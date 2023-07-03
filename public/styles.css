@@ -336,8 +336,8 @@ main {
   margin-bottom: 16px;
 }
 
-.skills__list:not(:last-child)::after {
-  display: block;
+.skills__list:not(:last-child) {
+  /* display: block;
   clear: both;
   content: "";
   position: relative;
@@ -345,9 +345,9 @@ main {
   top: 8px;
   max-width: 250px;
   height: 1px;
-  width: 50%; /* or 100px */
+  width: 50%;  */
   border-bottom: 2px solid rgb(68 68 68 / 15%);
-  margin: 0 auto;
+  /* margin: 0 auto; */
 }
 
 .skills__list-item {
