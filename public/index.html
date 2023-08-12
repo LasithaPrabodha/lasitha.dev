@@ -1,308 +1,89 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
   <head>
-    <meta charset="UTF-8" />
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Welcome to Firebase Hosting</title>
 
-    <meta
-      name="description"
-      content="Experienced full-stack web developer with expertise in building robust, scalable, and user-friendly applications for the public sector. Skilled in modern UI frameworks such as React, Angular and VueJS, and proficient in object-oriented languages like C#, TypeScript and Java. Passionate about leveraging technology to deliver innovative solutions and improve user experiences. Connect with me to discuss collaborations and explore opportunities."
-    />
+    <!-- update the version number as needed -->
+    <script defer src="/__/firebase/10.1.0/firebase-app-compat.js"></script>
+    <!-- include only the Firebase features as you need -->
+    <script defer src="/__/firebase/10.1.0/firebase-auth-compat.js"></script>
+    <script defer src="/__/firebase/10.1.0/firebase-database-compat.js"></script>
+    <script defer src="/__/firebase/10.1.0/firebase-firestore-compat.js"></script>
+    <script defer src="/__/firebase/10.1.0/firebase-functions-compat.js"></script>
+    <script defer src="/__/firebase/10.1.0/firebase-messaging-compat.js"></script>
+    <script defer src="/__/firebase/10.1.0/firebase-storage-compat.js"></script>
+    <script defer src="/__/firebase/10.1.0/firebase-analytics-compat.js"></script>
+    <script defer src="/__/firebase/10.1.0/firebase-remote-config-compat.js"></script>
+    <script defer src="/__/firebase/10.1.0/firebase-performance-compat.js"></script>
+    <!-- 
+      initialize the SDK after all desired features are loaded, set useEmulator to false
+      to avoid connecting the SDK to running emulators.
+    -->
+    <script defer src="/__/firebase/init.js?useEmulator=true"></script>
 
-    <meta
-      name="keywords"
-      content="full-stack web developer, public sector, micro frontends, microservices, UI frameworks, responsive design, feature-rich user experience, modern web technologies, relational database, SQL, agile development, problem-solving, collaboration, cloud applications"
-    />
-
-    <meta name="author" content="Lasitha Prabodha Weligampola" />
-
-    <!-- Open Graph meta tags for social media sharing -->
-    <meta property="og:title" content="Lasitha Prabodha Weligampola - Full Stack Software Engineer" />
-    <meta
-      property="og:description"
-      content="Experienced full-stack web developer with expertise in building robust, scalable, and user-friendly applications for the public sector. Skilled in modern UI frameworks such as React, Angular and VueJS, and proficient in object-oriented languages like C#, TypeScript and Java. Passionate about leveraging technology to deliver innovative solutions and improve user experiences. Connect with me to discuss collaborations and explore opportunities."
-    />
-    <meta property="og:image" content="https://www.lasitha.pw/casual-photo.jpg" />
-    <meta property="og:image:type" content="image/png" />
-    <meta property="og:url" content="https://www.lasitha.pw" />
-    <meta property="og:type" content="website" />
-
-    <!-- Twitter Card meta tags for Twitter sharing -->
-    <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="Lasitha Prabodha Weligampola - Full Stack Software Engineer" />
-    <meta
-      name="twitter:description"
-      content="Experienced full-stack web developer with expertise in building robust, scalable, and user-friendly applications for the public sector. Skilled in modern UI frameworks such as React, Angular and VueJS, and proficient in object-oriented languages like C#, TypeScript and Java. Passionate about leveraging technology to deliver innovative solutions and improve user experiences. Connect with me to discuss collaborations and explore opportunities."
-    />
-    <meta name="twitter:image" content="https://www.lasitha.pw/casual-photo.jpg" />
-
-    <!-- Canonical URL -->
-    <link rel="canonical" href="https://www.lasitha.pw" />
-
-    <!-- Other meta tags -->
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-    <meta name="robots" content="index, follow" />
-
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;700&display=swap" rel="stylesheet" />
-    <script src="https://kit.fontawesome.com/fa62c117c7.js" crossorigin="anonymous"></script>
-    <link rel="stylesheet" href="styles.css" />
-
-    <title>Lasitha Prabodha Weligampola - Full Stack Software Engineer</title>
+    <style media="screen">
+      body { background: #ECEFF1; color: rgba(0,0,0,0.87); font-family: Roboto, Helvetica, Arial, sans-serif; margin: 0; padding: 0; }
+      #message { background: white; max-width: 360px; margin: 100px auto 16px; padding: 32px 24px; border-radius: 3px; }
+      #message h2 { color: #ffa100; font-weight: bold; font-size: 16px; margin: 0 0 8px; }
+      #message h1 { font-size: 22px; font-weight: 300; color: rgba(0,0,0,0.6); margin: 0 0 16px;}
+      #message p { line-height: 140%; margin: 16px 0 24px; font-size: 14px; }
+      #message a { display: block; text-align: center; background: #039be5; text-transform: uppercase; text-decoration: none; color: white; padding: 16px; border-radius: 4px; }
+      #message, #message a { box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24); }
+      #load { color: rgba(0,0,0,0.4); text-align: center; font-size: 13px; }
+      @media (max-width: 600px) {
+        body, #message { margin-top: 0; background: white; box-shadow: none; }
+        body { border-top: 16px solid #ffa100; }
+      }
+    </style>
   </head>
-  <body class="light" id="top">
-    <header class="header center">
-      <h3>
-        <a href="https://www.lasitha.pw" class="link">LPW.</a>
-      </h3>
-
-      <nav class="nav center">
-        <!-- <ul class="nav__list center">
-          <li class="nav__list-item">
-            <a class="link link--nav" href="#projects">Projects</a>
-          </li>
-          <li class="nav__list-item">
-            <a class="link link--nav" href="#skills">Skills</a>
-          </li>
-          <li class="nav__list-item">
-            <a class="link link--nav" href="#contact">Contact</a>
-          </li>
-        </ul> -->
-
-        <button type="button" aria-label="toggle theme" class="btn btn--icon">
-          <i aria-hidden="true" id="btn-theme" class="fas fa-moon"></i>
-        </button>
-
-        <button type="button" aria-label="toggle navigation" class="btn btn--icon nav__hamburger">
-          <i aria-hidden="true" class="fas fa-bars"></i>
-        </button>
-      </nav>
-    </header>
-
-    <main>
-      <!-- About -->
-      <div class="about center">
-        <h1>Hi, I am <span class="about__name">Lasitha Prabodha.</span> 👋🏼</h1>
-        <h2 class="about__role">A Full Stack Software Engineer.</h2>
-        <p class="about__desc center">
-          Welcome to my personal website! I am a passionate Full Stack Software Engineer with over six years of
-          experience. I am currently studying for a post-graduate certificate at Fanshawe College in Canada. 🇨🇦
-        </p>
-
-        <div class="about__contact center">
-          <!-- <a href="https://example.com">
-            <span class="btn btn--outline">Resume</span>
-          </a> -->
-
-          <a href="https://www.instagram.com/lu6_fer/" aria-label="insta" class="link link--icon">
-            <i aria-hidden="true" class="fab fa-instagram"></i>
-          </a>
-          <a href="https://www.facebook.com/lasitha1030/" aria-label="fb" class="link link--icon">
-            <i aria-hidden="true" class="fab fa-facebook"></i>
-          </a>
-
-          <a href="https://linkedin.com/in/lasithapw" aria-label="linkedin" class="link link--icon">
-            <i aria-hidden="true" class="fab fa-linkedin"></i>
-          </a>
-        </div>
-      </div>
-
-      <!-- Projects -->
-      <!-- <section id="projects" class="section projects">
-        <h2 class="section__title">Projects</h2>
-        <div class="projects__grid">
-          <div class="project">
-            <h3>Project 1</h3>
-            <p class="project__description">
-              Ipsum accusamus ea excepturi aliquid eligendi amet. Explicabo
-              sapiente debitis labore sed ipsam Mollitia repellat illum quod
-              unde beatae Quis
-            </p>
-            <ul class="project__stack">
-              <li class="project__stack-item">SASS</li>
-              <li class="project__stack-item">TypeScript</li>
-              <li class="project__stack-item">React</li>
-            </ul>
-            <a
-              href="https://github.com"
-              aria-label="source code"
-              class="link link--icon"
-            >
-              <i aria-hidden="true" class="fab fa-github"></i>
-            </a>
-            <a
-              href="https://example.com"
-              aria-label="live preview"
-              class="link link--icon"
-            >
-              <i aria-hidden="true" class="fas fa-external-link-alt"></i>
-            </a>
-          </div>
-          <div class="project">
-            <h3>Project 2</h3>
-            <p class="project__description">
-              Ipsum accusamus ea excepturi aliquid eligendi amet. Explicabo
-              sapiente debitis labore sed ipsam Mollitia repellat illum quod
-              unde beatae Quis
-            </p>
-            <ul class="project__stack">
-              <li class="project__stack-item">SASS</li>
-              <li class="project__stack-item">TypeScript</li>
-              <li class="project__stack-item">React</li>
-            </ul>
-            <a
-              href="https://github.com"
-              aria-label="source code"
-              class="link link--icon"
-            >
-              <i aria-hidden="true" class="fab fa-github"></i>
-            </a>
-            <a
-              href="https://example.com"
-              aria-label="live preview"
-              class="link link--icon"
-            >
-              <i aria-hidden="true" class="fas fa-external-link-alt"></i>
-            </a>
-          </div>
-          <div class="project">
-            <h3>Project 3</h3>
-            <p class="project__description">
-              Ipsum accusamus ea excepturi aliquid eligendi amet. Explicabo
-              sapiente debitis labore sed ipsam Mollitia repellat illum quod
-              unde beatae Quis
-            </p>
-            <ul class="project__stack">
-              <li class="project__stack-item">SASS</li>
-              <li class="project__stack-item">TypeScript</li>
-              <li class="project__stack-item">React</li>
-            </ul>
-            <a
-              href="https://github.com"
-              aria-label="source code"
-              class="link link--icon"
-            >
-              <i aria-hidden="true" class="fab fa-github"></i>
-            </a>
-            <a
-              href="https://example.com"
-              aria-label="live preview"
-              class="link link--icon"
-            >
-              <i aria-hidden="true" class="fas fa-external-link-alt"></i>
-            </a>
-          </div>
-        </div>
-      </section> -->
-
-      <!-- Skills -->
-      <section class="section skills" id="skills">
-        <h2 class="section__title">Technical Skills</h2>
-
-        <div class="skills__list">
-          <img
-            class="skills__list-item"
-            src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg"
-          />
-
-          <img
-            class="skills__list-item"
-            src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/typescript/typescript-original.svg"
-          />
-
-          <img
-            class="skills__list-item"
-            src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/csharp/csharp-original.svg"
-          />
-
-          <img
-            class="skills__list-item"
-            src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/dart/dart-original.svg"
-          />
-
-          <img
-            class="skills__list-item"
-            src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/php/php-original.svg"
-          />
-
-          <img
-            class="skills__list-item"
-            src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/kotlin/kotlin-original.svg"
-          />
-
-          <img
-            class="skills__list-item"
-            src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/swift/swift-original.svg"
-          />
-        </div>
-
-        <div class="skills__list">
-          <img
-            class="skills__list-item"
-            src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/angularjs/angularjs-original.svg"
-          />
-
-          <img
-            src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg"
-            class="skills__list-item"
-          />
-
-          <img
-            src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/vuejs/vuejs-original.svg"
-            class="skills__list-item"
-          />
-
-          <img
-            src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/flutter/flutter-original.svg"
-            class="skills__list-item"
-          />
-
-          <img
-            src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/html5/html5-original.svg"
-            class="skills__list-item"
-          />
-
-          <img
-            src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/css3/css3-original.svg"
-            class="skills__list-item"
-          />
-        </div>
-
-        <div class="skills__list">
-          <img
-            src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/microsoftsqlserver/microsoftsqlserver-plain.svg"
-            class="skills__list-item"
-          />
-
-          <img
-            src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/azure/azure-original.svg"
-            class="skills__list-item"
-          />
-        </div>
-      </section>
-
-      <!-- Contact -->
-      <!-- <section class="section contact center" id="contact">
-        <h2 class="section__title">Contact</h2>
-        <a href="mailto:@gmail.com">
-          <span class="btn btn--outline">Email me</span>
-        </a>
-      </section> -->
-    </main>
-
-    <footer class="footer">
-      <a href="https://github.com/LasithaPrabodha" class="link footer__link"> Created By Lasitha Prabodha </a>
-    </footer>
-
-    <div class="scroll-container">
-      <div class="scroll-top">
-        <a aria-label="Scroll up" href="#top">
-          <i aria-hidden="true" class="fas fa-arrow-up"></i>
-        </a>
-      </div>
+  <body>
+    <div id="message">
+      <h2>Welcome</h2>
+      <h1>Firebase Hosting Setup Complete</h1>
+      <p>You're seeing this because you've successfully setup Firebase Hosting. Now it's time to go build something extraordinary!</p>
+      <a target="_blank" href="https://firebase.google.com/docs/hosting/">Open Hosting Documentation</a>
     </div>
+    <p id="load">Firebase SDK Loading&hellip;</p>
 
-    <script src="./script.js"></script>
+    <script>
+      document.addEventListener('DOMContentLoaded', function() {
+        const loadEl = document.querySelector('#load');
+        // // 🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥
+        // // The Firebase SDK is initialized and available here!
+        //
+        // firebase.auth().onAuthStateChanged(user => { });
+        // firebase.database().ref('/path/to/ref').on('value', snapshot => { });
+        // firebase.firestore().doc('/foo/bar').get().then(() => { });
+        // firebase.functions().httpsCallable('yourFunction')().then(() => { });
+        // firebase.messaging().requestPermission().then(() => { });
+        // firebase.storage().ref('/path/to/ref').getDownloadURL().then(() => { });
+        // firebase.analytics(); // call to activate
+        // firebase.analytics().logEvent('tutorial_completed');
+        // firebase.performance(); // call to activate
+        //
+        // // 🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥
+
+        try {
+          let app = firebase.app();
+          let features = [
+            'auth', 
+            'database', 
+            'firestore',
+            'functions',
+            'messaging', 
+            'storage', 
+            'analytics', 
+            'remoteConfig',
+            'performance',
+          ].filter(feature => typeof app[feature] === 'function');
+          loadEl.textContent = `Firebase SDK loaded with ${features.join(', ')}`;
+        } catch (e) {
+          console.error(e);
+          loadEl.textContent = 'Error loading the Firebase SDK, check the console.';
+        }
+      });
+    </script>
   </body>
 </html>
