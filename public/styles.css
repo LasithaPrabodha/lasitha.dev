@@ -236,7 +236,7 @@ main {
   margin-bottom: 1em;
   text-transform: uppercase;
 }
-
+/* 
 .nav__list {
   margin-right: 1.5em;
   display: flex;
@@ -244,12 +244,11 @@ main {
 
 .nav__list-item {
   margin-left: 1.5em;
-}
-
+}  
 .nav__hamburger {
   display: none;
   width: 1em;
-}
+} */
 
 .about {
   flex-direction: column;
@@ -430,12 +429,7 @@ main {
   .nav__list-item {
     margin: 0.5em 0;
   }
-
-  .nav__hamburger {
-    display: flex;
-    margin-left: 0.8em;
-  }
-
+ 
   .about {
     margin-top: 2em;
   }
