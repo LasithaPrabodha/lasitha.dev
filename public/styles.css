@@ -256,7 +256,9 @@ main {
 }
 
 .about__name {
-  color: var(--clr-primary);
+  background-color: var(--clr-primary);
+  color: var(--clr-bg);
+  padding: 0 8px;
 }
 
 .about__role {
