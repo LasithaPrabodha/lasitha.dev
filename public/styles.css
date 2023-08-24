@@ -353,8 +353,14 @@ main {
 .skills__list-item {
   margin: 0.75em;
   width: 50px;
+  transition: transform 0.5s;
+  display: flex;
+  flex-direction: column;
+  position: relative;
 }
-
+.skills__list-item:hover {
+  transform: scale(1.1, 1.1);
+}
 .contact {
   flex-direction: column;
 }
@@ -379,6 +385,20 @@ main {
   background-color: transparent;
   font-size: 1.8rem;
   transition: transform 0.2s ease-in-out;
+}
+
+.skills__list-item span {
+  font-size: 10px;
+  text-align: center;
+  display: none;
+  position: absolute;
+  bottom: -16px;
+  left: 0;
+  right: 0;
+}
+
+.skills__list-item:hover span {
+  display: block;
 }
 
 @media (max-width: 600px) {
