@@ -399,6 +399,10 @@ main {
   right: 0;
 }
 
+.text-underline {
+  text-decoration: underline;
+}
+
 .skills__list-item:hover span {
   display: block;
 }
@@ -432,7 +436,7 @@ main {
   .nav__list-item {
     margin: 0.5em 0;
   }
- 
+
   .about {
     margin-top: 2em;
   }
