@@ -1,7 +1,7 @@
 (function () {
   const body = document.body;
 
-  const btnTheme = document.querySelector(".fa-moon");
+  const btnTheme = document.querySelector("#theme-toggle");
   const btnHamburger = document.querySelector(".fa-bars");
   const navListItem = document.querySelectorAll(".nav__list-item");
   const isSystemThemeDark = window.matchMedia("(prefers-color-scheme:dark)").matches;
@@ -11,7 +11,7 @@
 
   const addThemeClass = (bodyClass, btnClass) => {
     body.classList.add(bodyClass);
-    btnTheme.classList.add(btnClass);
+    btnTheme.children[0].classList.add(btnClass);
   };
 
   addThemeClass(getBodyTheme, getBtnTheme);
@@ -20,7 +20,7 @@
 
   const setTheme = (bodyClass, btnClass) => {
     body.classList.remove(localStorage.getItem("portfolio-theme"));
-    btnTheme.classList.remove(localStorage.getItem("portfolio-btn-theme"));
+    btnTheme.children[0].classList.remove(localStorage.getItem("portfolio-btn-theme"));
 
     addThemeClass(bodyClass, btnClass);
 
