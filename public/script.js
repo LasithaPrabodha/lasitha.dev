@@ -3,15 +3,16 @@
 
   const btnTheme = document.querySelector(".fa-moon");
   const btnHamburger = document.querySelector(".fa-bars");
+  const navListItem = document.querySelectorAll(".nav__list-item");
   const isSystemThemeDark = window.matchMedia("(prefers-color-scheme:dark)").matches;
+  const getBodyTheme = localStorage.getItem("portfolio-theme");
+  const getBtnTheme = localStorage.getItem("portfolio-btn-theme");
+  const navUl = document.querySelector(".nav__list");
 
   const addThemeClass = (bodyClass, btnClass) => {
     body.classList.add(bodyClass);
     btnTheme.classList.add(btnClass);
   };
-
-  const getBodyTheme = localStorage.getItem("portfolio-theme");
-  const getBtnTheme = localStorage.getItem("portfolio-btn-theme");
 
   addThemeClass(getBodyTheme, getBtnTheme);
 
@@ -27,29 +28,31 @@
     localStorage.setItem("portfolio-btn-theme", btnClass);
   };
 
-  isSystemThemeDark ? setTheme("dark", "fa-sun") : setTheme("light", "fa-moon");
+  // isSystemThemeDark ? setTheme("dark", "fa-sun") : setTheme("light", "fa-moon");
 
-  const toggleTheme = () => (isDark() ? setTheme("light", "fa-moon") : setTheme("dark", "fa-sun"));
+  btnTheme.addEventListener("click", () => (isDark() ? setTheme("light", "fa-moon") : setTheme("dark", "fa-sun")));
 
-  btnTheme.addEventListener("click", toggleTheme);
+  const closeNav = () =>{
+    navUl.classList.remove("display-nav-list");
+    btnHamburger.classList.remove("fa-times");
+    btnHamburger.classList.add("fa-bars");
+  }
 
-  const displayList = () => {
-    const navUl = document.querySelector(".nav__list");
-
+  btnHamburger.addEventListener("click", () => {
     if (btnHamburger.classList.contains("fa-bars")) {
       btnHamburger.classList.remove("fa-bars");
       btnHamburger.classList.add("fa-times");
       navUl.classList.add("display-nav-list");
     } else {
-      btnHamburger.classList.remove("fa-times");
-      btnHamburger.classList.add("fa-bars");
-      navUl.classList.remove("display-nav-list");
+      closeNav()
     }
-  };
+  });
 
-  btnHamburger.addEventListener("click", displayList);
+  navUl.addEventListener("click", () => {
+    closeNav()
+  });
 
-  const scrollUp = () => {
+  document.addEventListener("scroll", () => {
     const btnScrollTop = document.querySelector(".scroll-top");
 
     if (body.scrollTop > 500 || document.documentElement.scrollTop > 500) {
@@ -57,7 +60,5 @@
     } else {
       btnScrollTop.style.display = "none";
     }
-  };
-
-  document.addEventListener("scroll", scrollUp);
+  });
 })();
