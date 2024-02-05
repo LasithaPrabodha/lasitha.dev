@@ -44,3 +44,8 @@ p + h2 {
   object-position: 100% 25%;
 }
 
+.blog a {
+  color: var(--clr-primary);
+  cursor: pointer;
+  text-decoration: underline;
+}
