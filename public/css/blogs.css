@@ -1,0 +1,18 @@
+.blog {
+  display: flex;
+  margin: 24px 0;
+}
+
+.blog img {
+  width: 250px;
+  height: 250px;
+  object-fit: cover;
+}
+
+.blog .text {
+  margin-left: 24px;
+}
+
+.text h4 {
+  margin-bottom: 12px;
+}

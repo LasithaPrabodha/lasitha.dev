@@ -24,7 +24,7 @@ body {
   line-height: 1.5;
   color: var(--clr-fg);
   background-color: var(--clr-bg);
-  transition: all .3s;
+  transition: all 0.3s;
 }
 
 .light {
@@ -335,7 +335,6 @@ main {
   justify-content: center;
 }
 
-
 .skills__list-item {
   margin: 0.75em;
   /* width: 50px; */
@@ -391,6 +390,10 @@ main {
   display: block;
 }
 
+small {
+  font-size: smaller;
+}
+
 @media (max-width: 600px) {
   .header {
     height: 6em;
@@ -443,7 +446,7 @@ main {
   }
 }
 
-.welcome-animation{
+.welcome-animation {
   display: inline-block;
   animation: wave 1s ease;
   animation-delay: 1s;
