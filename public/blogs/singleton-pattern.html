@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+
+    <meta
+      name="description"
+      content="Delve into understanding the Singleton Pattern, its significance, and considerations for its usage. Explore real-world scenarios in C# and learn about its advantages, disadvantages, and implications on design principles like SRP, OCP, and DIP."
+    />
+
+    <meta
+      name="keywords"
+      content="Singleton Pattern, Design Pattern, C#, software design, software architecture, global instances, SRP, OCP, DIP"
+    />
+
+    <meta name="author" content="Lasitha Prabodha Weligampola" />
+
+    <!-- Open Graph meta tags for social media sharing -->
+    <meta
+      property="og:title"
+      content="Understanding the Singleton Pattern & when to use it, or do we really need to?"
+    />
+    <meta
+      property="og:description"
+      content="Delve into understanding the Singleton Pattern, its significance, and considerations for its usage. Explore real-world scenarios in C# and learn about its advantages, disadvantages, and implications on design principles like SRP, OCP, and DIP."
+    />
+    <meta property="og:image" content="https://www.lasitha.dev/images/singleton-meme-friends.webp" />
+    <meta property="og:image:type" content="image/png" />
+    <meta property="og:url" content="https://www.lasitha.dev" />
+    <meta property="og:type" content="website" />
+
+    <!-- Twitter Card meta tags for Twitter sharing -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta
+      name="twitter:title"
+      content="Understanding the Singleton Pattern & when to use it, or do we really need to?"
+    />
+    <meta
+      name="twitter:description"
+      content="Delve into understanding the Singleton Pattern, its significance, and considerations for its usage. Explore real-world scenarios in C# and learn about its advantages, disadvantages, and implications on design principles like SRP, OCP, and DIP."
+    />
+    <meta name="twitter:image" content="https://www.lasitha.dev/images/singleton-meme-friends.webp" />
+
+    <!-- Canonical URL -->
+    <link rel="canonical" href="https://www.lasitha.dev" />
+
+    <!-- Other meta tags -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <meta name="robots" content="index, follow" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;700&display=swap" rel="stylesheet" />
+    <script src="https://kit.fontawesome.com/fa62c117c7.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="../css/styles.css" />
+    <link rel="stylesheet" href="../css/blog-detail.css" />
+
+    <title>Understanding the Singleton Pattern & when to use it, or do we really need to?</title>
+  </head>
+  <body class="light" id="top">
+    <header class="header center">
+      <h3>
+        <a href="https://www.lasitha.dev" class="link">LP.</a>
+      </h3>
+
+      <nav class="nav center">
+        <ul class="nav__list center">
+          <li class="nav__list-item">
+            <a class="link link--nav" href="../index.html#projects">Projects</a>
+          </li>
+          <li class="nav__list-item">
+            <a class="link link--nav" href="../index.html#skills">Skills</a>
+          </li>
+          <li class="nav__list-item">
+            <a class="link link--nav" href="../blogs">Blogs</a>
+          </li>
+          <li class="nav__list-item">
+            <a class="link link--nav" href="#contact">Contact</a>
+          </li>
+        </ul>
+
+        <button id="theme-toggle" type="button" aria-label="toggle theme" class="btn btn--icon">
+          <i aria-hidden="true" id="btn-theme" class="fas fa-moon"></i>
+        </button>
+
+        <button type="button" aria-label="toggle navigation" class="btn btn--icon nav__hamburger">
+          <i aria-hidden="true" class="fas fa-bars"></i>
+        </button>
+      </nav>
+    </header>
+
+    <main>
+      <div class="blog">
+        <div class="date">February 7th, 2024</div>
+        <h1>Understanding the Singleton Pattern & when to use it, or do we really need to?</h1>
+
+        <p>
+          In this article, I will dive into understanding what the Singleton Pattern is and let's check whether it's
+          really worth it. I will be using C# as our main language to give you examples because (insert something
+          funny).
+        </p>
+
+        <h2>So, what exactly is Singleton Pattern?</h2>
+
+        <p>
+          Let's imagine you're working on a project where you need just one copy of a class, accessible from anywhere in
+          your code. That's what the Singleton Pattern is all about; ensuring there's only one instance of a class in
+          charge of a specific task. This way, you maintain order and prevent chaos by avoiding duplicate instances and
+          conflicting operations.
+        </p>
+        <div class="image">
+          <img src="../images/singleton-meme-some-hero.webp" alt="There can be only one... initialization" />
+        </div>
+        <p>
+          Singleton Pattern is one of the simplest design patterns and probably the most widely used design pattern.
+          Sometimes it is used in scenarios where it is not required. In such cases, the disadvantages of using it
+          outweighs the advantages what it provides.
+        </p>
+        <h2>But why would we need such a pattern?</h2>
+        <p>
+          Take managing a database connection or overseeing access to a shared resource like a logging system or a
+          configuration manager as examples. Having multiple instances in these scenarios could spell trouble, leading
+          to wasted resources or messy outcomes.
+        </p>
+
+        <p>Enough with the theory, let's look into a real-world scenario in C# where we apply the Singleton Pattern</p>
+
+        <p>
+          We have a class named DBManager, tasked with handling database connections across our application. It's
+          crucial to have just one DBManager instance to avoid resource wastage and potential connection issues.
+        </p>
+
+        <script src="https://gist.github.com/LasithaPrabodha/81c2833179f608ba695a04de13499418.js"></script>
+
+        <p>
+          The <code>DBManager</code> class keeps its constructor private so that there's no external initialization. The
+          <code>Instance</code>
+          property is in charge of managing the singleton instance. We provide the access for our instance by setting it
+          up as a static property. Whenever we need to deal with the database in our app we just need to make quick call
+          with <code>DBManager.Instance.Connect()</code> to gets us connected, and
+          <code>DBManager.Instance.Disconnect()</code> tidies things up when we're done. It's a straightforward way to
+          keep our database tasks consistent and smooth across the application.
+        </p>
+
+        <p>We can see that this pattern addresses two problems.</p>
+        <ol>
+          <li>Ensure that a class has just a single instance.</li>
+          <li>Provide a global access point to that instance.</li>
+        </ol>
+
+        <p>
+          However, it's actually not as nice as it sounds, which is why I believe the Singleton pattern is often
+          considered problematic or 'evil'.
+        </p>
+
+        <h2>What's the issue with Global Instances?</h2>
+        <p>Hmm, global access? So now everyone can access it? 🤔</p>
+        <div class="image">
+          <img src="../images/singleton-meme-friends.webp" alt="A friends meme" />
+        </div>
+        <p>
+          The Singleton Pattern can be a <strong>double-edged sword</strong> when it comes to global instances. While it
+          offers a convenient way to manage single instances of classes, it also presents us some challenges.
+        </p>
+
+        <ol>
+          <li>
+            With global access to a single instance, different parts of your code become tightly coupled with it. This
+            means changes to the singleton class can ripple throughout your codebase, making maintenance more
+            complicated. I bet you won't need that when you approach a release date.
+          </li>
+          <li>
+            By using global instances, You hide your application's dependencies in your code instead of exposing them
+            through the interfaces and injecting them wherever is needed. This will decrease testability and flexibility
+            while increasing complexity and difficulty in debugging.
+          </li>
+          <li>
+            Testing code reliant on global singletons is tough. The hidden dependencies and tight coupling make it
+            tricky to isolate and test components independently.
+          </li>
+          <li>
+            As your codebase grows, the rigidness of global singletons can limit scalability. Refactoring or adding new
+            features becomes more challenging.
+          </li>
+        </ol>
+        <p>I remember my father once said,</p>
+
+        <p>
+          <i>Avoid using global variables or instances, son. </i>
+        </p>
+
+        <p>Maybe he knew I would reach this stage someday. :></p>
+
+        <h2>Violation Of SOLID Principles</h2>
+        <p>Let's see how the Singleton Pattern cost us when held up to SOLID principles. It's pretty bad actually.</p>
+
+        <h3>Single Responsibility Principle (SRP)</h3>
+        <p>
+          The Singleton Pattern's primary responsibility is to ensure a single instance of a class. However, it often
+          takes on additional responsibilities, such as managing global state or serving as a global access point.
+        </p>
+        <p>
+          When several threads request access to one instance; singleton should take responsibility for dispatching data
+          to each request in threads by using locks to prevent <strong>Race-Condition</strong> or handling read and
+          write to deliver valid data.
+        </p>
+        <p>
+          This is just the beginning. As time goes by, new responsibilities will be added to the singleton. You end up
+          with a class that nearly does anything. This violates the SRP by causing the class to have multiple reasons to
+          change.
+        </p>
+
+        <h3>Open/Closed Principle (OCP)</h3>
+
+        <p>
+          The Singleton Pattern can be challenging to extend or modify without altering its core implementation. Since
+          the class controls its own instantiation, making changes to accommodate new requirements can be tricky without
+          modifying the class directly.
+        </p>
+        <p>
+          A class needs to allow inheritance in order to qualify as “open”. Inheritance is an “is-a” relationship.
+          Because of the “is-a” relationship, instances of the child class are also instances of the parent class if you
+          inherit from a singleton class. This means that you may end up with numerous instances of the singleton class.
+        </p>
+        <p>
+          If a singleton class prevents inheritance, it is no longer “open”; however, if a singleton class allows
+          inheritance, it is “open” for extension, and it can no longer follow the singleton pattern.
+        </p>
+
+        <h3>Dependency Inversion Principle (DIP)</h3>
+
+        <p>According to the Wikipedia article,</p>
+
+        <p>
+          <i
+            >In object-oriented design, the dependency inversion principle is a specific methodology for loosely coupled
+            software modules
+          </i>
+        </p>
+        <p>
+          But the Singleton Pattern introduces high coupling between components that rely on the singleton instance.
+          This can make it challenging to adhere to the DIP, as components become tightly bound to the Singleton class,
+          making it difficult to substitute dependencies or adhere to dependency injection principles.
+        </p>
+
+        <hr />
+
+        <h2>TL;DR:</h2>
+
+        <p>
+          The Singleton Pattern ensures there's only one instance of a class, accessible globally, but it's a mixed bag.
+          While the Singleton Pattern can be a useful tool, it's essential to be mindful of its potential to violate
+          SOLID principles, particularly concerning single responsibility and dependency inversion. Careful design and
+          consideration are necessary to mitigate these risks and maintain a clean and flexible codebase.
+        </p>
+
+        <div class="image">
+          <img src="../images/singleton-meme.webp" alt="A singleton pattern meme" />
+        </div>
+      </div>
+
+      <!-- Contact -->
+      <section class="section contact center" id="contact">
+        <h2 class="section__title">Contact</h2>
+        <a href="mailto:lasiprabo@gmail.com">
+          <span class="btn btn--outline">Email me</span>
+        </a>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <a href="https://github.com/LasithaPrabodha" class="link footer__link">
+        Created By Lasitha Prabodha Weligampola
+      </a>
+    </footer>
+
+    <div class="scroll-container">
+      <div class="scroll-top">
+        <a aria-label="Scroll up" href="#top">
+          <i aria-hidden="true" class="fas fa-arrow-up"></i>
+        </a>
+      </div>
+    </div>
+    <script type="module">
+      // Import the functions you need from the SDKs you need
+      import { initializeApp } from "https://www.gstatic.com/firebasejs/10.2.0/firebase-app.js";
+      import { getAnalytics } from "https://www.gstatic.com/firebasejs/10.2.0/firebase-analytics.js";
+
+      // Your web app's Firebase configuration
+      // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+      const firebaseConfig = {
+        apiKey: "AIzaSyA-1RXBoCHFuqHfpN0kClrvfz67Yot-uNY",
+        authDomain: "personal-website-9f4b4.firebaseapp.com",
+        projectId: "personal-website-9f4b4",
+        storageBucket: "personal-website-9f4b4.appspot.com",
+        messagingSenderId: "883373147721",
+        appId: "1:883373147721:web:d915047f9583fb45532198",
+        measurementId: "G-F69649RJ7Y",
+      };
+
+      // Initialize Firebase
+      const app = initializeApp(firebaseConfig);
+      const analytics = getAnalytics(app);
+    </script>
+    <script src="../script.js"></script>
+  </body>
+</html>

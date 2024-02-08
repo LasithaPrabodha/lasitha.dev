@@ -6,12 +6,16 @@ h2 {
   margin-bottom: 18px;
 }
 
+h3 {
+  margin-bottom: 16px;
+}
+
 p {
   margin-bottom: 12px;
 }
 
 .blog {
-  max-width: 800px;
+  max-width: 700px;;
   margin: 0 auto;
 }
 
@@ -37,6 +41,9 @@ p {
 p + h2 {
   margin-top: 36px;
 }
+p + h3 {
+  margin-top: 28px;
+}
 
 #lecture-room {
   height: 300px;
@@ -48,4 +55,18 @@ p + h2 {
   color: var(--clr-primary);
   cursor: pointer;
   text-decoration: underline;
+}
+
+ol {
+  padding-left: 26px;
+  padding-bottom: 12px;
+}
+
+ol li {
+  margin-bottom: 12px;
+}
+
+p i {
+  margin-left: 12px;
+  font-size: 16px;
 }

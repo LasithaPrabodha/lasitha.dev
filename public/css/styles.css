@@ -2,7 +2,7 @@
   global styles
 ===============*/
 
-* {
+*:not(pre, code, hr) {
   padding: 0;
   margin: 0;
   border: 0;
@@ -89,10 +89,21 @@ a {
   text-decoration: none;
 }
 
+hr {
+  margin: 32px 0;
+  border-style: dashed;
+}
 button {
   cursor: pointer;
 }
 
+p {
+  line-height: 1.5;
+}
+
+small {
+  font-size: smaller;
+}
 @media (max-width: 900px) {
   h1 {
     font-size: 2.6rem;
@@ -388,10 +399,6 @@ main {
 
 .skills__list-item:hover span {
   display: block;
-}
-
-small {
-  font-size: smaller;
 }
 
 @media (max-width: 600px) {
