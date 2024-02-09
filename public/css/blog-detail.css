@@ -33,9 +33,13 @@
 }
 
 .image img {
-  max-width: 600px;
   width: 100%;
-  border-radius: 10px;
+  border-radius: 6px;
+  max-width: 500px;
+}
+
+.image.lg img {
+  max-width: unset;
 }
 
 p + h2 {
