@@ -55,13 +55,14 @@
     <script src="https://kit.fontawesome.com/fa62c117c7.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="../css/styles.css" />
     <link rel="stylesheet" href="../css/blog-detail.css" />
+    <link rel="stylesheet" href="../css/dark-gist.css" />
 
     <title>Understanding the Singleton Pattern & when to use it, or do we really need to?</title>
   </head>
   <body class="light" id="top">
     <header class="header center">
       <h3>
-        <a href="https://www.lasitha.dev" class="link">LP.</a>
+        <a href="../" class="link">LP.</a>
       </h3>
 
       <nav class="nav center">
@@ -127,8 +128,9 @@
         <p>Enough with the theory, let's look into a real-world scenario in C# where we apply the Singleton Pattern</p>
 
         <p>
-          We have a class named DBManager, tasked with handling database connections across our application. It's
-          crucial to have just one DBManager instance to avoid resource wastage and potential connection issues.
+          We have a class named <code>DBManager</code>, tasked with handling database connections across our
+          application. It's crucial to have just one <code>DBManager</code> instance to avoid resource wastage and
+          potential connection issues.
         </p>
 
         <script src="https://gist.github.com/LasithaPrabodha/81c2833179f608ba695a04de13499418.js"></script>
@@ -186,7 +188,7 @@
         </ol>
         <p>I remember my father once said,</p>
 
-        <p>
+        <p class="quote">
           <i>Avoid using global variables or instances, son. </i>
         </p>
 
@@ -230,9 +232,11 @@
 
         <h3>Dependency Inversion Principle (DIP)</h3>
 
-        <p>According to the Wikipedia article,</p>
-
         <p>
+          According to the <a href="https://en.wikipedia.org/wiki/Dependency_inversion_principle">Wikipedia article</a>,
+        </p>
+
+        <p class="quote">
           <i
             >In object-oriented design, the dependency inversion principle is a specific methodology for loosely coupled
             software modules

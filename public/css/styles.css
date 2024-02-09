@@ -30,6 +30,8 @@ body {
 .light {
   --clr-bg: #fcfcfc;
   --clr-bg-alt: #fff;
+  --clr-bg-code: #eee;
+  --clr-quote: #afb8c1;
   --clr-fg: #555;
   --clr-fg-alt: #444;
   --clr-primary: #2978b5;
@@ -39,6 +41,8 @@ body {
 .dark {
   --clr-bg: #23283e;
   --clr-bg-alt: #2a2f4c;
+  --clr-bg-code: #404051;
+  --clr-quote: #7f7f9f;
   --clr-fg: #bdbddd;
   --clr-fg-alt: #cdcdff;
   --clr-primary: #90a0d9;
@@ -100,7 +104,11 @@ button {
 p {
   line-height: 1.5;
 }
-
+code {
+  background: var(--clr-bg-code);
+  padding: 2px;
+  font-size: 12px;
+}
 small {
   font-size: smaller;
 }

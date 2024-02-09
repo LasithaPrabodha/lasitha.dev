@@ -15,7 +15,7 @@ p {
 }
 
 .blog {
-  max-width: 700px;;
+  max-width: 700px;
   margin: 0 auto;
 }
 
@@ -66,7 +66,12 @@ ol li {
   margin-bottom: 12px;
 }
 
-p i {
+p.quote {
+  display: flex;
+}
+
+p.quote i {
   margin-left: 12px;
-  font-size: 16px;
+  font-size: 24px;
+  color: var(--clr-quote);
 }
