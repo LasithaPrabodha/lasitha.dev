@@ -83,208 +83,216 @@
       </nav>
     </header>
 
-    <main>
-      <!-- About -->
-      <div class="about center">
-        <h1>Hi, I am <span class="about__name">Lasitha Prabodha.</span> <div class="welcome-animation">👋🏼</div></h1>
-        <h2 class="about__role">A Full Stack & Mobile Software Engineer.</h2>
-        <p class="about__desc">
-          I am an experienced software engineer committed to deliver engaging digital experiences, written in clean code.
-          <br />
-          <br />
-          My skill set primarily focuses on frontend development with Angular, mobile development with React Native,
-          complemented by proficiency in backend development with ASP.NET Core. 
-          <br />
-          <br />
-          Eager to bring my skills and enthusiasm
-          to new challenges.
-        </p>
-        <!-- <img src="images/avatar.webp" alt="my avatar, holding a macbook pro" width="120" /> -->
-        <div class="about__contact center">
-          <!-- <a href="https://example.com">
-            <span class="btn btn--outline">Resume</span>
-          </a> -->
+    <!-- About -->
+    <div class="about center">
+      <h1>
+        Hi, I am <span class="about__name">Lasitha Prabodha.</span>
+        <div class="welcome-animation">👋🏼</div>
+      </h1>
+      <h2 class="about__role">A Full Stack & Mobile Software Engineer.</h2>
+      <p class="about__desc">
+        I design and develop engaging web, mobile, and API experiences with
+        <br />
+        Angular, React Native, ASP.NET Core and more.
 
-          <a href="https://www.instagram.com/lu6_fer/" target="_blank" aria-label="insta" class="link link--icon">
-            <i aria-hidden="true" class="fab fa-instagram"></i>
-          </a>
-          <a href="https://www.facebook.com/lmlxlml/" target="_blank" aria-label="fb" class="link link--icon">
-            <i aria-hidden="true" class="fab fa-facebook"></i>
-          </a>
+        <br />
+        <br />
+        I'm always eager to bring my skills and enthusiasm for new challenges. 
+        <br />
+        <br />
 
-          <a href="https://linkedin.com/in/lasithapw" target="_blank" aria-label="linkedin" class="link link--icon">
-            <i aria-hidden="true" class="fab fa-linkedin"></i>
+        <a class="link link--nav" href="#contact">Let's collaborate!</a>
+      </p>
+      <img id="avatar" src="images/avatar.webp" alt="my avatar, holding a macbook pro" />
+    
+
+      <img id="scroll-down" src="images/scroll-down.gif" alt="scroll-down" />
+    </div>
+
+    <!-- Projects -->
+    <section class="projects" id="projects">
+      <h2 class="section__title">Projects</h2>
+      <div class="projects__grid">
+        <div class="project">
+          <h3>Jeopardy</h3>
+          <p class="project__description">
+            A simple implementation of the classic TV game show "Jeopardy". The project is built using vanilla
+            JavaScript.
+          </p>
+          <ul class="project__stack">
+            <li class="project__stack-item">JavaScript</li>
+            <li class="project__stack-item">CSS</li>
+            <li class="project__stack-item">HTML</li>
+          </ul>
+          <a
+            href="https://github.com/LasithaPrabodha/jeopardy-app"
+            target="_blank"
+            aria-label="source code"
+            class="link link--icon"
+          >
+            <i aria-hidden="true" class="fab fa-github"></i>
           </a>
-          <a href="https://github.com/LasithaPrabodha" target="_blank" aria-label="github" class="link link--icon">
+          <a
+            href="https://lasithaprabodha.github.io/jeopardy-app/"
+            target="_blank"
+            aria-label="live preview"
+            class="link link--icon"
+          >
+            <i aria-hidden="true" class="fas fa-external-link-alt"></i>
+          </a>
+        </div>
+        <div class="project">
+          <h3>Kingsbury Toronto</h3>
+          <p class="project__description">
+            A mobile-first and user-friendly website for a luxurious apartment in Toronto.
+          </p>
+          <ul class="project__stack">
+            <li class="project__stack-item">HTML</li>
+            <li class="project__stack-item">CSS</li>
+          </ul>
+          <a href="#" aria-label="source code" class="link link--icon">
+            <i aria-hidden="true" class="fab fa-github"></i>
+          </a>
+          <a
+            href="https://kingsbury-toronto-website.web.app"
+            target="_blank"
+            aria-label="live preview"
+            class="link link--icon"
+          >
+            <i aria-hidden="true" class="fas fa-external-link-alt"></i>
+          </a>
+        </div>
+        <div class="project">
+          <h3>CarPool App Backend</h3>
+          <p class="project__description">A project written .NET to learn clean architecture with DDD</p>
+          <ul class="project__stack">
+            <li class="project__stack-item">C#</li>
+            <li class="project__stack-item">.NET</li>
+          </ul>
+          <a
+            href="https://github.com/LasithaPrabodha/CleanArchitecture"
+            target="_blank"
+            aria-label="source code"
+            class="link link--icon"
+          >
             <i aria-hidden="true" class="fab fa-github"></i>
           </a>
         </div>
+        <div class="project">
+          <h3>SuperOffice - Developer Portal</h3>
+          <p class="project__description">
+            Contains a set of self-serve tools that developers can use to manage their access to SuperOffice Online APIs
+          </p>
+          <ul class="project__stack">
+            <li class="project__stack-item">Angular</li>
+            <li class="project__stack-item">C#</li>
+            <li class="project__stack-item">.NET</li>
+          </ul>
+          <a
+            href="https://docs.superoffice.com/en/developer-portal/about.html"
+            target="_blank"
+            aria-label="source code"
+            class="link link--icon"
+          >
+            <i aria-hidden="true" class="fas fa-external-link-alt"></i>
+          </a>
+        </div>
+        <div class="project">
+          <h3>Cenium PMS</h3>
+          <p class="project__description">
+            Streamlines complex group bookings with a versatile and dynamic PMS solution
+          </p>
+          <ul class="project__stack">
+            <li class="project__stack-item">Angular</li>
+            <li class="project__stack-item">C#</li>
+            <li class="project__stack-item">.NET</li>
+          </ul>
+          <a href="https://www.cenium.com/pms/" aria-label="source code" class="link link--icon" target="_blank">
+            <i aria-hidden="true" class="fas fa-external-link-alt"></i>
+          </a>
+        </div>
+        <div class="project">
+          <h3>Club Arena</h3>
+          <p class="project__description">
+            Simplifies sports facility management, enabling easy bookings without manual processing
+          </p>
+          <ul class="project__stack">
+            <li class="project__stack-item">Angular</li>
+            <li class="project__stack-item">C#</li>
+            <li class="project__stack-item">.NET</li>
+          </ul>
+          <a href="https://arena.club.no/" aria-label="source code" class="link link--icon" target="_blank">
+            <i aria-hidden="true" class="fas fa-external-link-alt"></i>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Skills -->
+    <section class="skills" id="skills">
+      <h2 class="section__title">Technical Skills</h2>
+
+      <div class="skills__list">
+        <li class="skills__list-item btn btn--plain">JavaScript</li>
+        <li class="skills__list-item btn btn--plain">Typescript</li>
+        <li class="skills__list-item btn btn--plain">C#</li>
+        <li class="skills__list-item btn btn--plain">Dart</li>
+        <li class="skills__list-item btn btn--plain">PHP</li>
+        <li class="skills__list-item btn btn--plain">Kotlin</li>
+        <li class="skills__list-item btn btn--plain">Swift</li>
       </div>
 
-      <!-- Projects -->
-      <section id="projects" class="section projects">
-        <h2 class="section__title">Projects</h2>
-        <div class="projects__grid">
-          <div class="project">
-            <h3>Jeopardy</h3>
-            <p class="project__description">
-              A simple implementation of the classic TV game show "Jeopardy". The project is built using vanilla
-              JavaScript.
-            </p>
-            <ul class="project__stack">
-              <li class="project__stack-item">JavaScript</li>
-              <li class="project__stack-item">CSS</li>
-              <li class="project__stack-item">HTML</li>
-            </ul>
-            <a
-              href="https://github.com/LasithaPrabodha/jeopardy-app"
-              target="_blank"
-              aria-label="source code"
-              class="link link--icon"
-            >
-              <i aria-hidden="true" class="fab fa-github"></i>
-            </a>
-            <a
-              href="https://lasithaprabodha.github.io/jeopardy-app/"
-              target="_blank"
-              aria-label="live preview"
-              class="link link--icon"
-            >
-              <i aria-hidden="true" class="fas fa-external-link-alt"></i>
-            </a>
-          </div>
-          <div class="project">
-            <h3>Kingsbury Toronto</h3>
-            <p class="project__description">
-              A mobile-first and user-friendly website for a luxurious apartment in Toronto.
-            </p>
-            <ul class="project__stack">
-              <li class="project__stack-item">HTML</li>
-              <li class="project__stack-item">CSS</li>
-            </ul>
-            <a href="#" aria-label="source code" class="link link--icon">
-              <i aria-hidden="true" class="fab fa-github"></i>
-            </a>
-            <a
-              href="https://kingsbury-toronto-website.web.app"
-              target="_blank"
-              aria-label="live preview"
-              class="link link--icon"
-            >
-              <i aria-hidden="true" class="fas fa-external-link-alt"></i>
-            </a>
-          </div>
-          <div class="project">
-            <h3>CarPool App Backend</h3>
-            <p class="project__description">A project written .NET to learn clean architecture with DDD</p>
-            <ul class="project__stack">
-              <li class="project__stack-item">C#</li>
-              <li class="project__stack-item">.NET</li>
-            </ul>
-            <a
-              href="https://github.com/LasithaPrabodha/CleanArchitecture"
-              target="_blank"
-              aria-label="source code"
-              class="link link--icon"
-            >
-              <i aria-hidden="true" class="fab fa-github"></i>
-            </a>
-          </div>
-          <div class="project">
-            <h3>SuperOffice - Developer Portal</h3>
-            <p class="project__description">
-              Contains a set of self-serve tools that developers can use to manage their access to SuperOffice Online
-              APIs
-            </p>
-            <ul class="project__stack">
-              <li class="project__stack-item">Angular</li>
-              <li class="project__stack-item">C#</li>
-              <li class="project__stack-item">.NET</li>
-            </ul>
-            <a
-              href="https://docs.superoffice.com/en/developer-portal/about.html"
-              target="_blank"
-              aria-label="source code"
-              class="link link--icon"
-            >
-              <i aria-hidden="true" class="fas fa-external-link-alt"></i>
-            </a>
-          </div>
-          <div class="project">
-            <h3>Cenium PMS</h3>
-            <p class="project__description">
-              Streamlines complex group bookings with a versatile and dynamic PMS solution
-            </p>
-            <ul class="project__stack">
-              <li class="project__stack-item">Angular</li>
-              <li class="project__stack-item">C#</li>
-              <li class="project__stack-item">.NET</li>
-            </ul>
-            <a href="https://www.cenium.com/pms/" aria-label="source code" class="link link--icon" target="_blank">
-              <i aria-hidden="true" class="fas fa-external-link-alt"></i>
-            </a>
-          </div>
-          <div class="project">
-            <h3>Club Arena</h3>
-            <p class="project__description">
-              Simplifies sports facility management, enabling easy bookings without manual processing
-            </p>
-            <ul class="project__stack">
-              <li class="project__stack-item">Angular</li>
-              <li class="project__stack-item">C#</li>
-              <li class="project__stack-item">.NET</li>
-            </ul>
-            <a href="https://arena.club.no/" aria-label="source code" class="link link--icon" target="_blank">
-              <i aria-hidden="true" class="fas fa-external-link-alt"></i>
-            </a>
-          </div>
-        </div>
-      </section>
+      <div class="skills__list">
+        <li class="skills__list-item btn btn--plain">Angular</li>
+        <li class="skills__list-item btn btn--plain">ReactJS</li>
+        <li class="skills__list-item btn btn--plain">React Native</li>
+        <li class="skills__list-item btn btn--plain">VueJS</li>
+        <li class="skills__list-item btn btn--plain">Flutter</li>
+        <li class="skills__list-item btn btn--plain">HTML5</li>
+        <li class="skills__list-item btn btn--plain">CSS3</li>
+      </div>
 
-      <!-- Skills -->
-      <section class="section skills" id="skills">
-        <h2 class="section__title">Technical Skills</h2>
-
-        <div class="skills__list">
-          <li class="skills__list-item btn btn--plain">JavaScript</li>
-          <li class="skills__list-item btn btn--plain">Typescript</li>
-          <li class="skills__list-item btn btn--plain">C#</li>
-          <li class="skills__list-item btn btn--plain">Dart</li>
-          <li class="skills__list-item btn btn--plain">PHP</li>
-          <li class="skills__list-item btn btn--plain">Kotlin</li>
-          <li class="skills__list-item btn btn--plain">Swift</li>
-        </div>
-
-        <div class="skills__list">
-          <li class="skills__list-item btn btn--plain">Angular</li>
-          <li class="skills__list-item btn btn--plain">ReactJS</li>
-          <li class="skills__list-item btn btn--plain">React Native</li>
-          <li class="skills__list-item btn btn--plain">VueJS</li>
-          <li class="skills__list-item btn btn--plain">Flutter</li>
-          <li class="skills__list-item btn btn--plain">HTML5</li>
-          <li class="skills__list-item btn btn--plain">CSS3</li>
-        </div>
-
-        <div class="skills__list">
-          <li class="skills__list-item btn btn--plain">ASP.NET Core</li>
-          <li class="skills__list-item btn btn--plain">MSSQL</li>
-          <li class="skills__list-item btn btn--plain">Azure</li>
-        </div>
-      </section>
-
-      <!-- Contact -->
-      <section class="section contact center" id="contact">
-        <h2 class="section__title">Contact</h2>
-        <a href="mailto:lasiprabo@gmail.com">
-          <span class="btn btn--outline">Email me</span>
-        </a>
-      </section>
-    </main>
+      <div class="skills__list">
+        <li class="skills__list-item btn btn--plain">ASP.NET Core</li>
+        <li class="skills__list-item btn btn--plain">MSSQL</li>
+        <li class="skills__list-item btn btn--plain">Azure</li>
+      </div>
+    </section>
 
     <footer class="footer">
+      <!-- Contact -->
+      <section class="contact center" id="contact">
+        <h2 class="section__title">Contact</h2>
+
+        <p>Interested in working together? We should queue up a time to chat. I'll buy the coffee.</p>
+
+        <a href="mailto:lasiprabo@gmail.com">
+          <span class="btn btn--outline">Let's do this! 🤘🏼</span>
+        </a>
+      </section>
+
       <a href="https://github.com/LasithaPrabodha" class="link footer__link">
         Created By Lasitha Prabodha Weligampola</a
       >
+      <div class="about__contact center">
+        <!-- <a href="https://example.com">
+            <span class="btn btn--outline">Resume</span>
+          </a> -->
+
+        <a href="https://www.instagram.com/lu6_fer/" target="_blank" aria-label="insta" class="link link--icon">
+          <i aria-hidden="true" class="fab fa-instagram"></i>
+        </a>
+        <a href="https://www.facebook.com/lmlxlml/" target="_blank" aria-label="fb" class="link link--icon">
+          <i aria-hidden="true" class="fab fa-facebook"></i>
+        </a>
+
+        <a href="https://linkedin.com/in/lasithapw" target="_blank" aria-label="linkedin" class="link link--icon">
+          <i aria-hidden="true" class="fab fa-linkedin"></i>
+        </a>
+        <a href="https://github.com/LasithaPrabodha" target="_blank" aria-label="github" class="link link--icon">
+          <i aria-hidden="true" class="fab fa-github"></i>
+        </a>
+      </div>
     </footer>
 
     <div class="scroll-container">

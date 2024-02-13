@@ -35,7 +35,7 @@ body {
   --clr-fg: #555;
   --clr-fg-alt: #444;
   --clr-primary: #2978b5;
-  --shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+  --shadow: rgba(100, 100, 111, 0.2) 0px 7px 7px 0px;
 }
 
 .dark {
@@ -46,7 +46,7 @@ body {
   --clr-fg: #bdbddd;
   --clr-fg-alt: #cdcdff;
   --clr-primary: #90a0d9;
-  --shadow: rgba(0, 0, 0, 0.16) 0px 10px 36px 0px, rgba(0, 0, 0, 0.06) 0px 0px 0px 1px;
+  --shadow: rgba(0, 0, 0, 0.16) 0px 10px 10px 0px, rgba(0, 0, 0, 0.06) 0px 0px 0px 1px;
 }
 
 ::-moz-selection {
@@ -126,6 +126,7 @@ small {
   color: var(--clr-primary);
   padding: 0 0 0.3em 0;
   position: relative;
+  cursor: pointer;
 }
 
 .link:hover {
@@ -150,7 +151,6 @@ small {
 
 .link--nav {
   color: var(--clr-fg);
-  text-transform: lowercase;
   font-weight: 500;
 }
 
@@ -164,7 +164,6 @@ small {
   padding: 0.8em 1.4em;
   font-weight: 500;
   font-size: 0.9rem;
-  text-transform: lowercase;
   transition: transform 0.2s ease-in-out;
 }
 
@@ -223,6 +222,9 @@ small {
   transform: translateY(-5px);
 }
 
+nav a {
+  text-transform: lowercase;
+}
 /*========
     layout
   ========*/
@@ -248,8 +250,8 @@ main {
   margin: 0 auto;
 }
 
-.section {
-  margin-top: 5em;
+section {
+  margin-top: 10em;
 }
 
 .section__title {
@@ -273,8 +275,7 @@ main {
 
 .about {
   flex-direction: column;
-  margin-top: 3em;
-  min-height: calc(100vh - 250px);
+  min-height: calc(100vh - 128px);
 }
 
 .about__name {
@@ -283,25 +284,35 @@ main {
 }
 
 .about__role {
-  margin-top: 1.2em;
+  margin-top: 1em;
 }
 
 .about__desc {
   font-size: 1rem;
   max-width: 720px;
+  margin-top: 4em;
 }
-
-.about__desc,
 .about__contact {
-  margin-top: 2.4em;
+  margin-top: 1em;
 }
 
-.about .link--icon {
+.about__contact .link--icon {
   margin-right: 0.8em;
 }
 
 .about .btn--outline {
   margin-right: 1em;
+}
+
+#avatar {
+  width: 150px;
+  margin-top: 2em;
+  margin-bottom: 5em;
+}
+#scroll-down {
+  width: 75px;
+  position: absolute;
+  bottom: 0;
 }
 
 .projects__grid {
@@ -346,6 +357,10 @@ main {
   margin-left: 0.5em;
 }
 
+.skills {
+  margin-bottom: 10em;
+}
+
 .skills__list {
   width: fit-content;
   margin: 0 auto;
@@ -367,12 +382,39 @@ main {
 }
 .contact {
   flex-direction: column;
+  margin-top: 5em;
+  margin-bottom: 5em;
 }
 
 .footer {
-  padding: 3em 0;
+  padding: 1em 0;
   margin-top: 4em;
   text-align: center;
+  background-color: var(--clr-primary);
+  color: var(--clr-bg);
+}
+
+.footer a,
+.footer h2 {
+  color: var(--clr-bg);
+}
+
+.footer .btn--outline {
+  color: var(--clr-bg);
+  border: 2px solid var(--clr-bg);
+}
+
+.footer .btn--outline:focus,
+.footer .btn--outline:hover {
+  color: var(--clr-primary);
+}
+
+.footer .btn--outline:before {
+  background-color: var(--clr-bg);
+}
+
+.footer .link:hover {
+  color: var(--clr-bg-alt);
 }
 
 .footer__link {
@@ -414,7 +456,7 @@ main {
     height: 6em;
   }
 
-  .section {
+  section {
     margin-top: 4em;
   }
 
@@ -442,6 +484,8 @@ main {
 
   .about {
     margin-top: 2em;
+    margin-left: 1em;
+    margin-right: 1em;
     text-align: left;
   }
 
@@ -459,12 +503,20 @@ main {
     z-index: 2;
     margin-left: 0.8em;
   }
+
+  #scroll-down {
+    display: none;
+  }
 }
 
 .welcome-animation {
   display: inline-block;
   animation: wave 1s ease;
   animation-delay: 1s;
+}
+
+.contact p {
+  margin-bottom: 20px;
 }
 
 @keyframes wave {
