@@ -141,9 +141,7 @@ body.dark .gist .pl-sr,
 body.dark .gist .pl-enti {
   color: #b83426;
 }
-body.dark {
-  font: 16px "Open Sans", sans-serif;
-}
+
 body.dark .gist .gist-file {
   border-color: #555 #555 #444;
 }
