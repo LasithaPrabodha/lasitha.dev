@@ -1,5 +1,6 @@
 .blogs {
   max-width: 1100px;
+  min-height: calc(100vh - 128px);
   margin: 0 auto;
 }
 .blog {
@@ -26,7 +27,7 @@
   .blogs {
     max-width: 1100px;
     margin: 0 auto;
-    margin: 24px;
+    margin-top: 24px;
   }
   .blog {
     flex-direction: column;
@@ -34,5 +35,8 @@
   }
   .blog .text {
     margin: 0;
+  }
+  .blog img {
+    width: 100%;
   }
 }

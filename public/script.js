@@ -32,11 +32,11 @@
 
   btnTheme.addEventListener("click", () => (isDark() ? setTheme("light", "fa-moon") : setTheme("dark", "fa-sun")));
 
-  const closeNav = () =>{
+  const closeNav = () => {
     navUl.classList.remove("display-nav-list");
     btnHamburger.classList.remove("fa-times");
     btnHamburger.classList.add("fa-bars");
-  }
+  };
 
   btnHamburger.addEventListener("click", () => {
     if (btnHamburger.classList.contains("fa-bars")) {
@@ -44,12 +44,12 @@
       btnHamburger.classList.add("fa-times");
       navUl.classList.add("display-nav-list");
     } else {
-      closeNav()
+      closeNav();
     }
   });
 
   navUl.addEventListener("click", () => {
-    closeNav()
+    closeNav();
   });
 
   document.addEventListener("scroll", () => {
