@@ -279,8 +279,11 @@ section {
 }
 
 .about__name {
-  color: var(--clr-primary);
   padding: 0 8px;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  -webkit-background-clip: text;
+  background-image: linear-gradient(45deg, #BA2D23, #1B3487);
 }
 
 .about__role {
