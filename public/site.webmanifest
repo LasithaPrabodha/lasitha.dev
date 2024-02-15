@@ -1,0 +1,26 @@
+{
+  "name": "Lasitha Prabodha Weligampola - best full stack developer",
+  "short_name": "Lasitha",
+  "icons": [
+    {
+      "src": "/images/favicon/android-chrome-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "/images/favicon/android-chrome-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ],
+  "theme_color": "#2978b5",
+  "background_color": "#fcfcfc",
+  "display": "standalone",
+  "categories": [
+    "software",
+    "developer",
+    "portfolio"
+  ],
+  "start_url": "https://www.lasitha.dev",
+  "description": "I design and develop engaging web, mobile, and API experiences with Angular, React Native, ASP.NET Core and more"
+}
