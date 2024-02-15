@@ -441,6 +441,10 @@ section {
   color: var(--clr-bg-alt);
 }
 
+.footer .link::before {
+  background-color: var(--clr-bg-alt);
+}
+
 .footer__link {
   font-size: 0.9rem;
   font-weight: 700;
