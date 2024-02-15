@@ -1,0 +1,162 @@
+.about {
+  flex-direction: column;
+  min-height: calc(100vh - 128px);
+}
+.about h1 {
+  font-size: 4em;
+}
+.about__name {
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  -webkit-background-clip: text;
+  background-image: linear-gradient(45deg, var(--clr-grd-one), var(--clr-grd-two));
+}
+
+.about__role {
+  margin-top: 1em;
+}
+
+.about__desc {
+  font-size: 1rem;
+  max-width: 720px;
+  margin-top: 4em;
+}
+
+.about .btn--outline {
+  margin-right: 1em;
+}
+
+#avatar {
+  width: 150px;
+  margin-top: 2em;
+  margin-bottom: 5em;
+}
+#scroll-down {
+  width: 75px;
+  position: absolute;
+  bottom: 0;
+}
+
+.projects__grid {
+  max-width: 1100px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(18em, 1fr));
+  grid-gap: 2em;
+}
+
+.project {
+  padding: 2em;
+  margin: 0 auto;
+  text-align: center;
+  box-shadow: var(--shadow);
+  transition: transform 0.2s linear;
+  border-radius: 8px;
+  display: flex;
+  flex-direction: column;
+}
+
+.project:hover {
+  transform: translateY(-7px);
+}
+
+.project__description {
+  margin-top: 1em;
+}
+
+.project__stack {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin: 1.2em 0;
+}
+
+.project__stack-item {
+  margin: 0.5em;
+  font-weight: 500;
+  font-size: 0.8rem;
+  color: var(--clr-fg-alt);
+}
+
+.project .link--icon {
+  margin-left: 0.5em;
+}
+
+.skills {
+  margin-bottom: 10em;
+}
+
+.skills__list {
+  width: fit-content;
+  margin: 0 auto;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.skills__list ul {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.skills__list-item {
+  margin: 0.75em;
+  border-radius: 4px;
+  transition: transform 0.5s;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+}
+.skills__list-item:hover {
+  transform: scale(1.1, 1.1);
+}
+
+.skills__list-item span {
+  font-size: 10px;
+  text-align: center;
+  display: none;
+  position: absolute;
+  bottom: -16px;
+  left: 0;
+  right: 0;
+}
+
+.skills__list-item:hover span {
+  display: block;
+}
+
+.welcome-animation {
+  display: inline-block;
+  animation: wave 1s ease;
+  animation-delay: 1s;
+}
+
+@media (max-width: 600px) {
+  .about {
+    margin-top: 2em;
+    text-align: left;
+  }
+  .about h1 {
+    font-size: 3em;
+  }
+
+  #scroll-down {
+    display: none;
+  }
+}
+
+@keyframes wave {
+  0% {
+    transform: rotate(0deg);
+  }
+  25% {
+    transform: rotate(15deg);
+  }
+  75% {
+    transform: rotate(-15deg);
+  }
+  100% {
+    transform: rotate(0deg);
+  }
+}

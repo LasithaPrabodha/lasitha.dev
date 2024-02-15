@@ -79,3 +79,8 @@ p.quote i {
   font-size: 24px;
   color: var(--clr-quote);
 }
+@media (max-width: 600px) {
+  .blog h1 {
+    line-height: 1.2;
+  }
+}
