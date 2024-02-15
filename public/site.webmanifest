@@ -1,6 +1,10 @@
 {
   "name": "Lasitha Prabodha Weligampola - Full Stack & Mobile Software Engineer",
   "short_name": "Lasitha",
+  "start_url": "https://www.lasitha.dev",
+  "description": "Lasitha's personal website",
+  "lang": "en",
+  "orientation": "portrait",
   "icons": [
     {
       "src": "/images/favicon/android-chrome-192x192.png",
@@ -13,14 +17,12 @@
       "type": "image/png"
     }
   ],
-  "theme_color": "#2978b5",
-  "background_color": "#fcfcfc",
-  "display": "standalone",
   "categories": [
     "software",
     "developer",
     "portfolio"
   ],
-  "start_url": "https://www.lasitha.dev",
-  "description": "I design and develop engaging web, mobile, and API experiences with Angular, React Native, ASP.NET Core and more"
+  "theme_color": "#2978b5",
+  "background_color": "#fcfcfc",
+  "display": "standalone"
 }
