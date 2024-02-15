@@ -291,7 +291,6 @@ section {
   font-size: 4em;
 }
 .about__name {
-  padding: 0 8px;
   -webkit-text-fill-color: transparent;
   background-clip: text;
   -webkit-background-clip: text;
