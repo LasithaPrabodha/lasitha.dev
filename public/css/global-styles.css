@@ -49,8 +49,8 @@ body {
   font-family: "Poppins", sans-serif;
   line-height: 1.5;
   color: var(--clr-fg);
-  background-color: var(--clr-bg);
-  transition: all 0.3s;
+  background-color: var(--clr-bg); 
+  transition: all .5s;
 }
 
 ::-moz-selection {
@@ -252,6 +252,10 @@ nav a {
   max-width: 1100px;
   margin: 0 auto;
   justify-content: space-between;
+  background: transparent;
+}
+.header * {
+  z-index: 1;
 }
 .section__title {
   text-align: center;
@@ -287,7 +291,7 @@ nav a {
   .header {
     height: 6em;
   }
-  
+
   .nav__list {
     display: none;
     flex-direction: column;

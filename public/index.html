@@ -58,7 +58,9 @@
 
     <title>Lasitha Prabodha Weligampola</title>
   </head>
-  <body class="light" id="top">
+  <body class="" id="top">
+    <div class="night-back-container">
+      
     <header class="header center">
       <h3>
         <a href="./" class="link">LP.</a>
@@ -92,6 +94,7 @@
 
     <!-- About -->
     <div class="about center">
+      <canvas id="canvas"></canvas>
       <h1>
         Hi, I am <span class="about__name">Lasitha Prabodha.</span>
         <div class="welcome-animation">👋🏼</div>
@@ -115,6 +118,8 @@
       <img id="scroll-down" src="images/scroll-down.gif" alt="scroll-down" />
     </div>
 
+    <div></div>
+  </div>
     <!-- Projects -->
     <section class="projects" id="projects">
       <h2 class="section__title">Projects</h2>
@@ -392,6 +397,8 @@
       const app = initializeApp(firebaseConfig);
       const analytics = getAnalytics(app);
     </script>
+    <script src="./js/night.js"></script>
+    <script src="./js/shooting-star.js"></script>
     <script src="./script.js"></script>
   </body>
 </html>
