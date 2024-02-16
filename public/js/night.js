@@ -19,6 +19,25 @@ canvas.height = height;
 
 let counter = 0;
 
+function checkIfMobile() {
+  if ("maxTouchPoints" in navigator) {
+    return navigator.maxTouchPoints > 0;
+  } else if ("msMaxTouchPoints" in navigator) {
+    return navigator.msMaxTouchPoints > 0;
+  } else {
+    const mQ = window.matchMedia && matchMedia("(pointer:coarse)");
+    if (mQ && mQ.media === "(pointer:coarse)") {
+      return !mQ.matches;
+    } else if ("orientation" in window) {
+      return true; // deprecated, but good fallback
+    } else {
+      // Only as a last resort, fall back to user agent sniffing
+      const UA = navigator.userAgent;
+      return /\b(BlackBerry|webOS|iPhone|IEMobile)\b/i.test(UA) || /\b(Android|Windows Phone|iPad|iPod)\b/i.test(UA);
+    }
+  }
+}
+
 function randomInt(max) {
   return Math.floor(Math.random() * max);
 }
@@ -69,7 +88,9 @@ function render() {
     fillCircle(ctx, x, y, star.r, `rgba(255, 255, 255, ${opacity}`);
   });
 
-  renderMoon(ctx);
+  const isMobile = checkIfMobile();
+
+  !isMobile && renderMoon(ctx);
 
   counter++;
   requestAnimationFrame(render);
