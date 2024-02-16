@@ -4,9 +4,12 @@
   overflow: hidden;
   background: transparent;
 }
-
 .about *:not(canvas) {
   z-index: 1;
+}
+
+.nav-open .about *:not(canvas) {
+  z-index: -1;
 }
 
 .night-back-container {
@@ -18,15 +21,15 @@ canvas {
   position: absolute;
   top: 0;
   left: 0;
-  opacity: 0;
+  display: none;
 }
 
 .dark canvas {
-  opacity: 1;
+  display: block;
 }
 
 .light canvas {
-  opacity: 0;
+  display: none;
 }
 
 .about h1 {

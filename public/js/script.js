@@ -3,46 +3,61 @@
 
   const btnTheme = document.querySelector("#theme-toggle");
   const btnHamburger = document.querySelector(".fa-bars");
-  const navListItem = document.querySelectorAll(".nav__list-item");
-  const isSystemThemeDark = window.matchMedia("(prefers-color-scheme:dark)").matches;
-  const getBodyTheme = localStorage.getItem("portfolio-theme") || "light";
-  const getBtnTheme = localStorage.getItem("portfolio-btn-theme") || "fa-moon";
   const navUl = document.querySelector(".nav__list");
 
-  const addThemeClass = (bodyClass, btnClass) => {
+  function getBodyTheme() {
+    return localStorage.getItem("portfolio-theme") || "light";
+  }
+  function getBtnTheme() {
+    return localStorage.getItem("portfolio-btn-theme") || "fa-moon";
+  }
+
+  function addThemeClass(bodyClass, btnClass) {
     body.classList.add(bodyClass);
     btnTheme.children[0].classList.add(btnClass);
-  };
+  }
 
-  addThemeClass(getBodyTheme, getBtnTheme);
+  addThemeClass(getBodyTheme(), getBtnTheme());
 
-  const isDark = () => body.classList.contains("dark");
+  function isDark() {
+    return body.classList.contains("dark");
+  }
 
-  const setTheme = (bodyClass, btnClass) => {
-    body.classList.remove(localStorage.getItem("portfolio-theme"));
-    btnTheme.children[0].classList.remove(localStorage.getItem("portfolio-btn-theme"));
+  function setTheme(bodyClass, btnClass) {
+    body.classList.remove(getBodyTheme());
+    btnTheme.children[0].classList.remove(getBtnTheme());
 
     addThemeClass(bodyClass, btnClass);
 
     localStorage.setItem("portfolio-theme", bodyClass);
     localStorage.setItem("portfolio-btn-theme", btnClass);
-  };
+  }
 
-  // isSystemThemeDark ? setTheme("dark", "fa-sun") : setTheme("light", "fa-moon");
-
-  btnTheme.addEventListener("click", () => (isDark() ? setTheme("light", "fa-moon") : setTheme("dark", "fa-sun")));
-
-  const closeNav = () => {
+  function closeNav() {
     navUl.classList.remove("display-nav-list");
     btnHamburger.classList.remove("fa-times");
     btnHamburger.classList.add("fa-bars");
-  };
+    body.classList.remove("nav-open");
+  }
+
+  function openNav() {
+    btnHamburger.classList.remove("fa-bars");
+    btnHamburger.classList.add("fa-times");
+    navUl.classList.add("display-nav-list");
+    body.classList.add("nav-open");
+  }
+
+  btnTheme.addEventListener("click", () => {
+    if (isDark()) {
+      setTheme("light", "fa-moon");
+    } else {
+      setTheme("dark", "fa-sun");
+    }
+  });
 
   btnHamburger.addEventListener("click", () => {
     if (btnHamburger.classList.contains("fa-bars")) {
-      btnHamburger.classList.remove("fa-bars");
-      btnHamburger.classList.add("fa-times");
-      navUl.classList.add("display-nav-list");
+      openNav();
     } else {
       closeNav();
     }
