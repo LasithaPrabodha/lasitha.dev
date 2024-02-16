@@ -5,8 +5,8 @@
   const btnHamburger = document.querySelector(".fa-bars");
   const navListItem = document.querySelectorAll(".nav__list-item");
   const isSystemThemeDark = window.matchMedia("(prefers-color-scheme:dark)").matches;
-  const getBodyTheme = localStorage.getItem("portfolio-theme");
-  const getBtnTheme = localStorage.getItem("portfolio-btn-theme");
+  const getBodyTheme = localStorage.getItem("portfolio-theme") || "light";
+  const getBtnTheme = localStorage.getItem("portfolio-btn-theme") || "fa-moon";
   const navUl = document.querySelector(".nav__list");
 
   const addThemeClass = (bodyClass, btnClass) => {
