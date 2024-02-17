@@ -65,7 +65,7 @@ function fillCircle(ctx, x, y, r, fillStyle) {
   ctx.fill();
 }
 
-function renderMoon(ctx, blur) {
+function renderMoon(ctx) {
   fillCircle(ctx, moon.x, moon.y, moon.r, moon.color);
   // render a smaller circle above the moon to give it that well-known moon-shape
   fillCircle(ctx, moon.x - moon.r / 3, moon.y - moon.r / 3, moon.r, backgroundColor);
