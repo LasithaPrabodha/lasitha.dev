@@ -14,7 +14,6 @@ const { default: sun } = await import(`/src/assets/icons/sun.svg?raw`);
   <nav class="nav center">
     <ul class="nav__list center">
       <HeaderLink href="/projects">Projects</HeaderLink>
-      <HeaderLink href="/skills">Skills</HeaderLink>
       <HeaderLink href="/blogs">Blogs</HeaderLink>
       <HeaderLink href="/contact">Contact</HeaderLink>
     </ul>
@@ -47,6 +46,7 @@ const { default: sun } = await import(`/src/assets/icons/sun.svg?raw`);
   }
 
   function addThemeClass(bodyClass: string) {
+    body.className = "";
     body.classList.add(bodyClass);
     if (bodyClass === "light") {
       if (moon) moon.classList.remove("d-none");
@@ -58,13 +58,22 @@ const { default: sun } = await import(`/src/assets/icons/sun.svg?raw`);
   }
 
   function setTheme(bodyClass: string) {
-    body.classList.remove(getBodyTheme());
-
     addThemeClass(bodyClass);
 
     localStorage.setItem("portfolio-theme", bodyClass);
   }
 
+  addThemeClass(getBodyTheme());
+
+  btnTheme?.addEventListener("click", () => {
+    if (isDark()) {
+      setTheme("light");
+    } else {
+      setTheme("dark");
+    }
+  });
+
+  // Navigation
   function closeNav() {
     navUl?.classList.remove("display-nav-list");
     btnHamburger?.classList.remove("fa-times");
@@ -78,16 +87,6 @@ const { default: sun } = await import(`/src/assets/icons/sun.svg?raw`);
     navUl?.classList.add("display-nav-list");
     body.classList.add("nav-open");
   }
-
-  addThemeClass(getBodyTheme());
-
-  btnTheme?.addEventListener("click", () => {
-    if (isDark()) {
-      setTheme("light");
-    } else {
-      setTheme("dark");
-    }
-  });
 
   btnHamburger?.addEventListener("click", () => {
     if (btnHamburger.classList.contains("fa-bars")) {

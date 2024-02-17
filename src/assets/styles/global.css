@@ -222,6 +222,18 @@ body.nav-open {
   display: none !important;
 }
 
+canvas {
+  z-index: 0;
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: none;
+}
+
+.dark canvas {
+  display: block;
+}
+
 @media (max-width: 600px) {
   body {
     padding-left: 1em;

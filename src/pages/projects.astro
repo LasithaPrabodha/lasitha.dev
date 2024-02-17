@@ -26,7 +26,8 @@ const { default: code } = await import(`/src/assets/icons/code.svg?raw`);
       }
     </style>
   </head>
-  <body class="light" id="top">
+  <body class="dark" id="top">
+    <canvas id="canvas"></canvas>
     <Header />
     <section id="projects">
       <h2 class="section__title">Projects</h2>
@@ -80,5 +81,16 @@ const { default: code } = await import(`/src/assets/icons/code.svg?raw`);
         />
       </div>
     </section>
+
+    <style>
+      #projects {
+        position: relative;
+        background: transparent;
+      }
+    </style>
+    <script>
+      import { render } from "../assets/js/night.js";
+      render();
+    </script>
   </body>
 </html>

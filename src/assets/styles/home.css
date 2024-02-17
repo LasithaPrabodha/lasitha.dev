@@ -11,17 +11,6 @@
   z-index: -1;
 }
 
-canvas {
-  z-index: 0;
-  position: absolute;
-  top: 0;
-  left: 0;
-  display: none;
-}
-
-.dark canvas {
-  display: block;
-}
 
 .light canvas {
   display: none;
