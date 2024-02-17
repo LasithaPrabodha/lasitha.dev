@@ -11,10 +11,6 @@
   z-index: -1;
 }
 
-.night-back-container {
-  position: relative;
-  overflow: hidden;
-}
 canvas {
   z-index: 0;
   position: absolute;
@@ -71,9 +67,10 @@ canvas {
 }
 
 .contact-links .link--icon {
-  margin-right: 0.4em;
-  margin-left: 0.4em;
+  margin-right: 0.5em;
+  margin-left: 0.5em;
   display: flex;
+  padding: 8px 0;
 }
 
 @media (max-width: 600px) {

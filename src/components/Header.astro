@@ -3,7 +3,7 @@ import HeaderLink from "./HeaderLink.astro";
 import { SHORT_SITE_TITLE } from "../consts";
 
 const { default: moon } = await import(`/src/assets/icons/moon.svg?raw`);
-const { default: sun } = await import(`/src/assets/icons/moon.svg?raw`);
+const { default: sun } = await import(`/src/assets/icons/sun.svg?raw`);
 ---
 
 <header class="header center">
@@ -21,6 +21,7 @@ const { default: sun } = await import(`/src/assets/icons/moon.svg?raw`);
 
     <button id="theme-toggle" type="button" aria-label="toggle theme" class="btn btn--icon">
       <Fragment set:html={moon} />
+      <Fragment set:html={sun} />
     </button>
 
     <button type="button" aria-label="toggle navigation" class="btn btn--icon nav__hamburger">
@@ -28,6 +29,78 @@ const { default: sun } = await import(`/src/assets/icons/moon.svg?raw`);
     </button>
   </nav>
 </header>
+
+<script>
+  const body = document.body;
+  const btnTheme = document.querySelector("#theme-toggle");
+  const btnHamburger = document.querySelector(".fa-bars");
+  const navUl = document.querySelector(".nav__list");
+  const moon = document.querySelector('svg[data-id="moon"');
+  const sun = document.querySelector('svg[data-id="sun"');
+
+  function isDark() {
+    return body.classList.contains("dark");
+  }
+
+  function getBodyTheme() {
+    return localStorage.getItem("portfolio-theme") || "light";
+  }
+
+  function addThemeClass(bodyClass: string) {
+    body.classList.add(bodyClass);
+    if (bodyClass === "light") {
+      if (moon) moon.classList.remove("d-none");
+      if (sun) sun.classList.add("d-none");
+    } else {
+      if (moon) moon.classList.add("d-none");
+      if (sun) sun.classList.remove("d-none");
+    }
+  }
+
+  function setTheme(bodyClass: string) {
+    body.classList.remove(getBodyTheme());
+
+    addThemeClass(bodyClass);
+
+    localStorage.setItem("portfolio-theme", bodyClass);
+  }
+
+  function closeNav() {
+    navUl?.classList.remove("display-nav-list");
+    btnHamburger?.classList.remove("fa-times");
+    btnHamburger?.classList.add("fa-bars");
+    body.classList.remove("nav-open");
+  }
+
+  function openNav() {
+    btnHamburger?.classList.remove("fa-bars");
+    btnHamburger?.classList.add("fa-times");
+    navUl?.classList.add("display-nav-list");
+    body.classList.add("nav-open");
+  }
+
+  addThemeClass(getBodyTheme());
+
+  btnTheme?.addEventListener("click", () => {
+    if (isDark()) {
+      setTheme("light");
+    } else {
+      setTheme("dark");
+    }
+  });
+
+  btnHamburger?.addEventListener("click", () => {
+    if (btnHamburger.classList.contains("fa-bars")) {
+      openNav();
+    } else {
+      closeNav();
+    }
+  });
+
+  navUl?.addEventListener("click", () => {
+    closeNav();
+  });
+</script>
 
 <style>
   .header {
@@ -70,6 +143,13 @@ const { default: sun } = await import(`/src/assets/icons/moon.svg?raw`);
 
   #theme-toggle {
     height: 20px;
+    display: flex;
+    align-items: center;
+  }
+
+  :global([data-id="moon"]),
+  :global([data-id="sun"]) {
+    fill: var(--clr-primary);
   }
 
   :global(svg) {

@@ -2,14 +2,13 @@
 import { Image } from "astro:assets";
 
 import BaseHead from "../components/BaseHead.astro";
-import Header from "../components/Header.astro"; 
+import Header from "../components/Header.astro";
 import ContactIcons from "../components/ContactIcons.astro";
 import { SITE_TITLE, SITE_DESCRIPTION } from "../consts";
 
 import avatar from "../assets/images/avatar.webp";
 
 import "../assets/styles/home.css";
-
 ---
 
 <!doctype html>
@@ -18,30 +17,32 @@ import "../assets/styles/home.css";
     <BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
   </head>
   <body class="light" id="top">
-    <div class="night-back-container">
-      <Header />
-      <div class="about center">
-        <canvas id="canvas"></canvas>
-        <h1>
-          Hi, I am <span class="about__name">Lasitha Prabodha.</span>
-          <div class="welcome-animation">👋🏼</div>
-        </h1>
-        <h2 class="about__role">A Full Stack & Mobile Software Engineer.</h2>
-        <p class="about__desc">
-          I design and develop engaging web, mobile, and API experiences with
-          <br />
-          Angular, React Native, ASP.NET Core and more.
-          <br />
-          <br />
-          I'm always eager to bring my skills and enthusiasm for new challenges.
-          <br />
-          <br />
-          <a class="link link--nav" href="#contact">Let's collaborate!</a>
-        </p>
-        <Image id="avatar" src={avatar} alt="my avatar, holding a macbook pro" />
+    <Header />
+    <div class="about center">
+      <canvas id="canvas"></canvas>
+      <h1>
+        Hi, I am <span class="about__name">Lasitha Prabodha.</span>
+        <div class="welcome-animation">👋🏼</div>
+      </h1>
+      <h2 class="about__role">A Full Stack & Mobile Software Engineer.</h2>
+      <p class="about__desc">
+        I design and develop engaging web, mobile, and API experiences with
+        <br />
+        Angular, React Native, ASP.NET Core and more.
+        <br />
+        <br />
+        I'm always eager to bring my skills and enthusiasm for new challenges.
+        <br />
+        <br />
+        <a class="link link--nav" href="#contact">Let's collaborate!</a>
+      </p>
+      <Image id="avatar" src={avatar} alt="my avatar, holding a macbook pro" />
 
-        <ContactIcons />
-      </div>
+      <ContactIcons />
     </div>
+    <script>
+      import { render } from "../assets/js/night.js";
+      render();
+    </script>
   </body>
 </html>
