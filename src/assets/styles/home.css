@@ -1,0 +1,111 @@
+.about {
+  flex-direction: column;
+  overflow: hidden;
+  background: transparent;
+}
+.about *:not(canvas) {
+  z-index: 1;
+}
+
+.nav-open .about *:not(canvas) {
+  z-index: -1;
+}
+
+.night-back-container {
+  position: relative;
+  overflow: hidden;
+}
+canvas {
+  z-index: 0;
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: none;
+}
+
+.dark canvas {
+  display: block;
+}
+
+.light canvas {
+  display: none;
+}
+
+.about h1 {
+  font-size: 4em;
+}
+.about__name {
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  -webkit-background-clip: text;
+  background-image: linear-gradient(45deg, var(--clr-grd-one), var(--clr-grd-two));
+}
+
+.about__role {
+  margin-top: 1em;
+}
+
+.about__desc {
+  font-size: 1rem;
+  max-width: 720px;
+  margin-top: 4em;
+}
+
+.about .btn--outline {
+  margin-right: 1em;
+}
+
+#avatar {
+  width: 150px;
+  height: 150px;
+  margin-top: 2em;
+}
+.welcome-animation {
+  display: inline-block;
+  animation: wave 1s ease;
+  animation-delay: 1s;
+}
+
+.contact-links {
+  margin-top: 3em;
+}
+
+.contact-links .link--icon {
+  margin-right: 0.4em;
+  margin-left: 0.4em;
+  display: flex;
+}
+
+@media (max-width: 600px) {
+  .about {
+    margin-top: 2em;
+    margin-left: 1em;
+    margin-right: 1em;
+  }
+  .about h1 {
+    font-size: 3em;
+  }
+
+  .night-back-container {
+    margin-left: -1em;
+    margin-right: -1em;
+  }
+  .contact-links {
+    margin-top: 2em;
+  }
+}
+
+@keyframes wave {
+  0% {
+    transform: rotate(0deg);
+  }
+  25% {
+    transform: rotate(15deg);
+  }
+  75% {
+    transform: rotate(-15deg);
+  }
+  100% {
+    transform: rotate(0deg);
+  }
+}

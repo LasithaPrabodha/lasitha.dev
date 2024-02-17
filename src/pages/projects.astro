@@ -1,0 +1,84 @@
+---
+import BaseHead from "../components/BaseHead.astro";
+import Header from "../components/Header.astro";
+import Footer from "../components/Footer.astro";
+import Project from "../components/Project.astro";
+
+const SITE_TITLE = "Lasitha's - Projects";
+const SITE_DESCRIPTION = "Lasitha's - Projects";
+
+const { default: eye } = await import(`/src/assets/icons/eye.svg?raw`);
+const { default: book } = await import(`/src/assets/icons/book.svg?raw`);
+const { default: code } = await import(`/src/assets/icons/code.svg?raw`);
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
+    <style>
+      .projects__grid {
+        max-width: 1100px;
+        margin: 0 auto;
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(18em, 1fr));
+        grid-gap: 2em;
+      }
+    </style>
+  </head>
+  <body class="light" id="top">
+    <Header />
+    <section id="projects">
+      <h2 class="section__title">Projects</h2>
+      <div class="projects__grid">
+        <Project
+          title="SuperOffice - Developer Portal"
+          description="Contains a set of self-serve tools that developers can use to manage their access to SuperOffice Online APIs"
+          technologies={["Angular", ".NET", "C#"]}
+          links={[
+            {
+              href: "https://docs.superoffice.com/en/developer-portal/about.html",
+              ariaLabel: "documentation",
+              icon: book,
+            },
+          ]}
+        />
+        <Project
+          title="Cenium PMS"
+          description="Streamlines complex group bookings with a versatile and dynamic PMS solution"
+          technologies={["Angular", ".NET", "C#"]}
+          links={[{ href: "https://www.cenium.com/pms", ariaLabel: "website", icon: book }]}
+        />
+        <Project
+          title="CarPool App Backend"
+          description="A project written .NET to learn clean architecture with DDD"
+          technologies={[".NET", "C#"]}
+          links={[
+            { href: "https://github.com/LasithaPrabodha/CleanArchitecture", ariaLabel: "source code", icon: code },
+          ]}
+        />
+        <Project
+          title="Club Arena"
+          description="Simplifies sports facility management, enabling easy bookings without manual processing"
+          technologies={["Angular", ".NET", "C#"]}
+          links={[{ href: "https://github.com/LasithaPrabodha/jeopardy-app", ariaLabel: "source code", icon: eye }]}
+        />
+        <Project
+          title="Jeopardy"
+          description="A simple implementation of the classic TV game show 'Jeopardy'. The project is built using vanilla JavaScript"
+          technologies={["JavaScript", "CSS", "HTML"]}
+          links={[
+            { href: "https://github.com/LasithaPrabodha/jeopardy-app", ariaLabel: "source code", icon: code },
+            { href: "https://lasithaprabodha.github.io/jeopardy-app", ariaLabel: "source code", icon: eye },
+          ]}
+        />
+        <Project
+          title="Kingsbury Toronto"
+          description="A mobile-first and user-friendly website for a luxurious apartment in Toronto"
+          technologies={["CSS", "HTML"]}
+          links={[{ href: "https://kingsbury-toronto-website.web.app", ariaLabel: "live preview", icon: eye }]}
+        />
+      </div>
+    </section>
+  </body>
+</html>

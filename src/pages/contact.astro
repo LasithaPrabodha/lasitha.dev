@@ -1,0 +1,38 @@
+---
+import BaseHead from "../components/BaseHead.astro";
+import Header from "../components/Header.astro";
+import Footer from "../components/Footer.astro";
+import Project from "../components/Project.astro";
+
+const SITE_TITLE = "Contact Lasitha";
+const SITE_DESCRIPTION = "Contact Lasitha";
+
+const { default: eye } = await import(`/src/assets/icons/eye.svg?raw`);
+const { default: book } = await import(`/src/assets/icons/book.svg?raw`);
+const { default: code } = await import(`/src/assets/icons/code.svg?raw`);
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
+    <style>
+      .projects__grid {
+        max-width: 1100px;
+        margin: 0 auto;
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(18em, 1fr));
+        grid-gap: 2em;
+      }
+    </style>
+  </head>
+  <body class="light" id="top">
+    <Header />
+    <section id="projects">
+      <h2 class="section__title">Contact Me</h2>
+      <div class="projects__grid">
+        
+      </div>
+    </section>
+  </body>
+</html>

@@ -1,0 +1,75 @@
+---
+import BaseHead from "../components/BaseHead.astro";
+import Header from "../components/Header.astro";
+import Footer from "../components/Footer.astro";
+import Project from "../components/Project.astro";
+import Skill from "../components/Skill.astro";
+
+const SITE_TITLE = "Lasitha's - Technical Skills";
+const SITE_DESCRIPTION = "Lasitha's - Technical Skills";
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
+    <style>
+      .skills__grid {
+        max-width: 1100px;
+        margin: 0 auto;
+        display: flex;
+        justify-content: center;
+        flex-wrap: wrap;
+        gap: 2em;
+        margin-top: 2em;
+      }
+      .section__sub-title {
+        text-align: center;
+        margin-top: 2.5em;
+        margin-bottom: 1em;
+        text-transform: uppercase;
+      }
+      #skills {
+        margin-bottom: 3em;
+      }
+    </style>
+  </head>
+  <body class="light" id="top">
+    <Header />
+    <section id="skills">
+      <h2 class="section__title">Technical Skills</h2>
+
+      <h4 class="section__sub-title">Languages</h4>
+      <div class="skills__grid">
+        <Skill title="JavaScript" />
+        <Skill title="TypeScript" />
+        <Skill title="C#" />
+        <Skill title="Dart" />
+        <Skill title="PHP" />
+        <Skill title="Kotlin" />
+        <Skill title="Swift" />
+        <Skill title="HTML5" />
+        <Skill title="CSS3" />
+      </div>
+
+      <h4 class="section__sub-title">Frameworks & Libraries</h4>
+      <div class="skills__grid">
+        <Skill title="Laravel" />
+        <Skill title="ASP.NET Core" />
+        <Skill title="Flutter" />
+        <Skill title="Angular" />
+        <Skill title="ReactJS" />
+        <Skill title="React Native" />
+        <Skill title="VueJS" />
+        <Skill title="Astro" />
+      </div>
+
+      <h4 class="section__sub-title">Cloud & DB</h4>
+      <div class="skills__grid">
+        <Skill title="Azure" />
+        <Skill title="Firebase" />
+        <Skill title="MSSQL" />
+      </div>
+    </section>
+  </body>
+</html>

@@ -1,0 +1,65 @@
+---
+import type { Link } from "../interfaces/Link";
+
+const { title, description, technologies, links } = Astro.props;
+---
+
+<div class="project">
+  <h3>{title}</h3>
+  <p class="project__description">{description}</p>
+  <ul class="project__stack">
+    {technologies.map((t: string) => <li class="project__stack-item">{t}</li>)}
+  </ul>
+  <div class="links">
+    {
+      links.map((l: Link) => (
+        <a href={l.href} target="_blank" rel="noreferrer" aria-label={l.ariaLabel} class="link link--icon">
+          <Fragment set:html={l.icon} />
+        </a>
+      ))
+    }
+  </div>
+</div>
+
+<style>
+  .project {
+    padding: 2em;
+    margin: 0 auto;
+    text-align: center;
+    box-shadow: var(--shadow);
+    transition: transform 0.2s linear;
+    border-radius: 8px;
+    display: flex;
+    flex-direction: column;
+  }
+ 
+
+  .project__description {
+    margin-top: 1em;
+  }
+
+  .project__stack {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin: 1.2em 0;
+  }
+
+  .project__stack-item {
+    margin: 0.5em;
+    font-weight: 500;
+    font-size: 0.8rem;
+    color: var(--clr-fg-alt);
+  }
+
+  .link--icon {
+    margin-left: 0.5em;
+  }
+
+  .links {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+  }
+</style>

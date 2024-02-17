@@ -1,0 +1,40 @@
+---
+const { default: instagram } = await import(`/src/assets/icons/instagram.svg?raw`);
+const { default: facebook } = await import(`/src/assets/icons/facebook.svg?raw`);
+const { default: linkedin } = await import(`/src/assets/icons/linkedin.svg?raw`);
+const { default: github } = await import(`/src/assets/icons/github.svg?raw`);
+---
+
+<div class="contact-links center">
+  <a
+    href="https://www.instagram.com/lu6_fer/"
+    target="_blank"
+    rel="noreferrer"
+    aria-label="insta"
+    class="link link--icon"
+  >
+    <Fragment set:html={instagram} />
+  </a>
+  <a href="https://www.facebook.com/lmlxlml/" target="_blank" rel="noreferrer" aria-label="fb" class="link link--icon">
+    <Fragment set:html={facebook} />
+  </a>
+
+  <a
+    href="https://linkedin.com/in/lasithapw"
+    target="_blank"
+    rel="noreferrer"
+    aria-label="linkedin"
+    class="link link--icon"
+  >
+    <Fragment set:html={linkedin} />
+  </a>
+  <a
+    href="https://github.com/LasithaPrabodha"
+    target="_blank"
+    rel="noreferrer"
+    aria-label="github"
+    class="link link--icon"
+  >
+    <Fragment set:html={github} />
+  </a>
+</div>
