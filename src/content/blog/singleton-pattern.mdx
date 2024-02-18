@@ -1,0 +1,150 @@
+---
+title: 'Understanding the Singleton Pattern & when to use it, or do we really need to?'
+description: 'In 2002, when I was nine years old, I stepped into TEC Sri Lanka, a place filled with computers and
+cutting edge technology. It felt like entering a world! Little did I know then that this experience would
+ignite my passion, for all things related to computers...'
+pubDate: 'Feb 07 2024'
+---
+
+import WideImage from '../../components/WideImage.astro'
+ 
+In this article, I will dive into understanding what the Singleton Pattern is and let's check whether it's
+really worth it. I will be using C# as our main language to give you examples because (insert something funny).
+
+## So, what exactly is Singleton Pattern?
+
+
+Let's imagine you're working on a project where you need just one copy of a class, accessible from anywhere in
+your code. That's what the Singleton Pattern is all about; ensuring there's only one instance of a class in
+charge of a specific task. This way, you maintain order and prevent chaos by avoiding duplicate instances and
+conflicting operations.
+
+
+![There can be only one... initialization](../../assets/images/blogs/singleton-meme-some-hero.webp) 
+   
+Singleton Pattern is one of the simplest design patterns and probably the most widely used design pattern.
+Sometimes it is used in scenarios where it is not required. In such cases, the disadvantages of using it
+outweighs the advantages what it provides.
+
+## But why would we need such a pattern?
+
+
+Take managing a database connection or overseeing access to a shared resource like a logging system or a
+configuration manager as examples. Having multiple instances in these scenarios could spell trouble, leading to
+wasted resources or messy outcomes.
+
+
+Enough with the theory, let's look into a real-world scenario in C# where we apply the Singleton Pattern.
+
+  
+We have a class named `DBManager`, tasked with handling database connections across our application.
+It's crucial to have just one `DBManager` instance to avoid resource wastage and potential connection
+issues.
+
+  <script src="https://gist.github.com/LasithaPrabodha/81c2833179f608ba695a04de13499418.js"></script>
+
+The `DBManager` class keeps its constructor private so that there's no external initialization. The
+`Instance` property is in charge of managing the singleton instance. We provide the access for our instance by setting it
+up as a static property. Whenever we need to deal with the database in our app we just need to make quick call
+with `DBManager.Instance.Connect()` to gets us connected, and
+`DBManager.Instance.Disconnect()` tidies things up when we're done. It's a straightforward way to
+keep our database tasks consistent and smooth across the application.
+
+
+We can see that this pattern addresses two problems.
+
+1. Ensure that a class has just a single instance. 
+2. Provide a global access point to that instance. 
+ 
+
+However, it's actually not as nice as it sounds, which is why I believe the Singleton pattern is often
+considered problematic or 'evil'.
+
+## What's the issue with Global Instances?
+
+Hmm, global access? So now everyone can access it? 🤔
+
+![A friends meme](../../assets/images/blogs/singleton-meme-friends.webp) 
+ 
+ The Singleton Pattern can be a <strong>double-edged sword</strong> when it comes to global instances. While it
+offers a convenient way to manage single instances of classes, it also presents us some challenges.
+
+ 
+1. With global access to a single instance, different parts of your code become tightly coupled with it. This
+  means changes to the singleton class can ripple throughout your codebase, making maintenance more complicated.
+  I bet you won't need that when you approach a release date.
+2. By using global instances, You hide your application's dependencies in your code instead of exposing them
+  through the interfaces and injecting them wherever is needed. This will decrease testability and flexibility
+  while increasing complexity and difficulty in debugging.
+3. Testing code reliant on global singletons is tough. The hidden dependencies and tight coupling make it tricky
+  to isolate and test components independently.
+4. As your codebase grows, the rigidness of global singletons can limit scalability. Refactoring or adding new
+  features becomes more challenging.
+
+I remember my father once said,
+
+> Avoid using global variables or instances, son. 
+
+Maybe he knew I would reach this stage someday. :>
+
+## Violation Of SOLID Principles
+
+Let's see how the Singleton Pattern cost us when held up to SOLID principles. It's pretty bad actually.
+
+### Single Responsibility Principle (SRP)
+
+
+The Singleton Pattern's primary responsibility is to ensure a single instance of a class. However, it often
+takes on additional responsibilities, such as managing global state or serving as a global access point.
+
+     
+When several threads request access to one instance; singleton should take responsibility for dispatching data
+to each request in threads by using locks to prevent <strong>Race-Condition</strong> or handling read and write
+to deliver valid data.
+
+     
+This is just the beginning. As time goes by, new responsibilities will be added to the singleton. You end up
+with a class that nearly does anything. This violates the SRP by causing the class to have multiple reasons to
+change.
+
+
+### Open/Closed Principle (OCP)
+
+
+The Singleton Pattern can be challenging to extend or modify without altering its core implementation. Since the
+class controls its own instantiation, making changes to accommodate new requirements can be tricky without
+modifying the class directly.
+
+      
+A class needs to allow inheritance in order to qualify as “open”. Inheritance is an “is-a” relationship. Because
+of the “is-a” relationship, instances of the child class are also instances of the parent class if you inherit
+from a singleton class. This means that you may end up with numerous instances of the singleton class.
+
+      
+If a singleton class prevents inheritance, it is no longer “open”; however, if a singleton class allows
+inheritance, it is “open” for extension, and it can no longer follow the singleton pattern.
+
+### Dependency Inversion Principle (DIP)
+ 
+According to the <a href="https://en.wikipedia.org/wiki/Dependency_inversion_principle" target="_blank"  rel="noreferrer"  >Wikipedia article</a>,
+
+
+> In object-oriented design, the dependency inversion principle is a specific methodology for loosely coupled software modules
+ 
+ But the Singleton Pattern introduces high coupling between components that rely on the singleton instance. This
+can make it challenging to adhere to the DIP, as components become tightly bound to the Singleton class, making
+it difficult to substitute dependencies or adhere to dependency injection principles.
+
+ <hr />
+
+## TL;DR:
+
+The Singleton Pattern ensures there's only one instance of a class, accessible globally, but it's a mixed bag.
+While the Singleton Pattern can be a useful tool, it's essential to be mindful of its potential to violate SOLID
+principles, particularly concerning single responsibility and dependency inversion. Careful design and
+consideration are necessary to mitigate these risks and maintain a clean and flexible codebase.
+
+
+<WideImage>
+![A singleton pattern meme](../../assets/images/blogs/singleton-meme.webp) 
+</WideImage> 

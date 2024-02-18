@@ -8,11 +8,11 @@ const { href, class: className, ...props } = Astro.props;
 const { pathname } = Astro.url;
 const subpath = pathname.match(/[^\/]+/g);
 const isActive = href === pathname || href === "/" + subpath?.[0];
-console.log(isActive,href,pathname)
+console.log(isActive, href, pathname);
 ---
 
 <li class="nav__list-item">
-  <a class="link link--nav" href={href} class:list={[className, { active: isActive }]} {...props}>
+  <a class="link link--nav lowercase" href={href} class:list={[className, { active: isActive }]} {...props}>
     <slot />
   </a>
 </li>
@@ -20,5 +20,11 @@ console.log(isActive,href,pathname)
 <style>
   .nav__list-item {
     margin-left: 1.5em;
+  }
+
+  @media (max-width: 640px) {
+    .nav__list-item {
+      margin: 0.5em 0;
+    }
   }
 </style>

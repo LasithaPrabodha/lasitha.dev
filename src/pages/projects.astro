@@ -12,9 +12,12 @@ const { default: code } = await import(`/src/assets/icons/code.svg?raw`);
 ---
 
 <Page title={SITE_TITLE} description={SITE_DESCRIPTION} addNight={true}>
-  <section id="projects">
-    <h2 class="section__title">Projects</h2>
-    <div class="projects__grid">
+  <section
+    id="projects"
+    class="bg-transparent flex flex-col justify-center flex-1 p-6 w-full m-auto box-border mt-6 max-w-[1100px] mb-40 max-sm:mb-8"
+  >
+    <h2 class="section__title font-semibold">Projects</h2>
+    <div class="pt-10 grid gap-16 md:grid-cols-2 lg:grid-cols-3 lg:gap-x-8 lg:gap-y-12">
       <Project
         title="SuperOffice - Developer Portal"
         description="Contains a set of self-serve tools that developers can use to manage their access to SuperOffice Online APIs"
@@ -67,24 +70,17 @@ const { default: code } = await import(`/src/assets/icons/code.svg?raw`);
   </section>
 
   <style>
-    #projects {
-      position: relative;
-      background: transparent;
-
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-    }
-
     :global(#projects > #rect-right) {
       position: absolute;
       right: 0;
       bottom: calc(100vh / 5);
+      z-index: -1;
     }
     :global(#projects > #rect-left) {
       position: absolute;
       left: 0;
-    top: -128px;
+      top: -128px;
+      z-index: -1;
     }
     .projects__grid {
       max-width: 1100px;
@@ -95,7 +91,7 @@ const { default: code } = await import(`/src/assets/icons/code.svg?raw`);
       width: 100%;
     }
 
-    @media (max-width: 600px) {
+    @media (max-width: 640px) {
       #projects {
         padding-bottom: 2em;
       }

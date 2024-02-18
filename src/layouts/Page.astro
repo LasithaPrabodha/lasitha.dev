@@ -4,6 +4,8 @@ import Header from "../components/Header.astro";
 
 const { title, description, addNight, ...props } = Astro.props;
 
+const { default: up } = await import(`/src/assets/icons/angles-up.svg?raw`);
+
 const theme = Astro.cookies.get("theme")?.value ?? "light";
 ---
 
@@ -18,15 +20,34 @@ const theme = Astro.cookies.get("theme")?.value ?? "light";
     <main {...props}>
       <slot />
     </main>
-    <script>
-      import { render } from "../assets/js/night.js";
-      import { start } from "../assets/js/shooting-star.js";
+    <div class="scroll-container">
+      <div class="scroll-top">
+        <a aria-label="Scroll up" href="#top">
+          <Fragment set:html={up} />
+        </a>
+      </div>
+      <script>
+        import { render } from "../assets/js/night.js";
+        import { start } from "../assets/js/shooting-star.js";
 
-      render();
+        render();
 
-      window.onload = function () {
-        setTimeout(start, 200);
-      };
-    </script>
+        window.onload = function () {
+          setTimeout(start, 200);
+        };
+
+        document.addEventListener("scroll", () => {
+          const btnScrollTop = document.querySelector<HTMLElement>(".scroll-top");
+
+          if (!btnScrollTop) return;
+
+          if (document.body?.scrollTop > 500 || document.documentElement.scrollTop > 500) {
+            btnScrollTop.style.display = "block";
+          } else {
+            btnScrollTop.style.display = "none";
+          }
+        });
+      </script>
+    </div>
   </body>
 </html>

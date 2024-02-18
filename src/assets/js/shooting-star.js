@@ -60,7 +60,7 @@ export function start() {
   //Canvas and settings
   let canvas = document.getElementById("canvas"),
     context = canvas.getContext("2d"),
-    width = (canvas.width = window.innerWidth),
+    width = (canvas.width = document.body.offsetWidth),
     height = (canvas.height = document.body.offsetHeight),
     shootingStars = [],
     starsAngle = 145,

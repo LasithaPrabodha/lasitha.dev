@@ -58,7 +58,7 @@
   padding: 8px 0;
 }
 
-@media (max-width: 600px) {
+@media (max-width: 640px) {
   .about {
     margin-top: 2em;
     margin-left: 1em;

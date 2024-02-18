@@ -7,14 +7,14 @@ import myPhone from "../assets/images/casual-photo.jpg";
 import RectPattern from "../components/RectPattern.astro";
 ---
 
-<Page title={SITE_TITLE} description={SITE_DESCRIPTION} addNight={true} class="about center">
-  <div class="about__container">
+<Page title={SITE_TITLE} description={SITE_DESCRIPTION} addNight={true}>
+  <div class="flex flex-1 flex-col p-6 w-full m-auto box-border mt-6 max-w-[900px] text-start mb-40 max-sm:mb-8">
     <div class="name">
-      <small>About</small>
-      <h2>Lasitha Prabodha Weligampola</h2>
+      <small class="uppercase">About</small>
+      <h2 class="font-semibold">Lasitha Prabodha Weligampola</h2>
     </div>
-    <div class="details">
-      <div class="details__summary">
+    <div class="flex max-sm:block mt-8 gap-4">
+      <div class="flex-1">
         <p>Hi there!</p>
         <p>
           I'm excited to introduce myself! I've been writing software for over 7 years, and I love taking my passion and
@@ -27,7 +27,7 @@ import RectPattern from "../components/RectPattern.astro";
         </p>
         <p>I'm always learning new things as the tech world keeps changing, which keeps me excited!</p>
       </div>
-      <div class="details__photo">
+      <div class="details__photo relative">
         <Image src={myPhone} alt="A portrai photo" width={300} height={300} />
         <RectPattern />
       </div>
@@ -36,34 +36,11 @@ import RectPattern from "../components/RectPattern.astro";
 </Page>
 
 <style>
-  small {
-    text-transform: uppercase;
-  }
-  .about__container {
-    text-align: start;
-    margin-bottom: 10em;
-  }
-
   .name h2 {
     -webkit-text-fill-color: transparent;
     background-clip: text;
     -webkit-background-clip: text;
     background-image: linear-gradient(45deg, var(--clr-grd-one), var(--clr-grd-two));
-  }
-
-  .details {
-    display: flex;
-    max-width: 800px;
-    margin-top: 2em;
-    gap: 1em;
-  }
-
-  .details__summary {
-    flex: 1;
-  }
-
-  .details__photo {
-    position: relative;
   }
 
   :global(.details__photo > svg) {
@@ -81,13 +58,13 @@ import RectPattern from "../components/RectPattern.astro";
     position: relative;
   }
 
-  @media screen and (min-width: 599px) {
+  @media screen and (min-width: 639px) {
     img {
       margin-top: 3em;
     }
   }
 
-  @media (max-width: 600px) {
+  @media (max-width: 640px) {
     .details {
       display: block;
     }

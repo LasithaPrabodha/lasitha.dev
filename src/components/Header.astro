@@ -6,13 +6,9 @@ const { default: moon } = await import(`/src/assets/icons/moon.svg?raw`);
 const { default: cross } = await import(`/src/assets/icons/xmark.svg?raw`);
 const { default: menu } = await import(`/src/assets/icons/bars.svg?raw`);
 const { default: sun } = await import(`/src/assets/icons/sun.svg?raw`);
-
-const today = new Date();
-
-const theme = Astro.cookies.get("theme")?.value ?? "light";
 ---
 
-<header class="header center">
+<header class="p-6 flex justify-center items-center h-32 sm:h-24 bg-transparent max-sm:justify-end">
   <nav class="nav center">
     <ul class="nav__list center">
       <HeaderLink href="/">Home</HeaderLink>
@@ -39,8 +35,6 @@ const theme = Astro.cookies.get("theme")?.value ?? "light";
   const btnTheme = document.querySelector("#theme-toggle");
   const btnHamburger = document.querySelector(".nav__hamburger");
   const navUl = document.querySelector(".nav__list");
-  const moon = document.querySelector('svg[data-id="moon"');
-  const sun = document.querySelector('svg[data-id="sun"');
 
   type Themes = "light" | "dark";
 
@@ -57,7 +51,9 @@ const theme = Astro.cookies.get("theme")?.value ?? "light";
     changeTheme(theme);
     const d = new Date();
     d.setTime(d.getTime() + 365 * 86400000);
-    document.cookie = `theme=${theme};expires=${d.toUTCString()}`;
+    document.cookie = `theme=${theme};expires=${d.toUTCString()};domain=${
+      location.hostname.split(".").reverse()[1] + "." + location.hostname.split(".").reverse()[0]
+    };path=/`;
   }
 
   btnTheme?.addEventListener("click", () => {
@@ -104,24 +100,18 @@ const theme = Astro.cookies.get("theme")?.value ?? "light";
 
 <style>
   :global([data-id="moon"]),
-  :global([data-id="sun"]) {
+  :global([data-id="sun"]),
+  :global([data-id="close"]),
+  :global([data-id="menu"]) {
     fill: var(--clr-primary);
   }
-
-  :global(.header svg) {
+  :global([data-id="moon"]) {
+    display: var(--display-moon);
+  }
+  :global([data-id="sun"]) {
+    display: var(--display-sun);
+  }
+  :global(header svg) {
     width: 16px;
-  }
-
-  :global(.light [data-id="moon"]) {
-    display: block;
-  }
-  :global(.light [data-id="sun"]) {
-    display: none;
-  }
-  :global(.dark [data-id="sun"]) {
-    display: block;
-  }
-  :global(.dark [data-id="moon"]) {
-    display: none;
   }
 </style>
