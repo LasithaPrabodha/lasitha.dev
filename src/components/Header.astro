@@ -51,14 +51,6 @@ const theme = Astro.cookies.get("theme")?.value ?? "light";
   function changeTheme(theme: Themes) {
     body.className = "";
     body.classList.add(theme);
-
-    if (theme === "light") {
-      if (moon) moon.classList.remove("d-none");
-      if (sun) sun.classList.add("d-none");
-    } else {
-      if (moon) moon.classList.add("d-none");
-      if (sun) sun.classList.remove("d-none");
-    }
   }
 
   function setTheme(theme: Themes) {
@@ -118,5 +110,18 @@ const theme = Astro.cookies.get("theme")?.value ?? "light";
 
   :global(.header svg) {
     width: 16px;
+  }
+
+  :global(.light [data-id="moon"]) {
+    display: block;
+  }
+  :global(.light [data-id="sun"]) {
+    display: none;
+  }
+  :global(.dark [data-id="sun"]) {
+    display: block;
+  }
+  :global(.dark [data-id="moon"]) {
+    display: none;
   }
 </style>
