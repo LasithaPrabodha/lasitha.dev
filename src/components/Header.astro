@@ -1,20 +1,24 @@
 ---
 import HeaderLink from "./HeaderLink.astro";
-import { SHORT_SITE_TITLE } from "../consts";
+import "../assets/styles/header.css";
 
 const { default: moon } = await import(`/src/assets/icons/moon.svg?raw`);
+const { default: cross } = await import(`/src/assets/icons/xmark.svg?raw`);
+const { default: menu } = await import(`/src/assets/icons/bars.svg?raw`);
 const { default: sun } = await import(`/src/assets/icons/sun.svg?raw`);
+
+const today = new Date();
+
+const theme = Astro.cookies.get("theme")?.value ?? "light";
 ---
 
 <header class="header center">
-  <h3>
-    <a href="/" class="link">{SHORT_SITE_TITLE}</a>
-  </h3>
-
   <nav class="nav center">
     <ul class="nav__list center">
+      <HeaderLink href="/">Home</HeaderLink>
+      <HeaderLink href="/about">About</HeaderLink>
       <HeaderLink href="/projects">Projects</HeaderLink>
-      <HeaderLink href="/blogs">Blogs</HeaderLink>
+      <HeaderLink href="/blog">Blogs</HeaderLink>
       <HeaderLink href="/contact">Contact</HeaderLink>
     </ul>
 
@@ -24,7 +28,8 @@ const { default: sun } = await import(`/src/assets/icons/sun.svg?raw`);
     </button>
 
     <button type="button" aria-label="toggle navigation" class="btn btn--icon nav__hamburger">
-      <i aria-hidden="true" class="fas fa-bars"></i>
+      <Fragment set:html={menu} />
+      <Fragment set:html={cross} />
     </button>
   </nav>
 </header>
@@ -32,23 +37,22 @@ const { default: sun } = await import(`/src/assets/icons/sun.svg?raw`);
 <script>
   const body = document.body;
   const btnTheme = document.querySelector("#theme-toggle");
-  const btnHamburger = document.querySelector(".fa-bars");
+  const btnHamburger = document.querySelector(".nav__hamburger");
   const navUl = document.querySelector(".nav__list");
   const moon = document.querySelector('svg[data-id="moon"');
   const sun = document.querySelector('svg[data-id="sun"');
+
+  type Themes = "light" | "dark";
 
   function isDark() {
     return body.classList.contains("dark");
   }
 
-  function getBodyTheme() {
-    return localStorage.getItem("portfolio-theme") || "light";
-  }
-
-  function addThemeClass(bodyClass: string) {
+  function changeTheme(theme: Themes) {
     body.className = "";
-    body.classList.add(bodyClass);
-    if (bodyClass === "light") {
+    body.classList.add(theme);
+
+    if (theme === "light") {
       if (moon) moon.classList.remove("d-none");
       if (sun) sun.classList.add("d-none");
     } else {
@@ -57,13 +61,12 @@ const { default: sun } = await import(`/src/assets/icons/sun.svg?raw`);
     }
   }
 
-  function setTheme(bodyClass: string) {
-    addThemeClass(bodyClass);
-
-    localStorage.setItem("portfolio-theme", bodyClass);
+  function setTheme(theme: Themes) {
+    changeTheme(theme);
+    const d = new Date();
+    d.setTime(d.getTime() + 365 * 86400000);
+    document.cookie = `theme=${theme};expires=${d.toUTCString()}`;
   }
-
-  addThemeClass(getBodyTheme());
 
   btnTheme?.addEventListener("click", () => {
     if (isDark()) {
@@ -73,124 +76,47 @@ const { default: sun } = await import(`/src/assets/icons/sun.svg?raw`);
     }
   });
 
+  window.addEventListener("DOMContentLoaded", () => {
+    const cookies = document.cookie;
+    const match = cookies.match("theme=([^;]+)");
+    let theme = "light";
+    if (match) {
+      theme = match[1];
+    }
+    changeTheme(theme as Themes);
+  });
+
   // Navigation
   function closeNav() {
     navUl?.classList.remove("display-nav-list");
-    btnHamburger?.classList.remove("fa-times");
-    btnHamburger?.classList.add("fa-bars");
+    btnHamburger?.children[0].classList.remove("d-none");
+    btnHamburger?.children[1].classList.add("d-none");
     body.classList.remove("nav-open");
   }
 
   function openNav() {
-    btnHamburger?.classList.remove("fa-bars");
-    btnHamburger?.classList.add("fa-times");
+    btnHamburger?.children[0].classList.add("d-none");
+    btnHamburger?.children[1].classList.remove("d-none");
     navUl?.classList.add("display-nav-list");
     body.classList.add("nav-open");
   }
 
   btnHamburger?.addEventListener("click", () => {
-    if (btnHamburger.classList.contains("fa-bars")) {
+    if (btnHamburger?.children[1].classList.contains("d-none")) {
       openNav();
     } else {
       closeNav();
     }
   });
-
-  navUl?.addEventListener("click", () => {
-    closeNav();
-  });
 </script>
 
 <style>
-  .header {
-    height: 8em;
-    max-width: 1100px;
-    margin: 0 auto;
-    justify-content: space-between;
-    background: transparent;
-  }
-  .header * {
-    z-index: 1;
-  }
-
-  nav a {
-    text-transform: lowercase;
-  }
-  .nav__list {
-    margin-right: 1.5em;
-    display: flex;
-  }
-
-  .nav__hamburger {
-    display: none;
-    width: 1em;
-  }
-
-  .btn--icon {
-    padding: 0;
-    font-size: 1.2rem;
-  }
-
-  .btn--icon:hover,
-  .btn--icon:focus {
-    color: var(--clr-primary);
-  }
-
-  .btn--icon:active {
-    transform: translateY(-5px);
-  }
-
-  #theme-toggle {
-    height: 20px;
-    display: flex;
-    align-items: center;
-  }
-
   :global([data-id="moon"]),
   :global([data-id="sun"]) {
     fill: var(--clr-primary);
   }
 
-  :global(svg) {
+  :global(.header svg) {
     width: 16px;
-  }
-  @media (max-width: 600px) {
-    .header {
-      height: 6em;
-      margin-left: 1em;
-      margin-right: 1em;
-    }
-
-    .nav__list {
-      display: none;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      position: fixed;
-      inset: 0;
-      width: 100%;
-      height: 100%;
-      z-index: 2;
-      transition: width 0.2s ease-in-out;
-    }
-
-    .display-nav-list {
-      display: flex;
-      width: 100%;
-    }
-
-    .nav__list-item {
-      margin: 0.5em 0;
-    }
-
-    .scroll-container {
-      display: none;
-    }
-
-    .nav__hamburger {
-      display: flex;
-      z-index: 2;
-      margin-left: 0.8em;
-    }
   }
 </style>

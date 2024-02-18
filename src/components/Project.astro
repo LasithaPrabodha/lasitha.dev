@@ -33,10 +33,10 @@ const { title, description, technologies, links } = Astro.props;
     flex-direction: column;
     background-color: var(--clr-bg);
   }
- 
 
   .project__description {
     margin-top: 1em;
+    flex: 1;
   }
 
   .project__stack {
@@ -58,9 +58,9 @@ const { title, description, technologies, links } = Astro.props;
   }
 
   .links {
-    flex: 1;
     display: flex;
     justify-content: center;
     align-items: flex-end;
+    gap: 0.5em;
   }
 </style>

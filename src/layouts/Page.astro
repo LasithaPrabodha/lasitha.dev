@@ -1,0 +1,30 @@
+---
+import BaseHead from "../components/BaseHead.astro";
+import Header from "../components/Header.astro";
+
+const { title, description, addNight, ...props } = Astro.props;
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <BaseHead title={title} description={description} />
+  </head>
+  <body class="dark" id="top">
+    {addNight && <canvas id="canvas" />}
+    <Header />
+    <main {...props}>
+      <slot />
+    </main>
+    <script>
+      import { render } from "../assets/js/night.js";
+      import { start } from "../assets/js/shooting-star.js";
+
+      render();
+
+      window.onload = function () {
+        setTimeout(start, 200);
+      };
+    </script>
+  </body>
+</html>

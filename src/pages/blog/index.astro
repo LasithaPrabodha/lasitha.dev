@@ -1,0 +1,41 @@
+---
+import { getCollection } from "astro:content";
+
+import { SITE_TITLE, SITE_DESCRIPTION } from "../../consts";
+import Page from "../../layouts/Page.astro";
+import FormattedDate from "../../components/FormattedDate.astro";
+
+const posts = (await getCollection("blog")).sort(
+  (a: any, b: any) => a.data.pubDate.valueOf() - b.data.pubDate.valueOf()
+);
+---
+
+<Page title={SITE_TITLE} description={SITE_DESCRIPTION} addNight={true}>
+  <section id="projects">
+    <h2 class="section__title">Let's Learn Together!</h2>
+    <div class="projects__grid">
+      <ul>
+        {
+          posts.map((post: any) => (
+            <a href={`/blog/${post.slug}/`}>
+              <div class="blog">
+                <div>
+                  <img  src={post.data.heroImage} alt="" />
+                </div>
+                <div class="text">
+                  <div class="title">
+                    <h4>{post.data.title}</h4>
+                    <small>{post.data.pubDate}</small>
+                  </div>
+                  <p>
+                    {post.data.description}
+                  </p>
+                </div>
+              </div>
+            </a>
+          ))
+        }
+      </ul>
+    </div>
+  </section>
+</Page>

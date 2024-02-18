@@ -2,6 +2,7 @@
   flex-direction: column;
   overflow: hidden;
   background: transparent;
+  height: calc(100vh - 128px) !important;
 }
 .about *:not(canvas) {
   z-index: 1;
@@ -10,7 +11,6 @@
 .nav-open .about *:not(canvas) {
   z-index: -1;
 }
-
 
 .light canvas {
   display: none;
@@ -45,14 +45,10 @@
   height: 150px;
   margin-top: 2em;
 }
-.welcome-animation {
-  display: inline-block;
-  animation: wave 1s ease;
-  animation-delay: 1s;
-}
 
 .contact-links {
   margin-top: 3em;
+  margin-bottom: 147px;
 }
 
 .contact-links .link--icon {

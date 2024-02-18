@@ -1,6 +1,6 @@
 const backgroundColor = "#030318";
 const width = window.innerWidth;
-const height = window.innerHeight;
+const height = document.body.offsetHeight
 const maxStarRadius = 1.5;
 const minStarOpacity = 0.1;
 const maxStarOpacity = 0.7;

@@ -1,9 +1,4 @@
-"use strict";
-window.onload = function () {
-  setTimeout(start, 200);
-};
-
-function start() {
+export function start() {
   //Helpers
   function lineToAngle(x1, y1, length, radians) {
     const x2 = x1 + length * Math.cos(radians),
@@ -66,7 +61,7 @@ function start() {
   let canvas = document.getElementById("canvas"),
     context = canvas.getContext("2d"),
     width = (canvas.width = window.innerWidth),
-    height = (canvas.height = document.querySelector(".night-back-container").offsetHeight),
+    height = (canvas.height = document.body.offsetHeight),
     shootingStars = [],
     starsAngle = 145,
     shootingStarSpeed = {
