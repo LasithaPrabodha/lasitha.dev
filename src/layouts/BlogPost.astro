@@ -27,7 +27,7 @@ const posts = (await getCollection("blog"))
   </head>
   <body class={theme} id="top">
     <Header />
-    <main {...props} class="bg-transparent mt-6 max-sm:p-6 max-w-[700px] w-full m-auto box-border mb-40 max-sm:mb-8">
+    <main {...props} class="bg-transparent sm:mt-6 max-sm:p-6 max-w-[700px] w-full m-auto box-border mb-40 max-sm:mb-8">
       <div class="go-back mb-8">
         <a href="/blog" class="flex gap-2">
           <Fragment set:html={back} /> Back to Blogs

@@ -46,18 +46,6 @@
   margin-top: 2em;
 }
 
-.contact-links {
-  margin-top: 3em;
-  margin-bottom: 147px;
-}
-
-.contact-links .link--icon {
-  margin-right: 0.5em;
-  margin-left: 0.5em;
-  display: flex;
-  padding: 8px 0;
-}
-
 @media (max-width: 640px) {
   .about {
     margin-top: 2em;

@@ -8,7 +8,7 @@ const { default: menu } = await import(`/src/assets/icons/bars.svg?raw`);
 const { default: sun } = await import(`/src/assets/icons/sun.svg?raw`);
 ---
 
-<header class="p-6 flex justify-center items-center h-32 sm:h-24 bg-transparent max-sm:justify-end">
+<header class="p-6 flex justify-center items-center sm:h-24 bg-transparent max-sm:justify-end">
   <nav class="nav center">
     <ul class="nav__list center">
       <HeaderLink href="/">Home</HeaderLink>
@@ -51,9 +51,7 @@ const { default: sun } = await import(`/src/assets/icons/sun.svg?raw`);
     changeTheme(theme);
     const d = new Date();
     d.setTime(d.getTime() + 365 * 86400000);
-    document.cookie = `theme=${theme};expires=${d.toUTCString()};domain=${
-      location.hostname.split(".").reverse()[1] + "." + location.hostname.split(".").reverse()[0]
-    };path=/`;
+    document.cookie = `theme=${theme};expires=${d.toUTCString()};domain=lasitha.dev;path=/`;
   }
 
   btnTheme?.addEventListener("click", () => {
