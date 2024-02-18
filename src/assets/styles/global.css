@@ -44,7 +44,7 @@ html {
 }
 
 body {
-  font-family: "Poppins", sans-serif;
+  font-family: "Quicksand", sans-serif;
   line-height: 1.5;
   color: var(--clr-fg);
   background-color: var(--clr-bg);
@@ -67,6 +67,7 @@ h3,
 h4 {
   line-height: 1.2;
   color: var(--clr-fg-alt);
+  font-family: "Poppins", sans-serif;
 }
 
 h1 {
@@ -130,7 +131,21 @@ main {
   justify-content: center;
   text-align: center;
 }
+pre {
+  background: var(--clr-bg-code) !important;
+  padding: 1em;
+  font-size: 12px;
+  margin-bottom: 2em;
+}
 
+code span {
+  color: var(--clr-fg) !important;
+}
+
+b,
+strong {
+  font-weight: 500;
+}
 @media (prefers-reduced-motion: reduce) {
   html {
     scroll-behavior: auto;

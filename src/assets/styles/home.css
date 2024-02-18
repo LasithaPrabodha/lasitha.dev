@@ -20,6 +20,7 @@
   font-size: 4em;
 }
 .about__name {
+  font-family: "Poppins", sans-serif;
   -webkit-text-fill-color: transparent;
   background-clip: text;
   -webkit-background-clip: text;
