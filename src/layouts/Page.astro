@@ -3,6 +3,8 @@ import BaseHead from "../components/BaseHead.astro";
 import Header from "../components/Header.astro";
 
 const { title, description, addNight, ...props } = Astro.props;
+
+const theme = Astro.cookies.get("theme")?.value ?? "light";
 ---
 
 <!doctype html>
@@ -10,7 +12,7 @@ const { title, description, addNight, ...props } = Astro.props;
   <head>
     <BaseHead title={title} description={description} />
   </head>
-  <body class="dark" id="top">
+  <body class={theme} id="top">
     {addNight && <canvas id="canvas" />}
     <Header />
     <main {...props}>
