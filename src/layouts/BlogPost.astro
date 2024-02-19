@@ -27,15 +27,6 @@ const posts = (await getCollection("blog"))
     <BaseHead title={title} description={description} />
   </head>
   <body class={theme} id="top">
-    <!-- Google Tag Manager (noscript) -->
-    <noscript
-      ><iframe
-        src="https://www.googletagmanager.com/ns.html?id=GTM-WTKBZNLF"
-        height="0"
-        width="0"
-        style="display:none;visibility:hidden"></iframe></noscript
-    >
-    <!-- End Google Tag Manager (noscript) -->
     <Header />
     <main {...props} class="bg-transparent sm:mt-6 max-sm:p-6 max-w-[700px] w-full m-auto box-border mb-40 max-sm:mb-8">
       <div class="go-back mb-8">

@@ -17,18 +17,14 @@ const canonicalURL = Astro.site ? new URL(Astro.url.pathname, Astro.site) : "";
 const { title, description, image = "/images/casual-photo.jpg" } = Astro.props;
 ---
 
-<!-- Google Tag Manager -->
-<script>
-  (function (w: any, d: any, s: any, l: any, i: any) {
-    w[l] = w[l] || [];
-    w[l].push({ "gtm.start": new Date().getTime(), event: "gtm.js" });
-    var f = d.getElementsByTagName(s)[0],
-      j = d.createElement(s),
-      dl = l != "dataLayer" ? "&l=" + l : "";
-    j.async = true;
-    j.src = "https://www.googletagmanager.com/gtm.js?id=" + i + dl;
-    f.parentNode.insertBefore(j, f);
-  })(window, document, "script", "dataLayer", "GTM-WTKBZNLF");
+<!-- Google tag (gtag.js) -->
+<script type="text/partytown" async src="https://www.googletagmanager.com/gtag/js?id=G-KNY2P9SNXS"></script>
+<script type="text/partytown">
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-KNY2P9SNXS');
 </script>
 
 <!-- Global Metadata -->
