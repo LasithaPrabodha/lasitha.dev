@@ -15,6 +15,15 @@ const theme = Astro.cookies.get("theme")?.value ?? "light";
     <BaseHead title={title} description={description} />
   </head>
   <body class={theme} id="top">
+    <!-- Google Tag Manager (noscript) -->
+    <noscript
+      ><iframe
+        src="https://www.googletagmanager.com/ns.html?id=GTM-WTKBZNLF"
+        height="0"
+        width="0"
+        style="display:none;visibility:hidden"></iframe></noscript
+    >
+    <!-- End Google Tag Manager (noscript) -->
     {addNight && <canvas id="canvas" />}
     <Header />
     <main {...props}>
