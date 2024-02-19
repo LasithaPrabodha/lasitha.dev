@@ -4,14 +4,15 @@ import { getCollection } from "astro:content";
 import { SITE_TITLE, SITE_DESCRIPTION } from "../../consts";
 import Page from "../../layouts/Page.astro";
 import FormattedDate from "../../components/FormattedDate.astro";
+import RectPattern from "../../components/RectPattern.astro";
 
 const posts = (await getCollection("blog")).sort(
-  (a: any, b: any) => a.data.pubDate.valueOf() - b.data.pubDate.valueOf()
+  (a: any, b: any) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf() 
 );
 ---
 
 <Page title={SITE_TITLE} description={SITE_DESCRIPTION} addNight={true}>
-  <section class="flex flex-1 flex-col p-6 w-full m-auto box-border mt-6 mb-20 max-w-[900px]">
+  <section id="blogs" class="flex flex-1 flex-col p-6 w-full m-auto box-border mt-6 mb-20 max-w-[900px]">
     <h2 class="section__title font-semibold">Let's Learn Together!</h2>
     <div class="pt-10 grid gap-16 lg:grid-cols-2 lg:gap-x-8 lg:gap-y-12">
       {
@@ -28,11 +29,33 @@ const posts = (await getCollection("blog")).sort(
         ))
       }
     </div>
+
+    <RectPattern width={250} height={250} id="rect-left" />
+    <RectPattern width={230} height={230} id="rect-right" />
   </section>
 </Page>
 
 <style>
   .btn-read-story {
     color: var(--clr-grd-one);
+  }
+  :global(#blogs > #rect-right) {
+    position: absolute;
+    right: 0;
+    top: 128px;
+    z-index: -1;
+  }
+  :global(#blogs > #rect-left) {
+    position: absolute;
+    left: 0;
+    bottom: calc(100vh / 5);
+    z-index: -1;
+  }
+
+  @media (max-width: 640px) {
+    :global(#blogs > #rect-right),
+    :global(#projects > #rect-left) {
+      display: none;
+    }
   }
 </style>
