@@ -108,7 +108,7 @@ These are just a few examples, and the Observer Pattern has applications in many
 - Allow Observers to <strong>dynamically subscribe/unsubscribe</strong> to receive relevant updates.
 - Be mindful of situations where Subjects and Observers indirectly affect each other, leading to infinite loops. Consider <strong>breaking circular dependencies</strong> through design changes.
 - Properly remove Observers from Subject lists to prevent unnecessary references and <strong>memory leaks.</strong>
-- Consider <strong>leveraging libraries</strong> like RxJS (JavaScript) or Guava (Java) for advanced features and easier implementation.
+- Consider <strong>leveraging libraries</strong> like RxJS (JavaScript), Guava or RxJava (Java) for advanced features and easier implementation.
 
 
 ## Anti-Patterns to Avoid
