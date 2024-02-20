@@ -52,9 +52,9 @@ const posts = (await getCollection("blog")).sort(
     z-index: -1;
   }
 
-  @media (max-width: 640px) {
+  @media (max-width: 1024px) {
     :global(#blogs > #rect-right),
-    :global(#projects > #rect-left) {
+    :global(#blogs > #rect-left) {
       display: none;
     }
   }
