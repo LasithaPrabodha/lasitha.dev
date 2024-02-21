@@ -61,7 +61,7 @@ export function start() {
   let canvas = document.getElementById("canvas"),
     context = canvas.getContext("2d"),
     width = (canvas.width = document.body.offsetWidth),
-    height = (canvas.height = document.body.offsetHeight),
+    height = (canvas.height = document.body.scrollHeight),
     shootingStars = [],
     starsAngle = 145,
     shootingStarSpeed = {
