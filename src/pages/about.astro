@@ -7,7 +7,7 @@ import myPhone from "../assets/images/casual-photo.jpg";
 import RectPattern from "../components/RectPattern.astro";
 ---
 
-<Page title={SITE_TITLE} description={SITE_DESCRIPTION} addNight={true}>
+<Page title={"About - " + SITE_TITLE} description={SITE_DESCRIPTION} addNight={true}>
   <div class="flex flex-1 flex-col p-6 w-full m-auto box-border mt-6 max-w-[900px] text-start mb-40 max-sm:mb-8">
     <div class="name">
       <small class="uppercase">About</small>
@@ -23,7 +23,8 @@ import RectPattern from "../components/RectPattern.astro";
         </p>
         <p>
           Some of my go-to languages and tools for web & mobile development: Typescript, Angular, React, Vue.js, React
-          Native, Redux, Flutter, Kotlin, Swift, ASP.NET Core, Node.js, Azure, SQL, Firebase, Docker, SASS, Bootstrap, TailwindCSS, Jest.
+          Native, Redux, Flutter, Kotlin, Swift, ASP.NET Core, Node.js, Azure, SQL, Firebase, Docker, SASS, Bootstrap,
+          TailwindCSS, Jest.
         </p>
         <p>I'm always learning new things as the tech world keeps changing, which keeps me excited!</p>
       </div>
@@ -54,7 +55,7 @@ import RectPattern from "../components/RectPattern.astro";
 
   img {
     border-radius: 8px;
-    box-shadow: var(--shadow); 
+    box-shadow: var(--shadow);
     position: relative;
   }
 

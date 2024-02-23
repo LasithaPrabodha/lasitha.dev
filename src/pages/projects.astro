@@ -2,16 +2,14 @@
 import Page from "../layouts/Page.astro";
 import Project from "../components/Project.astro";
 import RectPattern from "../components/RectPattern.astro";
-
-const SITE_TITLE = "Lasitha's - Projects";
-const SITE_DESCRIPTION = "Lasitha's - Projects";
+import { SITE_DESCRIPTION, SITE_TITLE } from "../consts";
 
 const { default: eye } = await import(`/src/assets/icons/eye.svg?raw`);
 const { default: book } = await import(`/src/assets/icons/book.svg?raw`);
 const { default: code } = await import(`/src/assets/icons/code.svg?raw`);
 ---
 
-<Page title={SITE_TITLE} description={SITE_DESCRIPTION} addNight={true}>
+<Page title={"Projects - " + SITE_TITLE} description={SITE_DESCRIPTION} addNight={true}>
   <section
     id="projects"
     class="bg-transparent flex flex-col justify-center flex-1 p-6 w-full m-auto box-border mt-6 max-w-[1100px] mb-40 max-sm:mb-8"
@@ -92,7 +90,7 @@ const { default: code } = await import(`/src/assets/icons/code.svg?raw`);
     :global(#projects > #rect-left) {
       position: absolute;
       left: 0;
-      top: -128px;
+      top: -120px;
       z-index: -1;
     }
     .projects__grid {

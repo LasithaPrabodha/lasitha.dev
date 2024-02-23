@@ -1,28 +1,24 @@
 ---
 import Page from "../layouts/Page.astro";
 import ContactIcons from "../components/ContactIcons.astro";
-
-const SITE_TITLE = "Contact Lasitha";
-const SITE_DESCRIPTION = "Contact Lasitha";
+import { SITE_DESCRIPTION, SITE_TITLE } from "../consts";
 ---
 
-<Page title={SITE_TITLE} description={SITE_DESCRIPTION} addNight={true}>
+<Page title={"Contact - " + SITE_TITLE} description={SITE_DESCRIPTION} addNight={true}>
   <section
     id="projects"
     class="bg-transparent flex flex-col justify-center flex-1 p-6 w-full m-auto box-border mt-6 max-w-[1100px] mb-40 max-sm:mb-8"
   >
     <h2 class="section__title font-semibold">Contact Me</h2>
-    
-    <div class="flex flex-col items-center" id="contact"> 
 
+    <div class="flex flex-col items-center" id="contact">
       <p>Interested in working together? We should queue up a time to chat. I'll buy the coffee.</p>
 
       <a href="mailto:lasiprabo@gmail.com" class="">
         <span class="btn btn--outline">Let's do this! 🤘🏼</span>
       </a>
-    
+
       <ContactIcons />
     </div>
-
   </section>
 </Page>

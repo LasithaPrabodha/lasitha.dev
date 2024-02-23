@@ -2,7 +2,7 @@
   flex-direction: column;
   overflow: hidden;
   background: transparent;
-  height: calc(100vh - 128px) !important;
+  height: calc(100vh - 96px) !important;
 }
 .about *:not(canvas) {
   z-index: 1;
