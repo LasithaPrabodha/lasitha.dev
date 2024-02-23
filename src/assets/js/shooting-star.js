@@ -70,7 +70,7 @@ export function start() {
     },
     shootingStarOpacityDelta = 0.01,
     trailLengthDelta = 0.01,
-    shootingStarEmittingInterval = 5000,
+    shootingStarEmittingInterval = 10000,
     shootingStarLifeTime = 500,
     maxTrailLength = 300,
     shootingStarRadius = 3,
