@@ -6,7 +6,7 @@ import { SITE_DESCRIPTION, SITE_TITLE } from "../consts";
 
 const { default: eye } = await import(`/src/assets/icons/eye.svg?raw`);
 const { default: book } = await import(`/src/assets/icons/book.svg?raw`);
-const { default: code } = await import(`/src/assets/icons/code.svg?raw`);
+const { default: github } = await import(`/src/assets/icons/github.svg?raw`);
 ---
 
 <Page title={"Projects - " + SITE_TITLE} description={SITE_DESCRIPTION} addNight={true}>
@@ -35,48 +35,117 @@ const { default: code } = await import(`/src/assets/icons/code.svg?raw`);
         links={[{ href: "https://www.cenium.com/pms", ariaLabel: "website", icon: book }]}
       />
       <Project
-        title="CarPool App Backend"
-        description="A project written .NET to learn clean architecture with DDD"
-        technologies={[".NET", "C#"]}
-        links={[{ href: "https://github.com/LasithaPrabodha/CleanArchitecture", ariaLabel: "source code", icon: code }]}
-      />
-      <Project
         title="Club Arena"
         description="Simplifies sports facility management, enabling easy bookings without manual processing"
         technologies={["Angular", ".NET", "C#"]}
         links={[{ href: "https://arena.club.no", ariaLabel: "source code", icon: eye }]}
       />
       <Project
-        title="Jeopardy"
-        description="A simple implementation of the classic TV game show 'Jeopardy'. The project is built using vanilla JavaScript"
-        technologies={["JavaScript", "CSS", "HTML"]}
+        title="CarPool App Backend"
+        description="A project written .NET to learn clean architecture with DDD and CQRS"
+        technologies={[".NET", "C#"]}
         links={[
-          { href: "https://github.com/LasithaPrabodha/jeopardy-app", ariaLabel: "source code", icon: code },
+          { href: "https://github.com/LasithaPrabodha/CleanArchitecture", ariaLabel: "source code", icon: github },
+        ]}
+      />
+      <Project
+        title="Jeopardy Game Clone"
+        description="A simple implementation of the classic TV game show 'Jeopardy'. The project is built using vanilla JavaScript"
+        technologies={["JavaScript", "HTML", "CSS"]}
+        links={[
+          { href: "https://github.com/LasithaPrabodha/jeopardy-app", ariaLabel: "source code", icon: github },
           { href: "https://lasithaprabodha.github.io/jeopardy-app", ariaLabel: "source code", icon: eye },
         ]}
       />
       <Project
+        title="Jeopardy API"
+        description="An API of all recorded Jeopardy! games up until 2023-12-29. You can retrieve 518,061 clues, over 8,742 games and 54,160 categories."
+        technologies={["C#", "ASP.NET Core"]}
+        links={[{ href: "https://github.com/LasithaPrabodha/jeopardy-api", ariaLabel: "source code", icon: github }]}
+      />
+      <Project
         title="Kingsbury Toronto"
         description="A mobile-first and user-friendly website for a luxurious apartment in Toronto"
-        technologies={["CSS", "HTML"]}
+        technologies={["HTML", "CSS"]}
         links={[{ href: "https://kingsbury-toronto-website.web.app", ariaLabel: "live preview", icon: eye }]}
       />
       <Project
         title="Dots Connect"
         description="It's a small, dynamic, two-player game where you compete to connect dots of the same color on a grid."
-        technologies={["JavaScript", "CSS", "HTML"]}
+        technologies={["JavaScript", "HTML", "CSS"]}
         links={[
           { href: "https://lasithaprabodha.github.io/dot-connect", ariaLabel: "live preview", icon: eye },
           {
             href: "https://github.com/LasithaPrabodha/dot-connect",
             ariaLabel: "source code",
-            icon: code,
+            icon: github,
+          },
+        ]}
+      />
+      <Project
+        title="Expense Tracker"
+        description="This simple and intuitive app helps you manage and track your expenses efficiently."
+        technologies={["React Native", "TypeScript"]}
+        links={[
+          {
+            href: "https://github.com/LasithaPrabodha/expense-tracking-app-rn",
+            ariaLabel: "source code",
+            icon: github,
+          },
+        ]}
+      />
+      <Project
+        title="My Website"
+        description="My mobile responsive personal website, built using Astro + Tailwind CSS + Netlify."
+        technologies={["Astro", "TailwindCSS"]}
+        links={[
+          {
+            href: "https://github.com/LasithaPrabodha/website-2023",
+            ariaLabel: "source code",
+            icon: github,
+          },
+        ]}
+      />
+      <Project
+        title="Redis-like Server"
+        description="This project implements a simplified version of a Redis-like server in Go, providing basic functionalities similar to Redis."
+        technologies={["Go"]}
+        links={[
+          {
+            href: "https://github.com/LasithaPrabodha/redis-like-server",
+            ariaLabel: "source code",
+            icon: github,
+          },
+        ]}
+      />
+      <Project
+        title="Account Balance Viewer"
+        description="This simple web-enabled application is designed to provide a monthly overview of the account balances for different departments within a company."
+        technologies={["C#", ".NET", "Angular"]}
+        links={[
+          {
+            href: "https://github.com/LasithaPrabodha/account-balance",
+            ariaLabel: "source code",
+            icon: github,
+          },
+        ]}
+      />
+      <Project
+        title="Calendar PHP"
+        description="A calendar made with php in OOD and mvc architecture."
+        technologies={["PHP", "JavaScript", "HTML", "CSS"]}
+        links={[
+          {
+            href: "https://github.com/LasithaPrabodha/calendar-php",
+            ariaLabel: "source code",
+            icon: github,
           },
         ]}
       />
     </div>
 
     <RectPattern width={250} height={250} id="rect-left" />
+    <RectPattern width={260} height={260} id="rect-left-bottom" />
     <RectPattern width={230} height={230} id="rect-right" />
   </section>
 
@@ -84,13 +153,19 @@ const { default: code } = await import(`/src/assets/icons/code.svg?raw`);
     :global(#projects > #rect-right) {
       position: absolute;
       right: 0;
-      bottom: calc(100vh / 5);
+      bottom: 50px;
       z-index: -1;
     }
     :global(#projects > #rect-left) {
       position: absolute;
       left: 0;
       top: -120px;
+      z-index: -1;
+    }
+    :global(#projects > #rect-left-bottom) {
+      position: absolute;
+      left: 0;
+      bottom: -500px;
       z-index: -1;
     }
     .projects__grid {
