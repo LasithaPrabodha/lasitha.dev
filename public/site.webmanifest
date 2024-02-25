@@ -22,7 +22,5 @@
     "developer",
     "portfolio"
   ],
-  "theme_color": "#1b3487",
-  "background_color": "#fcfcfc",
   "display": "standalone"
 }
