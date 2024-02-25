@@ -8,7 +8,7 @@
   --clr-primary: #1b3487;
   --clr-grd-one: #ba2d23;
   --clr-grd-two: #1b3487;
-  --shadow: rgba(100, 100, 111, 0.2) 0px 5px 5px 0px;
+  --shadow: rgba(100, 100, 111, 0.2) 0px 5px 5px 0px, rgba(100, 100, 111, 0.2) 0px 0px 0px 0.5px;
   --display-sun: none;
   --display-moon: block;
 }
@@ -23,7 +23,7 @@
   --clr-primary: #90a0d9;
   --clr-grd-one: #90a0d9;
   --clr-grd-two: #90a0d9;
-  --shadow: rgba(0, 0, 0, 0.16) 0px 10px 10px 0px, rgba(0, 0, 0, 0.06) 0px 0px 0px 1px;
+  --shadow: rgba(100, 100, 111, 0.2) 0px 10px 10px 0px, rgba(100, 100, 111, 0.2) 0px 0px 0px 1px;
   --display-sun: block;
   --display-moon: none;
 }
