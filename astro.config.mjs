@@ -8,7 +8,7 @@ import partytown from "@astrojs/partytown";
 // https://astro.build/config
 export default defineConfig({
   output: "server",
-  site: "https://lasitha.netlify.app",
+  site: "https://lasitha.dev",
   integrations: [
     mdx(),
     sitemap(),
