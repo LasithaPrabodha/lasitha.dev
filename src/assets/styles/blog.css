@@ -2,6 +2,7 @@ article h1 {
   font-weight: 500;
 }
 article h2 {
+  margin-top: 36px;
   margin-bottom: 18px;
   font-weight: 500;
 }
@@ -10,9 +11,11 @@ article h3 {
   margin-bottom: 16px;
   font-weight: 500;
 }
-article h2 {
-  margin-top: 36px;
+article h4 { 
+  margin-bottom: 0.75em;
+  font-weight: 500;
 }
+
 article a {
   color: var(--clr-primary);
   cursor: pointer;
