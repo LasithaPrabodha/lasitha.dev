@@ -1,3 +1,3 @@
-export const SITE_TITLE = 'Lasitha Prabodha Weligampola';
+export const SITE_TITLE = 'Lasitha Weligampola - Software Engineer';
 export const SHORT_SITE_TITLE = "LP."
-export const SITE_DESCRIPTION = 'Experienced full-stack web developer with expertise in building robust, scalable, and user-friendly applications. Skilled in modern Javascript UI frameworks such as React, Angular and VueJS, and proficient in object-oriented languages like C#, TypeScript and Java. Passionate about leveraging technology to deliver innovative solutions and improve user experiences. Connect with me to discuss collaborations and explore opportunities.';
+export const SITE_DESCRIPTION = 'Lasitha Weligampola, a seasoned Senior Full-Stack Software Engineer with seven years of expertise in Angular, React, React Native, ASP.NET Core, and Azure. Specializing in Travel and CRM domains, I deliver user-centric solutions in Agile environments.';
