@@ -1,7 +1,13 @@
 ---
-const { default: instagram } = await import(`/src/assets/icons/instagram.svg?raw`);
-const { default: facebook } = await import(`/src/assets/icons/facebook.svg?raw`);
-const { default: linkedin } = await import(`/src/assets/icons/linkedin.svg?raw`);
+const { default: instagram } = await import(
+  `/src/assets/icons/instagram.svg?raw`
+);
+const { default: facebook } = await import(
+  `/src/assets/icons/facebook.svg?raw`
+);
+const { default: linkedin } = await import(
+  `/src/assets/icons/linkedin.svg?raw`
+);
 const { default: github } = await import(`/src/assets/icons/github.svg?raw`);
 ---
 
@@ -15,7 +21,13 @@ const { default: github } = await import(`/src/assets/icons/github.svg?raw`);
   >
     <Fragment set:html={instagram} />
   </a>
-  <a href="https://www.facebook.com/lmlxlml/" target="_blank" rel="noreferrer" aria-label="fb" class="link link--icon">
+  <a
+    href="https://www.facebook.com/lmlxlml/"
+    target="_blank"
+    rel="noreferrer"
+    aria-label="fb"
+    class="link link--icon"
+  >
     <Fragment set:html={facebook} />
   </a>
 

@@ -17,10 +17,6 @@
       "type": "image/png"
     }
   ],
-  "categories": [
-    "software",
-    "developer",
-    "portfolio"
-  ],
+  "categories": ["software", "developer", "portfolio"],
   "display": "standalone"
 }

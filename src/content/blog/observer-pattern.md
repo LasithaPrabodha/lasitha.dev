@@ -1,7 +1,7 @@
 ---
-title: 'Observer Design Pattern'
-description: 'Think of yourself as a news enthusiast eagerly awaiting updates on your favourite topics. The Observer Pattern smoothly links you (the Observer) to the news platform (the Subject).'
-pubDate: 'Feb 18 2024'
+title: "Observer Design Pattern"
+description: "Think of yourself as a news enthusiast eagerly awaiting updates on your favourite topics. The Observer Pattern smoothly links you (the Observer) to the news platform (the Subject)."
+pubDate: "Feb 18 2024"
 ---
 
 Think of yourself as a news enthusiast eagerly awaiting updates on your favourite topics. The Observer Pattern smoothly links you (the Observer) to the news platform (the Subject).
@@ -63,10 +63,10 @@ Now, let's create concrete classes for a "NewsPublisher" (Subject) and "NewsSubs
 
 ### Output
 
-``` 
-Hey Amal, There is a new article from CNN "sports": Sri Lanka Wins! 
-Hey Amal, There is a new article from CNN "technology": New iPhone is out! 
-Hey Amal, There is a new article from CNN "entertainment": Johnny and Amber married again! 
+```
+Hey Amal, There is a new article from CNN "sports": Sri Lanka Wins!
+Hey Amal, There is a new article from CNN "technology": New iPhone is out!
+Hey Amal, There is a new article from CNN "entertainment": Johnny and Amber married again!
 Hey Kamal, There is a new article from CNN "politics": Mahinda dead!
 
 ```
@@ -80,6 +80,7 @@ This is a simplified example. Use libraries like <a href="https://rxjs.dev/guide
 The Observer Pattern's versatility shines in various domains, making it an important quality of elegant software design. Let's explore some concrete examples:
 
 1. GUI Updates
+
    - <strong>Spreadsheet Cells:</strong> When you edit one cell in a spreadsheet, other cells dependent on its value automatically update, demonstrating the Observer Pattern in action. The edited cell acts as the Subject, notifying dependent cells (Observers) of the change, prompting them to recalculate themselves.
    - <strong>Progress Bars:</strong> Progress bars often represent the state of an ongoing task. By subscribing to updates from the task, the progress bar acts as an Observer, displaying the latest progress information received from the Subject (task).
 
@@ -90,6 +91,7 @@ The Observer Pattern's versatility shines in various domains, making it an impor
 ![God typing](../../assets/images/blogs/typing.gif)
 
 3. Pub/Sub Systems
+
    - <strong>Messaging Apps:</strong> Chat platforms like Slack or Discord utilize the Observer Pattern extensively. Channels act as Subjects, notifying subscribed users (Observers) when new messages arrive. This ensures users only receive updates relevant to their subscribed channels.
    - <strong>News Aggregators:</strong> Services like Feedly allow users to subscribe to various news feeds (Subjects). When new articles are published, the feeds notify their subscribers, enabling them to stay updated on their chosen topics.
 
@@ -109,7 +111,6 @@ These are just a few examples, and the Observer Pattern has applications in many
 - Be mindful of situations where Subjects and Observers indirectly affect each other, leading to infinite loops. Consider <strong>breaking circular dependencies</strong> through design changes.
 - Properly remove Observers from Subject lists to prevent unnecessary references and <strong>memory leaks.</strong>
 - Consider <strong>leveraging libraries</strong> like RxJS (JavaScript), Guava or RxJava (Java) for advanced features and easier implementation.
-
 
 ## Anti-Patterns to Avoid
 

@@ -37,11 +37,15 @@ const theme = Astro.cookies.get("theme")?.value ?? "light";
         };
 
         document.addEventListener("scroll", () => {
-          const btnScrollTop = document.querySelector<HTMLElement>(".scroll-top");
+          const btnScrollTop =
+            document.querySelector<HTMLElement>(".scroll-top");
 
           if (!btnScrollTop) return;
 
-          if (document.body?.scrollTop > 500 || document.documentElement.scrollTop > 500) {
+          if (
+            document.body?.scrollTop > 500 ||
+            document.documentElement.scrollTop > 500
+          ) {
             btnScrollTop.style.display = "block";
           } else {
             btnScrollTop.style.display = "none";

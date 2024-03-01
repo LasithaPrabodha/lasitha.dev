@@ -1,1 +1,0 @@
-import"./Header.astro_astro_type_script_index_0_lang.Cp8Py-rk.js";document.addEventListener("scroll",()=>{const o=document.querySelector(".scroll-top");o&&(document.body?.scrollTop>500||document.documentElement.scrollTop>500?o.style.display="block":o.style.display="none")});

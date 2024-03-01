@@ -11,7 +11,7 @@ const theme = Astro.cookies.get("theme")?.value ?? "light";
 
 // type Props = CollectionEntry<'blog'>['data'];
 
-const { title, description, pubDate, updatedDate, ...props } = Astro.props;
+const { title, description, pubDate, updatedDate, url, ...props } = Astro.props;
 const { default: back } = await import(`/src/assets/icons/angle-left.svg?raw`);
 const { default: up } = await import(`/src/assets/icons/angles-up.svg?raw`);
 
@@ -19,6 +19,12 @@ const posts = (await getCollection("blog"))
   .sort(() => Math.random() - 0.5)
   .filter((p) => p.data.title !== title)
   .slice(0, 2);
+
+const ogImage = {
+  src: `/image/${url}.png`,
+  alt: title,
+};
+
 ---
 
 <!doctype html>

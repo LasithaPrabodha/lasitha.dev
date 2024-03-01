@@ -7,16 +7,23 @@ import FormattedDate from "../../components/FormattedDate.astro";
 import RectPattern from "../../components/RectPattern.astro";
 
 const posts = (await getCollection("blog")).sort(
-  (a: any, b: any) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf()
+  (a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf(),
 );
 ---
 
-<Page title={"Blogs - " + SITE_TITLE} description={SITE_DESCRIPTION} addNight={true}>
-  <section id="blogs" class="flex flex-1 flex-col p-6 w-full m-auto box-border mt-6 mb-20 max-w-[900px]">
+<Page
+  title={"Blogs - " + SITE_TITLE}
+  description={SITE_DESCRIPTION}
+  addNight={true}
+>
+  <section
+    id="blogs"
+    class="flex flex-1 flex-col p-6 w-full m-auto box-border mt-6 mb-20 max-w-[900px]"
+  >
     <h2 class="section__title font-semibold">Let's Learn Together!</h2>
     <div class="pt-10 grid gap-16 lg:grid-cols-2 lg:gap-x-8 lg:gap-y-12">
       {
-        posts.map((post: any) => (
+        posts.map((post) => (
           <a class="" href={`/blog/${post.slug}/`}>
             <div class="mb-4">
               <FormattedDate date={post.data.pubDate} />

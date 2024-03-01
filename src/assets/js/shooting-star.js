@@ -77,8 +77,15 @@ export function start() {
     paused = false;
 
   function createShootingStar() {
-    const shootingStar = particle.create(randomRange(width / 2, width), randomRange(0, height / 2), 0, 0);
-    shootingStar.setSpeed(randomRange(shootingStarSpeed.min, shootingStarSpeed.max));
+    const shootingStar = particle.create(
+      randomRange(width / 2, width),
+      randomRange(0, height / 2),
+      0,
+      0,
+    );
+    shootingStar.setSpeed(
+      randomRange(shootingStarSpeed.min, shootingStarSpeed.max),
+    );
     shootingStar.setHeading(degreesToRads(starsAngle));
     shootingStar.radius = shootingStarRadius;
     shootingStar.opacity = 0;

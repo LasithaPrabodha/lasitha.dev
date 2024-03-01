@@ -6,13 +6,18 @@ type Props = HTMLAttributes<"a">;
 const { href, class: className, ...props } = Astro.props;
 
 const { pathname } = Astro.url;
-const subpath = pathname.match(/[^\/]+/g);
+const subpath = pathname.match(/[^\/]+/g); // eslint-disable-line
 const isActive = href === pathname || href === "/" + subpath?.[0];
 console.log(isActive, href, pathname);
 ---
 
 <li class="nav__list-item">
-  <a class="link link--nav lowercase" href={href} class:list={[className, { active: isActive }]} {...props}>
+  <a
+    class="link link--nav lowercase"
+    href={href}
+    class:list={[className, { active: isActive }]}
+    {...props}
+  >
     <slot />
   </a>
 </li>

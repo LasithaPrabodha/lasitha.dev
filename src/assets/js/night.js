@@ -1,6 +1,6 @@
 const backgroundColor = "#030318";
 const width = document.body.offsetWidth;
-const height = document.body.scrollHeight
+const height = document.body.scrollHeight;
 const maxStarRadius = 1.5;
 const minStarOpacity = 0.1;
 const maxStarOpacity = 0.7;
@@ -33,7 +33,10 @@ function checkIfMobile() {
     } else {
       // Only as a last resort, fall back to user agent sniffing
       const UA = navigator.userAgent;
-      return /\b(BlackBerry|webOS|iPhone|IEMobile)\b/i.test(UA) || /\b(Android|Windows Phone|iPad|iPod)\b/i.test(UA);
+      return (
+        /\b(BlackBerry|webOS|iPhone|IEMobile)\b/i.test(UA) ||
+        /\b(Android|Windows Phone|iPad|iPod)\b/i.test(UA)
+      );
     }
   }
 }
@@ -68,11 +71,18 @@ function fillCircle(ctx, x, y, r, fillStyle) {
 function renderMoon(ctx) {
   fillCircle(ctx, moon.x, moon.y, moon.r, moon.color);
   // render a smaller circle above the moon to give it that well-known moon-shape
-  fillCircle(ctx, moon.x - moon.r / 3, moon.y - moon.r / 3, moon.r, backgroundColor);
+  fillCircle(
+    ctx,
+    moon.x - moon.r / 3,
+    moon.y - moon.r / 3,
+    moon.r,
+    backgroundColor,
+  );
 }
 
 function getOpacity(factor) {
-  const opacityIncrement = (maxStarOpacity - minStarOpacity) * Math.abs(Math.sin(factor));
+  const opacityIncrement =
+    (maxStarOpacity - minStarOpacity) * Math.abs(Math.sin(factor));
   const opacity = minStarOpacity + opacityIncrement;
   return opacity;
 }

@@ -9,7 +9,11 @@ const { default: book } = await import(`/src/assets/icons/book.svg?raw`);
 const { default: github } = await import(`/src/assets/icons/github.svg?raw`);
 ---
 
-<Page title={"Projects - " + SITE_TITLE} description={SITE_DESCRIPTION} addNight={true}>
+<Page
+  title={"Projects - " + SITE_TITLE}
+  description={SITE_DESCRIPTION}
+  addNight={true}
+>
   <section
     id="projects"
     class="bg-transparent flex flex-col justify-center flex-1 p-6 w-full m-auto box-border mt-6 max-w-[1100px] mb-40 max-sm:mb-8"
@@ -17,7 +21,9 @@ const { default: github } = await import(`/src/assets/icons/github.svg?raw`);
     <h2 class="section__title font-semibold">Projects</h2>
 
     <h3 class="mt-8 font-semibold text-center">Professional Projects</h3>
-    <div class="pt-10 grid gap-16 md:grid-cols-2 lg:grid-cols-3 lg:gap-x-8 lg:gap-y-12">
+    <div
+      class="pt-10 grid gap-16 md:grid-cols-2 lg:grid-cols-3 lg:gap-x-8 lg:gap-y-12"
+    >
       <Project
         title="SuperOffice - Developer Portal"
         description="Contains a set of self-serve tools that developers can use to manage their access to SuperOffice Online APIs"
@@ -34,23 +40,41 @@ const { default: github } = await import(`/src/assets/icons/github.svg?raw`);
         title="Cenium PMS"
         description="Streamlines complex group bookings with a versatile and dynamic PMS solution"
         technologies={["Angular", ".NET", "C#"]}
-        links={[{ href: "https://www.cenium.com/pms", ariaLabel: "website", icon: book }]}
+        links={[
+          {
+            href: "https://www.cenium.com/pms",
+            ariaLabel: "website",
+            icon: book,
+          },
+        ]}
       />
       <Project
         title="Club Arena"
         description="Simplifies sports facility management, enabling easy bookings without manual processing"
         technologies={["Angular", ".NET", "C#"]}
-        links={[{ href: "https://arena.club.no", ariaLabel: "source code", icon: eye }]}
+        links={[
+          {
+            href: "https://arena.club.no",
+            ariaLabel: "source code",
+            icon: eye,
+          },
+        ]}
       />
     </div>
     <h3 class="mt-16 font-semibold text-center">Personal Projects</h3>
-    <div class="pt-10 grid gap-16 md:grid-cols-2 lg:grid-cols-3 lg:gap-x-8 lg:gap-y-12">
+    <div
+      class="pt-10 grid gap-16 md:grid-cols-2 lg:grid-cols-3 lg:gap-x-8 lg:gap-y-12"
+    >
       <Project
         title="CarPool App Backend"
         description="A project written .NET to learn clean architecture with DDD and CQRS"
         technologies={[".NET", "C#"]}
         links={[
-          { href: "https://github.com/LasithaPrabodha/CleanArchitecture", ariaLabel: "source code", icon: github },
+          {
+            href: "https://github.com/LasithaPrabodha/CleanArchitecture",
+            ariaLabel: "source code",
+            icon: github,
+          },
         ]}
       />
       <Project
@@ -58,28 +82,52 @@ const { default: github } = await import(`/src/assets/icons/github.svg?raw`);
         description="A simple implementation of the classic TV game show 'Jeopardy'. The project is built using vanilla JavaScript"
         technologies={["JavaScript", "HTML", "CSS"]}
         links={[
-          { href: "https://github.com/LasithaPrabodha/jeopardy-app", ariaLabel: "source code", icon: github },
-          { href: "https://lasithaprabodha.github.io/jeopardy-app", ariaLabel: "source code", icon: eye },
+          {
+            href: "https://github.com/LasithaPrabodha/jeopardy-app",
+            ariaLabel: "source code",
+            icon: github,
+          },
+          {
+            href: "https://lasithaprabodha.github.io/jeopardy-app",
+            ariaLabel: "source code",
+            icon: eye,
+          },
         ]}
       />
       <Project
         title="Jeopardy API"
         description="An API of all recorded Jeopardy! games up until 2023-12-29. You can retrieve 518,061 clues, over 8,742 games and 54,160 categories."
         technologies={["C#", "ASP.NET Core"]}
-        links={[{ href: "https://github.com/LasithaPrabodha/jeopardy-api", ariaLabel: "source code", icon: github }]}
+        links={[
+          {
+            href: "https://github.com/LasithaPrabodha/jeopardy-api",
+            ariaLabel: "source code",
+            icon: github,
+          },
+        ]}
       />
       <Project
         title="Kingsbury Toronto"
         description="A mobile-first and user-friendly website for a luxurious apartment in Toronto"
         technologies={["HTML", "CSS"]}
-        links={[{ href: "https://kingsbury-toronto-website.web.app", ariaLabel: "live preview", icon: eye }]}
+        links={[
+          {
+            href: "https://kingsbury-toronto-website.web.app",
+            ariaLabel: "live preview",
+            icon: eye,
+          },
+        ]}
       />
       <Project
         title="Dots Connect"
         description="It's a small, dynamic, two-player game where you compete to connect dots of the same color on a grid."
         technologies={["JavaScript", "HTML", "CSS"]}
         links={[
-          { href: "https://lasithaprabodha.github.io/dot-connect", ariaLabel: "live preview", icon: eye },
+          {
+            href: "https://lasithaprabodha.github.io/dot-connect",
+            ariaLabel: "live preview",
+            icon: eye,
+          },
           {
             href: "https://github.com/LasithaPrabodha/dot-connect",
             ariaLabel: "source code",
@@ -170,7 +218,7 @@ const { default: github } = await import(`/src/assets/icons/github.svg?raw`);
       width: 100%;
     }
 
-    h3{
+    h3 {
       color: var(--clr-fg);
     }
     @media (max-width: 640px) {

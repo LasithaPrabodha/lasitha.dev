@@ -8,7 +8,8 @@
   --clr-primary: #1b3487;
   --clr-grd-one: #ba2d23;
   --clr-grd-two: #1b3487;
-  --shadow: rgba(100, 100, 111, 0.2) 0px 5px 5px 0px, rgba(100, 100, 111, 0.2) 0px 0px 0px 0.5px;
+  --shadow: rgba(100, 100, 111, 0.2) 0px 5px 5px 0px,
+    rgba(100, 100, 111, 0.2) 0px 0px 0px 0.5px;
   --display-sun: none;
   --display-moon: block;
 }
