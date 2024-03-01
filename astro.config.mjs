@@ -17,6 +17,7 @@ if (process.argv[3] === "--node" || process.argv[4] === "--node") {
 
 // https://astro.build/config
 export default defineConfig({
+  output: "server",
   site: "https://lasitha.dev",
   image: {
     service: sharpImageService(),
@@ -35,5 +36,6 @@ export default defineConfig({
     optimizeDeps: {
       exclude: ["@resvg/resvg-js"],
     },
-  }
+  },
+  adapter: adapter
 });
