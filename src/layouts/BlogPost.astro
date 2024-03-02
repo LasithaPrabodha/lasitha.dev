@@ -23,14 +23,21 @@ const posts = (await getCollection("blog"))
 const ogImage = {
   src: `/image/${url}.png`,
   alt: title,
-};
-
+}; 
 ---
 
 <!doctype html>
 <html lang="en">
   <head>
-    <BaseHead title={title} description={description} />
+    <BaseHead title={title} description={description}  ogImage={ogImage} />
+    {
+      pubDate && (
+        <meta
+          property="article:published_time"
+          content={pubDate.toISOString()}
+        />
+      )
+    }
   </head>
   <body class={theme} id="top">
     <Header />

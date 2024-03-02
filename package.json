@@ -6,8 +6,8 @@
     "dev": "astro dev",
     "start": "astro dev",
     "build": "astro check && astro build",
-    "build:node": "npx astro build",
-    "preview": "astro preview",
+    "build:node": "npx astro build ./ --node",
+    "preview": "npm run build:node && astro preview --node",
     "astro": "astro"
   },
   "dependencies": {

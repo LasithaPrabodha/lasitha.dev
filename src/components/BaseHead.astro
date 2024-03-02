@@ -5,18 +5,24 @@ import "../assets/styles/fonts.css";
 import "../assets/styles/global.css";
 import "../assets/styles/components.css";
 import "../assets/styles/footer.css";
+import { OG_IMAGE, SITE_DESCRIPTION, SITE_TITLE } from "consts";
 
 interface Props {
   title: string;
   description: string;
-  ogImage?: string;
+  ogImage?:  {
+    src: string;
+    alt: string;
+  };
 }
 
+const { title = SITE_TITLE, description = SITE_DESCRIPTION, ogImage = OG_IMAGE } = Astro.props;
+
+const ogImageURL = new URL(ogImage.src, Astro.site).href;
 const canonicalURL = Astro.site
   ? new URL(Astro.url.pathname, "https://lasitha.dev")
   : "";
 
-const { title, description, ogImage = "/images/casual-photo.jpg" } = Astro.props;
 ---
 
 <!-- Google tag (gtag.js) -->
@@ -59,11 +65,11 @@ const { title, description, ogImage = "/images/casual-photo.jpg" } = Astro.props
 <meta property="og:url" content={Astro.url} />
 <meta property="og:title" content={title} />
 <meta property="og:description" content={description} />
-<meta property="og:image" content={new URL(ogImage, Astro.url)} />
+<meta property="og:image" content={ogImageURL} />
 
 <!-- Twitter -->
 <meta property="twitter:card" content="summary_large_image" />
 <meta property="twitter:url" content={Astro.url} />
 <meta property="twitter:title" content={title} />
 <meta property="twitter:description" content={description} />
-<meta property="twitter:image" content={new URL(ogImage, Astro.url)} />
+<meta property="twitter:image" content={ogImageURL} />

@@ -3,7 +3,7 @@ import Page from "../layouts/Page.astro";
 import { SITE_TITLE, SITE_DESCRIPTION } from "../consts";
 import { Image } from "astro:assets";
 
-import myPhone from "../assets/images/casual-photo.jpg";
+import myPhoto from "../assets/images/casual-photo.jpg";
 import RectPattern from "../components/RectPattern.astro";
 ---
 
@@ -41,9 +41,9 @@ import RectPattern from "../components/RectPattern.astro";
       </div>
       <div class="details__photo relative">
         <Image
-          src={myPhone}
+          src={myPhoto}
           loading="eager"
-          alt="A portrai photo"
+          alt="My portrait photo"
           width={300}
           height={300}
         />
