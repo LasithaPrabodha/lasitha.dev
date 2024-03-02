@@ -7,7 +7,7 @@ import node from "@astrojs/node";
 import expressiveCode from "astro-expressive-code";
 
 const astroExpressiveCodeOptions = {
-  themes: ["one-dark-pro", "slack-ochin"],
+  themes: ["one-dark-pro", "github-light"],
 };
 let adapter = netlify();
 

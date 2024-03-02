@@ -6,7 +6,7 @@ pubDate: "Mar 01 2024"
 
 import NoShadow from "../../components/NoShadow.astro";
 
-{/* <NoShadow>![Angular](../../assets/images/blogs/angular.gif)</NoShadow> */}
+<NoShadow>![Angular](../../assets/images/blogs/angular.png)</NoShadow>
 
 In 2010, Google's Miško Hevery and Adam Abrons led an internal project to create Angular. This initial version, known as AngularJS, immediately became popular because to its innovative approach to single-page application (SPA) development. However, with the expanding landscape of web development, a complete rewrite arose in 2016: Angular (also known as "Angular 2+").
 
@@ -109,13 +109,39 @@ Directives in act as markers on DOM elements that instruct Angular on how to han
 Angular comes with built directives such, as `ngIf` `ngFor` and `ngSwitch` to enhance templates with logic and features.
 Developers have the flexibility to craft custom directives for expanding HTML capabilities.
 
-**Template file**
 
-<script src="https://gist.github.com/LasithaPrabodha/7dad3964485588dbc600f237c8c32dbb.js"></script>
+```html title="app.component.html"
+<h1>{{ title }}</h1>
 
-**Class file**
+<p>Welcome, {{ name }}!</p>
 
-<script src="https://gist.github.com/LasithaPrabodha/98fb7369445c772a9fff6e0b5acb4e60.js"></script>
+<button [hidden]="isLoading" (click)="handleClick()">Click me</button>
+
+<ul *ngIf="isLoading">
+  <li>Loading...</li>
+</ul>
+```
+
+
+```ts title="app.component.ts"
+import { Component } from '@angular/core';
+
+@Component({
+  selector: 'app-root',
+  templateUrl: './app.component.html',
+  styleUrls: ['./app.component.css']
+})
+export class AppComponent {
+  title = 'My App';
+  name = 'Alice';
+  isLoading = false;
+
+  handleClick() {
+    alert('Button clicked!');
+    this.name = 'Bob'; // Example of data change
+  }
+}
+```
 
 ## Organizing Your Code with Services and Dependency Injection
 
@@ -143,7 +169,47 @@ This approach promotes several benefits:
 
 Here's an example code demonstrating Angular services and dependency injection
 
-<script src="https://gist.github.com/LasithaPrabodha/a0fdaa628a437731a5cb8916ab8cb326.js"></script>
+```ts title="app.component.ts"
+import { Component } from '@angular/core';
+import { DataService } from './data.service';
+
+@Component({
+  selector: 'app-root',
+  templateUrl: './app.component.html',
+  styleUrls: ['./app.component.css']
+})
+export class AppComponent {
+  message: string;
+
+  constructor(private dataService: DataService) {
+    this.message = this.dataService.getData(); // Inject and access service data
+  }
+
+  updateData() {
+    this.dataService.setData('Data updated!'); // Modify service data
+    this.message = this.dataService.getData(); // Update component message
+  }
+}
+```
+
+```ts title="data.service.ts"
+import { Injectable } from '@angular/core';
+
+@Injectable({
+  providedIn: 'root' // Makes the service available throughout the application
+})
+export class DataService {
+  private data: string = 'This is data from the service.';
+
+  getData() {
+    return this.data;
+  }
+
+  setData(newData: string) {
+    this.data = newData;
+  }
+}
+```
 
 The component declares its need for the `DataService` by including it in its constructor's parameters.
 This signifies to Angular that the component relies on the service for its functionality.
@@ -158,32 +224,91 @@ By leveraging services and dependency injection, you can structure your Angular 
 Imagine exploring different rooms in a house; Angular Router provides a similar experience for navigating between various sections (components)
 in your application. This built-in feature helps users seamlessly switch between different views (components) based on the URL they access.
 
-**Configuring Routes:**
+#### Configuring Routes
 
 1. You specify routes in an array within a `Routes` object. Each route is a configuration object with properties like:
 
    - **path:** The URL path that corresponds to the route. For example, `'/about'` might map to an "About" component.
    - **component:** The component to be displayed when the route is matched.
 
-   <script src="https://gist.github.com/LasithaPrabodha/14b341763f7887578109441c0534409b.js"></script>
+    ```ts title="app-routing.module.ts"
+    import { NgModule } from '@angular/core';
+    import { RouterModule, Routes } from '@angular/router';
+    import { HomeComponent } from './home/home.component';
+    import { AboutComponent } from './about/about.component';
+
+    const routes: Routes = [
+    { path: '', component: HomeComponent }, // Default route
+    { path: 'about', component: AboutComponent },
+    ];
+
+    @NgModule({
+    imports: [RouterModule.forRoot(routes)],
+    exports: [RouterModule]
+    })
+    export class AppRoutingModule { }
+    ```
 
 2. Then, in your main template (`app.component.html`), use `routerLink` on anchor tags to link to different components and include `<router-outlet>` where the content of those components should be displayed based on the selected route.
 
-   <script src="https://gist.github.com/LasithaPrabodha/9cbf794988ebd4ea6296f4c4e2d0e435.js"></script>
+    ```html title="app.component.html"
+    <nav>
+    <a routerLink="/" routerLinkActive="active" ariaCurrentWhenActive="page">
+        Home
+    </a>
+    <a routerLink="/about" routerLinkActive="active" ariaCurrentWhenActive="page">
+        About
+    </a>
+    </nav>
+
+    <router-outlet></router-outlet>
+    ```
 
    Import `AppRoutingModule` to make routing functionality available throughout the application.
 
-   <script src="https://gist.github.com/LasithaPrabodha/c30abf39ff76601135d785eae6f2cb6a.js"></script>
+    ```ts title="app.module.ts"
+    import { NgModule } from '@angular/core';
+    import { BrowserModule } from '@angular/platform-browser';
+    import { AppComponent } from './app.component';
+    import { AppRoutingModule } from './app-routing.module';
+    import { HomeComponent } from './home/home.component';
+    import { AboutComponent } from './about/about.component';
 
-**Handling Navigation:**
+    @NgModule({
+    declarations: [AppComponent, HomeComponent, AboutComponent],
+    imports: [
+        BrowserModule,
+        AppRoutingModule, // Import AppRoutingModule here
+    ],
+    providers: [],
+    bootstrap: [AppComponent],
+    })
+    export class AppModule {}
+    ```
+
+#### Handling Navigation
 
 - **Navigation links:** Use the `routerLink` directive on anchor tags (`<a>`) to define navigation links within your templates.
   For example, `<a routerLink="/about">About Us</a>` creates a link that navigates to the "About" component when clicked.
 - **Programmatic navigation:** You can use the `Router` service to programmatically navigate between routes within your component logic.
 
-  {" "}
+    ```ts title="app.component.ts"
+    import { Component } from '@angular/core';
+    import { Router } from '@angular/router';
 
-  <script src="https://gist.github.com/LasithaPrabodha/e0c8e56e626665ef3457a16703c7c516.js"></script>
+    @Component({
+    selector: 'app-root',
+    templateUrl: './app.component.html',
+    standalone: true
+    })
+    export class AppComponent {
+    constructor(private router: Router) {}
+
+    navigateToAbout() {
+        this.router.navigate(['/about']); // Programmatic navigation to the '/about' route
+    }
+    }
+    ```
 
 ## Building Interactive Forms with Angular
 
@@ -196,7 +321,26 @@ Capturing user input is essential for many web applications. Angular provides tw
 They offer a simplified approach for building forms directly within your component templates using HTML elements and directives.
 They are suitable for simpler forms with less complex validation requirements.
 
-<script src="https://gist.github.com/LasithaPrabodha/6b636d09a3820e8da6ef6d0512c137bf.js"></script>
+```html title="user-form.component.html"
+<form (ngSubmit)="onSubmit()">
+  <div>
+    <label for="name">Name:</label>
+    <input type="text" id="name" name="name" [(ngModel)]="userModel.name" required>
+  </div>
+  
+  <div>
+    <label for="email">Email:</label>
+    <input type="email" id="email" name="email" [(ngModel)]="userModel.email" required>
+  </div>
+  
+  <div>
+    <label for="age">Age:</label>
+    <input type="number" id="age" name="age" [(ngModel)]="userModel.age" required>
+  </div>
+  
+  <button type="submit">Submit</button>
+</form>
+```
 
     - We're using `[(ngModel)]` to bind form input fields to properties of the `userModel` object. This allows two-way data binding between the form inputs and the component class.
     - `(ngSubmit)` is an event binding that triggers the `onSubmit()` method when the form is submitted.
@@ -213,7 +357,37 @@ Here's an example of how to implement a simple reactive form in Angular.
 
 First, let's create a new component called `ReactiveUserFormComponent`.
 
-<script src="https://gist.github.com/LasithaPrabodha/489f71bb6156b2649555ca5374278773.js"></script>
+```ts title="reactive-user-form.component.ts"
+import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+
+@Component({
+  selector: 'app-reactive-user-form',
+  templateUrl: './reactive-user-form.component.html'
+})
+export class ReactiveUserFormComponent implements OnInit {
+  userForm: FormGroup;
+
+  constructor(private formBuilder: FormBuilder) {}
+
+  ngOnInit() {
+    this.userForm = this.formBuilder.group({
+      name: ['', Validators.required],
+      email: ['', [Validators.required, Validators.email]],
+      age: [null, [Validators.required, Validators.min(18)]]
+    });
+  }
+
+  onSubmit() {
+    if (this.userForm.valid) {
+      console.log('Form submitted with data:', this.userForm.value);
+      // Here, you can perform actions like sending data to a server
+    } else {
+      console.error('Form is invalid');
+    }
+  }
+}
+```
 
 In here, we are utilizing Angulars `FormBuilder` service to establish a `FormGroup` containing three form elements; name, email and age.
 We've integrated validation rules to ensure that the name and email inputs are mandatory the email input is an email address and the age input is,
@@ -221,7 +395,37 @@ at 18 years old.
 
 Now, let's create the corresponding template file `reactive-user-form.component.html`
 
-<script src="https://gist.github.com/LasithaPrabodha/2d1e5a0f4e9ab542411c241a9b42300a.js"></script>
+```html title="reactive-user-form.component.html"
+<form [formGroup]="userForm" (ngSubmit)="onSubmit()">
+  <div>
+    <label for="name">Name:</label>
+    <input type="text" id="name" formControlName="name">
+    <div *ngIf="userForm.get('name').invalid && userForm.get('name').touched">
+      <span *ngIf="userForm.get('name').errors.required">Name is required.</span>
+    </div>
+  </div>
+  
+  <div>
+    <label for="email">Email:</label>
+    <input type="email" id="email" formControlName="email">
+    <div *ngIf="userForm.get('email').invalid && userForm.get('email').touched">
+      <span *ngIf="userForm.get('email').errors.required">Email is required.</span>
+      <span *ngIf="userForm.get('email').errors.email">Invalid email format.</span>
+    </div>
+  </div>
+  
+  <div>
+    <label for="age">Age:</label>
+    <input type="number" id="age" formControlName="age">
+    <div *ngIf="userForm.get('age').invalid && userForm.get('age').touched">
+      <span *ngIf="userForm.get('age').errors.required">Age is required.</span>
+      <span *ngIf="userForm.get('age').errors.min">Age must be at least 18.</span>
+    </div>
+  </div>
+  
+  <button type="submit" [disabled]="userForm.invalid">Submit</button>
+</form>
+```
 
 In this template, we bind the FormGroup to the `<form>` element using `[formGroup]="userForm"`.
 Each input field is associated with a form control using formControlName.
@@ -267,11 +471,77 @@ First, ensure that you have included `HttpClientModule` in your module (`app.mod
 
 Then, let's create a service to handle API requests. Create a file named `data.service.ts`
 
-<script src="https://gist.github.com/LasithaPrabodha/8f277141eeb10e53ef0e9b9b490729f9.js"></script>
+```ts title="data.service.ts"
+import { Injectable } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs';
+import { ApiResponse } from '.../interfaces/api-response.interface';
+import { PostData } from '.../interfaces/post-data.interface';
+
+@Injectable({
+  providedIn: 'root'
+})
+export class DataService {
+
+  constructor(private http: HttpClient) { }
+
+  getData(): Observable<ApiResponse> {
+    return this.http.get<ApiResponse>('https://api.example.com/data');
+  }
+
+  postData(data: PostData): Observable<ApiResponse> {
+    return this.http.post<ApiResponse>('https://api.example.com/data', data);
+  }
+}
+```
 
 Finally, let's use this service in our component.
 
-<script src="https://gist.github.com/LasithaPrabodha/77e982ad02b32bf6c2f0228834fc4895.js"></script>
+```ts title="app.component.ts"
+import { Component } from '@angular/core';
+import { DataService } from './data.service';
+import { ApiResponse } from './api-response.interface';
+import { PostData } from './post-data.interface';
+
+@Component({
+  selector: 'app-root',
+  templateUrl: './app.component.html',
+  styleUrls: ['./app.component.css']
+})
+export class AppComponent {
+  responseData: ApiResponse;
+  postData: PostData = { name: '', email: '', age: 0 };
+  postResponse: ApiResponse;
+
+  constructor(private dataService: DataService) { }
+
+  fetchData(): void {
+    this.dataService.getData().subscribe(
+      (data: ApiResponse) => {
+        this.responseData = data;
+        console.log('Received data:', this.responseData);
+        // Process and display data as needed
+      },
+      (error: any) => {
+        console.error('Error fetching data:', error);
+      }
+    );
+  }
+
+  sendData(): void {
+    this.dataService.postData(this.postData).subscribe(
+      (response: ApiResponse) => {
+        this.postResponse = response;
+        console.log('Response from server:', this.postResponse);
+        // Handle response from server
+      },
+      (error: any) => {
+        console.error('Error sending data:', error);
+      }
+    );
+  }
+}
+```
 
 ## Keeping Your Angular Project Clean and Efficient
 

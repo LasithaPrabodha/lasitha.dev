@@ -27,7 +27,24 @@ The Observer Pattern thrives in TypeScript's strong typing and interface capabil
 
 First, we'll define interfaces for the Subject and Observer:
 
-<script src="https://gist.github.com/LasithaPrabodha/adb52b3f274a2d468dc66d255a0f786e.js"></script>
+```ts
+interface Subject<T> {
+    registerObserver(observer: Observer<T>): void;
+    unregisterObserver(observer: Observer<T>): void;
+    notifyObservers(data?: T): void;
+}
+
+interface Observer<T> {
+    update(subject: Subject<T>, data?: T): void;
+}
+
+// used for our example
+interface Article {
+    topic: string;
+    title: string;
+    content: string;
+}
+```
 
 <strong>Subject<T></strong> defines the core functionality of a "source" object responsible for notifying its dependents.
 
@@ -43,7 +60,70 @@ First, we'll define interfaces for the Subject and Observer:
 
 Now, let's create concrete classes for a "NewsPublisher" (Subject) and "NewsSubscriber" (Observer)
 
-<script src="https://gist.github.com/LasithaPrabodha/7937d28ba2e0615c0c01b2640712b7bf.js"></script>
+```ts title="implementation.ts"
+class NewsPublisher implements Subject<Article> {
+    private observers: Observer<Article>[] = [];
+    
+    name: String = ""
+    articles: Article[] = []; // array to store published articles
+
+    constructor(name: String) {
+        this.name = name;
+    }
+
+    registerObserver(observer: Observer<Article>): void {
+        this.observers.push(observer);
+    }
+
+    unregisterObserver(observer: Observer<Article>): void {
+        const index = this.observers.indexOf(observer);
+        if (index !== -1) {
+            this.observers.splice(index, 1);
+        }
+    }
+
+    notifyObservers(article?: Article): void {
+        for (const observer of this.observers) {
+            observer.update(this, article);
+        }
+    }
+
+    publishArticle(topic: string, title: string, content: string): void {
+        // Simulate article creation
+        const article = { topic, title, content };
+        articles.push(article)
+        this.notifyObservers(article);
+    }
+
+}
+
+class NewsSubscriber implements Observer<Article> {
+    constructor(
+      private readonly name: string, 
+      private readonly topics: string[]
+    ) { }
+
+    notify(subject: Subject<Article>, article?: Article): void {
+        if (subject instanceof NewsPublisher && article) {
+            if (this.topics.includes(article.topic)) {
+                // Simulates the behavior of sending an email
+                console.log(`Hey ${this.name}, There is a new article from ${subject.name} "${article.topic}": ${article.title}`);
+            }
+        }
+    }
+
+    subscribe(topic: string): void {
+        this.topics.push(topic);
+    }
+
+    unsubscribe(topic: string): void {
+        const index = this.topics.indexOf(topic);
+        if (index !== -1) {
+            this.topics.splice(index, 1);
+        }
+    }
+}
+```
 
 <strong>NewsPublisher</strong> implements the `Subject<Article>` interface and manages subscribed news topics.
 
@@ -59,11 +139,28 @@ Now, let's create concrete classes for a "NewsPublisher" (Subject) and "NewsSubs
 
 ### Usage
 
-<script src="https://gist.github.com/LasithaPrabodha/b0fb3ec81550b10563d993a9f232a500.js"></script>
+```ts title="usage.ts"
+const publisher = new NewsPublisher("CNN");
+const amal = new NewsSubscriber("Amal", ["sports", "technology"]);
+const kamal = new NewsSubscriber("Kamal", ["entertainment", "politics"]);
+
+publisher.registerObserver(amal);
+publisher.registerObserver(kamal);
+
+// Subscriber can subscribe/unsubscribe dynamically
+amal.subscribe("entertainment");
+kamal.unsubscribe("entertainment");
+
+publisher.publishArticle("sports", "Sri Lanka Wins!", "...");
+publisher.publishArticle("technology", "New iPhone is out!", "...");
+publisher.publishArticle("entertainment", "Johnny and Amber married again!", "...");
+publisher.publishArticle("politics", "Mahinda dead!", "...");
+```
+
 
 ### Output
 
-```
+```bash
 Hey Amal, There is a new article from CNN "sports": Sri Lanka Wins!
 Hey Amal, There is a new article from CNN "technology": New iPhone is out!
 Hey Amal, There is a new article from CNN "entertainment": Johnny and Amber married again!

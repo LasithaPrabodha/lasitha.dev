@@ -34,7 +34,35 @@ We have a class named `DBManager`, tasked with handling database connections acr
 It's crucial to have just one `DBManager` instance to avoid resource wastage and potential connection
 issues.
 
-<script src="https://gist.github.com/LasithaPrabodha/81c2833179f608ba695a04de13499418.js"></script>
+```cs title="DBManager.cs"
+public class DBManager
+{
+    private static DBManager instance;
+    
+    private DBManager() { }
+    
+    public static DBManager Instance
+    {
+        get
+        {
+            if (instance == null)
+            {
+               instance = new DBManager();
+            }
+                
+            return instance;
+        }
+    }
+    public void Connect()
+    {
+        // Implementation to establish a database connection
+    }
+    public void Disconnect()
+    {
+        // Implementation to close the database connection
+    }
+}
+```
 
 The `DBManager` class keeps its constructor private so that there's no external initialization. The
 `Instance` property is in charge of managing the singleton instance. We provide the access for our instance by setting it

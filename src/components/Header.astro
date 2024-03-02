@@ -8,9 +8,7 @@ const { default: menu } = await import(`/src/assets/icons/bars.svg?raw`);
 const { default: sun } = await import(`/src/assets/icons/sun.svg?raw`);
 ---
 
-<header
-  class="p-6 flex justify-center items-center sm:h-24 bg-transparent max-sm:justify-end"
->
+<header class="p-6 flex justify-center items-center sm:h-24 bg-transparent max-sm:justify-end">
   <nav class="nav center">
     <ul class="nav__list center">
       <HeaderLink href="/">Home</HeaderLink>
@@ -20,21 +18,12 @@ const { default: sun } = await import(`/src/assets/icons/sun.svg?raw`);
       <HeaderLink href="/contact">Contact</HeaderLink>
     </ul>
 
-    <button
-      id="theme-toggle"
-      type="button"
-      aria-label="toggle theme"
-      class="btn btn--icon"
-    >
+    <button id="theme-toggle" type="button" aria-label="toggle theme" class="btn btn--icon">
       <Fragment set:html={moon} />
       <Fragment set:html={sun} />
     </button>
 
-    <button
-      type="button"
-      aria-label="toggle navigation"
-      class="btn btn--icon nav__hamburger"
-    >
+    <button type="button" aria-label="toggle navigation" class="btn btn--icon nav__hamburger">
       <Fragment set:html={menu} />
       <Fragment set:html={cross} />
     </button>
@@ -56,6 +45,12 @@ const { default: sun } = await import(`/src/assets/icons/sun.svg?raw`);
   function changeTheme(theme: Themes) {
     body.className = "";
     body.classList.add(theme);
+
+    if (theme === "light") {
+      document.documentElement.setAttribute("data-theme", "github-light");
+    } else {
+      document.documentElement.setAttribute("data-theme", "one-dark-pro");
+    }
   }
 
   function setTheme(theme: Themes) {

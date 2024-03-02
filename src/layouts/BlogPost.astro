@@ -8,6 +8,7 @@ import "../assets/styles/blog.css";
 import "../assets/styles/dark-gist.css";
 
 const theme = Astro.cookies.get("theme")?.value ?? "light";
+const ecTheme = theme === 'dark' ? "one-dark-pro" : "github-light"
 
 // type Props = CollectionEntry<'blog'>['data'];
 
@@ -27,7 +28,7 @@ const ogImage = {
 ---
 
 <!doctype html>
-<html lang="en">
+<html lang="en" data-theme={ecTheme}>
   <head>
     <BaseHead title={title} description={description}  ogImage={ogImage} />
     {
