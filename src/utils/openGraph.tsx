@@ -4,8 +4,6 @@ import satori from "satori";
 import { SITE_TITLE } from "../consts";
 import { readFile } from "node:fs/promises";
 
-import Poppins from "@fontsource/poppins/files/poppins-devanagari-600-normal.woff";
-
 const dimensions = {
   width: 1200,
   height: 630,
