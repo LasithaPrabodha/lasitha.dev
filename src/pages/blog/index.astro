@@ -12,12 +12,12 @@ const posts = (await getCollection("blog")).sort(
 ---
 
 <Page
-  title={"Blogs - " + SITE_TITLE}
+  title={"Blog - " + SITE_TITLE}
   description={SITE_DESCRIPTION}
   addNight={true}
 >
   <section
-    id="blogs"
+    id="blog"
     class="flex flex-1 flex-col p-6 w-full m-auto box-border mt-6 mb-20 max-w-[900px]"
   >
     <h2 class="section__title font-bold">Let's Learn Together!</h2>
@@ -46,13 +46,13 @@ const posts = (await getCollection("blog")).sort(
   .btn-read-story {
     color: var(--clr-grd-one);
   }
-  :global(#blogs > #rect-right) {
+  :global(#blog > #rect-right) {
     position: absolute;
     right: 0;
     top: 128px;
     z-index: -1;
   }
-  :global(#blogs > #rect-left) {
+  :global(#blog > #rect-left) {
     position: absolute;
     left: 0;
     bottom: calc(100vh / 5);
@@ -60,8 +60,8 @@ const posts = (await getCollection("blog")).sort(
   }
 
   @media (max-width: 1024px) {
-    :global(#blogs > #rect-right),
-    :global(#blogs > #rect-left) {
+    :global(#blog > #rect-right),
+    :global(#blog > #rect-left) {
       display: none;
     }
   }

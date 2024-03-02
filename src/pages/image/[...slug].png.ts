@@ -7,8 +7,8 @@ interface Props {
   pubDate: Date;
 }
 
-const blogs = await getCollection("blog");
-const result = blogs.map((blog) => ({
+const blogPosts = await getCollection("blog");
+const result = blogPosts.map((blog) => ({
   params: { slug: blog.slug },
   props: {
     title: blog.data.title,
