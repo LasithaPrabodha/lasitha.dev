@@ -5,7 +5,7 @@
   "scripts": {
     "dev": "astro dev",
     "start": "astro dev",
-    "build": "yarn add sharp --ignore-engines && astro check && astro build",
+    "build": "npm install --os=linux --cpu=x64 sharp && astro check && astro build",
     "build:node": "npx astro build ./ --node",
     "preview": "npm run build:node && astro preview --node",
     "astro": "astro"
