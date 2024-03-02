@@ -1,7 +1,7 @@
 import { Resvg } from "@resvg/resvg-js";
 import { html } from "satori-html";
 import satori from "satori";
-import { SITE_TITLE } from "../consts";
+import { SITE_TITLE } from "consts";
 import { readFile } from "node:fs/promises";
 
 const dimensions = {
