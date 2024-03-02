@@ -117,10 +117,14 @@ body.nav-open {
 }
 
 main {
-  height: calc(100vh - 120px);
   position: relative;
   background: transparent;
 }
+
+.fixed-height {
+  height: calc(100vh - 96px);
+}
+
 .center {
   display: flex;
   align-items: center;

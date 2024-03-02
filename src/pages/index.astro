@@ -1,7 +1,7 @@
 ---
-import Page from "../layouts/Page.astro";
-import ContactIcons from "../components/ContactIcons.astro";
-import { SITE_TITLE, SITE_DESCRIPTION } from "../consts";
+import Page from "@layouts/Page.astro";
+import ContactIcons from "@components/ContactIcons.astro";
+import { SITE_TITLE, SITE_DESCRIPTION } from "consts";
 
 import "../assets/styles/home.css";
 ---
@@ -10,11 +10,13 @@ import "../assets/styles/home.css";
   title={SITE_TITLE}
   description={SITE_DESCRIPTION}
   addNight={true}
-  class="about center"
+  class="max-sm:mt-8 max-sm:ml-4 max-sm:mr-4 flex-col overflow-hidden bg-transparent center"
 >
-  <h1>
-    Hi, I am <span class="about__name font-semibold">Lasitha Prabodha.</span>
-  </h1>
-  <h2 class="about__role">A Full Stack & Mobile Software Engineer.</h2>
-  <ContactIcons />
+  <div class="fixed-height flex flex-col justify-center">
+    <h1 class="text-6xl max-sm:text-5xl">
+      Hi, I am <span class="about__name font-semibold">Lasitha Prabodha.</span>
+    </h1>
+    <h2 class="mt-10 mb-32">A Full Stack & Mobile Software Engineer.</h2>
+    <ContactIcons />
+  </div>
 </Page>

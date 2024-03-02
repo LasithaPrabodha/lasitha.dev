@@ -2,15 +2,13 @@
 import FormattedDate from "../components/FormattedDate.astro";
 import BaseHead from "../components/BaseHead.astro";
 import Header from "../components/Header.astro";
+import Footer from "@components/Footer.astro";
 import { getCollection } from "astro:content";
 
 import "../assets/styles/blog.css";
 
-import '@fontsource-variable/quicksand';
-import '@fontsource/poppins/600.css';
-
 const theme = Astro.cookies.get("theme")?.value ?? "light";
-const ecTheme = theme === 'dark' ? "one-dark-pro" : "github-light"
+const ecTheme = theme === "dark" ? "one-dark-pro" : "github-light";
 
 // type Props = CollectionEntry<'blog'>['data'];
 
@@ -26,25 +24,18 @@ const posts = (await getCollection("blog"))
 const ogImage = {
   src: `/image/${url}.png`,
   alt: title,
-}; 
+};
 ---
 
 <!doctype html>
 <html lang="en" data-theme={ecTheme}>
   <head>
-    <BaseHead title={title} description={description}  ogImage={ogImage} />
-    {
-      pubDate && (
-        <meta
-          property="article:published_time"
-          content={pubDate.toISOString()}
-        />
-      )
-    }
+    <BaseHead title={title} description={description} ogImage={ogImage} />
+    {pubDate && <meta property="article:published_time" content={pubDate.toISOString()} />}
   </head>
-  <body class={theme} id="top">
+  <body class:list={[theme, "relative"]} id="top">
     <Header />
-    <main {...props} class="bg-transparent sm:mt-6 max-sm:p-6 max-w-[700px] w-full m-auto box-border mb-40 max-sm:mb-8">
+    <main {...props} class="bg-transparent sm:mt-6 max-sm:p-6 max-w-[700px] w-full m-auto box-border mb-6 max-sm:mb-8">
       <div class="go-back mb-8">
         <a href="/blog" class="flex gap-2">
           <Fragment set:html={back} /> Back to Blogs
@@ -79,6 +70,8 @@ const ogImage = {
                   <h4>{post.data.title}</h4>
                   <FormattedDate date={post.data.pubDate} />
                 </div>
+
+                <p>{post.data.description}</p>
               </a>
             ))
           }
@@ -106,5 +99,6 @@ const ogImage = {
         }
       });
     </script>
+    <Footer />
   </body>
 </html>

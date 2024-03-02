@@ -9,21 +9,15 @@ const { default: book } = await import(`/src/assets/icons/book.svg?raw`);
 const { default: github } = await import(`/src/assets/icons/github.svg?raw`);
 ---
 
-<Page
-  title={"Projects - " + SITE_TITLE}
-  description={SITE_DESCRIPTION}
-  addNight={true}
->
+<Page title={"Projects - " + SITE_TITLE} description={SITE_DESCRIPTION} addNight={true}>
   <section
     id="projects"
-    class="bg-transparent flex flex-col justify-center flex-1 p-6 w-full m-auto box-border mt-6 max-w-[1100px] mb-40 max-sm:mb-8"
+    class="bg-transparent flex flex-col justify-center flex-1 p-6 w-full m-auto box-border mt-6 max-w-[1100px] mb-6 max-sm:mb-8"
   >
     <h2 class="section__title font-semibold">Projects</h2>
 
     <h3 class="mt-8 font-semibold text-center">Professional Projects</h3>
-    <div
-      class="pt-10 grid gap-16 md:grid-cols-2 lg:grid-cols-3 lg:gap-x-8 lg:gap-y-12"
-    >
+    <div class="pt-10 grid gap-16 md:grid-cols-2 lg:grid-cols-3 lg:gap-x-8 lg:gap-y-12">
       <Project
         title="SuperOffice - Developer Portal"
         description="Contains a set of self-serve tools that developers can use to manage their access to SuperOffice Online APIs"
@@ -62,9 +56,7 @@ const { default: github } = await import(`/src/assets/icons/github.svg?raw`);
       />
     </div>
     <h3 class="mt-16 font-semibold text-center">Personal Projects</h3>
-    <div
-      class="pt-10 grid gap-16 md:grid-cols-2 lg:grid-cols-3 lg:gap-x-8 lg:gap-y-12"
-    >
+    <div class="pt-10 grid gap-16 md:grid-cols-2 lg:grid-cols-3 lg:gap-x-8 lg:gap-y-12">
       <Project
         title="CarPool App Backend"
         description="A project written .NET to learn clean architecture with DDD and CQRS"
@@ -194,7 +186,7 @@ const { default: github } = await import(`/src/assets/icons/github.svg?raw`);
     :global(#projects > #rect-right) {
       position: absolute;
       right: 0;
-      bottom: 50px;
+      top: calc(100vh / 2);
       z-index: -1;
     }
     :global(#projects > #rect-left) {
@@ -206,7 +198,7 @@ const { default: github } = await import(`/src/assets/icons/github.svg?raw`);
     :global(#projects > #rect-left-bottom) {
       position: absolute;
       left: 0;
-      bottom: -500px;
+      bottom: calc(100vh / 2);
       z-index: -1;
     }
     .projects__grid {

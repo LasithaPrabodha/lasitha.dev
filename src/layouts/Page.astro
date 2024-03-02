@@ -1,10 +1,8 @@
 ---
-import BaseHead from "../components/BaseHead.astro";
-import Header from "../components/Header.astro";
+import BaseHead from "@components/BaseHead.astro";
+import Header from "@components/Header.astro";
+import Footer from "@components/Footer.astro";
 
-import '@fontsource-variable/quicksand';
-import '@fontsource/poppins/400.css';
-import '@fontsource/poppins/700.css';
 
 const { title, description, addNight, ...props } = Astro.props;
 
@@ -18,7 +16,7 @@ const theme = Astro.cookies.get("theme")?.value ?? "light";
   <head>
     <BaseHead title={title} description={description} />
   </head>
-  <body class={theme} id="top">
+  <body class:list={[theme, "relative"]} id="top">
     {addNight && <canvas id="canvas" />}
     <Header />
     <main {...props}>
@@ -41,15 +39,11 @@ const theme = Astro.cookies.get("theme")?.value ?? "light";
         };
 
         document.addEventListener("scroll", () => {
-          const btnScrollTop =
-            document.querySelector<HTMLElement>(".scroll-top");
+          const btnScrollTop = document.querySelector<HTMLElement>(".scroll-top");
 
           if (!btnScrollTop) return;
 
-          if (
-            document.body?.scrollTop > 500 ||
-            document.documentElement.scrollTop > 500
-          ) {
+          if (document.body?.scrollTop > 500 || document.documentElement.scrollTop > 500) {
             btnScrollTop.style.display = "block";
           } else {
             btnScrollTop.style.display = "none";
@@ -57,5 +51,6 @@ const theme = Astro.cookies.get("theme")?.value ?? "light";
         });
       </script>
     </div>
+    <Footer />
   </body>
 </html>

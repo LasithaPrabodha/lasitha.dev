@@ -43,7 +43,8 @@ const { default: sun } = await import(`/src/assets/icons/sun.svg?raw`);
   }
 
   function changeTheme(theme: Themes) {
-    body.className = "";
+    body.classList.remove("dark")
+    body.classList.remove("light")
     body.classList.add(theme);
 
     if (theme === "light") {

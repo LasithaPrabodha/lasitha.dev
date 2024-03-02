@@ -1,17 +1,11 @@
 ---
-const { default: instagram } = await import(
-  `/src/assets/icons/instagram.svg?raw`
-);
-const { default: facebook } = await import(
-  `/src/assets/icons/facebook.svg?raw`
-);
-const { default: linkedin } = await import(
-  `/src/assets/icons/linkedin.svg?raw`
-);
+const { default: instagram } = await import(`/src/assets/icons/instagram.svg?raw`);
+const { default: facebook } = await import(`/src/assets/icons/facebook.svg?raw`);
+const { default: linkedin } = await import(`/src/assets/icons/linkedin.svg?raw`);
 const { default: github } = await import(`/src/assets/icons/github.svg?raw`);
 ---
 
-<div class="contact-links center">
+<div class="max-sm:mt-8 center">
   <a
     href="https://www.instagram.com/lu6_fer/"
     target="_blank"
@@ -21,13 +15,7 @@ const { default: github } = await import(`/src/assets/icons/github.svg?raw`);
   >
     <Fragment set:html={instagram} />
   </a>
-  <a
-    href="https://www.facebook.com/lmlxlml/"
-    target="_blank"
-    rel="noreferrer"
-    aria-label="fb"
-    class="link link--icon"
-  >
+  <a href="https://www.facebook.com/lmlxlml/" target="_blank" rel="noreferrer" aria-label="fb" class="link link--icon">
     <Fragment set:html={facebook} />
   </a>
 
@@ -51,12 +39,7 @@ const { default: github } = await import(`/src/assets/icons/github.svg?raw`);
   </a>
 </div>
 <style>
-  .contact-links {
-    margin-top: 3em;
-    margin-bottom: 147px;
-  }
-
-  .contact-links .link--icon {
+  .link--icon {
     margin-right: 0.5em;
     margin-left: 0.5em;
     display: flex;
