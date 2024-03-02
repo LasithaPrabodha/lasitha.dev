@@ -53,7 +53,7 @@ const generateOgImage = async (title: string = SITE_TITLE, date: Date = new Date
       -webkit-text-fill-color: transparent;
       background-clip: text;
       -webkit-background-clip: text;
-      background-image: linear-gradient(45deg, #90a0d9, #eee);"
+      background-image: linear-gradient(180deg, #90a0d9, #eee);"
       >
         ${title}
       </div>
