@@ -4,20 +4,20 @@ import netlify from "@astrojs/netlify";
 import tailwind from "@astrojs/tailwind";
 import partytown from "@astrojs/partytown";
 import expressiveCode from "astro-expressive-code";
-
-const astroExpressiveCodeOptions = {
-  themes: ["one-dark-pro", "github-light"],
-};
+import { astroImageTools } from "astro-imagetools";
+ 
 
 // https://astro.build/config
 export default defineConfig({
-  output: "server",
   site: "https://lasitha.dev",
   image: {
     service: sharpImageService(),
   },
   integrations: [
-    expressiveCode(astroExpressiveCodeOptions),
+    astroImageTools,
+    expressiveCode({
+      themes: ["one-dark-pro", "github-light"],
+    }),
     mdx(),
     tailwind(),
     partytown({
