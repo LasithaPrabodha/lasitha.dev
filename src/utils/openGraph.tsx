@@ -38,9 +38,9 @@ export const getOgImagePath = (filename: string = SITE_TITLE) => {
  * @param text
  */
 const generateOgImage = async (title: string = SITE_TITLE, date: Date = new Date()): Promise<Buffer> => {
-  const markup = html`<div class="bg-zinc-900 flex flex-col w-full h-full" style="font-family: 'Quicksand'">
-    <div class="flex flex-col w-full h-4/5 p-10 justify-center">
-      <div class="text-zinc-400 text-2xl mb-6">
+  const markup = html`<div tw="bg-zinc-900 flex flex-col w-full h-full" style="font-family: 'Quicksand'">
+    <div tw="flex flex-col w-full h-4/5 p-10 justify-center">
+      <div tw="text-zinc-400 text-2xl mb-6">
         ${date.toLocaleDateString("en-us", {
           year: "numeric",
           month: "long",
@@ -48,7 +48,7 @@ const generateOgImage = async (title: string = SITE_TITLE, date: Date = new Date
         })}
       </div>
       <div
-        class="flex text-6xl w-full font-bold leading-snug tracking-tight text-transparent bg-red-400"
+        tw="flex text-6xl w-full font-bold leading-snug tracking-tight text-transparent bg-red-400"
         style="font-family: Poppins, sans-serif;
       -webkit-text-fill-color: transparent;
       background-clip: text;
@@ -58,15 +58,15 @@ const generateOgImage = async (title: string = SITE_TITLE, date: Date = new Date
         ${title}
       </div>
     </div>
-    <div class="w-full h-1/5 border-t border-zinc-700/50 flex p-10 items-center justify-between text-2xl">
-      <div class="flex items-center">
-        <span class="ml-3 text-zinc-400">lasitha.dev</span>
+    <div tw="w-full h-1/5 border-t border-zinc-700/50 flex p-10 items-center justify-between text-2xl">
+      <div tw="flex items-center">
+        <span tw="ml-3 text-zinc-400">lasitha.dev</span>
       </div>
-      <div class="flex items-center">
-        <img src="https://lasitha.dev/static/casual-photo.jpg" class="w-20 h-20 rounded-full" />
-        <div class="flex flex-col ml-4">
-          <span class="text-zinc-400">Lasitha Weligampola</span>
-          <span class="text-blue-400">@lu6_fer</span>
+      <div tw="flex items-center">
+        <img src="https://lasitha.dev/static/casual-photo-192x192.png" tw="w-20 h-20 rounded-full" />
+        <div tw="flex flex-col ml-4">
+          <span tw="text-zinc-400">Lasitha Weligampola</span>
+          <span tw="text-blue-400">@lu6_fer</span>
         </div>
       </div>
     </div>
