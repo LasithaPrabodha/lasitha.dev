@@ -27,7 +27,7 @@ article img + small {
   text-align: center;
 }
 article p img {
-  /* width: 100%; */
+  width: 100%;
   border-radius: 6px;
   max-width: 500px;
   margin: 0 auto;
