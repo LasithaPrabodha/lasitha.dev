@@ -5,7 +5,9 @@ import Header from "../components/Header.astro";
 import { getCollection } from "astro:content";
 
 import "../assets/styles/blog.css";
-import "../assets/styles/dark-gist.css";
+
+import '@fontsource-variable/quicksand';
+import '@fontsource/poppins/600.css';
 
 const theme = Astro.cookies.get("theme")?.value ?? "light";
 const ecTheme = theme === 'dark' ? "one-dark-pro" : "github-light"

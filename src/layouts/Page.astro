@@ -2,6 +2,10 @@
 import BaseHead from "../components/BaseHead.astro";
 import Header from "../components/Header.astro";
 
+import '@fontsource-variable/quicksand';
+import '@fontsource/poppins/400.css';
+import '@fontsource/poppins/700.css';
+
 const { title, description, addNight, ...props } = Astro.props;
 
 const { default: up } = await import(`/src/assets/icons/angles-up.svg?raw`);
