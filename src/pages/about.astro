@@ -1,10 +1,10 @@
 ---
 import Page from "../layouts/Page.astro";
-import { SITE_TITLE, SITE_DESCRIPTION } from "../consts";
-import { Image } from "astro:assets";
+import { SITE_TITLE, SITE_DESCRIPTION } from "../consts"; 
 
 import myPhoto from "../assets/images/casual-photo.jpg";
 import RectPattern from "../components/RectPattern.astro";
+import Image from "@components/Image.astro";
 ---
 
 <Page
@@ -42,6 +42,7 @@ import RectPattern from "../components/RectPattern.astro";
       <div class="details__photo relative">
         <Image
           src={myPhoto}
+          placeholder="blur"
           loading="eager"
           alt="My portrait photo"
           width={300}
