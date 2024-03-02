@@ -51,13 +51,13 @@ const generateOgImage = async (text: string = SITE_TITLE, date: Date = new Date(
     fonts: [
       {
         name: "Poppins",
-        data: await readFile("./src/assets/fonts/Poppins-Regular.ttf"),
+        data: await readFile("./fonts/Poppins-Regular.ttf"),
         weight: 400,
         style: "normal",
       },
       {
         name: "PoppinsSemiBold",
-        data: await readFile("./src/assets/fonts/Poppins-SemiBold.ttf"),
+        data: await readFile("./fonts/Poppins-SemiBold.ttf"),
         weight: 600,
         style: "normal",
       },
