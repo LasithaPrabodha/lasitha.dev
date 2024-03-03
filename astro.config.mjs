@@ -9,7 +9,7 @@ import { astroImageTools } from "astro-imagetools";
 // https://astro.build/config
 export default defineConfig({
   output: "server",
-  site: "https://lasitha.dev",
+  site: "https://www.lasitha.dev",
   image: {
     service: sharpImageService(),
   },

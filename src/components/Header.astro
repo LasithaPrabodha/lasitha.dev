@@ -58,7 +58,7 @@ const { default: sun } = await import(`/src/assets/icons/sun.svg?raw`);
     changeTheme(theme);
     const d = new Date();
     d.setTime(d.getTime() + 365 * 86400000);
-    document.cookie = `theme=${theme};expires=${d.toUTCString()};domain=lasitha.dev;path=/`;
+    document.cookie = `theme=${theme};expires=${d.toUTCString()};domain=www.lasitha.dev;path=/`;
   }
 
   btnTheme?.addEventListener("click", () => {

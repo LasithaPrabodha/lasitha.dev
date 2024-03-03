@@ -61,7 +61,7 @@ const generateOgImage = async (title: string = SITE_TITLE, date: Date = new Date
         <span tw="ml-3 text-zinc-400">lasitha.dev</span>
       </div>
       <div tw="flex items-center">
-        <img src="https://lasitha.dev/static/casual-photo-192x192.png" tw="w-20 h-20 rounded-full" />
+        <img src="https://www.lasitha.dev/static/casual-photo-192x192.png" tw="w-20 h-20 rounded-full" />
         <div tw="flex flex-col ml-4">
           <span tw="text-zinc-400">Lasitha Weligampola</span>
           <span tw="text-blue-400">@lu6_fer</span>

@@ -1,5 +1,7 @@
 ## lasitha.dev
 
+[![Netlify Status](https://api.netlify.com/api/v1/badges/8945fed9-bf36-466b-bf71-75eebe6ab61b/deploy-status)](https://app.netlify.com/sites/lasitha/deploys)
+
 A minimal, responsive, and accessible personal website built with built using [Astro](https://astro.build/) + [Tailwind CSS](https://tailwindcss.com/).
 
 
