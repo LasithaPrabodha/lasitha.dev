@@ -1,14 +1,14 @@
 import { defineConfig, sharpImageService } from "astro/config";
 import mdx from "@astrojs/mdx";
-import netlify from "@astrojs/netlify";
+import netlify from "@astrojs/netlify/functions";
 import tailwind from "@astrojs/tailwind";
 import partytown from "@astrojs/partytown";
 import expressiveCode from "astro-expressive-code";
 import { astroImageTools } from "astro-imagetools";
- 
 
 // https://astro.build/config
 export default defineConfig({
+  output: "server",
   site: "https://lasitha.dev",
   image: {
     service: sharpImageService(),
