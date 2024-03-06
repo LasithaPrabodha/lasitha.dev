@@ -38,13 +38,21 @@ const { default: sun } = await import(`/src/assets/icons/sun.svg?raw`);
 
   type Themes = "light" | "dark";
 
+  if (body.classList.contains("use-system")) {
+    if (window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches) {
+      setTheme("dark");
+    }else{
+      setTheme("light");
+    }
+  }
+
   function isDark() {
     return body.classList.contains("dark");
   }
 
   function changeTheme(theme: Themes) {
-    body.classList.remove("dark")
-    body.classList.remove("light")
+    body.classList.remove("dark");
+    body.classList.remove("light");
     body.classList.add(theme);
 
     if (theme === "light") {
@@ -55,6 +63,7 @@ const { default: sun } = await import(`/src/assets/icons/sun.svg?raw`);
   }
 
   function setTheme(theme: Themes) {
+    console.log({ theme });
     changeTheme(theme);
     const d = new Date();
     d.setTime(d.getTime() + 365 * 86400000);
@@ -67,16 +76,6 @@ const { default: sun } = await import(`/src/assets/icons/sun.svg?raw`);
     } else {
       setTheme("dark");
     }
-  });
-
-  window.addEventListener("DOMContentLoaded", () => {
-    const cookies = document.cookie;
-    const match = cookies.match("theme=([^;]+)");
-    let theme = "light";
-    if (match) {
-      theme = match[1];
-    }
-    changeTheme(theme as Themes);
   });
 
   // Navigation
