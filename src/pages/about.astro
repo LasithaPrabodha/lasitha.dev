@@ -2,8 +2,7 @@
 import Page from "@layouts/Page.astro";
 import { SITE_TITLE, SITE_DESCRIPTION } from "consts";
 import { Image } from "astro:assets";
-
-import myPhoto from "@assets/images/casual-photo.jpg";
+ 
 import RectPattern from "@components/RectPattern.astro";
 ---
 
@@ -34,7 +33,7 @@ import RectPattern from "@components/RectPattern.astro";
         <p>I'm always learning new things as the tech world keeps changing, which keeps me excited!</p>
       </div>
       <div class="details__photo relative">
-        <Image src={myPhoto} loading="eager" alt="My portrait photo" width={300} height={300} />
+        <Image src={"https://res.cloudinary.com/dsu9zpw0u/image/upload/f_auto,q_auto/v1/website/evowropp5sec3dlcg6zo"} loading="eager" alt="My portrait photo" width={300} height={300} />
         <RectPattern />
       </div>
     </div>
