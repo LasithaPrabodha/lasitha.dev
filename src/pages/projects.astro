@@ -3,10 +3,17 @@ import Page from "@layouts/Page.astro";
 import Project from "@components/Project.astro";
 import RectPattern from "@components/RectPattern.astro";
 import { SITE_DESCRIPTION, SITE_TITLE } from "consts";
+import { getCollection } from "astro:content";
+import type { Link } from "interfaces/Link";
 
 const { default: eye } = await import(`/src/assets/icons/eye.svg?raw`);
 const { default: book } = await import(`/src/assets/icons/book.svg?raw`);
 const { default: github } = await import(`/src/assets/icons/github.svg?raw`);
+
+const icons: { [key: string]: string } = { eye, book, github };
+
+const professionalProjects = (await getCollection("professional-projects")).sort((a, b) => a.data.id - b.data.id);
+const personalProjects = await getCollection("personal-projects");
 ---
 
 <Page title={"Projects - " + SITE_TITLE} description={SITE_DESCRIPTION} addNight={true}>
@@ -18,167 +25,19 @@ const { default: github } = await import(`/src/assets/icons/github.svg?raw`);
 
     <h3 class="mt-8 font-semibold text-center">Professional Projects</h3>
     <div class="pt-10 grid gap-16 md:grid-cols-2 lg:grid-cols-3 lg:gap-x-8 lg:gap-y-12">
-      <Project
-        title="SuperOffice - Developer Portal"
-        description="Contains a set of self-serve tools that developers can use to manage their access to SuperOffice Online APIs"
-        technologies={["Angular", ".NET", "C#"]}
-        links={[
-          {
-            href: "https://docs.superoffice.com/en/developer-portal/about.html",
-            ariaLabel: "documentation",
-            icon: book,
-          },
-        ]}
-      />
-      <Project
-        title="Cenium PMS"
-        description="Streamlines complex group bookings with a versatile and dynamic PMS solution"
-        technologies={["Angular", ".NET", "C#"]}
-        links={[
-          {
-            href: "https://www.cenium.com/pms",
-            ariaLabel: "website",
-            icon: book,
-          },
-        ]}
-      />
-      <Project
-        title="Club Arena"
-        description="Simplifies sports facility management, enabling easy bookings without manual processing"
-        technologies={["Angular", ".NET", "C#"]}
-        links={[
-          {
-            href: "https://arena.club.no",
-            ariaLabel: "source code",
-            icon: eye,
-          },
-        ]}
-      />
+      {
+        professionalProjects.map((project) => (
+          <Project {...project} links={project.data.links.map((l: Link) => ({ ...l, icon: icons[l.icon] }))} />
+        ))
+      }
     </div>
     <h3 class="mt-16 font-semibold text-center">Personal Projects</h3>
     <div class="pt-10 grid gap-16 md:grid-cols-2 lg:grid-cols-3 lg:gap-x-8 lg:gap-y-12">
-      <Project
-        title="CarPool App Backend"
-        description="A project written .NET to learn clean architecture with DDD and CQRS"
-        technologies={[".NET", "C#"]}
-        links={[
-          {
-            href: "https://github.com/LasithaPrabodha/CleanArchitecture",
-            ariaLabel: "source code",
-            icon: github,
-          },
-        ]}
-      />
-      <Project
-        title="Jeopardy Game"
-        description="A simple implementation of the classic TV game show 'Jeopardy'. The project is built using vanilla JavaScript"
-        technologies={["JavaScript", "HTML", "CSS"]}
-        links={[
-          {
-            href: "https://github.com/LasithaPrabodha/jeopardy-app",
-            ariaLabel: "source code",
-            icon: github,
-          },
-          {
-            href: "https://lasithaprabodha.github.io/jeopardy-app",
-            ariaLabel: "source code",
-            icon: eye,
-          },
-        ]}
-      />
-      <Project
-        title="Jeopardy API"
-        description="An API of all recorded Jeopardy! games up until 2023-12-29. You can retrieve 518,061 clues, over 8,742 games and 54,160 categories."
-        technologies={["C#", "ASP.NET Core"]}
-        links={[
-          {
-            href: "https://github.com/LasithaPrabodha/jeopardy-api",
-            ariaLabel: "source code",
-            icon: github,
-          },
-        ]}
-      />
-      <Project
-        title="Kingsbury Toronto"
-        description="A mobile-first and user-friendly website for a luxurious apartment in Toronto"
-        technologies={["HTML", "CSS"]}
-        links={[
-          {
-            href: "https://lasithaprabodha.github.io/hotel-website",
-            ariaLabel: "live preview",
-            icon: eye,
-          },{
-            href: "https://github.com/LasithaPrabodha/hotel-website",
-            ariaLabel: "source code",
-            icon: github,
-          },
-        ]}
-      />
-      <Project
-        title="Dots Connect"
-        description="It's a small, dynamic, two-player game where you compete to connect dots of the same color on a grid."
-        technologies={["JavaScript", "HTML", "CSS"]}
-        links={[
-          {
-            href: "https://lasithaprabodha.github.io/dot-connect",
-            ariaLabel: "live preview",
-            icon: eye,
-          },
-          {
-            href: "https://github.com/LasithaPrabodha/dot-connect",
-            ariaLabel: "source code",
-            icon: github,
-          },
-        ]}
-      />
-      <Project
-        title="Expense Tracker"
-        description="This simple and intuitive app helps you manage and track your expenses efficiently."
-        technologies={["React Native", "TypeScript"]}
-        links={[
-          {
-            href: "https://github.com/LasithaPrabodha/expense-tracking-app-rn",
-            ariaLabel: "source code",
-            icon: github,
-          },
-        ]}
-      />
-      <Project
-        title="My Website"
-        description="My mobile responsive personal website, built using Astro + Tailwind CSS + Netlify."
-        technologies={["Astro", "TailwindCSS"]}
-        links={[
-          {
-            href: "https://github.com/LasithaPrabodha/lasitha.dev",
-            ariaLabel: "source code",
-            icon: github,
-          },
-        ]}
-      />
-      <Project
-        title="Redis-like Server"
-        description="This project implements a simplified version of a Redis-like server in Go, providing basic functionalities similar to Redis."
-        technologies={["Go"]}
-        links={[
-          {
-            href: "https://github.com/LasithaPrabodha/redis-like-server",
-            ariaLabel: "source code",
-            icon: github,
-          },
-        ]}
-      />
-      <Project
-        title="Account Balance Viewer"
-        description="This simple web-enabled application is designed to provide a monthly overview of the account balances for different departments within a company."
-        technologies={["C#", ".NET", "Angular"]}
-        links={[
-          {
-            href: "https://github.com/LasithaPrabodha/account-balance",
-            ariaLabel: "source code",
-            icon: github,
-          },
-        ]}
-      />
+      {
+        personalProjects.map((project) => (
+          <Project {...project} links={project.data.links.map((l: Link) => ({ ...l, icon: icons[l.icon] }))} />
+        ))
+      }
     </div>
 
     <RectPattern width={250} height={250} id="rect-left" />

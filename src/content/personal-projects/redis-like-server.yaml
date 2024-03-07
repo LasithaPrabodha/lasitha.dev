@@ -1,0 +1,9 @@
+title: "Redis-like Server"
+description: "This project implements a simplified version of a Redis-like server in Go, providing basic functionalities similar to Redis"
+technologies:
+  - Go
+links:
+  - href: "https://github.com/LasithaPrabodha/redis-like-server"
+    ariaLabel: "source code"
+    icon: "github"
+  
