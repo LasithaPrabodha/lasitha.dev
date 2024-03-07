@@ -12,7 +12,7 @@ In this blog, we'll dive into understanding this pattern. We'll cover its basics
 
 It's a behavioural design pattern that fosters a <strong>one-to-many relationship</strong> between elements. Essentially, one element, the <strong>Subject</strong>, monitors its own state and keeps a list of dependent elements, the <strong>Observers</strong>. When the Subject's state changes, it notifies all its Observers, keeping them up to date and enabling them to react accordingly.
 
-![Observer Pattern](../../assets/images/blog/observer-pattern.png)
+![Observer Pattern](../../assets/images/blog/2024-02-18/observer-pattern.png)
 <small>UML diagram for Observer Pattern (<a href="https://en.wikipedia.org/wiki/Observer_pattern" target="_blank" rel="noreferrer">Wikipedia</a>)</small>
 
 Picture it as subscribing to a news feed. You don't need to constantly refresh the website; the platform (Subject) automatically delivers updates to you (Observer) whenever there's news. This eliminates the need for constant checking and keeps everyone informed seamlessly.
@@ -168,7 +168,7 @@ Hey Kamal, There is a new article from CNN "politics": Mahinda dead!
 
 ```
 
-![Surprised Dog](../../assets/images/blog/surprised-dog.gif)
+![Surprised Dog](../../assets/images/blog/2024-02-18/surprised-dog.gif)
 
 This is a simplified example. Use libraries like <a href="https://rxjs.dev/guide/overview" target="_blank" rel="noreferrer">`RxJS`</a> for advanced features and real-world scenarios.
 
@@ -185,7 +185,7 @@ The Observer Pattern's versatility shines in various domains, making it an impor
    - <strong>Button Clicks:</strong> When you click a button, it acts as the Subject, notifying event listeners (Observers) about the click event. These listeners could trigger various actions based on their specific interests, like opening a new window or playing a sound.
    - <strong>Keyboard Strokes:</strong> Similar to button clicks, key presses notify registered event listeners (Observers) about the pressed key, enabling keyboard shortcuts and interactive features.
 
-![God typing](../../assets/images/blog/typing.gif)
+![God typing](../../assets/images/blog/2024-02-18/typing.gif)
 
 3. Pub/Sub Systems
 
@@ -198,7 +198,7 @@ The Observer Pattern's versatility shines in various domains, making it an impor
 
 These are just a few examples, and the Observer Pattern has applications in many other areas like data fetching, network monitoring, and collaborative editing. Its power lies in its ability to establish loosely coupled, efficient communication between objects, making it a valuable tool for developers across various domains.
 
-![happy engineers](../../assets/images/blog/happy-engineers.gif)
+![happy engineers](../../assets/images/blog/2024-02-18/happy-engineers.gif)
 
 ## Best Practices
 
