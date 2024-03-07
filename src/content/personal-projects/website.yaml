@@ -1,0 +1,9 @@
+title: "Personal Website"
+description: "My mobile responsive personal website, built using Astro + Tailwind CSS + Netlify"
+technologies:
+  - Astro
+  - TailwindCSS
+links:
+  - href: "https://github.com/LasithaPrabodha/lasitha.dev"
+    ariaLabel: "source code"
+    icon: "github"

@@ -176,7 +176,71 @@ declare module 'astro:content' {
 	};
 
 	type DataEntryMap = {
-		
+		"personal-projects": {
+"account-balance-viewer": {
+	id: "account-balance-viewer";
+  collection: "personal-projects";
+  data: any
+};
+"car-pool": {
+	id: "car-pool";
+  collection: "personal-projects";
+  data: any
+};
+"dots-connect": {
+	id: "dots-connect";
+  collection: "personal-projects";
+  data: any
+};
+"expense-tracker": {
+	id: "expense-tracker";
+  collection: "personal-projects";
+  data: any
+};
+"jeopardy-api": {
+	id: "jeopardy-api";
+  collection: "personal-projects";
+  data: any
+};
+"jeopardy-game": {
+	id: "jeopardy-game";
+  collection: "personal-projects";
+  data: any
+};
+"kingsburry-toronto": {
+	id: "kingsburry-toronto";
+  collection: "personal-projects";
+  data: any
+};
+"redis-like-server": {
+	id: "redis-like-server";
+  collection: "personal-projects";
+  data: any
+};
+"website": {
+	id: "website";
+  collection: "personal-projects";
+  data: any
+};
+};
+"professional-projects": {
+"cenium": {
+	id: "cenium";
+  collection: "professional-projects";
+  data: InferEntrySchema<"professional-projects">
+};
+"cloud-arena": {
+	id: "cloud-arena";
+  collection: "professional-projects";
+  data: InferEntrySchema<"professional-projects">
+};
+"superoffice": {
+	id: "superoffice";
+  collection: "professional-projects";
+  data: InferEntrySchema<"professional-projects">
+};
+};
+
 	};
 
 	type AnyEntryMap = ContentEntryMap & DataEntryMap;

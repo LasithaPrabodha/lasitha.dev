@@ -1,0 +1,10 @@
+title: "Expense Tracker"
+description: "This simple and intuitive app helps you manage and track your expenses efficiently"
+technologies:
+  - "React Native"
+  - TypeScript
+links:
+  - href: "https://github.com/LasithaPrabodha/expense-tracking-app-rn"
+    ariaLabel: "source code"
+    icon: "github"
+  

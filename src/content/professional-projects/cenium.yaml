@@ -1,0 +1,12 @@
+id: 2
+title: "Cenium PMS"
+description: "Streamlines complex group bookings with a versatile and dynamic PMS solution"
+technologies:
+  - Angular
+  - .NET
+  - C#
+links:
+  - href: "https://www.cenium.com/pms"
+    ariaLabel: "website"
+    icon: "book"
+  

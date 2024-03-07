@@ -1,0 +1,10 @@
+title: "CarPool App Backend"
+description: "A project written .NET to learn clean architecture with DDD and CQRS"
+technologies:
+  - .NET
+  - C#
+links:
+  - href: "https://github.com/LasithaPrabodha/CleanArchitecture"
+    ariaLabel: "source code"
+    icon: "github"
+  

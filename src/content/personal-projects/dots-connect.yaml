@@ -1,0 +1,14 @@
+title: "Dots Connect"
+description: "It's a small, dynamic, two-player game where you compete to connect dots of the same color on a grid"
+technologies:
+  - JavaScript
+  - HTML
+  - CSS
+links:
+  - href: "https://lasithaprabodha.github.io/dot-connect"
+    ariaLabel: "live preview"
+    icon: "eye"
+  - href: "https://github.com/LasithaPrabodha/dot-connect"
+    ariaLabel: "source code"
+    icon: "github"
+  

@@ -1,0 +1,12 @@
+id: 3
+title: "Club Arena"
+description: "Simplifies sports facility management, enabling easy bookings without manual processing"
+technologies:
+  - Angular
+  - .NET
+  - C#
+links:
+  - href: "https://arena.club.no"
+    ariaLabel: "website"
+    icon: "eye"
+  

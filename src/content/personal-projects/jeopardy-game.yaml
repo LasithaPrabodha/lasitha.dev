@@ -1,0 +1,13 @@
+title: "Jeopardy Game"
+description: "A simple implementation of the classic TV game show 'Jeopardy'. The project is built using vanilla JavaScript"
+technologies:
+  - JavaScript
+  - HTML
+  - CSS
+links:
+  - href: "https://github.com/LasithaPrabodha/jeopardy-app"
+    ariaLabel: "source code"
+    icon: "github"
+  - href: "https://lasithaprabodha.github.io/jeopardy-app"
+    ariaLabel: "live preview"
+    icon: "eye"
