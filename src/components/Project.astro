@@ -64,7 +64,15 @@ const { title, description, technologies } = data;
 
   projects.forEach((link) => {
     link.addEventListener("click", (event) => {
-      const project = (event.target as Element).closest(".project") as HTMLElement;
+      const target = event.target as HTMLElement;
+      if (
+        target.classList.contains("link--icon") ||
+        (target.parentNode as HTMLElement).classList.contains("link--icon")
+      ) {
+        return;
+      }
+
+      const project = target.closest(".project") as HTMLElement;
       const link = project?.dataset.link;
       window.open(link, "_blank")?.focus();
     });
