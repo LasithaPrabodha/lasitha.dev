@@ -14,7 +14,7 @@ const { title, description, technologies } = data;
     <ul class="project__stack">
       {technologies.map((t: string) => <li class="project__stack-item">{t}</li>)}
     </ul>
-    <div class="project-links flex items-center gap-2 gap-y-4">
+    <div class="project-links flex items-center">
       {links.map((l: Link) => <IconLink href={l.href} icon={l.icon} ariaLabel={l.ariaLabel} />)}
     </div>
   </div>
