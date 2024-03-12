@@ -4,7 +4,7 @@ const height = document.body.scrollHeight;
 const maxStarRadius = 1.5;
 const minStarOpacity = 0.1;
 const maxStarOpacity = 0.7;
-const stars = createStars(width, height, 50);
+const stars = createStars(width, height, 60);
 const moon = {
   color: "#fea",
   x: width - width / 3.3,
