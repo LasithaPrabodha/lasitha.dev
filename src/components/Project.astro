@@ -1,35 +1,28 @@
 ---
 import type { Link } from "../interfaces/Link";
+import IconLink from "./IconLink.astro";
 
 const { data, links } = Astro.props;
 const { title, description, technologies } = data;
 ---
 
-<div class="project">
+<div class="project" data-link={links[0].href}>
   <h3>{title}</h3>
   <p class="project__description">{description}</p>
-  <ul class="project__stack">
-    {technologies.map((t: string) => <li class="project__stack-item">{t}</li>)}
-  </ul>
-  <div class="links">
-    {
-      links.map((l: Link) => (
-        <a href={l.href} target="_blank" rel="noreferrer" aria-label={l.ariaLabel} class="link link--icon">
-          <Fragment set:html={l.icon} />
-        </a>
-      ))
-    }
+
+  <div class="flex justify-between">
+    <ul class="project__stack">
+      {technologies.map((t: string) => <li class="project__stack-item">{t}</li>)}
+    </ul>
+    <div class="project-links flex items-center gap-2 gap-y-4">
+      {links.map((l: Link) => <IconLink href={l.href} icon={l.icon} ariaLabel={l.ariaLabel} />)}
+    </div>
   </div>
 </div>
-
 <style>
   .project {
-    padding: 2em;
+    cursor: pointer;
     margin: 0 auto;
-    text-align: center;
-    box-shadow: var(--shadow);
-    transition: transform 0.2s linear;
-    border-radius: 8px;
     display: flex;
     flex-direction: column;
     background-color: var(--clr-bg);
@@ -37,31 +30,45 @@ const { title, description, technologies } = data;
 
   .project__description {
     margin-top: 1em;
+    margin-bottom: 1em;
     flex: 1;
   }
 
   .project__stack {
+    margin-bottom: 0.5em;
     display: flex;
     flex-wrap: wrap;
-    justify-content: center;
-    margin: 1.2em 0;
   }
 
   .project__stack-item {
-    margin: 0.5em;
+    margin-right: 0.5em;
+    margin-top: 0.5em;
     font-weight: 500;
-    font-size: 0.8rem;
-    color: var(--clr-fg-alt);
+    font-size: 0.6rem;
+    color: var(--clr-quote);
+    border: 1px solid;
+    padding: 0 0.5em;
+    border-radius: 5px;
   }
 
-  .link--icon {
-    margin-left: 0.5em;
+  a {
+    margin-right: 0.5em;
   }
-
-  .links {
-    display: flex;
-    justify-content: center;
-    align-items: flex-end;
-    gap: 0.5em;
+  :global(.project-links svg) {
+    fill: var(--clr-quote);
+    font-size: 1.2rem;
+    width: 16px;
+    height: 16px;
   }
 </style>
+<script>
+  const projects = document.querySelectorAll(".project");
+
+  projects.forEach((link) => {
+    link.addEventListener("click", (event) => {
+      const project = (event.target as Element).closest(".project") as HTMLElement;
+      const link = project?.dataset.link;
+      window.open(link, "_blank")?.focus();
+    });
+  });
+</script>

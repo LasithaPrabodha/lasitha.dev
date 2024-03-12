@@ -3,38 +3,17 @@ import { getCollection } from "astro:content";
 
 import { SITE_TITLE, SITE_DESCRIPTION } from "consts";
 import Page from "@layouts/Page.astro";
-import FormattedDate from "@components/FormattedDate.astro";
 import RectPattern from "@components/RectPattern.astro";
+import BlogPost from "@components/BlogPost.astro";
 
-const posts = (await getCollection("blog")).sort(
-  (a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf(),
-);
+const posts = (await getCollection("blog")).sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
 ---
 
-<Page
-  title={"Blog - " + SITE_TITLE}
-  description={SITE_DESCRIPTION}
-  addNight={true}
->
-  <section
-    id="blog"
-    class="flex flex-1 flex-col p-6 w-full m-auto box-border mt-6 mb-20 max-w-[900px]"
-  >
+<Page title={"Blog - " + SITE_TITLE} description={SITE_DESCRIPTION} addNight={true}>
+  <section id="blog" class="flex flex-1 flex-col p-6 w-full m-auto box-border mt-6 mb-20 max-w-[900px]">
     <h2 class="section__title font-bold">Let's Learn Together!</h2>
-    <div class="pt-10 grid gap-16 lg:grid-cols-2 lg:gap-x-8 lg:gap-y-12">
-      {
-        posts.map((post) => (
-          <a class="" href={`/blog/${post.slug}/`}>
-            <div class="mb-4">
-              <FormattedDate date={post.data.pubDate} />
-              <h4 class="mt-2">{post.data.title}</h4>
-            </div>
-            <p>{post.data.description}</p>
-
-            <p class="btn-read-story">Read Full Story</p>
-          </a>
-        ))
-      }
+    <div class="pt-10 grid gap-8 lg:grid-cols-2 lg:gap-x-8 lg:gap-y-12">
+      {posts.map((post) => <BlogPost post={post} />)}
     </div>
 
     <RectPattern width={250} height={250} id="rect-left" />
@@ -43,9 +22,6 @@ const posts = (await getCollection("blog")).sort(
 </Page>
 
 <style>
-  .btn-read-story {
-    color: var(--clr-grd-one);
-  }
   :global(#blog > #rect-right) {
     position: absolute;
     right: 0;

@@ -1,4 +1,6 @@
 ---
+import IconLink from "./IconLink.astro";
+
 const { default: instagram } = await import(`/src/assets/icons/instagram.svg?raw`);
 const { default: facebook } = await import(`/src/assets/icons/facebook.svg?raw`);
 const { default: linkedin } = await import(`/src/assets/icons/linkedin.svg?raw`);
@@ -6,43 +8,11 @@ const { default: github } = await import(`/src/assets/icons/github.svg?raw`);
 ---
 
 <div class="max-sm:mt-8 center">
-  <a
-    href="https://www.instagram.com/lu6_fer/"
-    target="_blank"
-    rel="noreferrer"
-    aria-label="insta"
-    class="link link--icon"
-  >
-    <Fragment set:html={instagram} />
-  </a>
-  <a href="https://www.facebook.com/lmlxlml/" target="_blank" rel="noreferrer" aria-label="fb" class="link link--icon">
-    <Fragment set:html={facebook} />
-  </a>
+  <IconLink href="https://www.instagram.com/lu6_fer" ariaLabel="insta" icon={instagram} />
 
-  <a
-    href="https://linkedin.com/in/lasithapw"
-    target="_blank"
-    rel="noreferrer"
-    aria-label="linkedin"
-    class="link link--icon"
-  >
-    <Fragment set:html={linkedin} />
-  </a>
-  <a
-    href="https://github.com/LasithaPrabodha"
-    target="_blank"
-    rel="noreferrer"
-    aria-label="github"
-    class="link link--icon"
-  >
-    <Fragment set:html={github} />
-  </a>
+  <IconLink href="https://www.facebook.com/lmlxlml" ariaLabel="fb" icon={facebook} />
+
+  <IconLink href="https://linkedin.com/in/lasithapw" ariaLabel="linkedin" icon={linkedin} />
+
+  <IconLink href="https://github.com/LasithaPrabodha" ariaLabel="github" icon={github} />
 </div>
-<style>
-  .link--icon {
-    margin-right: 0.5em;
-    margin-left: 0.5em;
-    display: flex;
-    padding: 8px 0;
-  }
-</style>

@@ -60,10 +60,10 @@
 }
 .link.active svg,
 .link:hover svg {
-  fill: var(--clr-primary);
+  fill: var(--clr-grd-one);
 }
 
-.link::before {
+.link:not(.link--icon)::before {
   content: "";
   display: inline;
   width: 0%;
@@ -75,16 +75,10 @@
   transition: width 0.2s ease-in;
 }
 
-.link.active::before,
-.link:hover::before,
-.link:focus::before {
+.link:not(.link--icon).active::before,
+.link:not(.link--icon):hover::before,
+.link:not(.link--icon):focus::before {
   width: 100%;
-}
-.link--icon svg {
-  fill: var(--clr-fg);
-  font-size: 1.2rem;
-  width: 18px;
-  height: 18px;
 }
 
 .link--nav {
@@ -101,11 +95,7 @@
   -webkit-text-fill-color: transparent;
   background-clip: text;
   -webkit-background-clip: text;
-  background-image: linear-gradient(
-    45deg,
-    var(--clr-grd-one),
-    var(--clr-grd-two)
-  );
+  background-image: linear-gradient(45deg, var(--clr-grd-one), var(--clr-grd-two));
 }
 
 .d-none {

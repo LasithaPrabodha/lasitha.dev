@@ -4,9 +4,9 @@ technologies:
   - .NET
   - C#
 links:
-  - href: "https://github.com/LasithaPrabodha/hotel-website"
-    ariaLabel: "source code"
-    icon: "github"
   - href: "https://lasithaprabodha.github.io/hotel-website"
     ariaLabel: "live preview"
     icon: "eye"
+  - href: "https://github.com/LasithaPrabodha/hotel-website"
+    ariaLabel: "source code"
+    icon: "github"
