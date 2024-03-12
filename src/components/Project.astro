@@ -14,7 +14,7 @@ const { title, description, technologies } = data;
     <ul class="project__stack">
       {technologies.map((t: string) => <li class="project__stack-item">{t}</li>)}
     </ul>
-    <div class="project-links flex items-center gap-2 gap-y-4">
+    <div class="project-links flex items-center">
       {links.map((l: Link) => <IconLink href={l.href} icon={l.icon} ariaLabel={l.ariaLabel} />)}
     </div>
   </div>
@@ -55,8 +55,6 @@ const { title, description, technologies } = data;
     margin-right: 0.5em;
   }
   :global(.project-links svg) {
-    fill: var(--clr-quote);
-    font-size: 1.2rem;
     width: 16px;
     height: 16px;
   }
