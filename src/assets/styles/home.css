@@ -10,7 +10,7 @@
   display: none;
 }
 
-.about__name {
+.about-name {
   font-family: "Poppins", sans-serif;
   -webkit-text-fill-color: transparent;
   background-clip: text;

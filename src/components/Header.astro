@@ -10,7 +10,7 @@ const { default: sun } = await import(`/src/assets/icons/sun.svg?raw`);
 
 <header class="p-6 flex justify-center items-center sm:h-24 bg-transparent max-sm:justify-end">
   <nav class="nav center">
-    <ul class="nav__list center">
+    <ul class="nav-list center">
       <HeaderLink href="/">Home</HeaderLink>
       <HeaderLink href="/about">About</HeaderLink>
       <HeaderLink href="/projects">Projects</HeaderLink>
@@ -23,7 +23,7 @@ const { default: sun } = await import(`/src/assets/icons/sun.svg?raw`);
       <Fragment set:html={sun} />
     </button>
 
-    <button type="button" aria-label="toggle navigation" class="btn btn--icon nav__hamburger">
+    <button type="button" aria-label="toggle navigation" class="btn btn--icon nav-hamburger">
       <Fragment set:html={menu} />
       <Fragment set:html={cross} />
     </button>
@@ -33,8 +33,8 @@ const { default: sun } = await import(`/src/assets/icons/sun.svg?raw`);
 <script>
   const body = document.body;
   const btnTheme = document.querySelector("#theme-toggle");
-  const btnHamburger = document.querySelector(".nav__hamburger");
-  const navUl = document.querySelector(".nav__list");
+  const btnHamburger = document.querySelector(".nav-hamburger");
+  const navUl = document.querySelector(".nav-list");
 
   type Themes = "light" | "dark";
 

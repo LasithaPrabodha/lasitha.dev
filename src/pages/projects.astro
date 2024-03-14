@@ -21,9 +21,9 @@ const personalProjects = await getCollection("personal-projects");
     id="projects"
     class="bg-transparent flex flex-col justify-center flex-1 w-full m-auto box-border p-6 pt-12 pb-6 max-w-[900px] max-sm:pb-8"
   >
-    <h2 class="section__title font-bold">Projects</h2>
+    <h2 class="section-title font-bold">Projects</h2>
 
-    <h3 class="mt-8 font-semibold text-center uppercase">Professional Projects</h3>
+    <h3 class="mt-8 font-semibold text-center uppercase text-[color:var(--clr-fg)]">Professional Projects</h3>
     <div class="py-12 grid gap-12 lg:grid-cols-2 lg:gap-x-8 lg:gap-y-20">
       {
         professionalProjects.map((project) => (
@@ -31,7 +31,7 @@ const personalProjects = await getCollection("personal-projects");
         ))
       }
     </div>
-    <h3 class="mt-16 font-semibold text-center uppercase">Personal Projects</h3>
+    <h3 class="mt-16 font-semibold text-center uppercase text-[color:var(--clr-fg)]">Personal Projects</h3>
     <div class="py-12 grid gap-12 lg:grid-cols-2 lg:gap-x-8 lg:gap-y-20">
       {
         personalProjects.map((project) => (
@@ -64,26 +64,11 @@ const personalProjects = await getCollection("personal-projects");
       bottom: calc(100vh / 2);
       z-index: -1;
     }
-    :global(#projects:has(.project:hover) .project){
+    :global(#projects:has(.project:hover) .project) {
       opacity: 0.6;
     }
-    .projects__grid {
-      max-width: 1100px;
-      margin: 0 auto;
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(18em, 1fr));
-      grid-gap: 2em;
-      width: 100%;
-    }
 
-    h3 {
-      color: var(--clr-fg);
-    }
     @media (max-width: 640px) {
-      #projects {
-        padding-bottom: 2em;
-      }
-
       :global(#projects > #rect-left) {
         top: 300px;
       }
