@@ -23,4 +23,10 @@ const professionalProjects = defineCollection({
   }),
 });
 
-export const collections = { blog, "professional-projects": professionalProjects };
+const techSkills = defineCollection({
+  type: "data",
+  // Type-check frontmatter using a schema
+  schema: z.array(z.object({ name: z.string() })),
+});
+
+export const collections = { blog, "professional-projects": professionalProjects, "tech-skills": techSkills };

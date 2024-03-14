@@ -247,6 +247,15 @@ declare module 'astro:content' {
   data: InferEntrySchema<"professional-projects">
 };
 };
+"skills": {
+"tech-skills": {
+	id: "tech-skills";
+  collection: "skills";
+  data: any
+};
+};
+"tech-skills": {
+};
 
 	};
 

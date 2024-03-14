@@ -1,0 +1,20 @@
+[
+  { "name": "Typescript" },
+  { "name": "Angular" },
+  { "name": "React" },
+  { "name": "Vue.js" },
+  { "name": "React Native" },
+  { "name": "Redux" },
+  { "name": "Kotlin" },
+  { "name": "Swift" },
+  { "name": "ASP.NET Core" },
+  { "name": "Node.js" },
+  { "name": "Azure" },
+  { "name": "SQL" },
+  { "name": "Firebase" },
+  { "name": "Docker" },
+  { "name": "SASS" },
+  { "name": "Bootstrap" },
+  { "name": "TailwindCSS" },
+  { "name": "Jest" }
+]

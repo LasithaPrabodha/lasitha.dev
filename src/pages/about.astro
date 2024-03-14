@@ -2,9 +2,13 @@
 import Page from "@layouts/Page.astro";
 import { SITE_TITLE, SITE_DESCRIPTION } from "consts";
 import { Image } from "astro:assets";
+import { getCollection } from "astro:content";
+import type { Skill } from "interfaces/Skill";
 
 import myPhoto from "@assets/images/casual-photo.jpg";
 import RectPattern from "@components/RectPattern.astro";
+
+const { data: techSkills } = (await getCollection("skills"))[0];
 ---
 
 <Page
@@ -32,23 +36,7 @@ import RectPattern from "@components/RectPattern.astro";
           <ul
             class="grid grid-cols-3 grid-flow-col grid-rows-6 max-sm:grid-rows-9 max-sm:grid-cols-2 list-disc pl-[18px] mb-4"
           >
-            <li>Typescript</li>
-            <li>Angular</li>
-            <li>React</li>
-            <li>Vue.js</li>
-            <li>React Native</li>
-            <li>Redux</li>
-            <li>Kotlin</li>
-            <li>ASP.NET Core</li>
-            <li>Node.js</li>
-            <li>Azure</li>
-            <li>SQL</li>
-            <li>Firebase</li>
-            <li>Docker</li>
-            <li>SASS</li>
-            <li>Bootstrap</li>
-            <li>TailwindCSS</li>
-            <li>Jest</li>
+            {techSkills.map((s: Skill) => <li>{s.name}</li>)}
           </ul>
         </p>
         <p>I'm always learning new things as the tech world keeps changing, which keeps me excited!</p>
