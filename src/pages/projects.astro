@@ -23,16 +23,16 @@ const personalProjects = await getCollection("personal-projects");
   >
     <h2 class="section__title font-bold">Projects</h2>
 
-    <h2 class="mt-8 font-semibold text-center">Professional Projects</h2>
-    <div class="py-16 grid gap-12 lg:grid-cols-2 lg:gap-x-8 lg:gap-y-20">
+    <h3 class="mt-8 font-semibold text-center uppercase">Professional Projects</h3>
+    <div class="py-12 grid gap-12 lg:grid-cols-2 lg:gap-x-8 lg:gap-y-20">
       {
         professionalProjects.map((project) => (
           <Project {...project} links={project.data.links.map((l: Link) => ({ ...l, icon: icons[l.icon] }))} />
         ))
       }
     </div>
-    <h2 class="mt-16 font-semibold text-center">Personal Projects</h2>
-    <div class="py-16 grid gap-12 lg:grid-cols-2 lg:gap-x-8 lg:gap-y-20">
+    <h3 class="mt-16 font-semibold text-center uppercase">Personal Projects</h3>
+    <div class="py-12 grid gap-12 lg:grid-cols-2 lg:gap-x-8 lg:gap-y-20">
       {
         personalProjects.map((project) => (
           <Project {...project} links={project.data.links.map((l: Link) => ({ ...l, icon: icons[l.icon] }))} />
