@@ -6,7 +6,7 @@ const { data, links } = Astro.props;
 const { title, description, technologies } = data;
 ---
 
-<div class="project" data-link={links[0].href}>
+<div class="project w-full" data-link={links[0].href}>
   <h3>{title}</h3>
   <p class="project__description">{description}</p>
 
@@ -26,6 +26,20 @@ const { title, description, technologies } = data;
     display: flex;
     flex-direction: column;
     background-color: var(--clr-bg);
+    transition: opacity ease-in 0.2s;
+  }
+  .project-links {
+    opacity: 0;
+    transition: var(--transition);
+    transform: translate3d(0, -20%, 0);
+  }
+
+  .project:hover {
+    opacity: 1 !important;
+  }
+  .project:hover .project-links {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
   }
 
   .project__description {
@@ -44,11 +58,12 @@ const { title, description, technologies } = data;
     margin-right: 0.5em;
     margin-top: 0.5em;
     font-weight: 500;
-    font-size: 0.6rem;
-    color: var(--clr-quote);
-    border: 1px solid;
-    padding: 0 0.5em;
-    border-radius: 5px;
+    font-size: 0.8rem;
+    color: var(--clr-grd-one);
+    padding: 0 1em;
+    border-radius: 50px;
+    background-color: var(--clr-chip-bg);
+    line-height: 1.8em;
   }
 
   a {

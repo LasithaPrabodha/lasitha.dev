@@ -6,6 +6,7 @@
   --clr-fg: #555;
   --clr-fg-alt: #444;
   --clr-primary: #1b3487;
+  --clr-chip-bg: #ff2d2310;
   --clr-grd-one: #ba2d23;
   --clr-grd-two: #1b3487;
   --shadow: rgba(100, 100, 111, 0.2) 0px 5px 5px 0px, rgba(100, 100, 111, 0.2) 0px 0px 0px 0.5px;
@@ -21,6 +22,7 @@
   --clr-fg: #bdbddd;
   --clr-fg-alt: #cdcdff;
   --clr-primary: #90a0d9;
+  --clr-chip-bg: #90a0d920;
   --clr-grd-one: #90a0d9;
   --clr-grd-two: #90a0d9;
   --shadow: rgba(100, 100, 111, 0.2) 0px 0px 0px 1px;
@@ -48,6 +50,7 @@ body {
   line-height: 1.5;
   color: var(--clr-fg);
   background-color: var(--clr-bg);
+  --transition: all 0.25s cubic-bezier(0.645, 0.045, 0.355, 1);
 }
 
 ::-moz-selection {
