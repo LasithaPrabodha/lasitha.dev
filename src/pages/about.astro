@@ -27,13 +27,33 @@ import RectPattern from "@components/RectPattern.astro";
           customer management.
         </p>
         <p>
-          Some of my go-to languages and tools for web & mobile development: Typescript, Angular, React, Vue.js, React
-          Native, Redux, Flutter, Kotlin, Swift, ASP.NET Core, Node.js, Azure, SQL, Firebase, Docker, SASS, Bootstrap,
-          TailwindCSS, Jest.
+          Some of my go-to languages and tools for web & mobile development:
+
+          <ul
+            class="grid grid-cols-3 grid-flow-col grid-rows-6 max-sm:grid-rows-9 max-sm:grid-cols-2 list-disc pl-[18px] mb-4"
+          >
+            <li>Typescript</li>
+            <li>Angular</li>
+            <li>React</li>
+            <li>Vue.js</li>
+            <li>React Native</li>
+            <li>Redux</li>
+            <li>Kotlin</li>
+            <li>ASP.NET Core</li>
+            <li>Node.js</li>
+            <li>Azure</li>
+            <li>SQL</li>
+            <li>Firebase</li>
+            <li>Docker</li>
+            <li>SASS</li>
+            <li>Bootstrap</li>
+            <li>TailwindCSS</li>
+            <li>Jest</li>
+          </ul>
         </p>
         <p>I'm always learning new things as the tech world keeps changing, which keeps me excited!</p>
       </div>
-      <div class="details__photo relative">
+      <div class="details-photo h-min relative">
         <Image src={myPhoto} loading="eager" alt="My portrait photo" width={300} height={300} />
         <RectPattern />
       </div>
@@ -49,30 +69,30 @@ import RectPattern from "@components/RectPattern.astro";
     background-image: linear-gradient(45deg, var(--clr-grd-one), var(--clr-grd-two));
   }
 
-  :global(.details__photo > svg) {
+  :global(.details-photo > svg) {
     position: absolute;
     right: 0;
     top: 0;
     margin-right: -2rem;
-    margin-top: 2rem;
+    margin-top: 4rem;
     z-index: -1;
     transition: var(--transition);
   }
-  .details__photo {
+  .details-photo {
     transition: var(--transition);
   }
 
-  .details__photo:hover {
-    transform: translate(0px, -10px);
+  .details-photo:hover {
+    transform: translate(-5px, -5px);
   }
 
-  .details__photo:hover img {
+  .details-photo:hover img {
     filter: none;
     transition: var(--transition);
   }
 
-  :global(.details__photo:hover > svg) {
-    transform: translate(0px, 30px);
+  :global(.details-photo:hover > svg) {
+    transform: translate(10px, 10px);
   }
 
   img {
@@ -99,6 +119,9 @@ import RectPattern from "@components/RectPattern.astro";
 
     .fixed-height {
       height: unset;
+    }
+    .details-photo:hover {
+      transform: translate(0px, -5px);
     }
   }
 </style>

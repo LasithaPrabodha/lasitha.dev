@@ -8,11 +8,11 @@ const { title, description, technologies } = data;
 
 <div class="project w-full" data-link={links[0].href}>
   <h4 class="title">{title}</h4>
-  <p class="project__description">{description}</p>
+  <p class="project-description">{description}</p>
 
   <div class="flex justify-between">
-    <ul class="project__stack">
-      {technologies.map((t: string) => <li class="project__stack-item">{t}</li>)}
+    <ul class="project-stack">
+      {technologies.map((t: string) => <li class="project-stack-item">{t}</li>)}
     </ul>
     <div class="project-links flex items-center">
       {links.map((l: Link) => <IconLink href={l.href} icon={l.icon} ariaLabel={l.ariaLabel} />)}
@@ -42,19 +42,19 @@ const { title, description, technologies } = data;
     transform: translate3d(0, 0, 0);
   }
 
-  .project__description {
+  .project-description {
     margin-top: 1em;
     margin-bottom: 1em;
     flex: 1;
   }
 
-  .project__stack {
+  .project-stack {
     margin-bottom: 0.5em;
     display: flex;
     flex-wrap: wrap;
   }
 
-  .project__stack-item {
+  .project-stack-item {
     margin-right: 0.5em;
     margin-top: 0.5em;
     font-weight: 500;

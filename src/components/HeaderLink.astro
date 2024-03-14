@@ -11,7 +11,7 @@ const isActive = href === pathname || href === "/" + subpath?.[0];
 console.log(isActive, href, pathname);
 ---
 
-<li class="nav__list-item">
+<li class="nav-list-item">
   <a
     class="link link--nav lowercase"
     href={href}
@@ -23,12 +23,12 @@ console.log(isActive, href, pathname);
 </li>
 
 <style>
-  .nav__list-item {
+  .nav-list-item {
     margin-left: 1.5em;
   }
 
   @media (max-width: 640px) {
-    .nav__list-item {
+    .nav-list-item {
       margin: 0.5em 0;
     }
   }

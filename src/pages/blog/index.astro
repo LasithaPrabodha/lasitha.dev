@@ -11,7 +11,7 @@ const posts = (await getCollection("blog")).sort((a, b) => b.data.pubDate.valueO
 
 <Page title={"Blog - " + SITE_TITLE} description={SITE_DESCRIPTION} addNight={true}>
   <section id="blog" class="flex flex-1 flex-col w-full m-auto box-border p-6 pt-12 pb-20 max-w-[900px]">
-    <h2 class="section__title font-bold">Let's Learn Together!</h2>
+    <h2 class="section-title font-bold">Let's Learn Together!</h2>
     <div class="pt-10 grid gap-8 lg:grid-cols-2 lg:gap-x-8 lg:gap-y-12">
       {posts.map((post) => <BlogPost post={post} />)}
     </div>
