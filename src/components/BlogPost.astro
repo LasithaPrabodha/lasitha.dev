@@ -4,7 +4,7 @@ import FormattedDate from "./FormattedDate.astro";
 const { post } = Astro.props;
 ---
 
-<a class="" href={`/blog/${post.slug}/`}>
+<a class="blog-post" href={`/blog/${post.slug}/`}>
   <div class="mb-4">
     <FormattedDate date={post.data.pubDate} />
     <h4 class="mt-2">{post.data.title}</h4>
@@ -14,6 +14,12 @@ const { post } = Astro.props;
   <p class="btn-read-story">Read Full Story</p>
 </a>
 <style>
+  .blog-post {
+    transition: opacity ease-in 0.2s;
+  }
+  .blog-post:hover {
+    opacity: 1 !important;
+  }
   .btn-read-story {
     color: var(--clr-grd-one);
   }
