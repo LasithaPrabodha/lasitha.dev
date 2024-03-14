@@ -16,9 +16,15 @@ const { post } = Astro.props;
 <style>
   .blog-post {
     transition: opacity ease-in 0.2s;
+    padding: 1em;
+    transition: box-shadow ease-in 0.2s;
+    box-shadow: unset;
+    border-radius: 8px;
   }
   .blog-post:hover {
-    opacity: 1 !important;
+    /* opacity: 1 !important; */
+
+    box-shadow: var(--shadow);
   }
   .btn-read-story {
     color: var(--clr-grd-one);

@@ -23,10 +23,13 @@ const { title, description, technologies } = data;
   .project {
     cursor: pointer;
     margin: 0 auto;
+    padding: 2em 1em;
     display: flex;
     flex-direction: column;
     background-color: var(--clr-bg);
-    transition: opacity ease-in 0.2s;
+    border-radius: 8px;
+    transition: box-shadow ease-in 0.2s;
+    box-shadow: unset;
   }
   .project-links {
     opacity: 0;
@@ -35,7 +38,8 @@ const { title, description, technologies } = data;
   }
 
   .project:hover {
-    opacity: 1 !important;
+    /* opacity: 1 !important; */
+    box-shadow: var(--shadow);
   }
   .project:hover .project-links {
     opacity: 1;

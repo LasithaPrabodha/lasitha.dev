@@ -25,7 +25,7 @@
   --clr-chip-bg: #90a0d920;
   --clr-grd-one: #90a0d9;
   --clr-grd-two: #90a0d9;
-  --shadow: rgba(100, 100, 111, 0.2) 0px 0px 0px 1px;
+  --shadow: rgba(255, 255, 255, 0.2) 0px 0px 0px 1px;
   --display-sun: block;
   --display-moon: none;
 }
