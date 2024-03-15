@@ -35,7 +35,7 @@ const posts = (await getCollection("blog")).sort((a, b) => b.data.pubDate.valueO
     z-index: -1;
   }
   :global(#blog:has(.blog-post:hover) .blog-post) {
-    /* opacity: 0.7; */
+    opacity: 0.7;
   }
 
   @media (max-width: 1024px) {

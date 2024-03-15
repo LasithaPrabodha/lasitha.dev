@@ -28,8 +28,11 @@ const { title, description, technologies } = data;
     flex-direction: column;
     background-color: var(--clr-bg);
     border-radius: 8px;
-    transition: box-shadow ease-in 0.2s;
+    transition:
+      border ease-in 0.2s,
+      opacity ease-in 0.2s;
     box-shadow: unset;
+    border: 0.5px solid var(--clr-bg);
   }
   .project-links {
     opacity: 0;
@@ -38,8 +41,8 @@ const { title, description, technologies } = data;
   }
 
   .project:hover {
-    /* opacity: 1 !important; */
-    box-shadow: var(--shadow);
+    border: 0.5px solid var(--clr-bg-code);
+    opacity: 1 !important;
   }
   .project:hover .project-links {
     opacity: 1;

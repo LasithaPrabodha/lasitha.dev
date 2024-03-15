@@ -36,15 +36,90 @@
   right: 0;
 }
 
-.btn--plain {
-  text-transform: initial;
-  background-color: var(--clr-bg-alt);
-  box-shadow: rgba(0, 0, 0, 0.15) 0px 3px 3px 0px;
-  border: 0;
+.button-container {
+  position: relative;
+  height: 50px;
+  overflow: hidden;
+  border: 2px solid var(--clr-fg-alt);
+  font-weight: 300;
+  transition: 0.5s;
+  letter-spacing: 1px;
+}
+.button-container button {
+  width: 101%;
+  height: 100%;
+  font-weight: 500;
+  font-size: 14px;
+  letter-spacing: 1px;
+  background: var(--clr-fg-alt);
+  -webkit-mask: url("../../../public/static/urban-sprite.png");
+  mask: url("../../../public/static/urban-sprite.png");
+  -webkit-mask-size: 3000% 100%;
+  mask-size: 3000% 100%;
+  border: none;
+  color: var(--clr-bg);
+  cursor: pointer;
+  -webkit-animation: ani2 0.7s steps(29) forwards;
+  animation: ani2 0.7s steps(29) forwards;
+}
+.button-container button:hover {
+  -webkit-animation: ani 0.7s steps(29) forwards;
+  animation: ani 0.7s steps(29) forwards;
 }
 
-.btn--plain:hover {
-  transform: translateY(-4px);
+.mas {
+  position: absolute;
+  color: var(--clr-fg-alt);
+  text-align: center;
+  width: 101%;
+  font-weight: 500;
+  font-size: 14px;
+  overflow: hidden;
+  top: 0;
+  height: min-content;
+  bottom: 0;
+  margin: auto 0;
+}
+
+@-webkit-keyframes ani {
+  from {
+    -webkit-mask-position: 100% 0;
+    mask-position: 100% 0;
+  }
+  to {
+    -webkit-mask-position: 0 0;
+    mask-position: 0 0;
+  }
+}
+@keyframes ani {
+  from {
+    -webkit-mask-position: 100% 0;
+    mask-position: 100% 0;
+  }
+  to {
+    -webkit-mask-position: 0% 0;
+    mask-position: 0% 0;
+  }
+}
+@-webkit-keyframes ani2 {
+  from {
+    -webkit-mask-position: 0% 0;
+    mask-position: 0% 0;
+  }
+  to {
+    -webkit-mask-position: 100% 0;
+    mask-position: 100% 0;
+  }
+}
+@keyframes ani2 {
+  from {
+    -webkit-mask-position: 0% 0;
+    mask-position: 0% 0;
+  }
+  to {
+    -webkit-mask-position: 100% 0;
+    mask-position: 100% 0;
+  }
 }
 
 .link {
