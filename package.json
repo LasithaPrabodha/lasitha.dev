@@ -5,8 +5,8 @@
   "scripts": {
     "dev": "astro dev",
     "start": "astro dev",
-    "build": "astro check && astro build",
-    "build:node": "npx astro build ./ --node",
+    "build": "astro check && astro build --remote",
+    "build:node": "npx astro build --remote ./ --node",
     "preview": "npm run build:node && astro preview --node",
     "astro": "astro"
   },
