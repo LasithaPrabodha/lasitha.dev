@@ -1,10 +1,12 @@
 import { defineConfig, sharpImageService } from "astro/config";
 import mdx from "@astrojs/mdx";
-import netlify from "@astrojs/netlify/functions";
+import netlify from "@astrojs/netlify";
 import tailwind from "@astrojs/tailwind";
 import partytown from "@astrojs/partytown";
 import expressiveCode from "astro-expressive-code";
 import { astroImageTools } from "astro-imagetools";
+
+import db from "@astrojs/db";
 
 // https://astro.build/config
 export default defineConfig({
@@ -25,11 +27,12 @@ export default defineConfig({
         forward: ["dataLayer.push"],
       },
     }),
+    db(),
   ],
   vite: {
     optimizeDeps: {
       exclude: ["@resvg/resvg-js"],
     },
   },
-  adapter: netlify()
+  adapter: netlify(),
 });

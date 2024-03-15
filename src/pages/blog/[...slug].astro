@@ -2,16 +2,37 @@
 import { getCollection } from "astro:content";
 import type { CollectionEntry } from "astro:content";
 import BlogPost from "@layouts/BlogPost.astro";
+import { db, eq, sql, ViewCount } from "astro:db";
+const isProd = import.meta.env.PROD;
 
 const posts = await getCollection("blog");
 type Props = CollectionEntry<"blog">;
 
 const { slug } = Astro.params;
+
+const date = new Date();
+date.toLocaleDateString("en-CA", { timeZone: "America/New_York" });
+
+if (isProd) {
+  await db
+    .insert(ViewCount)
+    .values({ slug: String(slug), count: 1, lastViewed: date })
+    .onConflictDoUpdate({
+      target: ViewCount.slug,
+      set: { count: sql`${ViewCount.count} + 1`, lastViewed: date },
+    });
+}
+
+const [viewCount] = await db
+  .select()
+  .from(ViewCount)
+  .where(eq(ViewCount.slug, String(slug)));
+
 const post = posts.find((page) => page.slug === slug);
 if (!post) return Astro.redirect("/404");
 const { Content } = await post.render();
 ---
 
-<BlogPost url={post.slug} {...post.data}>
+<BlogPost url={post.slug} viewCount={viewCount.count} {...post.data}>
   <Content />
 </BlogPost>
