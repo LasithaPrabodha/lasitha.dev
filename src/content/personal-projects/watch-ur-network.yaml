@@ -1,0 +1,20 @@
+id: 4
+title: "Watch Your Network"
+description: "Example web app which keeps tracks of your friends network"
+technologies:
+  - Angular
+  - NgRx
+  - Angular Material
+  - NgxCharts
+  - D3
+  - Nx
+  - Storybook
+  - Cypress
+  - Jest
+links:
+  - href: "https://lasithaprabodha.github.io/watch-ur-network"
+    ariaLabel: "live preview"
+    icon: "eye"
+  - href: "https://github.com/LasithaPrabodha/watch-ur-network"
+    ariaLabel: "source code"
+    icon: "github"
