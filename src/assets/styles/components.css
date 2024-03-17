@@ -52,8 +52,8 @@
   font-size: 14px;
   letter-spacing: 1px;
   background: var(--clr-fg-alt);
-  -webkit-mask: url("../../../public/static/urban-sprite.png");
-  mask: url("../../../public/static/urban-sprite.png");
+  -webkit-mask: url("/static/urban-sprite.png");
+  mask: url("/static/urban-sprite.png");
   -webkit-mask-size: 3000% 100%;
   mask-size: 3000% 100%;
   border: none;
