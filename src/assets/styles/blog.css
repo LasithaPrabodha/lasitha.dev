@@ -78,3 +78,15 @@ article blockquote p {
   font-style: italic;
   margin-bottom: 1em;
 }
+
+article .expressive-code + p {
+  margin-bottom: 1em;
+}
+
+article p + .expressive-code {
+  margin-bottom: 2em;
+}
+
+article p {
+  font-size: 18px;
+}

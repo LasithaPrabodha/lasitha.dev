@@ -1,0 +1,194 @@
+---
+title: "Angular Signals: A Streamlined Approach to Reactivity"
+description: "Angular Signals, a new feature released with Angular v16 that is set to transform change detection within Angular. Signals serve as an intelligent method for conveying data changes, enabling Angular to precisely identify what requires updating..."
+pubDate: "Mar 17 2024"
+---
+
+import WideImage from "../../components/WideImage.astro";
+
+Angular Signals, a new feature released with Angular v16 that is set to transform change detection within Angular. 
+Signals serve as an intelligent method for conveying data changes, enabling Angular to precisely identify what requires updating
+
+<WideImage>
+  ![Angular hulk introduces Signals](../../assets/images/blog/2024-03-17/hulk-signals.png)
+</WideImage>
+
+## Change Detection
+
+Angular's change detection mechanism, powered by "dirty checking," efficiently updates the UI by detecting data changes within components.
+However, in complex applications, this traditional approach can lead to performance issues due to unnecessary checks throughout the component hierarchy. 
+
+Angular Signals provide a solution by offering reactive building blocks that notify components when data changes occur. 
+This targeted approach enhances performance by minimizing unnecessary processing, resulting in more efficient updates for dynamic user interfaces.
+
+## What are Signals?
+
+Signals in Angular are powerful wrappers around data values with a unique ability to notify interested parties upon any changes to the encapsulated data. 
+This notification mechanism minimizes unnecessary re-renders and enables precise reaction to updates across components. 
+
+Signals can store any data type, from simple primitives to complex objects, empowering them to manage diverse application states. 
+Accessed solely through getter functions, Signals allow Angular to build a dependency map, facilitating targeted updates to only affected components. 
+
+## Simplicity at its Core
+
+
+Signals provide a clear API for creating reactive data streams. 
+Unlike the complexities of RxJS operators, Signals offer a more intuitive way to manage data changes. 
+This makes them ideal for developers of all experience levels.
+
+```ts
+import {  signal, computed, effect } from '@angular/core';
+
+export class SignalExample {
+  // Init
+  count = signal(1);
+
+  // Get (Same in Template || Typescript)
+  getCount = () => this.count();
+
+  // Setters
+  reset = () => this.count.set(1);
+  increment = () => this.count.update((c) => c + 1);
+
+  // Computed
+  doubled = computed(() => this.count() * 2);
+
+  // Effects
+  logCount = effect(() => console.log(this.doubled()));
+}
+```
+
+## Signals vs RxJS: Complementary, Not Competitive
+
+While Signals share similarities with RxJS Observables, they serve distinct purposes. 
+RxJS offers a robust toolkit for complex asynchronous operations. 
+Signals, on the other hand, excel in simplifying UI updates and component interactions within Angular's framework. 
+They work seamlessly together, allowing you to choose the right tool for the job.
+
+**Signals**
+
+```ts
+export class SignalCount {
+  count = signal(1);
+  increment_count() { this.count.update(c => c + 1) }
+  log_count = effect(() => console.log(this.count()))
+}
+```
+
+RxJS
+
+```ts
+export class RxjsCount {
+  count = BehaviorSubject(1);
+  count$ = count.pipe(
+    scan((acc, curr) => acc + curr),
+    tap((count) => console.log(count)),
+    takeUntilDestroyed()
+  )
+  increment_count() { this.count.next(1) }
+  count$.subscribe();
+}
+```
+
+> Let's break it down
+
+## Initialization / Get
+
+Initializing a Signal is straightforward. You use the `signal()` function to create a Signal object that holds your data. 
+Retrieving the current value is done through a getter function, which allows Angular to track how and where the Signal is used.
+
+```ts
+const name = signal('John Doe');
+
+console.log(name()); // Outputs: "John Doe"
+```
+
+## Setters
+
+Signals provide controlled ways to update their values. 
+
+
+You can use the `set()` method to replace the data within the Signal. 
+```ts
+const nameSignal = signal('John Doe');
+
+console.log(nameSignal()); // Outputs: "John Doe"
+
+nameSignal.set('Jane Doe');
+
+console.log(nameSignal()); // Outputs: "Jane Doe" (after update)
+```
+
+
+`update()` method applies a function to the current value of a Signal and sets the result as the new value.
+```ts
+const countSignal = signal(0);
+
+console.log(countSignal()); // Outputs: 0
+
+countSignal.update(value => value + 1);
+
+console.log(countSignal()); // Outputs: 1
+```
+
+## Computed
+
+Signals can be chained together to create derived data. 
+You define a computed Signal that depends on one or more existing Signals. 
+Whenever the source Signals change, the computed Signal automatically recalculates its value, keeping your UI in sync.
+
+```ts
+const firstName = signal('John');
+const lastName = signal('Doe');
+
+const fullName = computed(() => `${firstName()} ${lastName()}`);
+
+console.log(fullName()); // Outputs: "John Doe"
+
+firstName.set('Jane');
+
+console.log(fullName()); // Outputs: "Jane Doe" (after update)
+```
+
+## Effect
+
+While Signals primarily focus on data flow, you can leverage them to trigger side effects. 
+Define an effect function that takes a Signal as input and performs actions like making API calls or interacting with external services. 
+This helps maintain a clean separation between data and its side effects.
+
+
+```ts
+const searchTerm = signal('');
+
+loadList = effect(() => { 
+  const term = searchTerm()
+  console.log(`Search term changed to: ${term}`);
+});
+
+search(term: string){
+  searchTerm.set('new search'); // Triggers the effect function  
+}
+```
+
+## Untracked
+
+For specific scenarios where change detection isn't required, Signals offer the `untracked()` method. 
+This allows you to create Signals that exist outside Angular's change detection cycle, improving performance for data that doesn't directly affect the UI.
+
+```ts
+effect(() => {
+  const user = currentUser();
+  untracked(() => {
+    // If the `loggingService` reads signals, they won't be counted as
+    // dependencies of this effect.
+    this.loggingService.log(`User set to ${user}`);
+  });
+});
+```
+
+## Conclusion
+
+Angular Signals empower developers with a streamlined approach to reactive programming. 
+Their simplicity, clear separation from RxJS, and efficient change detection make them a valuable addition to the Angular toolbox. 
+With Signals, you can build more responsive and performant Angular applications with greater ease.
+

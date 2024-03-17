@@ -4,13 +4,14 @@ import BaseHead from "@components/BaseHead.astro";
 import Header from "@components/Header.astro";
 import Footer from "@components/Footer.astro";
 import { getCollection } from "astro:content";
+import { getViewCount } from "utils/viewCount";
 
 import "@assets/styles/blog.css";
 
 const theme = Astro.cookies.get("theme")?.value ?? "use-system";
 const ecTheme = theme === "dark" ? "one-dark-pro" : "github-light";
 
-const { title, description, pubDate, updatedDate, url, viewCount, ...props } = Astro.props;
+const { title, description, pubDate, updatedDate, url, ...props } = Astro.props;
 const { default: back } = await import(`/src/assets/icons/angle-left.svg?raw`);
 const { default: up } = await import(`/src/assets/icons/angles-up.svg?raw`);
 
@@ -23,6 +24,11 @@ const ogImage = {
   src: `/image/${url}.png`,
   alt: title,
 };
+
+const [viewCount] = await getViewCount(url);
+
+let count = 0;
+if (viewCount) count = viewCount.count;
 ---
 
 <!doctype html>
@@ -52,7 +58,7 @@ const ogImage = {
                 )
               }
 
-              <span class="text-sm text-[var(--clr-quote)]">{viewCount} View{viewCount == 1 ? "" : "s"}</span>
+              <span class="text-sm text-[var(--clr-quote)]">{count} View{count == 1 ? "" : "s"}</span>
             </div>
             <h1>{title}</h1>
             <hr />

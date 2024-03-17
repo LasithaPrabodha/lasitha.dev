@@ -136,6 +136,13 @@ declare module 'astro:content' {
 
 	type ContentEntryMap = {
 		"blog": {
+"angular-signals.mdx": {
+	id: "angular-signals.mdx";
+  slug: "angular-signals";
+  body: string;
+  collection: "blog";
+  data: InferEntrySchema<"blog">
+} & { render(): Render[".mdx"] };
 "ci-cd.mdx": {
 	id: "ci-cd.mdx";
   slug: "ci-cd";
