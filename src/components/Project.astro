@@ -73,12 +73,17 @@ const { title, description, technologies } = data;
     line-height: 1.8em;
   }
 
-  a {
-    margin-right: 0.5em;
-  }
   :global(.project-links svg) {
     width: 16px;
     height: 16px;
+  }
+
+  @media (max-width: 640px) {
+    .project {
+      padding-left: 0;
+      padding-right: 0;
+      border: 0.5px solid var(--clr-bg) !important;
+    }
   }
 </style>
 <script>
