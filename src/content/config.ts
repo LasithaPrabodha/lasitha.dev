@@ -11,7 +11,7 @@ const blog = defineCollection({
   }),
 });
 
-const professionalProjects = defineCollection({
+const projects = defineCollection({
   type: "data",
   // Type-check frontmatter using a schema
   schema: z.object({
@@ -29,4 +29,4 @@ const techSkills = defineCollection({
   schema: z.array(z.object({ name: z.string() })),
 });
 
-export const collections = { blog, "professional-projects": professionalProjects, "tech-skills": techSkills };
+export const collections = { blog, projects, "tech-skills": techSkills };

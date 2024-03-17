@@ -13,7 +13,7 @@ const { default: github } = await import(`/src/assets/icons/github.svg?raw`);
 const icons: { [key: string]: string } = { eye, book, github };
 
 const professionalProjects = (await getCollection("professional-projects")).sort((a, b) => a.data.id - b.data.id);
-const personalProjects = await getCollection("personal-projects");
+const personalProjects = (await getCollection("personal-projects")).sort((a, b) => a.data.id - b.data.id);
 ---
 
 <Page title={"Projects - " + SITE_TITLE} description={SITE_DESCRIPTION} addNight={true}>
