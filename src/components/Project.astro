@@ -6,7 +6,7 @@ const { data, links } = Astro.props;
 const { title, description, technologies } = data;
 ---
 
-<div class="project w-full" data-link={links[0].href}>
+<div class="project px-4 py-5 w-full" data-link={links[0].href}>
   <h4 class="title">{title}</h4>
   <p class="project-description">{description}</p>
 
@@ -22,8 +22,7 @@ const { title, description, technologies } = data;
 <style>
   .project {
     cursor: pointer;
-    margin: 0 auto;
-    padding: 1em;
+    margin: 0 auto; 
     display: flex;
     flex-direction: column;
     background-color: var(--clr-bg);
