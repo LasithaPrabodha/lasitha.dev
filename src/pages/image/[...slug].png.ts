@@ -1,31 +1,27 @@
 import { getCollection } from "astro:content";
 import generateOgImage, { type OgData } from "@utils/openGraph";
-import type { APIRoute } from "astro";
+import type { APIContext, APIRoute } from "astro";
 
 interface Props {
   title: string;
   pubDate: Date;
 }
 
-const blogPosts = await getCollection("blog");
-const result = blogPosts.map((blog) => ({
-  params: { slug: blog.slug },
-  props: {
-    title: blog.data.title,
-    pubDate: blog.data.pubDate,
-  },
-}));
-export const GET: APIRoute<OgData> = async ({ params }) => {
-  const blog = result.find((b) => b.params.slug === params.slug);
-  if (blog == null) {
-    return new Response(null, {
-      status: 404,
-    });
-  }
+export async function getStaticPaths() {
+  const blogPosts = await getCollection("blog");
+  const paths = blogPosts.map((blog) => ({
+    params: { slug: blog.slug },
+    props: {
+      title: blog.data.title,
+      pubDate: blog.data.pubDate,
+    },
+  }));
+  return paths;
+}
+export const GET: APIRoute<OgData> = async (context: APIContext) => {
+  const { title, pubDate } = context.props as Props;
 
-  const props = blog.props as Props;
-
-  const response = await generateOgImage(props.title, props.pubDate);
+  const response = await generateOgImage(title, pubDate);
   return new Response(response, {
     status: 200,
     headers: {
