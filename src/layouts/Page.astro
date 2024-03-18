@@ -7,7 +7,7 @@ const { title, description, addNight, ...props } = Astro.props;
 
 const { default: up } = await import(`/src/assets/icons/angles-up.svg?raw`);
 
-const theme = Astro.cookies.get("theme")?.value;
+const theme = Astro.cookies.get("theme")?.value || "dark";
 ---
 
 <!doctype html>
