@@ -16,7 +16,6 @@ const theme = Astro.cookies.get("theme")?.value;
     <BaseHead title={title} description={description} />
   </head>
   <body class="relative" id="top" data-theme={theme}>
-    {addNight && <canvas id="canvas" />}
     <Header />
     <main {...props} transition:animate="slide">
       <slot />
