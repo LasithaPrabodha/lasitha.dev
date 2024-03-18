@@ -1,6 +1,6 @@
 ---
 import HeaderLink from "./HeaderLink.astro";
-import "@assets/styles/header.css";
+// import "@assets/styles/header.css";
 
 const { default: moon } = await import(`/src/assets/icons/moon.svg?raw`);
 const { default: cross } = await import(`/src/assets/icons/xmark.svg?raw`);
@@ -8,8 +8,11 @@ const { default: menu } = await import(`/src/assets/icons/bars.svg?raw`);
 const { default: sun } = await import(`/src/assets/icons/sun.svg?raw`);
 ---
 
-<header class="p-6 flex justify-center items-center sm:h-24 bg-transparent max-sm:justify-end">
-  <nav class="nav center">
+<header
+  class="p-6 flex justify-center items-center sm:h-24 bg-transparent max-sm:justify-end"
+  transition:animate="none"
+>
+  <nav class="nav center" transition:persist="navigation">
     <ul class="nav-list center">
       <HeaderLink href="/">Home</HeaderLink>
       <HeaderLink href="/about">About</HeaderLink>
@@ -31,74 +34,81 @@ const { default: sun } = await import(`/src/assets/icons/sun.svg?raw`);
 </header>
 
 <script>
-  const body = document.body;
-  const btnTheme = document.querySelector("#theme-toggle");
   const btnHamburger = document.querySelector(".nav-hamburger");
   const navUl = document.querySelector(".nav-list");
+  const btnTheme = document.querySelector("#theme-toggle");
 
   type Themes = "light" | "dark";
 
-  if (body.classList.contains("use-system")) {
+  if (document.body.getAttribute("data-theme") == "") {
     if (window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches) {
       setTheme("dark");
-    }else{
+    } else {
       setTheme("light");
     }
   }
 
-  function isDark() {
-    return body.classList.contains("dark");
+  function toggleNav() {
+    btnHamburger?.children[0].classList.toggle("d-none");
+    btnHamburger?.children[1].classList.toggle("d-none");
+    navUl?.classList.toggle("display-nav-list");
+    document.body.classList.toggle("nav-open");
   }
 
-  function changeTheme(theme: Themes) {
-    body.classList.remove("dark");
-    body.classList.remove("light");
-    body.classList.add(theme);
-
-    if (theme === "light") {
-      document.documentElement.setAttribute("data-theme", "github-light");
-    } else {
-      document.documentElement.setAttribute("data-theme", "one-dark-pro");
+  function getTheme() {
+    if (document.body.getAttribute("data-theme")) {
+      return document.body.getAttribute("data-theme");
     }
+    if (window.matchMedia("(prefers-color-scheme: dark)").matches) {
+      return "dark";
+    }
+    return "light";
   }
 
   function setTheme(theme: Themes) {
-    console.log({ theme });
-    changeTheme(theme);
+    document.body.setAttribute("data-theme", theme);
+
+    if (theme === "dark") {
+      document.documentElement.setAttribute("data-theme", "one-dark-pro");
+    } else {
+      document.documentElement.setAttribute("data-theme", "github-light");
+    }
+
     const d = new Date();
     d.setTime(d.getTime() + 365 * 86400000);
     document.cookie = `theme=${theme};expires=${d.toUTCString()};domain=lasitha.dev;path=/`;
   }
 
-  btnTheme?.addEventListener("click", () => {
-    if (isDark()) {
-      setTheme("light");
-    } else {
-      setTheme("dark");
-    }
-  });
+  const handleToggleClick = () => {
+    const nextTheme = getTheme() === "dark" ? "light" : "dark";
+    setTheme(nextTheme);
+  };
+
+  btnTheme?.addEventListener("click", handleToggleClick);
 
   // Navigation
-  function closeNav() {
-    navUl?.classList.remove("display-nav-list");
-    btnHamburger?.children[0].classList.remove("d-none");
-    btnHamburger?.children[1].classList.add("d-none");
-    body.classList.remove("nav-open");
-  }
+  btnHamburger?.addEventListener("click", toggleNav);
 
-  function openNav() {
-    btnHamburger?.children[0].classList.add("d-none");
-    btnHamburger?.children[1].classList.remove("d-none");
-    navUl?.classList.add("display-nav-list");
-    body.classList.add("nav-open");
-  }
+  document.addEventListener("astro:page-load", () => {
+    const theme = getTheme()!;
+    document.body.setAttribute("data-theme", theme);
+  });
 
-  btnHamburger?.addEventListener("click", () => {
-    if (btnHamburger?.children[1].classList.contains("d-none")) {
-      openNav();
-    } else {
-      closeNav();
-    }
+  document.addEventListener("astro:after-swap", () => {
+    const parentPathName = window.location.pathname.split("/")[1];
+    const activeLink = document.querySelector(`.nav-list-item [href='/${parentPathName}']`);
+    activeLink?.classList.add("active");
+
+    document.querySelector(".nav-list")?.classList.remove("display-nav-list");
+    document.querySelector(".nav-hamburger")?.children[0].classList.remove("d-none");
+    document.querySelector(".nav-hamburger")?.children[1].classList.add("d-none");
+    document.body.classList.remove("nav-open");
+  });
+  document.addEventListener("astro:before-swap", () => {
+    const parentPathName = window.location.pathname.split("/")[1];
+
+    const activeLink = document.querySelector(`.nav-list-item [href='/${parentPathName}']`);
+    activeLink?.classList.remove("active");
   });
 </script>
 

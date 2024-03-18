@@ -16,11 +16,11 @@ const { post } = Astro.props;
 <style>
   .blog-post {
     padding: 1em;
-    transition: border ease-in 0.2s;
     border-radius: 8px;
     transition:
       border ease-in 0.2s,
-      opacity ease-in 0.2s;
+      opacity ease-in 0.2s,
+      background-color ease-in 0.25s;
     border: 0.5px solid var(--clr-bg);
   }
   .blog-post:hover {

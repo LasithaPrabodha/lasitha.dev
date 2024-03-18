@@ -28,7 +28,7 @@
   left: 0;
   top: 0;
   z-index: -1;
-  transition: right 0.2s ease-in-out;
+  transition: var(--transition);
 }
 
 .btn--outline:hover::before,
@@ -52,8 +52,8 @@
   font-size: 14px;
   letter-spacing: 1px;
   background: var(--clr-fg-alt);
-  -webkit-mask: url("../../../public/static/urban-sprite.png");
-  mask: url("../../../public/static/urban-sprite.png");
+  -webkit-mask: url("/static/urban-sprite.png");
+  mask: url("/static/urban-sprite.png");
   -webkit-mask-size: 3000% 100%;
   mask-size: 3000% 100%;
   border: none;
@@ -147,7 +147,7 @@
   bottom: 0;
   left: 0;
   background-color: var(--clr-primary);
-  transition: width 0.2s ease-in;
+  transition: var(--transition);
 }
 
 .link:not(.link--icon).active::before,
@@ -186,11 +186,11 @@ canvas {
   display: none;
 }
 
-.dark canvas {
+[data-theme="dark"] canvas {
   display: block;
 }
 
-.dark .rect-pattern {
+[data-theme="dark"] .rect-pattern {
   display: none;
 }
 
@@ -201,7 +201,7 @@ canvas {
   right: 2em;
   background-color: transparent;
   font-size: 1.8rem;
-  transition: transform 0.2s ease-in-out;
+  transition: var(--transition);
 }
 
 .scroll-top svg {

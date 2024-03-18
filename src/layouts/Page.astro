@@ -3,12 +3,11 @@ import BaseHead from "@components/BaseHead.astro";
 import Header from "@components/Header.astro";
 import Footer from "@components/Footer.astro";
 
-
 const { title, description, addNight, ...props } = Astro.props;
 
 const { default: up } = await import(`/src/assets/icons/angles-up.svg?raw`);
 
-const theme = Astro.cookies.get("theme")?.value ?? "use-system";
+const theme = Astro.cookies.get("theme")?.value;
 ---
 
 <!doctype html>
@@ -16,10 +15,10 @@ const theme = Astro.cookies.get("theme")?.value ?? "use-system";
   <head>
     <BaseHead title={title} description={description} />
   </head>
-  <body class:list={[theme, "relative"]} id="top">
+  <body class="relative" id="top" data-theme={theme}>
     {addNight && <canvas id="canvas" />}
     <Header />
-    <main {...props}>
+    <main {...props} transition:animate="slide">
       <slot />
     </main>
     <div class="scroll-container">
@@ -28,29 +27,26 @@ const theme = Astro.cookies.get("theme")?.value ?? "use-system";
           <Fragment set:html={up} />
         </a>
       </div>
-      <script>
-        import { render } from "@assets/js/night.js";
-        import { start } from "@assets/js/shooting-star.js";
-
-        render();
-
-        window.onload = function () {
-          setTimeout(start, 200);
-        };
-
-        document.addEventListener("scroll", () => {
-          const btnScrollTop = document.querySelector<HTMLElement>(".scroll-top");
-
-          if (!btnScrollTop) return;
-
-          if (document.body?.scrollTop > 500 || document.documentElement.scrollTop > 500) {
-            btnScrollTop.style.display = "block";
-          } else {
-            btnScrollTop.style.display = "none";
-          }
-        });
-      </script>
     </div>
     <Footer />
+    <script>
+      // import { render } from "@assets/js/night.js";
+      // import { start } from "@assets/js/shooting-star.js";
+
+      // render();
+      // setTimeout(start, 200);
+
+      document.addEventListener("scroll", () => {
+        const btnScrollTop = document.querySelector<HTMLElement>(".scroll-top");
+
+        if (!btnScrollTop) return;
+
+        if (document.body?.scrollTop > 500 || document.documentElement.scrollTop > 500) {
+          btnScrollTop.style.display = "block";
+        } else {
+          btnScrollTop.style.display = "none";
+        }
+      });
+    </script>
   </body>
 </html>

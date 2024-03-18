@@ -87,7 +87,7 @@ function getOpacity(factor) {
   return opacity;
 }
 
-export function render() {
+export function render() { 
   ctx.fillStyle = backgroundColor;
   ctx.fillRect(0, 0, width, height);
   stars.forEach(function (star, i) {

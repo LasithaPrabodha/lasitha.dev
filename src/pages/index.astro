@@ -1,9 +1,10 @@
 ---
 import Page from "@layouts/Page.astro";
+import MyName from "@components/MyName.astro";
 import ContactIcons from "@components/ContactIcons.astro";
 import { SITE_TITLE, SITE_DESCRIPTION } from "consts";
 
-import "@assets/styles/home.css";
+// import "@assets/styles/home.css";
 ---
 
 <Page
@@ -14,7 +15,7 @@ import "@assets/styles/home.css";
 >
   <div class="fixed-height flex flex-col justify-center">
     <h1 class="text-6xl max-sm:text-4xl">
-      Hi, I am <span class="about-name font-bold max-sm:block">Lasitha Prabodha</span>
+      Hi, I am <MyName />
     </h1>
     <h2 class="text-5xl max-sm:text-3xl max-sm:mt-4 text-[color:var(--clr-quote)]">
       I build things for web and mobile
