@@ -22,7 +22,7 @@ const { title, description, technologies } = data;
 <style>
   .project {
     cursor: pointer;
-    margin: 0 auto; 
+    margin: 0 auto;
     display: flex;
     flex-direction: column;
     border-radius: 8px;
@@ -84,22 +84,4 @@ const { title, description, technologies } = data;
     }
   }
 </style>
-<script>
-  const projects = document.querySelectorAll(".project");
 
-  projects.forEach((link) => {
-    link.addEventListener("click", (event) => {
-      const target = event.target as HTMLElement;
-      if (
-        target.classList.contains("link--icon") ||
-        (target.parentNode as HTMLElement).classList.contains("link--icon")
-      ) {
-        return;
-      }
-
-      const project = target.closest(".project") as HTMLElement;
-      const link = project?.dataset.link;
-      window.open(link, "_blank")?.focus();
-    });
-  });
-</script>

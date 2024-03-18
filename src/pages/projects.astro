@@ -44,36 +44,54 @@ const personalProjects = (await getCollection("personal-projects")).sort((a, b) 
     <RectPattern width={250} height={250} id="rect-left" />
     <RectPattern width={230} height={230} id="rect-right" />
   </section>
-
-  <style>
-    :global(#projects > #rect-right) {
-      position: absolute;
-      right: 0;
-      bottom: calc(100vh / 5);
-      z-index: -1;
-    }
-    :global(#projects > #rect-left) {
-      position: absolute;
-      left: 0;
-      top: 128px;
-      z-index: -1;
-    }
-
-    :global(#projects:has(.project:hover) .project) {
-      opacity: 0.7;
-    }
-
-    @media (max-width: 640px) {
-      :global(#projects > #rect-left) {
-        top: 300px;
-      }
-
-      :global(#projects > #rect-right) {
-        top: unset;
-      }
-      :global(#projects > #rect-left-bottom) {
-        bottom: 0;
-      }
-    }
-  </style>
 </Page>
+<style>
+  :global(#projects > #rect-right) {
+    position: absolute;
+    right: 0;
+    bottom: calc(100vh / 5);
+    z-index: -1;
+  }
+  :global(#projects > #rect-left) {
+    position: absolute;
+    left: 0;
+    top: 128px;
+    z-index: -1;
+  }
+
+  :global(#projects:has(.project:hover) .project) {
+    opacity: 0.7;
+  }
+
+  @media (max-width: 640px) {
+    :global(#projects > #rect-left) {
+      top: 300px;
+    }
+
+    :global(#projects > #rect-right) {
+      top: unset;
+    }
+    :global(#projects > #rect-left-bottom) {
+      bottom: 0;
+    }
+  }
+</style>
+<script>
+  const projects = document.querySelectorAll(".project");
+
+  projects.forEach((link) => {
+    link.addEventListener("click", (event) => {
+      const target = event.target as HTMLElement;
+      if (
+        target.classList.contains("link--icon") ||
+        (target.parentNode as HTMLElement).classList.contains("link--icon")
+      ) {
+        return;
+      }
+
+      const project = target.closest(".project") as HTMLElement;
+      const link = project?.dataset.link;
+      window.open(link, "_blank")?.focus();
+    });
+  });
+</script>
