@@ -27,7 +27,7 @@ const [viewCount] = await getViewCount(url);
 let count = 0;
 if (viewCount) count = viewCount.count;
 
-const theme = Astro.cookies.get("theme")?.value;
+const theme = Astro.cookies.get("theme")?.value || "dark";
 ---
 
 <!doctype html>
