@@ -186,11 +186,11 @@ canvas {
   display: none;
 }
 
-.dark canvas {
+[data-theme="dark"] canvas {
   display: block;
 }
 
-.dark .rect-pattern {
+[data-theme="dark"] .rect-pattern {
   display: none;
 }
 

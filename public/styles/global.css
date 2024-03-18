@@ -1,4 +1,4 @@
-.light {
+[data-theme="light"] {
   --clr-bg: #fcfcfc;
   --clr-bg-alt: #fff;
   --clr-bg-code: #eee;
@@ -14,7 +14,7 @@
   --display-moon: block;
 }
 
-.dark {
+[data-theme="dark"] {
   --clr-bg: #030317;
   --clr-bg-alt: #2a2f4c;
   --clr-bg-code: #404051;
@@ -29,6 +29,7 @@
   --display-sun: block;
   --display-moon: none;
 }
+
 *:not(pre, code, hr) {
   padding: 0;
   margin: 0;
@@ -51,6 +52,7 @@ body {
   color: var(--clr-fg);
   background-color: var(--clr-bg);
   --transition: all 0.25s cubic-bezier(0.645, 0.045, 0.355, 1);
+  transition: var(--transition);
 }
 
 ::-moz-selection {

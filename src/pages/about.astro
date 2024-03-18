@@ -7,6 +7,7 @@ import type { Skill } from "interfaces/Skill";
 
 import myPhoto from "@assets/images/casual-photo.jpg";
 import RectPattern from "@components/RectPattern.astro";
+import MyName from "@components/MyName.astro";
 
 const { data: techSkills } = (await getCollection("skills"))[0];
 ---
@@ -20,7 +21,9 @@ const { data: techSkills } = (await getCollection("skills"))[0];
   <div class="fixed-height sm:pt-20 sm:px-6 m-auto max-sm:pt-6 max-sm:mt-6 max-sm:px-6 box-border max-w-[900px]">
     <div class="name">
       <small class="uppercase">About</small>
-      <h2 class="font-bold">Lasitha Prabodha Weligampola</h2>
+      <h2 class="font-bold">
+        <MyName />
+      </h2>
     </div>
     <div class="flex max-sm:block mt-8 gap-4">
       <div class="flex-1">
@@ -42,7 +45,7 @@ const { data: techSkills } = (await getCollection("skills"))[0];
         <p>I'm always learning new things as the tech world keeps changing, which keeps me excited!</p>
       </div>
       <div class="details-photo h-min relative">
-        <Image src={myPhoto} loading="eager" alt="My portrait photo" width={300} height={300} />
+        <Image format="avif" src={myPhoto} loading="eager" alt="My portrait photo" width={300} height={300} />
         <RectPattern />
       </div>
     </div>
@@ -50,13 +53,6 @@ const { data: techSkills } = (await getCollection("skills"))[0];
 </Page>
 
 <style>
-  .name h2 {
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-    -webkit-background-clip: text;
-    background-image: linear-gradient(45deg, var(--clr-grd-one), var(--clr-grd-two));
-  }
-
   :global(.details-photo > svg) {
     position: absolute;
     right: 0;

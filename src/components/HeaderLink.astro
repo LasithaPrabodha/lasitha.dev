@@ -8,7 +8,6 @@ const { href, class: className, ...props } = Astro.props;
 const { pathname } = Astro.url;
 const subpath = pathname.match(/[^\/]+/g); // eslint-disable-line
 const isActive = href === pathname || href === "/" + subpath?.[0];
-console.log(isActive, href, pathname);
 ---
 
 <li class="nav-list-item">
