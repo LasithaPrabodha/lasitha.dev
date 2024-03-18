@@ -1,3 +1,7 @@
+* {
+  --transition: all 0.25s cubic-bezier(0.645, 0.045, 0.355, 1);
+}
+
 [data-theme="light"] {
   --clr-bg: #fcfcfc;
   --clr-bg-alt: #fff;
@@ -51,7 +55,6 @@ body {
   line-height: 1.5;
   color: var(--clr-fg);
   background-color: var(--clr-bg);
-  --transition: all 0.25s cubic-bezier(0.645, 0.045, 0.355, 1);
   transition: var(--transition);
 }
 

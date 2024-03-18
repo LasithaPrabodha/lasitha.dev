@@ -9,6 +9,7 @@ import { astroImageTools } from "astro-imagetools";
 import db from "@astrojs/db";
 
 export default defineConfig({
+  output:"server",
   site: "https://www.lasitha.dev",
   image: {
     service: sharpImageService(),

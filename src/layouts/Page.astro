@@ -6,6 +6,8 @@ import Footer from "@components/Footer.astro";
 const { title, description, addNight, ...props } = Astro.props;
 
 const { default: up } = await import(`/src/assets/icons/angles-up.svg?raw`);
+
+const theme = Astro.cookies.get("theme")?.value;
 ---
 
 <!doctype html>
@@ -13,7 +15,7 @@ const { default: up } = await import(`/src/assets/icons/angles-up.svg?raw`);
   <head>
     <BaseHead title={title} description={description} />
   </head>
-  <body class="relative" id="top">
+  <body class="relative" id="top" data-theme={theme}>
     {addNight && <canvas id="canvas" />}
     <Header />
     <main {...props} transition:animate="slide">
@@ -28,11 +30,11 @@ const { default: up } = await import(`/src/assets/icons/angles-up.svg?raw`);
     </div>
     <Footer />
     <script>
-      import { render } from "@assets/js/night.js";
-      import { start } from "@assets/js/shooting-star.js";
+      // import { render } from "@assets/js/night.js";
+      // import { start } from "@assets/js/shooting-star.js";
 
-      render()
-      setTimeout(start, 200);
+      // render();
+      // setTimeout(start, 200);
 
       document.addEventListener("scroll", () => {
         const btnScrollTop = document.querySelector<HTMLElement>(".scroll-top");
@@ -45,8 +47,6 @@ const { default: up } = await import(`/src/assets/icons/angles-up.svg?raw`);
           btnScrollTop.style.display = "none";
         }
       });
-
-      document.addEventListener("astro:after-swap", render);
     </script>
   </body>
 </html>

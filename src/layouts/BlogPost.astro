@@ -26,6 +26,8 @@ const [viewCount] = await getViewCount(url);
 
 let count = 0;
 if (viewCount) count = viewCount.count;
+
+const theme = Astro.cookies.get("theme")?.value;
 ---
 
 <!doctype html>
@@ -34,7 +36,7 @@ if (viewCount) count = viewCount.count;
     <BaseHead title={title} description={description} ogImage={ogImage} />
     {pubDate && <meta property="article:published_time" content={pubDate.toISOString()} />}
   </head>
-  <body class="relative" id="top">
+  <body class="relative" id="top" data-theme={theme}>
     <Header />
     <main
       {...props}

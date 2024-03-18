@@ -28,7 +28,7 @@
   left: 0;
   top: 0;
   z-index: -1;
-  transition: right 0.2s ease-in-out;
+  transition: var(--transition);
 }
 
 .btn--outline:hover::before,
@@ -147,7 +147,7 @@
   bottom: 0;
   left: 0;
   background-color: var(--clr-primary);
-  transition: width 0.2s ease-in;
+  transition: var(--transition);
 }
 
 .link:not(.link--icon).active::before,
@@ -201,7 +201,7 @@ canvas {
   right: 2em;
   background-color: transparent;
   font-size: 1.8rem;
-  transition: transform 0.2s ease-in-out;
+  transition: var(--transition);
 }
 
 .scroll-top svg {
