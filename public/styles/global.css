@@ -105,7 +105,7 @@ a {
 
 hr {
   margin: 32px 0;
-  border-style: dashed;
+  border-color: var(--clr-quote);
 }
 button {
   cursor: pointer;
