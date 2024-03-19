@@ -63,7 +63,7 @@ const theme = Astro.cookies.get("theme")?.value || "dark";
 
               <span class="text-sm text-[var(--clr-quote)]">{count} View{count == 1 ? "" : "s"}</span>
             </div>
-            <h1>{title}</h1>
+            <h1 class="text-5xl lg:leading-tight">{title}</h1>
             <hr />
           </div>
           <slot />

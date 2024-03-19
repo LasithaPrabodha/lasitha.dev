@@ -7,17 +7,17 @@ const { title, description, technologies } = data;
 ---
 
 <div class="project px-4 py-5 w-full" data-link={links[0].href}>
-  <h4 class="title">{title}</h4>
-  <p class="project-description">{description}</p>
-
   <div class="flex justify-between">
-    <ul class="project-stack">
-      {technologies.map((t: string) => <li class="project-stack-item">{t}</li>)}
-    </ul>
+    <h4 class="text-lg">{title}</h4>
     <div class="project-links flex items-center">
       {links.map((l: Link) => <IconLink href={l.href} icon={l.icon} ariaLabel={l.ariaLabel} />)}
     </div>
   </div>
+  <p class="mt-1 mb-4">{description}</p>
+
+  <ul class="project-stack">
+    {technologies.map((t: string) => <li class="project-stack-item">{t}</li>)}
+  </ul>
 </div>
 <style>
   .project {
@@ -35,7 +35,7 @@ const { title, description, technologies } = data;
   .project-links {
     opacity: 0;
     transition: var(--transition);
-    transform: translate3d(0, -20%, 0);
+    transform: translate3d(0, 20%, 0);
   }
 
   .project:hover {
@@ -45,12 +45,6 @@ const { title, description, technologies } = data;
   .project:hover .project-links {
     opacity: 1;
     transform: translate3d(0, 0, 0);
-  }
-
-  .project-description {
-    margin-top: 1em;
-    margin-bottom: 1em;
-    flex: 1;
   }
 
   .project-stack {
@@ -84,4 +78,3 @@ const { title, description, technologies } = data;
     }
   }
 </style>
-
