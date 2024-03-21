@@ -191,7 +191,7 @@ canvas {
 }
 
 [data-theme="dark"] .rect-pattern {
-  display: none;
+  color: var(--clr-bg-code);
 }
 
 .scroll-top {

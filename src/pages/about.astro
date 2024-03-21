@@ -26,29 +26,36 @@ const { data: techSkills } = (await getCollection("skills"))[0];
       </h2>
     </div>
     <div class="flex max-sm:block mt-8 gap-4">
-      <div class="flex-1">
+      <div class="flex-1 lg:pr-2">
         <p>Hi there!</p>
-        <p>
-          I'm excited to introduce myself! I've been writing software for over 7 years, and I love taking my passion and
-          turning it into real results. I build strong web and mobile apps, especially for travel, hospitality, and
-          customer management.
-        </p>
-        <p>
-          Some of my go-to languages and tools for web & mobile development:
 
-          <ul
-            class="grid grid-cols-3 grid-flow-col grid-rows-6 max-sm:grid-rows-9 max-sm:grid-cols-2 list-disc pl-[18px] mb-4"
-          >
-            {techSkills.map((s: Skill) => <li>{s.name}</li>)}
-          </ul>
+        <p class="lg:text-justify">
+          Throughout my journey from early encounters with computers in 2002 to my current role as a seasoned Frontend
+          Engineer, I've been driven by a passion for technology and creating meaningful digital experiences.
         </p>
-        <p>I'm always learning new things as the tech world keeps changing, which keeps me excited!</p>
+        <p class="lg:text-justify">
+          With over seven years of experience, I specialize in crafting elegant, user-centric web applications using
+          Angular, React, TypeScript, and more. I've revitalized legacy systems and led the development of cutting-edge
+          applications, honing my problem-solving skills and delivering exceptional results.
+        </p>
+        <p class="lg:text-justify">
+          Beyond coding, I'm a dedicated metalhead, drawing inspiration from bands like Black Sabbath and Tool.
+        </p>
       </div>
       <div class="details-photo h-min relative">
         <Image format="avif" src={myPhoto} loading="eager" alt="My portrait photo" width={300} height={300} />
         <RectPattern />
       </div>
     </div>
+
+    <p class="lg:mt-4 lg:text-justify">
+      Continuously learning and growing, I thrive on mastering new technologies and refining UI/UX skills. I believe in
+      the power of collaboration, fostering strong relationships to solve challenges and drive meaningful change.
+    </p>
+    <p class="lg:text-justify max-sm:mb-16">
+      As I embark on the next chapter, I'm excited to push boundaries in technology, mentor others, and make a positive
+      impact. Let's connect and discuss tech, metal, or collaboration opportunities!
+    </p>
   </div>
 </Page>
 
@@ -96,7 +103,7 @@ const { data: techSkills } = (await getCollection("skills"))[0];
 
     img {
       margin-top: 0;
-      margin-bottom: 4rem;
+      margin-bottom: 1rem;
       width: 100%;
       height: 100%;
     }
