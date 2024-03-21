@@ -6,6 +6,7 @@ import { Image } from "astro:assets";
 import myPhoto from "@assets/images/casual-photo.jpg";
 import RectPattern from "@components/RectPattern.astro";
 import MyName from "@components/MyName.astro";
+import ContactIcons from "@components/ContactIcons.astro";
 ---
 
 <Page
@@ -14,7 +15,9 @@ import MyName from "@components/MyName.astro";
   addNight={true}
   class="flex flex-col items-center overflow-x-hidden bg-transparent"
 >
-  <div class="fixed-height sm:pt-20 sm:px-6 m-auto max-sm:pt-6 max-sm:mt-6 max-sm:px-6 box-border max-w-[900px]">
+  <div
+    class="fixed-height sm:pt-20 sm:px-6 m-auto max-sm:pb-16 max-sm:pt-6 max-sm:mt-6 max-sm:px-6 box-border max-w-[900px]"
+  >
     <div class="name">
       <small class="uppercase">About</small>
       <h2 class="font-bold">
@@ -31,11 +34,11 @@ import MyName from "@components/MyName.astro";
         </p>
         <p class="lg:text-justify">
           With over seven years of experience, I specialize in crafting elegant, user-centric web applications using
-          Angular, React, TypeScript, and more. I've revitalized legacy systems and led the development of cutting-edge
+          Angular, React, TypeScript, C# .NET Core and more. I've revitalized legacy systems and led the development of cutting-edge
           applications, honing my problem-solving skills and delivering exceptional results.
         </p>
         <p class="lg:text-justify">
-          Beyond coding, I'm a dedicated metalhead, drawing inspiration from bands like Black Sabbath and Tool.
+          Beyond coding, I'm a dedicated metalhead, drawing inspiration from bands like Black Sabath, Gojira, Tool, and Metallica, to name a few.
         </p>
       </div>
       <div class="details-photo h-min relative">
@@ -48,10 +51,12 @@ import MyName from "@components/MyName.astro";
       Continuously learning and growing, I thrive on mastering new technologies and refining UI/UX skills. I believe in
       the power of collaboration, fostering strong relationships to solve challenges and drive meaningful change.
     </p>
-    <p class="lg:text-justify max-sm:mb-16">
+    <p class="lg:text-justify">
       As I embark on the next chapter, I'm excited to push boundaries in technology, mentor others, and make a positive
       impact. Let's connect and discuss tech, metal, or collaboration opportunities!
     </p>
+
+    <ContactIcons showEmail={true} />
   </div>
 </Page>
 
