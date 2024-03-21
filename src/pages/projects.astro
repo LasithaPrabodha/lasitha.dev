@@ -24,7 +24,7 @@ const personalProjects = (await getCollection("personal-projects")).sort((a, b) 
   >
     <h2 class="section-title font-bold">Projects</h2>
 
-    <h4 class="mt-6 lg:pl-4 text-center font-semibold uppercase text-[color:var(--clr-fg)]">Professional Projects</h4>
+    <h4 class="mt-6 lg:pl-4 lg:text-center font-semibold uppercase text-[color:var(--clr-fg)]">Professional Projects</h4>
     <div class="mt-6 grid gap-1 lg:grid-cols-2 lg:gap-y-6">
       {
         professionalProjects.map((project) => (
@@ -32,21 +32,27 @@ const personalProjects = (await getCollection("personal-projects")).sort((a, b) 
         ))
       }
     </div>
-    <h4 class="mt-16 lg:pl-4 text-center font-semibold uppercase text-[color:var(--clr-fg)]">Personal Projects</h4>
+    <h4
+      class="mt-16 lg:pl-4 lg:text-center font-semibold uppercase text-[color:var(--clr-fg)] relative w-max my-0 lg:mx-auto"
+    >
+      <span>Personal Projects</span>
+      <a
+        class="btn-more-projects text-sm absolute top-0 right-0 lg:pl-4 text-[color:var(--clr-quote)] hover:text-[color:var(--clr-grd-one)] flex items-center w-max"
+        href="https://www.github.com/LasithaPrabodha?tab=repositories"
+        target="_blank"
+      >
+        ( <span class="mr-1">View more</span>
+        <Fragment set:html={github} /> )
+      </a>
+    </h4>
     <div class="my-6 grid gap-1 lg:grid-cols-2 lg:gap-y-6">
       {
         personalProjects.map((project) => (
           <Project {...project} links={project.data.links.map((l: Link) => ({ ...l, icon: icons[l.icon] }))} />
         ))
       }
-
-     
     </div>
-    <a
-    class="btn-more-projects lg:pl-4 text-[color:var(--clr-grd-one)] mb-2 flex items-center gap-2 w-max"
-    href="https://www.github.com/LasithaPrabodha?tab=repositories"
-    target="_blank">View more projects <Fragment set:html={github} /></a
-    >
+
     <RectPattern width={250} height={250} id="rect-left" />
     <RectPattern width={230} height={230} id="rect-right" />
   </section>
@@ -69,23 +75,30 @@ const personalProjects = (await getCollection("personal-projects")).sort((a, b) 
     opacity: 0.7;
   }
 
+  .btn-more-projects {
+    right: -95px;
+    font-size: 10px;
+    bottom: 0;
+    transition: var(--transition);
+  }
   .btn-more-projects svg {
+    transition: var(--transition);
     fill: var(--clr-quote);
     font-size: 1.2rem;
-    width: 18px;
-    height: 18px;
+    width: 14px;
+    height: 14px;
+  }
+  .btn-more-projects:hover svg {
+    fill: var(--clr-grd-one);
   }
 
   @media (max-width: 640px) {
-    #projects > #rect-left {
-      top: 300px;
+    .btn-more-projects span {
+      display: none;
     }
 
-    #projects > #rect-right {
-      top: unset;
-    }
-    #projects > #rect-left-bottom {
-      bottom: 0;
+    .btn-more-projects {
+      right: -30px;
     }
   }
 </style>

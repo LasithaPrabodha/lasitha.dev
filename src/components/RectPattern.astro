@@ -12,21 +12,8 @@ const { width = 320, height = 320, ...props } = Astro.props;
   class="rect-pattern"
 >
   <defs>
-    <pattern
-      id="square-pattern"
-      x="0"
-      y="0"
-      width="20"
-      height="20"
-      patternUnits="userSpaceOnUse"
-    >
-      <rect
-        x="0"
-        y="0"
-        width="4"
-        height="4"
-        class="text-faded"
-        fill="currentColor"></rect>
+    <pattern id="square-pattern" x="0" y="0" width="20" height="20" patternUnits="userSpaceOnUse">
+      <rect x="0" y="0" width="4" height="4" class="text-faded" fill="currentColor"></rect>
     </pattern>
   </defs>
   <rect width={width} height={height} fill="url(#square-pattern)"></rect>
@@ -37,5 +24,11 @@ const { width = 320, height = 320, ...props } = Astro.props;
     display: block;
     width: auto;
     color: #ccc;
+  }
+
+  @media (max-width: 640px) {
+    svg {
+      display: none;
+    }
   }
 </style>

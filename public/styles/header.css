@@ -1,5 +1,5 @@
 header * {
-  z-index: 1;
+  z-index: 9999;
 }
 
 .nav-list {
@@ -32,6 +32,12 @@ header * {
   align-items: center;
 }
 
+body.nav-open {
+  overflow: hidden;
+}
+body.nav-open main {
+  z-index: -1;
+}
 @media (max-width: 640px) {
   .header {
     height: 6em;
@@ -51,8 +57,7 @@ header * {
     position: fixed;
     inset: 0;
     width: 100%;
-    height: 100%;
-    z-index: 9999;
+    height: 100vh;
     transition: var(--transition);
   }
 
@@ -63,8 +68,7 @@ header * {
   }
 
   .nav-hamburger {
-    display: flex;
-    z-index: 2;
+    display: flex; 
     margin-left: 0.8em;
   }
 }

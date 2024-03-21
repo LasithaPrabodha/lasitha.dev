@@ -2,14 +2,10 @@
 import Page from "@layouts/Page.astro";
 import { SITE_TITLE, SITE_DESCRIPTION } from "consts";
 import { Image } from "astro:assets";
-import { getCollection } from "astro:content";
-import type { Skill } from "interfaces/Skill";
 
 import myPhoto from "@assets/images/casual-photo.jpg";
 import RectPattern from "@components/RectPattern.astro";
 import MyName from "@components/MyName.astro";
-
-const { data: techSkills } = (await getCollection("skills"))[0];
 ---
 
 <Page
