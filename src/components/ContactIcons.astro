@@ -5,9 +5,14 @@ const { default: instagram } = await import(`/src/assets/icons/instagram.svg?raw
 const { default: facebook } = await import(`/src/assets/icons/facebook.svg?raw`);
 const { default: linkedin } = await import(`/src/assets/icons/linkedin.svg?raw`);
 const { default: github } = await import(`/src/assets/icons/github.svg?raw`);
+const { default: envelope } = await import(`/src/assets/icons/envelope.svg?raw`);
+
+const { showEmail = false } = Astro.props;
 ---
 
 <div class="max-sm:mt-8 center">
+  {showEmail && <IconLink href="mailto:lasiprabo@gmail.com" ariaLabel="email" icon={envelope} />}
+
   <IconLink href="https://www.instagram.com/lu6_fer" ariaLabel="insta" icon={instagram} />
 
   <IconLink href="https://www.facebook.com/lmlxlml" ariaLabel="fb" icon={facebook} />
