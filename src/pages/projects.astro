@@ -33,45 +33,58 @@ const personalProjects = (await getCollection("personal-projects")).sort((a, b) 
       }
     </div>
     <h4 class="mt-16 lg:pl-4 text-center font-semibold uppercase text-[color:var(--clr-fg)]">Personal Projects</h4>
-    <div class="my-6 grid gap-1 lg:grid-cols-2  lg:gap-y-6">
+    <div class="my-6 grid gap-1 lg:grid-cols-2 lg:gap-y-6">
       {
         personalProjects.map((project) => (
           <Project {...project} links={project.data.links.map((l: Link) => ({ ...l, icon: icons[l.icon] }))} />
         ))
       }
-    </div>
 
+     
+    </div>
+    <a
+    class="btn-more-projects lg:pl-4 text-[color:var(--clr-grd-one)] mb-2 flex items-center gap-2 w-max"
+    href="https://www.github.com/LasithaPrabodha?tab=repositories"
+    target="_blank">View more projects <Fragment set:html={github} /></a
+    >
     <RectPattern width={250} height={250} id="rect-left" />
     <RectPattern width={230} height={230} id="rect-right" />
   </section>
 </Page>
-<style>
-  :global(#projects > #rect-right) {
+<style is:global>
+  #projects > #rect-right {
     position: absolute;
     right: 0;
     bottom: calc(100vh / 5);
     z-index: -1;
   }
-  :global(#projects > #rect-left) {
+  #projects > #rect-left {
     position: absolute;
     left: 0;
     top: 128px;
     z-index: -1;
   }
 
-  :global(#projects:has(.project:hover) .project) {
+  #projects:has(.project:hover) .project {
     opacity: 0.7;
   }
 
+  .btn-more-projects svg {
+    fill: var(--clr-quote);
+    font-size: 1.2rem;
+    width: 18px;
+    height: 18px;
+  }
+
   @media (max-width: 640px) {
-    :global(#projects > #rect-left) {
+    #projects > #rect-left {
       top: 300px;
     }
 
-    :global(#projects > #rect-right) {
+    #projects > #rect-right {
       top: unset;
     }
-    :global(#projects > #rect-left-bottom) {
+    #projects > #rect-left-bottom {
       bottom: 0;
     }
   }
