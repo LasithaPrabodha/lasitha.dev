@@ -191,6 +191,11 @@ declare module 'astro:content' {
 
 	type DataEntryMap = {
 		"personal-projects": {
+"account-balance-viewer": {
+	id: "account-balance-viewer";
+  collection: "personal-projects";
+  data: any
+};
 "dots-connect": {
 	id: "dots-connect";
   collection: "personal-projects";

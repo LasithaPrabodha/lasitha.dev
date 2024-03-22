@@ -1,6 +1,6 @@
 id: 2
 title: "Jeopardy Game"
-description: "A simple implementation of the classic TV game show 'Jeopardy'. The project is built using vanilla JavaScript"
+description: "A Jeopardy game built with vanilla JavaScript (without external libraries) as a simple single-page application (SPA) utilizing a Redux store for state management"
 technologies:
   - JavaScript
   - HTML
