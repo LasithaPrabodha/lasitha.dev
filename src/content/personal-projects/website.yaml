@@ -1,6 +1,6 @@
-id: 3
-title: "Personal Website"
-description: "My mobile responsive personal website, built using Astro + Tailwind CSS + Netlify"
+id: 5
+title: "Personal Website (lasitha.dev)"
+description: "Built with Astro & Tailwind CSS, this mobile-friendly static website offers smooth transitions and leverages Astro DB for dynamic content"
 technologies:
   - Astro
   - TailwindCSS

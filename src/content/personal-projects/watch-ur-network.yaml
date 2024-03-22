@@ -1,6 +1,6 @@
 id: 4
 title: "Watch Your Network"
-description: "Example web app which keeps tracks of your friends network"
+description: "An example of a scalable Angular web application that visualizes friend network statistics on interactive grids and graphs. This project demonstrates the use of Nx, NgRx, Storybook, Jest, and Cypress"
 technologies:
   - Angular
   - NgRx

@@ -1,6 +1,6 @@
-id: 1
+id: 3
 title: "Dots Connect"
-description: "It's a small, dynamic, two-player game where you compete to connect dots of the same color on a grid"
+description: "This is a small, dynamic two-player game (with AI or another player) where you compete to connect dots of the same color on a grid. It features a minimal AI that demonstrates fundamental AI capabilities."
 technologies:
   - JavaScript
   - HTML
