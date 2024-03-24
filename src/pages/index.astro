@@ -3,29 +3,23 @@ import Page from "@layouts/Page.astro";
 import MyName from "@components/MyName.astro";
 import ContactIcons from "@components/ContactIcons.astro";
 import { SITE_TITLE, SITE_DESCRIPTION } from "consts";
-
-// import "@assets/styles/home.css";
 ---
 
 <Page
-  title={SITE_TITLE}
-  description={SITE_DESCRIPTION}
-  addNight={true}
-  class="max-sm:mt-8 max-sm:ml-4 max-sm:mr-4 flex-col overflow-hidden bg-transparent center"
+  metaTitle={SITE_TITLE}
+  metaDescription={SITE_DESCRIPTION}
+  transition:animate="fade"
+  class="min-h-screen max-sm:pt-8 max-sm:ml-4 max-sm:mr-4 flex-col overflow-hidden bg-transparent center"
 >
-  <div class="fixed-height flex flex-col justify-center">
-    <h1 class="text-6xl max-sm:text-4xl">
-      Hi, I am <MyName />
-    </h1>
-    <h2 class="text-5xl max-sm:text-3xl max-sm:mt-4 text-[color:var(--clr-quote)]">
-      I build things for web and mobile
-    </h2>
-    <p class="mb-12 mt-8">A software engineer specializing in building exceptional digital experiences</p>
+  <h1 class="text-6xl max-sm:text-4xl">
+    Hi, I am <MyName />
+  </h1>
+  <h2 class="text-5xl max-sm:text-3xl max-sm:mt-4 text-[color:var(--clr-quote)]">I build things for web and mobile</h2>
+  <p class="mb-12 mt-8">A software engineer specializing in building exceptional digital experiences</p>
 
-    <a href="/blog" class="button-container mb-12 z-0 my-0 mx-auto w-[200px]">
-      <span class="mas">Check out my blog!</span>
-      <button type="button" name="Hover">Check out my blog!</button>
-    </a>
-    <ContactIcons />
-  </div>
+  <a href="/blog" class="button-container mb-12 z-0 my-0 mx-auto w-[200px]">
+    <span class="mas">Check out my blog!</span>
+    <button type="button" name="Hover">Check out my blog!</button>
+  </a>
+  <ContactIcons />
 </Page>

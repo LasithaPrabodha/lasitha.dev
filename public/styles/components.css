@@ -160,34 +160,9 @@
   color: var(--clr-fg);
   font-weight: 500;
 }
-
-.section-title {
-  margin: 0 auto;
-  margin-bottom: 1em !important;
-  width: fit-content;
-  text-transform: uppercase;
-  text-align: center;
-  display: block;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-  -webkit-background-clip: text;
-  background-image: linear-gradient(45deg, var(--clr-grd-one), var(--clr-grd-two));
-}
-
+ 
 .d-none {
   display: none !important;
-}
-
-canvas {
-  z-index: 0;
-  position: absolute;
-  top: 0;
-  left: 0;
-  display: none;
-}
-
-[data-theme="dark"] canvas {
-  display: block;
 }
 
 [data-theme="dark"] .rect-pattern {

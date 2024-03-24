@@ -2,10 +2,10 @@
 import BaseHead from "@components/BaseHead.astro";
 import Header from "@components/Header.astro";
 import Footer from "@components/Footer.astro";
+import SectionTitle from "@components/SectionTitle.astro";
+import ScrollToTop from "@components/ScrollToTop.astro";
 
-const { title, description, addNight, ...props } = Astro.props;
-
-const { default: up } = await import(`/src/assets/icons/angles-up.svg?raw`);
+const { title, metaTitle, metaDescription, ...props } = Astro.props;
 
 const theme = Astro.cookies.get("theme")?.value || "dark";
 ---
@@ -13,39 +13,19 @@ const theme = Astro.cookies.get("theme")?.value || "dark";
 <!doctype html>
 <html lang="en">
   <head>
-    <BaseHead title={title} description={description} />
+    <BaseHead title={metaTitle} description={metaDescription} />
   </head>
   <body class="relative" id="top" data-theme={theme}>
     <Header />
-    <main {...props} transition:animate="slide">
+    <main
+      {...props}
+      class="flex relative min-h-screen flex-col flex-1 w-full m-auto box-border pt-6 px-6 sm:pt-36 pb-6 max-w-[900px] max-sm:pb-8 bg-transparent"
+    >
+      {title && <SectionTitle>{title}</SectionTitle>}
       <slot />
     </main>
-    <div class="scroll-container">
-      <div class="scroll-top">
-        <a aria-label="Scroll up" href="#top">
-          <Fragment set:html={up} />
-        </a>
-      </div>
-    </div>
+    <slot name="outside-main" />
     <Footer />
-    <script>
-      // import { render } from "@assets/js/night.js";
-      // import { start } from "@assets/js/shooting-star.js";
-
-      // render();
-      // setTimeout(start, 200);
-
-      document.addEventListener("scroll", () => {
-        const btnScrollTop = document.querySelector<HTMLElement>(".scroll-top");
-
-        if (!btnScrollTop) return;
-
-        if (document.body?.scrollTop > 500 || document.documentElement.scrollTop > 500) {
-          btnScrollTop.style.display = "block";
-        } else {
-          btnScrollTop.style.display = "none";
-        }
-      });
-    </script>
+    <ScrollToTop />
   </body>
 </html>
