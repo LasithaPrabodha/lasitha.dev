@@ -34,7 +34,7 @@ import ContactIcons from "@components/ContactIcons.astro";
     </div>
     <div class="details-photo h-min relative">
       <Image format="avif" src={myPhoto} loading="eager" alt="My portrait photo" width={300} height={300} />
-      <RectPattern />
+      <RectPattern width={320} height={320} />
     </div>
   </div>
 
@@ -53,10 +53,8 @@ import ContactIcons from "@components/ContactIcons.astro";
 <style>
   :global(.details-photo > svg) {
     position: absolute;
-    right: 0;
-    top: 0;
-    margin-right: -2rem;
-    margin-top: 4rem;
+    left: 10px;
+    top: 10px; 
     z-index: -1;
     transition: var(--transition);
   }
@@ -65,7 +63,7 @@ import ContactIcons from "@components/ContactIcons.astro";
   }
 
   .details-photo:hover {
-    transform: translate(-5px, -5px);
+    transform: translate(-3px, -3px);
   }
 
   .details-photo:hover img {
@@ -74,7 +72,7 @@ import ContactIcons from "@components/ContactIcons.astro";
   }
 
   :global(.details-photo:hover > svg) {
-    transform: translate(10px, 10px);
+    transform: translate(6px, 6px);
   }
 
   img {
