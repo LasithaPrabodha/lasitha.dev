@@ -1,0 +1,10 @@
+---
+const props = Astro.props;
+---
+
+<section
+  {...props}
+  class="bg-transparent flex flex-col flex-1 w-full m-auto box-border p-6 pt-12 pb-6 max-w-[900px] max-sm:pb-8"
+>
+  <slot />
+</section>

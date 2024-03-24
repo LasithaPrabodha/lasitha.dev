@@ -9,53 +9,47 @@ import MyName from "@components/MyName.astro";
 import ContactIcons from "@components/ContactIcons.astro";
 ---
 
-<Page
-  title={"About - " + SITE_TITLE}
-  description={SITE_DESCRIPTION}
-  addNight={true}
-  class="flex flex-col items-center overflow-x-hidden bg-transparent"
->
-  <div class="sm:pt-12 sm:px-6 m-auto max-sm:pt-6 pb-16 max-sm:mt-6 max-sm:px-6 box-border max-w-[900px]">
-    <div class="name">
-      <small class="uppercase">About</small>
-      <h2 class="font-bold">
-        <MyName />
-      </h2>
-    </div>
-    <div class="flex max-sm:block mt-8 gap-4">
-      <div class="flex-1 lg:pr-2">
-        <p>Hi there!</p>
-
-        <p class="lg:text-justify">
-          Throughout my journey from early encounters with computers in 2002 to my current role as a seasoned Frontend
-          Engineer, I've been driven by a passion for technology and creating meaningful digital experiences.
-        </p>
-        <p class="lg:text-justify">
-          With over seven years of experience, I specialize in crafting elegant, user-centric web applications using
-          Angular, React, TypeScript, C# .NET Core and more. I've revitalized legacy systems and led the development of cutting-edge
-          applications, honing my problem-solving skills and delivering exceptional results.
-        </p>
-        <p class="lg:text-justify">
-          Beyond coding, I'm a dedicated metalhead, drawing inspiration from bands like Black Sabath, Gojira, Tool, and Metallica, to name a few.
-        </p>
-      </div>
-      <div class="details-photo h-min relative">
-        <Image format="avif" src={myPhoto} loading="eager" alt="My portrait photo" width={300} height={300} />
-        <RectPattern />
-      </div>
-    </div>
-
-    <p class="lg:mt-4 lg:text-justify">
-      Continuously learning and growing, I thrive on mastering new technologies and refining UI/UX skills. I believe in
-      the power of collaboration, fostering strong relationships to solve challenges and drive meaningful change.
-    </p>
-    <p class="lg:text-justify">
-      As I embark on the next chapter, I'm excited to push boundaries in technology, mentor others, and make a positive
-      impact. Let's connect and discuss tech, metal, or collaboration opportunities!
-    </p>
-
-    <ContactIcons showEmail={true} />
+<Page metaTitle={"About - " + SITE_TITLE} metaDescription={SITE_DESCRIPTION} transition:animate="fade">
+  <div class="name mt-12 sm:mt-0">
+    <small class="uppercase">About</small>
+    <h2>
+      <MyName />
+    </h2>
   </div>
+  <div class="flex max-sm:block mt-8 gap-4">
+    <div class="flex-1 sm:pr-2">
+      <p>Hi there!</p>
+
+      <p class="sm:text-justify">
+        Throughout my journey from early encounters with computers in 2002 to my current role as a seasoned Frontend
+        Engineer, I've been driven by a passion for technology and creating meaningful digital experiences.
+      </p>
+      <p class="sm:text-justify">
+        With over seven years of experience, I specialize in crafting elegant, user-centric web applications using
+        Angular, React, TypeScript, C# .NET Core and more. I've revitalized legacy systems and led the development of
+        cutting-edge applications, honing my problem-solving skills and delivering exceptional results.
+      </p>
+      <p class="sm:text-justify">
+        Beyond coding, I'm a dedicated metalhead, drawing inspiration from bands like Black Sabath, Gojira, Tool, and
+        Metallica, to name a few.
+      </p>
+    </div>
+    <div class="details-photo h-min relative">
+      <Image format="avif" src={myPhoto} loading="eager" alt="My portrait photo" width={300} height={300} />
+      <RectPattern />
+    </div>
+  </div>
+
+  <p class="sm:text-justify">
+    Continuously learning and growing, I thrive on mastering new technologies and refining UI/UX skills. I believe in
+    the power of collaboration, fostering strong relationships to solve challenges and drive meaningful change.
+  </p>
+  <p class="sm:text-justify">
+    As I embark on the next chapter, I'm excited to push boundaries in technology, mentor others, and make a positive
+    impact. Let's connect and discuss tech, metal, or collaboration opportunities!
+  </p>
+
+  <ContactIcons showEmail={true} />
 </Page>
 
 <style>
@@ -107,9 +101,6 @@ import ContactIcons from "@components/ContactIcons.astro";
       height: 100%;
     }
 
-    .fixed-height {
-      height: unset;
-    }
     .details-photo:hover {
       transform: translate(0px, -5px);
     }

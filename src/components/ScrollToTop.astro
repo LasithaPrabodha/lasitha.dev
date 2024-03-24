@@ -1,0 +1,24 @@
+---
+const { default: up } = await import(`/src/assets/icons/angles-up.svg?raw`);
+---
+
+<div class="scroll-container">
+  <div class="scroll-top">
+    <a aria-label="Scroll up" href="#top">
+      <Fragment set:html={up} />
+    </a>
+  </div>
+</div>
+<script>
+  document.addEventListener("scroll", () => {
+    const btnScrollTop = document.querySelector<HTMLElement>(".scroll-top");
+
+    if (!btnScrollTop) return;
+
+    if (document.body?.scrollTop > 500 || document.documentElement.scrollTop > 500) {
+      btnScrollTop.style.display = "block";
+    } else {
+      btnScrollTop.style.display = "none";
+    }
+  });
+</script>

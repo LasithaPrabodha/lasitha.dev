@@ -9,42 +9,43 @@ import BlogPost from "@components/BlogPost.astro";
 const posts = (await getCollection("blog")).sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
 ---
 
-<Page title={"Blog - " + SITE_TITLE} description={SITE_DESCRIPTION} addNight={true}>
-  <section
-    transition:animate="fade"
-    id="blog"
-    class="flex flex-1 flex-col w-full m-auto box-border p-6 pt-12 pb-20 max-w-[900px]"
-  >
-    <h2 class="section-title font-bold">Let's Learn Together!</h2>
-    <div class="pt-10 grid gap-2 lg:grid-cols-2 lg:gap-y-8">
-      {posts.map((post) => <BlogPost post={post} />)}
-    </div>
+<Page
+  metaTitle={"Blog - " + SITE_TITLE}
+  metaDescription={SITE_DESCRIPTION}
+  transition:animate="fade"
+  title="Let's Learn Together!"
+>
+  <div class="mt-6 grid gap-2 sm:grid-cols-2 sm:gap-y-8" id="blog">
+    {posts.map((post) => <BlogPost post={post} />)}
+  </div>
 
-    <RectPattern width={250} height={250} id="rect-left" />
-    <RectPattern width={230} height={230} id="rect-right" />
-  </section>
+  <RectPattern slot="outside-main" width={250} height={250} id="blog-rect-left" />
+  <RectPattern slot="outside-main" width={230} height={230} id="blog-rect-right" />
 </Page>
 
-<style>
-  :global(#blog > #rect-right) {
+<style is:global>
+  body {
+    height: fit-content;
+  }
+  #blog-rect-right {
     position: absolute;
     right: 0;
     top: 128px;
     z-index: -1;
   }
-  :global(#blog > #rect-left) {
+  #blog-rect-left {
     position: absolute;
     left: 0;
     bottom: calc(100vh / 5);
     z-index: -1;
   }
-  :global(#blog:has(.blog-post:hover) .blog-post) {
+  #blog:has(.blog-post:hover) .blog-post {
     opacity: 0.7;
   }
 
   @media (max-width: 1024px) {
-    :global(#blog > #rect-right),
-    :global(#blog > #rect-left) {
+    #blog-rect-right,
+    #blog-rect-left {
       display: none;
     }
   }

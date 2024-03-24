@@ -2,23 +2,16 @@
 import Page from "@layouts/Page.astro";
 ---
 
-<Page title={"404"} description={"Page not found"} addNight={true}>
-  <section>
+<Page metaTitle={"404"} metaDescription={"Page not found"}>
+  <div class="notfound-wrapper h-screen m-0 flex flex-col items-center justify-center">
     <div class="four0four" title="404">404</div>
     <p>This page doesn't exist. =(</p>
     <a href="/"> Return to home</a>
-  </section>
+  </div>
 </Page>
 
 <style>
-  section {
-    display: flex;
-    flex-direction: column;
-    width: 100vw;
-    height: calc(100vh - 250px);
-    align-items: center;
-    justify-content: center;
-    margin: 0;
+  .notfound-wrapper {
     font-family: monospace, system-ui, sans-serif;
   }
 
