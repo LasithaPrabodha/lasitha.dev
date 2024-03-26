@@ -1,5 +1,13 @@
 :root {
   --transition: all 0.25s cubic-bezier(0.645, 0.045, 0.355, 1);
+
+  --bright-blue: oklch(51.01% .274 263.83);
+  --hot-red: oklch(61.42% .238 15.34);
+  --vivid-pink: oklch(69.02% .277 332.77);
+  --french-violet: oklch(47.66% .246 305.88);
+  --old-red: #ba2d23;
+  --old-blue: #1b3487;
+
 }
 
 [data-theme="light"] {
@@ -7,8 +15,8 @@
   --clr-bg-alt: #fff;
   --clr-bg-code: #eee;
   --clr-quote: #afb8c1;
-  --clr-fg: #555;
-  --clr-fg-alt: #444;
+  --clr-fg: #333333;
+  --clr-fg-alt: #333A3F;
   --clr-primary: #1b3487;
   --clr-chip-bg: #ff2d2310;
   --clr-grd-one: #ba2d23;
