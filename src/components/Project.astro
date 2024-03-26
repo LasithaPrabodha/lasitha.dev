@@ -8,7 +8,7 @@ const { title, description, technologies } = data;
 
 <div class="project px-4 py-5 w-full" data-link={links[0].href}>
   <div class="flex justify-between">
-    <h4 class="text-lg">{title}</h4>
+    <h4 class="text-xl">{title}</h4>
     <div class="project-links flex items-center">
       {links.map((l: Link) => <IconLink href={l.href} icon={l.icon} ariaLabel={l.ariaLabel} />)}
     </div>
