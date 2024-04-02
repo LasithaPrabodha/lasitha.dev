@@ -8,6 +8,7 @@
   --old-red: #ba2d23;
   --old-blue: #1b3487;
 
+  color-scheme: only light;
 }
 
 [data-theme="light"] {
