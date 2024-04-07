@@ -1,13 +1,8 @@
 :root {
   --transition: all 0.25s cubic-bezier(0.645, 0.045, 0.355, 1);
 
-  --bright-blue: oklch(51.01% .274 263.83);
-  --hot-red: oklch(61.42% .238 15.34);
-  --vivid-pink: oklch(69.02% .277 332.77);
-  --french-violet: oklch(47.66% .246 305.88);
   --old-red: #ba2d23;
   --old-blue: #1b3487;
-
 }
 
 [data-theme="light"] {
@@ -17,10 +12,9 @@
   --clr-quote: #afb8c1;
   --clr-fg: #333333;
   --clr-fg-alt: #333A3F;
-  --clr-primary: #1b3487;
+  --clr-primary: oklch(0.69 0.25 29.96);
   --clr-chip-bg: #ff2d2310;
-  --clr-grd-one: #ba2d23;
-  --clr-grd-two: #1b3487;
+  --clr-link: oklch(0.67 0.31 359.25); 
   --shadow: rgba(100, 100, 111, 0.2) 0px 2px 5px 0px, rgba(100, 100, 111, 0.2) 0px 0px 0px 0.5px;
   --display-sun: none;
   --display-moon: block;
@@ -35,8 +29,7 @@
   --clr-fg-alt: #cdcdff;
   --clr-primary: #90a0d9;
   --clr-chip-bg: #90a0d920;
-  --clr-grd-one: #90a0d9;
-  --clr-grd-two: #90a0d9;
+  --clr-link: #90a0d9; 
   --shadow: rgba(255, 255, 255, 0.2) 0px 0px 0px 1px;
   --display-sun: block;
   --display-moon: none;
@@ -160,5 +153,8 @@ strong {
 @media (max-width: 640px) {
   main {
     height: unset;
+  }
+  p { 
+    margin-bottom: 1.2em;
   }
 }

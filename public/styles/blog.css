@@ -2,8 +2,8 @@ article h1 {
   font-weight: 500;
 }
 article h2 {
-  margin-top: 36px;
-  margin-bottom: 18px;
+  margin-top: 1em;
+  margin-bottom: 0.5em;
   font-weight: 500;
 }
 
@@ -42,7 +42,7 @@ article .w-image img {
 article ul {
   list-style-type: disc;
   padding-left: 18px;
-  margin-bottom: 12px;
+  margin-bottom: 1.5em;
 }
 
 article li {
@@ -54,11 +54,11 @@ article li p {
 }
 
 .go-back {
-  color: var(--clr-grd-one);
+  color: var(--clr-link);
 }
 .go-back svg {
   width: 10px;
-  fill: var(--clr-grd-one);
+  fill: var(--clr-link);
 }
 
 article ol {
@@ -68,7 +68,7 @@ article ol {
 }
 
 article ol li {
-  margin-bottom: 12px;
+  margin-bottom: 0.5em;
 }
 
 article blockquote p {
@@ -83,10 +83,24 @@ article .expressive-code + p {
   margin-bottom: 1em;
 }
 
-article p + .expressive-code {
-  margin-bottom: 2em;
+article p + h2,
+article ul + h2 {
+  margin-top: 0.5em;
 }
 
 article p {
   font-size: 18px;
+}
+
+@media (max-width: 640px) {
+  article p {
+    font-size: 16px;
+  }
+
+  h2 {
+    font-size: 1.5rem;
+  }
+  h3 {
+    font-size: 1.25rem;
+  }
 }
