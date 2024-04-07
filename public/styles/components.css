@@ -135,7 +135,7 @@
 }
 .link.active svg,
 .link:hover svg {
-  fill: var(--clr-grd-one);
+  fill: var(--clr-link);
 }
 
 .link:not(.link--icon)::before {
@@ -160,28 +160,13 @@
   color: var(--clr-fg);
   font-weight: 500;
 }
- 
+
 .d-none {
   display: none !important;
 }
 
 [data-theme="dark"] .rect-pattern {
   color: var(--clr-bg-code);
-}
-
-.scroll-top {
-  display: none;
-  position: fixed;
-  bottom: 1em;
-  right: 2em;
-  background-color: transparent;
-  font-size: 1.8rem;
-  transition: var(--transition);
-}
-
-.scroll-top svg {
-  width: 26px;
-  fill: var(--clr-quote);
 }
 
 .no-shadow * {

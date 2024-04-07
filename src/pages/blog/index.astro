@@ -5,6 +5,7 @@ import { SITE_TITLE, SITE_DESCRIPTION } from "consts";
 import Page from "@layouts/Page.astro";
 import RectPattern from "@components/RectPattern.astro";
 import BlogPost from "@components/BlogPost.astro";
+import ScrollToTop from "@components/ScrollToTop.astro";
 
 const posts = (await getCollection("blog")).sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
 ---
@@ -38,7 +39,7 @@ const posts = (await getCollection("blog")).sort((a, b) => b.data.pubDate.valueO
     left: 0;
     bottom: calc(100vh / 5);
     z-index: -1;
-  } 
+  }
   @media (max-width: 1024px) {
     #blog-rect-right,
     #blog-rect-left {
