@@ -4,46 +4,15 @@ import { getCollection } from "astro:content";
 import { SITE_TITLE, SITE_DESCRIPTION } from "consts";
 import Page from "@layouts/Page.astro";
 import RectPattern from "@components/RectPattern.astro";
-import BlogPost from "@components/BlogPost.astro";
-import ScrollToTop from "@components/ScrollToTop.astro";
+import BlogPost from "@components/blog/BlogPost.astro";
+import SectionTitle from "@components/SectionTitle.astro";
 
 const posts = (await getCollection("blog")).sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
 ---
 
-<Page
-  metaTitle={"Blog - " + SITE_TITLE}
-  metaDescription={SITE_DESCRIPTION}
-  transition:animate="fade"
-  title="Let's Learn Together!"
->
+<Page metaTitle={"Blog - " + SITE_TITLE} metaDescription={SITE_DESCRIPTION} transition:animate="slide">
+  <SectionTitle>Let's Learn Together!</SectionTitle>
   <div class="mt-6 grid gap-2 sm:grid-cols-2 sm:gap-y-8" id="blog">
     {posts.map((post) => <BlogPost post={post} />)}
   </div>
-
-  <RectPattern slot="outside-main" width={250} height={250} id="blog-rect-left" />
-  <RectPattern slot="outside-main" width={230} height={230} id="blog-rect-right" />
 </Page>
-
-<style is:global>
-  body {
-    height: fit-content;
-  }
-  #blog-rect-right {
-    position: absolute;
-    right: 0;
-    top: 128px;
-    z-index: -1;
-  }
-  #blog-rect-left {
-    position: absolute;
-    left: 0;
-    bottom: calc(100vh / 5);
-    z-index: -1;
-  }
-  @media (max-width: 1024px) {
-    #blog-rect-right,
-    #blog-rect-left {
-      display: none;
-    }
-  }
-</style>

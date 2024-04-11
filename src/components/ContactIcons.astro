@@ -10,7 +10,7 @@ const { default: envelope } = await import(`/src/assets/icons/envelope.svg?raw`)
 const { showEmail = false } = Astro.props;
 ---
 
-<div class="center">
+<div class="center lg:invisible">
   {showEmail && <IconLink href="mailto:lasiprabo@gmail.com" ariaLabel="email" icon={envelope} />}
 
   <IconLink href="https://www.instagram.com/lu6_fer" ariaLabel="insta" icon={instagram} />

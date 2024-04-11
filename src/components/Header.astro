@@ -1,38 +1,174 @@
 ---
 import HeaderLink from "./HeaderLink.astro";
+import IconLink from "./IconLink.astro";
 // import "@assets/styles/header.css";
 
 const { default: moon } = await import(`/src/assets/icons/moon.svg?raw`);
 const { default: cross } = await import(`/src/assets/icons/xmark.svg?raw`);
 const { default: menu } = await import(`/src/assets/icons/bars.svg?raw`);
 const { default: sun } = await import(`/src/assets/icons/sun.svg?raw`);
+
+const { default: instagram } = await import(`/src/assets/icons/instagram.svg?raw`);
+const { default: facebook } = await import(`/src/assets/icons/facebook.svg?raw`);
+const { default: linkedin } = await import(`/src/assets/icons/linkedin.svg?raw`);
+const { default: github } = await import(`/src/assets/icons/github.svg?raw`);
+const { default: envelope } = await import(`/src/assets/icons/envelope.svg?raw`);
 ---
 
-<header
-  class="absolute top-0 sm:left-0 right-0 p-6 flex justify-center items-center sm:h-24 bg-transparent max-sm:justify-end"
-  transition:animate="none"
->
-  <nav class="nav center" transition:persist="navigation">
-    <ul class="nav-list center">
-      <HeaderLink href="/">Home</HeaderLink>
-      <HeaderLink href="/about">About</HeaderLink>
-      <HeaderLink href="/projects">Projects</HeaderLink>
-      <HeaderLink href="/blog">Blog</HeaderLink>
-      <HeaderLink href="/contact">Contact</HeaderLink>
-    </ul>
+<header class="fixed top-0 left-0 right-0 bg-transparent" transition:animate="none">
+  <nav class="nav flex justify-between py-6 px-10" transition:persist="navigation">
+    <h4 class="font-bold">LP</h4>
 
-    <button id="theme-toggle" type="button" aria-label="toggle theme" class="btn btn--icon">
-      <Fragment set:html={moon} />
-      <Fragment set:html={sun} />
-    </button>
+    <div class="flex justify-center">
+      <ul class="nav-list center">
+        <HeaderLink href="/">home</HeaderLink>
+        <HeaderLink href="/blog">Blog</HeaderLink>
+      </ul>
 
-    <button type="button" aria-label="toggle navigation" class="btn btn--icon nav-hamburger">
-      <Fragment set:html={menu} />
-      <Fragment set:html={cross} />
-    </button>
+      <button id="theme-toggle" type="button" aria-label="toggle theme" class="btn btn--icon">
+        <Fragment set:html={moon} />
+        <Fragment set:html={sun} />
+      </button>
+
+      <button type="button" aria-label="toggle navigation" class="btn btn--icon nav-hamburger">
+        <Fragment set:html={menu} />
+        <Fragment set:html={cross} />
+      </button>
+    </div>
   </nav>
 </header>
 
+<div class="social-icons fixed bottom-0 left-6 gap-1 flex flex-col">
+  <IconLink href="mailto:lasiprabo@gmail.com" ariaLabel="email" icon={envelope} />
+
+  <IconLink href="https://www.instagram.com/lu6_fer" ariaLabel="insta" icon={instagram} />
+
+  <IconLink href="https://www.facebook.com/lmlxlml" ariaLabel="fb" icon={facebook} />
+
+  <IconLink href="https://linkedin.com/in/lasithapw" ariaLabel="linkedin" icon={linkedin} />
+
+  <IconLink href="https://github.com/LasithaPrabodha" ariaLabel="github" icon={github} />
+</div>
+
+<style is:global>
+  [data-id="moon"],
+  [data-id="sun"],
+  [data-id="close"],
+  [data-id="menu"] {
+    fill: var(--clr-primary);
+  }
+  [data-id="moon"] {
+    display: var(--display-moon);
+  }
+  [data-id="sun"] {
+    display: var(--display-sun);
+  }
+  header svg {
+    width: 16px;
+  }
+  header {
+    background-color: rgb(255 255 255 / 85%);
+    backdrop-filter: blur(10px);
+    transition: 0.5s;
+  }
+  @media (prefers-reduced-motion: no-preference) {
+    header.hide {
+      transform: translateY(-100%);
+    }
+  }
+  header,
+  nav * {
+    z-index: 1;
+  }
+
+  .nav-list {
+    margin-right: 1.5em;
+    display: flex;
+  }
+
+  .nav-hamburger {
+    display: none;
+    width: 1em;
+  }
+
+  .btn--icon {
+    padding: 0;
+    font-size: 1.2rem;
+  }
+
+  .btn--icon:hover,
+  .btn--icon:focus {
+    color: var(--clr-primary);
+  }
+
+  .btn--icon:active {
+    transform: translateY(-5px);
+  }
+
+  #theme-toggle {
+    display: flex;
+    align-items: center;
+  }
+
+  .social-icons::after {
+    content: "";
+    display: block;
+    width: 1px;
+    height: 90px;
+    margin: 0px auto;
+    background-color: var(--clr-quote);
+  }
+
+  body.nav-open {
+    overflow: hidden;
+  }
+  body.nav-open main {
+    z-index: -1;
+  }
+  @media (max-width: 1023px) {
+    .social-icons {
+      display: none;
+    }
+  }
+
+  @media (max-width: 640px) {
+    #theme-toggle {
+      height: 20px;
+    }
+    .header {
+      height: 6em;
+      justify-content: flex-end !important;
+      display: flex !important;
+    }
+
+    .hamburger {
+      display: block;
+    }
+
+    .nav-list {
+      display: none;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      position: fixed;
+      inset: 0;
+      width: 100%;
+      height: 100vh;
+      transition: var(--transition);
+    }
+
+    .display-nav-list {
+      display: flex;
+      width: 100%;
+      background: var(--clr-bg);
+    }
+
+    .nav-hamburger {
+      display: flex;
+      margin-left: 0.8em;
+    }
+  }
+</style>
 <script>
   const btnHamburger = document.querySelector(".nav-hamburger");
   const navUl = document.querySelector(".nav-list");
@@ -110,22 +246,14 @@ const { default: sun } = await import(`/src/assets/icons/sun.svg?raw`);
     const activeLink = document.querySelector(`.nav-list-item [href='/${parentPathName}']`);
     activeLink?.classList.remove("active");
   });
-</script>
+  const nav = document.querySelector("header");
 
-<style>
-  :global([data-id="moon"]),
-  :global([data-id="sun"]),
-  :global([data-id="close"]),
-  :global([data-id="menu"]) {
-    fill: var(--clr-primary);
-  }
-  :global([data-id="moon"]) {
-    display: var(--display-moon);
-  }
-  :global([data-id="sun"]) {
-    display: var(--display-sun);
-  }
-  :global(header svg) {
-    width: 16px;
-  }
-</style>
+  let prevScrollpos = window.pageYOffset;
+
+  const toggleBottomNav = () => {
+    nav!.classList.toggle("hide", prevScrollpos <= window.pageYOffset);
+    prevScrollpos = window.pageYOffset;
+  };
+
+  window.addEventListener("scroll", toggleBottomNav);
+</script>
