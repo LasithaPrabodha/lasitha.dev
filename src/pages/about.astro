@@ -68,8 +68,7 @@ import ContactIcons from "@components/ContactIcons.astro";
     transform: translate(-3px, -3px);
   }
 
-  .details-photo:hover img {
-    filter: none;
+  .details-photo:hover img { 
     transition: var(--transition);
   }
 
@@ -82,8 +81,7 @@ import ContactIcons from "@components/ContactIcons.astro";
     box-shadow: var(--shadow);
     position: relative;
     background-image: url("/src/assets/images/blur.png");
-    background-size: contain;
-    filter: grayscale(100%) contrast(1);
+    background-size: contain; 
   }
 
   @media (max-width: 640px) {
