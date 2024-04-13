@@ -218,18 +218,23 @@ declare module 'astro:content' {
 };
 };
 "professional-projects": {
-"cenium": {
-	id: "cenium";
+"99x": {
+	id: "99x";
   collection: "professional-projects";
   data: any
 };
-"cloud-arena": {
-	id: "cloud-arena";
+"creative": {
+	id: "creative";
   collection: "professional-projects";
   data: any
 };
-"superoffice": {
-	id: "superoffice";
+"findmyfare": {
+	id: "findmyfare";
+  collection: "professional-projects";
+  data: any
+};
+"villvay": {
+	id: "villvay";
   collection: "professional-projects";
   data: any
 };

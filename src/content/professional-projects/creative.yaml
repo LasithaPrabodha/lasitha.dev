@@ -1,0 +1,12 @@
+id: 2
+title: "Creative Software"
+description: "Contributed to hospitality ERP software called Cenium. This software streamlines complex hotel group bookings with a versatile and dynamic PMS solution."
+technologies:
+  - Angular
+  - .NET
+  - C#
+links:
+  - href: "https://www.cenium.com/pms"
+    ariaLabel: "website"
+    icon: "external"
+  

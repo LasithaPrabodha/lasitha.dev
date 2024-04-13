@@ -1,62 +1,58 @@
 ---
-import Page from "@layouts/Page.astro";
-import { SITE_TITLE, SITE_DESCRIPTION } from "consts";
+import MyName from "@components/MyName.astro";
 import { Image } from "astro:assets";
 
-import myPhoto from "@assets/images/casual-photo.jpg";
 import RectPattern from "@components/RectPattern.astro";
-import MyName from "@components/MyName.astro";
-import ContactIcons from "@components/ContactIcons.astro";
+import myPhoto from "@assets/images/casual-photo.jpg";
 ---
 
-<Page metaTitle={"About - " + SITE_TITLE} metaDescription={SITE_DESCRIPTION} transition:animate="slide">
-  <div class="name mt-12 sm:mt-0">
-    <small class="uppercase">About</small>
-    <h2>
-      <MyName />
-    </h2>
+<section class="mb-32">
+  <div class="center">
+    <div class="name mt-12 sm:mt-0">
+      <small class="uppercase">About</small>
+      <h2 class="relative">
+        <MyName />
+      </h2>
+    </div>
   </div>
-  <div class="flex max-sm:block mt-8 gap-4">
+  <div class="flex max-sm:block mt-12 gap-4">
     <div class="flex-1 sm:pr-2">
       <p class="sm:text-justify">
         Hi there! I'm excited to introduce myself. I'm Lasitha Prabodha Weligampola. I discovered my passion for
         technology back in 2002 when I started playing around with computers. Now, as a Frontend Engineer with over 7
-        years of experience, I create web and mobile applications that are both functional and enjoyable to use. ✨
+        years of experience, I create web and mobile applications that are both functional and enjoyable to use.
       </p>
       <p class="sm:text-justify">
         My expertise lies in Angular, React, TypeScript, C#, .NET Core, and various other web technologies. I've worked
         with startups, medium-sized, and large-scale companies, leading the development of cutting-edge applications and
         revitalizing legacy systems.
       </p>
-      <p class="sm:text-justify">
-        Coding keeps my brain buzzing, but fire up some metal and that's when I truly come alive. 🙂‍↕️🤘🏼 The energy just
-        hits different. Whether it's Black Sabbath, Gojira, Tool or Metallica, I enjoy them all. 🎸
-      </p>
     </div>
     <div class="details-photo h-min relative">
-      <Image format="avif" src={myPhoto} loading="eager" alt="Lasitha Prabodha Weligampola" width={300} height={300} />
-      <RectPattern width={320} height={320} />
+      <Image format="avif" src={myPhoto} loading="eager" alt="Lasitha Prabodha Weligampola" width={250} height={250} />
+      <RectPattern width={250} height={250} />
     </div>
   </div>
-
+  <p class="sm:text-justify">
+    Coding keeps my brain buzzing, but fire up some metal and that's when I truly come alive. 🤘🏼 The energy just hits
+    different. Whether it's Black Sabbath, Gojira, Tool or Metallica, I enjoy them all. 🎸
+  </p>
   <p class="sm:text-justify">
     Continuous learning and improvement are essential to me, whether it's mastering new technologies or enhancing user
     interfaces for better usability. While I highly value the power of teamwork and fostering strong relationships, I'm
     equally capable of working effectively in both independent and collaborative environments.
   </p>
   <p class="sm:text-justify">
-    As I embark on the next chapter, I'm excited to push boundaries in technology, and make a positive impact.  <span class="sm:block"><a class="link" href="/contact">Let's
-    connect</a> and discuss tech, your favourite metal band, or collaboration opportunities! 🤝🏼</span> 
+    I'm excited to push boundaries in technology, and make a positive impact. Let's connect and discuss tech, your
+    favourite metal band, or collaboration opportunities! 🤝🏼
   </p>
-
-  <ContactIcons showEmail={true} />
-</Page>
+</section>
 
 <style>
   :global(.details-photo > svg) {
     position: absolute;
-    left: 10px;
-    top: 10px;
+    left: 20px;
+    top: -10px;
     z-index: -1;
     transition: var(--transition);
   }
@@ -65,15 +61,16 @@ import ContactIcons from "@components/ContactIcons.astro";
   }
 
   .details-photo:hover {
-    transform: translate(-3px, -3px);
+    transform: translate(3px, -3px);
   }
 
-  .details-photo:hover img { 
+  .details-photo:hover img {
     transition: var(--transition);
+    filter: none;
   }
 
   :global(.details-photo:hover > svg) {
-    transform: translate(6px, 6px);
+    transform: translate(6px, -6px);
   }
 
   img {
@@ -81,7 +78,30 @@ import ContactIcons from "@components/ContactIcons.astro";
     box-shadow: var(--shadow);
     position: relative;
     background-image: url("/src/assets/images/blur.png");
-    background-size: contain; 
+    background-size: contain;
+    filter: grayscale(100%) contrast(1);
+  }
+  h2::before {
+    content: "";
+    display: block;
+    position: absolute;
+    width: 90px;
+    height: 1px;
+    left: -120px;
+    margin: 0px auto;
+    background-color: var(--clr-quote);
+    top: 50%;
+  }
+  h2::after {
+    content: "";
+    display: block;
+    position: absolute;
+    width: 90px;
+    height: 1px;
+    right: -120px;
+    margin: 0px auto;
+    background-color: var(--clr-quote);
+    top: 50%;
   }
 
   @media (max-width: 640px) {
@@ -98,9 +118,6 @@ import ContactIcons from "@components/ContactIcons.astro";
 
     .details-photo:hover {
       transform: translate(0px, -5px);
-    }
-    p{
-      
     }
   }
 </style>

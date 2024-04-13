@@ -2,10 +2,12 @@
 const { default: up } = await import(`/src/assets/icons/angles-up.svg?raw`);
 ---
 
-<div class="scroll-top">
-  <a aria-label="Scroll up" href="#top">
-    <Fragment set:html={up} />
-  </a>
+<div class="scroll-container">
+  <div class="scroll-top">
+    <a aria-label="Scroll up" href="#top">
+      <Fragment set:html={up} />
+    </a>
+  </div>
 </div>
 <style>
   .scroll-top {

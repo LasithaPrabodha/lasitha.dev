@@ -1,5 +1,5 @@
 ---
-import FormattedDate from "@components/FormattedDate.astro";
+import FormattedDate from "@components/blog/FormattedDate.astro";
 import BaseHead from "@components/BaseHead.astro";
 import Header from "@components/Header.astro";
 import Footer from "@components/Footer.astro";
@@ -41,8 +41,7 @@ const ecTheme = theme === "dark" ? "one-dark-pro" : "github-light";
     <Header />
     <main
       {...props}
-      class="bg-transparent relative sm:mt-6 max-sm:p-6 max-w-[700px] w-full m-auto box-border mb-6 max-sm:mb-8"
-      transition:animate="slide"
+      class="bg-transparent relative sm:mt-6 max-sm:p-6 max-w-[700px] w-full m-auto box-border mb-6 max-sm:mb-8 animate-fade-left animate-ease-out"
     >
       <div class="go-back mb-8">
         <a href="/blog" class="flex gap-2">

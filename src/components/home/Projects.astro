@@ -1,0 +1,64 @@
+---
+import Project from "@components/Project.astro";
+import { getCollection } from "astro:content";
+import type { Link } from "interfaces/Link";
+
+const { default: external } = await import(`/src/assets/icons/external.svg?raw`);
+const { default: book } = await import(`/src/assets/icons/book.svg?raw`);
+const { default: github } = await import(`/src/assets/icons/github.svg?raw`);
+
+const icons: { [key: string]: string } = { external, book, github };
+
+const personalProjects = (await getCollection("personal-projects")).sort((a, b) => a.data.id - b.data.id);
+---
+
+<section class="min-h-screen">
+  <h2 class="flex">
+    <span class="title relative font-bold max-sm:block">Personal Projects</span>
+    <!-- <a
+      class="btn-more-projects ml-4 text-sm text-[color:var(--clr-quote)] hover:text-[color:var(--clr-link)] flex items-center"
+      href="https://www.github.com/LasithaPrabodha?tab=repositories"
+      target="_blank"
+    >
+      <span class="mr-1 text-nowrap">View more</span>
+      <Fragment set:html={github} />
+    </a> -->
+  </h2>
+
+  <div class="my-6 sm:-ml-4 grid gap-1 sm:grid-cols-2 sm:gap-y-6">
+    {
+      personalProjects.map((project) => (
+        <Project {...project} links={project.data.links.map((l: Link) => ({ ...l, icon: icons[l.icon] }))} />
+      ))
+    }
+  </div>
+</section>
+
+<style is:global>
+  span.title::after {
+    content: "";
+    display: block;
+    position: absolute;
+    width: 120px;
+    height: 1px;
+    right: -150px;
+    margin: 0px auto;
+    background-color: var(--clr-quote);
+    top: 50%;
+  }
+  .btn-more-projects {
+    right: -95px;
+    bottom: 0;
+    transition: var(--transition);
+  }
+  .btn-more-projects svg {
+    transition: var(--transition);
+    fill: var(--clr-quote);
+    font-size: 1.2rem;
+    width: 14px;
+    height: 14px;
+  }
+  .btn-more-projects:hover svg {
+    fill: var(--clr-link);
+  }
+</style>

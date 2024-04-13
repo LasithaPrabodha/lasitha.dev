@@ -1,0 +1,12 @@
+id: 1
+title: "99x"
+description: "Contributed to Angular-based web app development for SuperOffice, a European cloud B2B CRM. This application contains a set of self-serve tools that developers can use to manage their access to SuperOffice Online APIs."
+technologies:
+  - Angular
+  - .NET
+  - C#
+links:
+  - href: "https://docs.superoffice.com/en/developer-portal/about.html"
+    ariaLabel: "website"
+    icon: "external"
+  
