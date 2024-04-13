@@ -14,7 +14,7 @@ technologies:
 links:
   - href: "https://lasithaprabodha.github.io/watch-ur-network"
     ariaLabel: "live preview"
-    icon: "eye"
+    icon: "external"
   - href: "https://github.com/LasithaPrabodha/watch-ur-network"
     ariaLabel: "source code"
     icon: "github"

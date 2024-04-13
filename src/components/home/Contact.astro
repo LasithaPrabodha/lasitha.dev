@@ -5,7 +5,7 @@ import ContactIcons from "@components/ContactIcons.astro";
 <section class="mb-20 mt-12 center flex-col">
   <div class="center">
     <h2>
-      <span class="font-bold max-sm:block">Get In Touch!</span>
+      <span class="title relative font-bold max-sm:block">Get In Touch!</span>
     </h2>
   </div>
   <div class="flex flex-col items-center mt-24 sm:mt-0">
@@ -20,3 +20,17 @@ import ContactIcons from "@components/ContactIcons.astro";
     <ContactIcons />
   </div>
 </section>
+<style>
+  span.title::after {
+    content: "";
+    display: block;
+    position: absolute;
+    right: 0;
+    left: 0;
+    width: 1px;
+    height: 80px;
+    top: -110px;
+    margin: 0px auto;
+    background-color: var(--clr-quote);
+  }
+</style>

@@ -8,7 +8,7 @@ technologies:
 links:
   - href: "https://lasithaprabodha.github.io/jeopardy-app"
     ariaLabel: "live preview"
-    icon: "eye"
+    icon: "external"
   - href: "https://github.com/LasithaPrabodha/jeopardy-app"
     ariaLabel: "source code"
     icon: "github"

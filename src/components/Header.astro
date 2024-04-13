@@ -1,7 +1,6 @@
 ---
 import HeaderLink from "./HeaderLink.astro";
 import IconLink from "./IconLink.astro";
-// import "@assets/styles/header.css";
 
 const { default: moon } = await import(`/src/assets/icons/moon.svg?raw`);
 const { default: cross } = await import(`/src/assets/icons/xmark.svg?raw`);
@@ -13,13 +12,15 @@ const { default: facebook } = await import(`/src/assets/icons/facebook.svg?raw`)
 const { default: linkedin } = await import(`/src/assets/icons/linkedin.svg?raw`);
 const { default: github } = await import(`/src/assets/icons/github.svg?raw`);
 const { default: envelope } = await import(`/src/assets/icons/envelope.svg?raw`);
+
+const { animate = false } = Astro.props;
 ---
 
-<header class="fixed top-0 left-0 right-0 bg-transparent" transition:animate="none">
-  <nav class="nav flex justify-between py-6 px-10" transition:persist="navigation">
-    <h4 class="font-bold">LP</h4>
+<header class="fixed top-0 left-0 right-0 bg-transparent">
+  <nav class="nav flex justify-between py-6 px-6 sm:px-10">
+    <h4 class="font-bold animate-delay-1000 animate-ease-out" class:list={{ "animate-fade-right": animate }}>LP</h4>
 
-    <div class="flex justify-center">
+    <div class="flex justify-center animate-delay-1000 animate-ease-out" class:list={{ "animate-fade-left": animate }}>
       <ul class="nav-list center">
         <HeaderLink href="/">home</HeaderLink>
         <HeaderLink href="/blog">Blog</HeaderLink>
@@ -38,7 +39,10 @@ const { default: envelope } = await import(`/src/assets/icons/envelope.svg?raw`)
   </nav>
 </header>
 
-<div class="social-icons fixed bottom-0 left-6 gap-1 flex flex-col">
+<div
+  class="social-icons fixed bottom-0 left-6 gap-1 flex flex-col animate-delay-1000 animate-ease-out"
+  class:list={{ "animate-fade-right": animate }}
+>
   <IconLink href="mailto:lasiprabo@gmail.com" ariaLabel="email" icon={envelope} />
 
   <IconLink href="https://www.instagram.com/lu6_fer" ariaLabel="insta" icon={instagram} />

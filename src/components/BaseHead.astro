@@ -10,7 +10,6 @@ import "@fontsource/poppins/600.css";
 import "@fontsource/poppins/700.css";
 
 import { OG_IMAGE, SITE_DESCRIPTION, SITE_TITLE } from "consts";
-import { ViewTransitions } from "astro:transitions";
 
 interface Props {
   title: string;
@@ -56,7 +55,6 @@ const canonicalURL = Astro.site ? new URL(Astro.url.pathname, "https://www.lasit
 <style is:global>
   @import "/styles/global.css";
   @import "/styles/components.css";
-  @import "/styles/header.css";
   @import "/styles/blog.css";
 </style>
 
@@ -79,5 +77,3 @@ const canonicalURL = Astro.site ? new URL(Astro.url.pathname, "https://www.lasit
 <meta property="twitter:title" content={title} />
 <meta property="twitter:description" content={description} />
 <meta property="twitter:image" content={ogImageURL} />
-
-<ViewTransitions fallback="swap" />

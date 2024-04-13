@@ -1,0 +1,14 @@
+id: 3
+title: "Villvay Systems"
+description: "Developed innovative React Native and Flutter applications, and revamped e-commerce websites using ReactJS with Redux and Vanilla JavaScript for tech start-ups based in the US."
+technologies:
+  - React
+  - React Native
+  - JavaScript
+  - TypeScript
+  - Flutter
+links:
+  - href: "https://villvay.com/"
+    ariaLabel: "wesbite"
+    icon: "external"
+  

@@ -10,7 +10,7 @@ import myPhoto from "@assets/images/casual-photo.jpg";
   <div class="center">
     <div class="name mt-12 sm:mt-0">
       <small class="uppercase">About</small>
-      <h2>
+      <h2 class="relative">
         <MyName />
       </h2>
     </div>
@@ -80,6 +80,28 @@ import myPhoto from "@assets/images/casual-photo.jpg";
     background-image: url("/src/assets/images/blur.png");
     background-size: contain;
     filter: grayscale(100%) contrast(1);
+  }
+  h2::before {
+    content: "";
+    display: block;
+    position: absolute;
+    width: 90px;
+    height: 1px;
+    left: -120px;
+    margin: 0px auto;
+    background-color: var(--clr-quote);
+    top: 50%;
+  }
+  h2::after {
+    content: "";
+    display: block;
+    position: absolute;
+    width: 90px;
+    height: 1px;
+    right: -120px;
+    margin: 0px auto;
+    background-color: var(--clr-quote);
+    top: 50%;
   }
 
   @media (max-width: 640px) {
