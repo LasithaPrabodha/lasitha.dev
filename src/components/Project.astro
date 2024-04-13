@@ -3,7 +3,7 @@ import type { Link } from "../interfaces/Link";
 import IconLink from "./IconLink.astro";
 
 const { data, links } = Astro.props;
-const { title, description, technologies } = data;
+const { title, description, technologies, position } = data;
 ---
 
 <div class="project px-4 py-5 w-full" data-link={links[0].href}>
@@ -13,6 +13,8 @@ const { title, description, technologies } = data;
       {links.map((l: Link) => <IconLink href={l.href} icon={l.icon} ariaLabel={l.ariaLabel} />)}
     </div>
   </div>
+
+  <span class="text-sm  text-[var(--clr-quote)] mb-2">{position}</span>
   <p class="mt-1 mb-2">{description}</p>
 
   <ul class="project-stack">

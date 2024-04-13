@@ -1,5 +1,6 @@
 id: 2
 title: "Creative Software"
+position: "Senior Software Engineer"
 description: "Contributed to hospitality ERP software called Cenium. This software streamlines complex hotel group bookings with a versatile and dynamic PMS solution."
 technologies:
   - Angular

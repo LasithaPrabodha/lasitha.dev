@@ -1,5 +1,6 @@
 id: 4
 title: "Findmyfare.com"
+position: "Software Engineer"
 description: "Collaboratively developed and deployed web applications using Laravel and Angular for an online travel platform."
 technologies:
   - PHP
