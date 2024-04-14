@@ -1,8 +1,8 @@
-import { Resvg } from "@resvg/resvg-js";
 import { html } from "satori-html";
 import satori from "satori";
 import { SITE_TITLE } from "consts";
 import { readFile } from "node:fs/promises";
+import { Resvg } from "@resvg/resvg-js";
 
 const dimensions = {
   width: 1200,
@@ -74,12 +74,12 @@ const generateOgImage = async (title: string = SITE_TITLE, date: Date = new Date
     fonts: [
       {
         name: "Quicksand",
-        data: await readFile("./dist/fonts/quicksand-semibold.ttf"),
+        data: await readFile("./public/fonts/quicksand-semibold.ttf"),
         weight: 500,
       },
       {
         name: "Poppins",
-        data: await readFile("./dist/fonts/poppins-semibold.ttf"),
+        data: await readFile("./public/fonts/poppins-semibold.ttf"),
         weight: 700,
       },
     ],
