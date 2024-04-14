@@ -33,3 +33,14 @@ export const GET: APIRoute<OgData> = async ({ params }) => {
     },
   });
 };
+
+const postImportResult = await getCollection("blog");
+const posts = Object.values(postImportResult);
+
+export function getStaticPaths() {
+  return posts.map((post) => ({
+    params: { slug: post.slug },
+    props: post,
+  }));
+}
+export const prerender = true;

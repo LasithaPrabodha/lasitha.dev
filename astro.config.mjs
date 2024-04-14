@@ -9,7 +9,7 @@ import { astroImageTools } from "astro-imagetools";
 import db from "@astrojs/db";
 
 export default defineConfig({
-  output:"server",
+  output: "server",
   site: "https://www.lasitha.dev",
   image: {
     service: sharpImageService(),
@@ -29,6 +29,14 @@ export default defineConfig({
     db(),
   ],
   vite: {
+    ssr: {
+      external: ["@resvg/resvg-js"],
+    },
+    build: {
+      rollupOptions: {
+        external: ["@resvg/resvg-js"],
+      },
+    },
     optimizeDeps: {
       exclude: ["@resvg/resvg-js"],
     },

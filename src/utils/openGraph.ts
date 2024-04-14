@@ -15,22 +15,6 @@ export interface OgData {
 }
 
 /**
- * generate filename / path for generated OG images
- *
- * @param filename filename in asset folder
- * @returns
- */
-export const getOgImagePath = (filename: string = SITE_TITLE) => {
-  if (filename.startsWith("/")) filename = filename.substring(1);
-
-  if (filename.endsWith("/")) filename = filename.substring(0, filename.length - 1);
-
-  if (filename === "") filename = SITE_TITLE;
-
-  return `./image/${filename}.png`;
-};
-
-/**
  * generate opengraph image with satori and return a buffer
  *
  * @param text
