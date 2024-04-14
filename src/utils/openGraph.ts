@@ -70,19 +70,18 @@ const generateOgImage = async (title: string = SITE_TITLE, date: Date = new Date
     </div>
   </div>`;
 
-  
   const svg = await satori(markup, {
     fonts: [
       {
         name: "Quicksand",
-        data:  await readFile("./dist/fonts/Quicksand-SemiBold.ttf"),
+        data: await readFile("./dist/fonts/quicksand-semibold.ttf"),
         weight: 500,
       },
       {
         name: "Poppins",
-        data:  await readFile("./dist/fonts/Poppins-SemiBold.ttf"),
+        data: await readFile("./dist/fonts/poppins-semibold.ttf"),
         weight: 700,
-      }
+      },
     ],
     width: dimensions.width,
     height: dimensions.height,
