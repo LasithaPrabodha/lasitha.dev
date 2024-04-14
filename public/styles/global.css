@@ -12,7 +12,7 @@
   --clr-quote: #afb8c1;
   --clr-fg: #333333;
   --clr-fg-alt: #333A3F;
-  --clr-primary: oklch(0.69 0.25 29.96);
+  --clr-primary: #333A3F;
   --clr-chip-bg: #ff2d2310;
   --clr-link: oklch(0.67 0.31 359.25); 
   --shadow: rgba(100, 100, 111, 0.2) 0px 2px 5px 0px, rgba(100, 100, 111, 0.2) 0px 0px 0px 0.5px;
