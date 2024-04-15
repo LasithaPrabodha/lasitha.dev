@@ -3,6 +3,7 @@
 
   --old-red: #ba2d23;
   --old-blue: #1b3487;
+  --shadow: rgba(100, 100, 111, 0.2) 0px 2px 5px 0px, rgba(100, 100, 111, 0.2) 0px 0px 0px 0.5px;
 }
 
 [data-theme="light"] {
@@ -15,7 +16,6 @@
   --clr-primary: #333A3F;
   --clr-chip-bg: #ff2d2310;
   --clr-link: oklch(0.67 0.31 359.25); 
-  --shadow: rgba(100, 100, 111, 0.2) 0px 2px 5px 0px, rgba(100, 100, 111, 0.2) 0px 0px 0px 0.5px;
   --display-sun: none;
   --display-moon: block;
 }
@@ -29,8 +29,7 @@
   --clr-fg-alt: #cdcdff;
   --clr-primary: #90a0d9;
   --clr-chip-bg: #90a0d920;
-  --clr-link: #90a0d9; 
-  --shadow: rgba(255, 255, 255, 0.2) 0px 0px 0px 1px;
+  --clr-link: #90a0d9;  
   --display-sun: block;
   --display-moon: none;
 }
@@ -116,7 +115,7 @@ button {
 
 p {
   line-height: 1.5;
-  margin-bottom: 1.5em;
+  margin-bottom: 1em;
 }
 
 small {

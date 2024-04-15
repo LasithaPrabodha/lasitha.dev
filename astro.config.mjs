@@ -18,6 +18,11 @@ export default defineConfig({
     astroImageTools,
     expressiveCode({
       themes: ["one-dark-pro", "github-light"],
+      styleOverrides: {
+        frames: {
+          frameBoxShadowCssValue: "var(--shadow)",
+        },
+      },
     }),
     mdx(),
     tailwind(),

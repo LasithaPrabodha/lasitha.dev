@@ -1,6 +1,6 @@
 ---
 import MyName from "@components/MyName.astro";
-import { Image } from "astro:assets";
+import { Picture } from "astro:assets";
 
 import RectPattern from "@components/RectPattern.astro";
 import myPhoto from "@assets/images/casual-photo.jpg";
@@ -15,12 +15,13 @@ import myPhoto from "@assets/images/casual-photo.jpg";
       </h2>
     </div>
   </div>
-  <div class="flex max-sm:block mt-12 gap-4">
+  <div class="flex max-sm:block mt-12 gap-2">
     <div class="flex-1 sm:pr-2">
       <p class="sm:text-justify">
         Hi there! I'm excited to introduce myself. I'm Lasitha Prabodha Weligampola. I discovered my passion for
-        technology back in 2002 when I started playing around with computers. Now, as a Frontend Engineer with over 7
-        years of experience, I create web and mobile applications that are both functional and enjoyable to use.
+        technology back in 2002 when I started playing around with computers. Now, as a Full-Stack Engineer (Frontend
+        Focus) with over 7 years of experience, I create web and mobile applications that are both functional and
+        enjoyable to use.
       </p>
       <p class="sm:text-justify">
         My expertise lies in Angular, React, TypeScript, C#, .NET Core, and various other web technologies. I've worked
@@ -28,9 +29,9 @@ import myPhoto from "@assets/images/casual-photo.jpg";
         revitalizing legacy systems.
       </p>
     </div>
-    <div class="details-photo h-min relative">
-      <Image format="avif" src={myPhoto} loading="eager" alt="Lasitha Prabodha Weligampola" width={250} height={250} />
-      <RectPattern width={250} height={250} />
+    <div class="details-photo h-min relative max-w-full sm:max-w-64">
+      <Picture formats={["avif", "webp"]} src={myPhoto} alt="Lasitha Prabodha Weligampola" />
+      <RectPattern width={256} height={256} />
     </div>
   </div>
   <p class="sm:text-justify">
@@ -58,6 +59,7 @@ import myPhoto from "@assets/images/casual-photo.jpg";
   }
   .details-photo {
     transition: var(--transition);
+    margin-bottom: 1em;
   }
 
   .details-photo:hover {
@@ -65,7 +67,7 @@ import myPhoto from "@assets/images/casual-photo.jpg";
   }
 
   .details-photo:hover img {
-    transition: var(--transition); 
+    transition: var(--transition);
   }
 
   :global(.details-photo:hover > svg) {
@@ -73,11 +75,11 @@ import myPhoto from "@assets/images/casual-photo.jpg";
   }
 
   img {
-    border-radius: 8px;
+    border-radius: 16px;
     box-shadow: var(--shadow);
     position: relative;
     background-image: url("/src/assets/images/blur.png");
-    background-size: contain; 
+    background-size: contain;
   }
   h2::before {
     content: "";
