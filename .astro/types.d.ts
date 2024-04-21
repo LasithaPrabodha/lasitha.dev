@@ -206,6 +206,11 @@ declare module 'astro:content' {
   collection: "personal-projects";
   data: any
 };
+"the-kingsburry": {
+	id: "the-kingsburry";
+  collection: "personal-projects";
+  data: any
+};
 "watch-ur-network": {
 	id: "watch-ur-network";
   collection: "personal-projects";
