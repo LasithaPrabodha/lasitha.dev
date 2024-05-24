@@ -1,0 +1,11 @@
+id: 5
+title: "Expense Tracking App"
+description: "A simple expense-tracking app built with a minimal design."
+technologies:
+  - React Native
+  - Firebase
+  - Redux
+links:
+  - href: "https://github.com/LasithaPrabodha/expense-tracking-app-rn"
+    ariaLabel: "source code"
+    icon: "github"
