@@ -196,8 +196,18 @@ declare module 'astro:content' {
   collection: "personal-projects";
   data: any
 };
+"angular-deferred": {
+	id: "angular-deferred";
+  collection: "personal-projects";
+  data: any
+};
 "dots-connect": {
 	id: "dots-connect";
+  collection: "personal-projects";
+  data: any
+};
+"expense-tracker": {
+	id: "expense-tracker";
   collection: "personal-projects";
   data: any
 };

@@ -1,0 +1,12 @@
+id: 6
+title: "Angular Deferred Views App"
+description: "Application to demonstrate the use cases of Angular Deferred Views with source code."
+technologies:
+  - Angular
+links:
+  - href: "https://lasithaprabodha.github.io/angular-deferred-views/about"
+    ariaLabel: "live preview"
+    icon: "external"
+  - href: "https://github.com/LasithaPrabodha/angular-deferred-views"
+    ariaLabel: "source code"
+    icon: "github"
