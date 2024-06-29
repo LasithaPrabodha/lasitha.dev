@@ -27,7 +27,7 @@ const { animate = false } = Astro.props;
         <HeaderLink href="/">home</HeaderLink>
         <HeaderLink href="/blog">Blog</HeaderLink>
       </ul>
-      <div class="flex  justify-center z-50 buttons">
+      <div class="flex justify-center z-50 buttons">
         <button id="theme-toggle" type="button" aria-label="toggle theme" class="btn btn--icon">
           <Fragment set:html={moon} />
           <Fragment set:html={sun} />
@@ -263,12 +263,13 @@ const { animate = false } = Astro.props;
     const activeLink = document.querySelector(`.nav-list-item [href='/${parentPathName}']`);
     activeLink?.classList.remove("active");
   });
-  const nav = document.querySelector("header");
 
   let prevScrollpos = window.pageYOffset;
 
   const toggleBottomNav = () => {
-    nav!.classList.toggle("hide", prevScrollpos <= window.pageYOffset);
+    const nav = document.querySelector("header");
+    nav!.classList.toggle("hide", window.pageYOffset !== 0 && prevScrollpos <= window.pageYOffset);
+
     prevScrollpos = window.pageYOffset;
   };
 
