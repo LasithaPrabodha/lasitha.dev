@@ -269,7 +269,7 @@ const { animate = false } = Astro.props;
   const toggleBottomNav = () => {
     const nav = document.querySelector("header");
 
-    if (window.pageYOffset === 0) {
+    if (window.pageYOffset === 0 || prevScrollpos <= 0) {
       nav!.classList.remove("hide");
     } else {
       nav!.classList.toggle("hide", prevScrollpos < window.pageYOffset);
