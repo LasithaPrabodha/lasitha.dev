@@ -18,23 +18,26 @@ const { animate = false } = Astro.props;
 
 <header class="fixed top-0 left-0 right-0 bg-transparent">
   <nav class="nav flex justify-between py-6 px-6 sm:px-10">
-    <h4 class="font-bold animate-delay-1000 animate-ease-out" class:list={{ "animate-fade-right": animate }}>LP</h4>
+    <a href="/" class="z-50 animate-delay-1000 animate-ease-out" class:list={{ "animate-fade-right": animate }}>
+      <h4 class="font-bold">LP</h4>
+    </a>
 
-    <div class="flex justify-center animate-delay-1000 animate-ease-out" class:list={{ "animate-fade-left": animate }}>
+    <div class="flex relative animate-delay-1000 animate-ease-out" class:list={{ "animate-fade-left": animate }}>
       <ul class="nav-list center">
         <HeaderLink href="/">home</HeaderLink>
         <HeaderLink href="/blog">Blog</HeaderLink>
       </ul>
+      <div class="flex  justify-center z-50 buttons">
+        <button id="theme-toggle" type="button" aria-label="toggle theme" class="btn btn--icon">
+          <Fragment set:html={moon} />
+          <Fragment set:html={sun} />
+        </button>
 
-      <button id="theme-toggle" type="button" aria-label="toggle theme" class="btn btn--icon">
-        <Fragment set:html={moon} />
-        <Fragment set:html={sun} />
-      </button>
-
-      <button type="button" aria-label="toggle navigation" class="btn btn--icon nav-hamburger">
-        <Fragment set:html={menu} />
-        <Fragment set:html={cross} />
-      </button>
+        <button type="button" aria-label="toggle navigation" class="btn btn--icon nav-hamburger">
+          <Fragment set:html={menu} />
+          <Fragment set:html={cross} />
+        </button>
+      </div>
     </div>
   </nav>
 </header>
@@ -163,13 +166,23 @@ const { animate = false } = Astro.props;
 
     .display-nav-list {
       display: flex;
-      width: 100%;
+      width: 100vw;
+      height: 100vh;
+      margin-top: -1.5rem;
+      position: relative;
+      margin-left: -3rem;
       background: var(--clr-bg);
     }
 
     .nav-hamburger {
       display: flex;
       margin-left: 0.8em;
+    }
+
+    .display-nav-list ~ .buttons {
+      top: 0;
+      position: absolute;
+      right: 3rem;
     }
   }
 </style>
