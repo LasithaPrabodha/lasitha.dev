@@ -1,0 +1,32 @@
+---
+import Page from "@layouts/Page.astro";
+import { SITE_TITLE, SITE_DESCRIPTION } from "consts";
+---
+
+<Page
+  metaTitle={SITE_TITLE}
+  metaDescription={SITE_DESCRIPTION}
+  animate={true}
+  providedTheme="light"
+  style="width: 100vw;margin: 0;max-width: 100%;background: white;"
+>
+  <!-- Google Calendar Appointment Scheduling begin -->
+  <iframe
+    src="https://calendar.google.com/calendar/appointments/schedules/AcZssZ06s3aL0j_EISG9riMfUM6qObTnmBYLYcrQ424nHv3opemIdP3qAB9_I4ryWIJySzWP0Wf_d5qh?gv=true"
+    frameborder="0"></iframe>
+  <!-- end Google Calendar Appointment Scheduling -->
+</Page>
+
+<style>
+  iframe {
+    border: 0;
+    height: calc(100vh - 73px - 3rem);
+    width: calc(100vw - 3rem);
+    margin-top: 73px;
+  }
+  @media not all and (min-width: 640px) {
+    iframe {
+      height: calc(100vh - 73px - 3.5rem);
+    }
+  }
+</style>
