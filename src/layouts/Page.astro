@@ -4,9 +4,9 @@ import Header from "@components/Header.astro";
 import Footer from "@components/Footer.astro";
 import ScrollToTop from "@components/ScrollToTop.astro";
 
-const { metaTitle, metaDescription, animate, ...props } = Astro.props;
+const { metaTitle, metaDescription, animate, providedTheme, ...props } = Astro.props;
 
-const theme = Astro.cookies.get("theme")?.value || "";
+const theme = providedTheme ?? Astro.cookies.get("theme")?.value ?? "";
 ---
 
 <!doctype html>
