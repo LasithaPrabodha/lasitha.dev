@@ -35,7 +35,9 @@ This helps prevent issues where updates might be lost or conflicts arise because
 Using ETag and If-Match headers together with RowVersioning gives you a solid way to handle data conflicts in web applications. 
 It ensures that your updates are applied only if the data hasn't been modified since you last checked, helping you avoid overwriting someone else's changes and keeping your data consistent.
 
-### Implementing RowVersioning with ETag and If-Match Headers in EF Core
+## Implementation
+
+This is a production-ready implementation. I'm going to use a custom attribute to do all the dirty work. So, let's go through it step by step and get our hands dirty.
 
 1. Add a RowVersion Property to Your Entity
     Define a property in your entity class to store the version number or timestamp. This property should be of type `byte[]`.
