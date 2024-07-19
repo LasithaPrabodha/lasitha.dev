@@ -1,0 +1,172 @@
+---
+title: "Implementing RowVersioning with ETag and If-Match Headers in EF Core"
+description: "Managing data consistency is key in applications where multiple users interact with the same data. In web apps, you might have seen ETag and If-Match headers alongside a technique called RowVersioning to handle these situations..."
+pubDate: "Jul 19 2024"
+---
+
+During my interview today, the interviewer asked about a challenge I faced in a past project. I immediately thought of a project where I implemented RowVersioning a few years ago. 
+My team lead in Norway even suggested I write a blog post about it at the time. However, I was heavily focused on my plans to immigrate to Canada and it completely slipped my mind. 
+So today, I'm going to fulfill my promise.
+
+Managing data consistency is key in applications where multiple users interact with the same data. 
+In web apps, you might have seen ETag and If-Match headers alongside a technique called RowVersioning to handle these situations. 
+Let's break down how RowVersioning works with these headers and how you can use this in EF Core.
+
+## What is RowVersioning?
+
+RowVersioning is a method for tracking changes to data in a database when multiple users might be making updates at the same time. 
+Essentially, it uses a version number or timestamp that updates every time a row changes. 
+When you try to update a row, EF Core checks if the version number in the database matches the one you have. 
+If they match, your update goes through. If not, it means someone else has made changes since you last saw it, and you'll get a concurrency conflict.
+
+
+## What are ETag and If-Match Headers?
+
+An ETag (Entity Tag) is a unique identifier that represents a specific version of a resource. 
+It's included in the HTTP response headers and helps clients keep track of changes.
+
+The If-Match header comes into play when you're making HTTP requests. 
+It allows you to make your request conditional by including the ETag value you've received earlier. 
+The server will only process your request if the current ETag matches the one you've provided. 
+This helps prevent issues where updates might be lost or conflicts arise because of simultaneous changes.
+
+## Why Use ETag and If-Match Headers?
+
+Using ETag and If-Match headers together with RowVersioning gives you a solid way to handle data conflicts in web applications. 
+It ensures that your updates are applied only if the data hasn't been modified since you last checked, helping you avoid overwriting someone else's changes and keeping your data consistent.
+
+### Implementing RowVersioning with ETag and If-Match Headers in EF Core
+
+1. Add a RowVersion Property to Your Entity
+    Define a property in your entity class to store the version number or timestamp. This property should be of type `byte[]`.
+
+    ```cs
+    public class RowVersionBase
+    {
+        public byte[] RowVersion { get; set; } = null!;
+    }
+
+    public class User : RowVersionBase
+    {
+        public int Id { get; set; }
+        public string Title { get; set; }
+        public string FirstName { get; set; }
+        public string LastName { get; set; }
+        public string Email { get; set; }
+        public Role Role { get; set; }
+
+        [JsonIgnore]
+        public string PasswordHash { get; set; }
+    }
+    ```
+2. Configure the RowVersion Property in the DbContext
+    In your `DbContext` class, configure the `RowVersion` property using the Fluent API.
+
+    ```cs
+    protected override void OnModelCreating(ModelBuilder builder)
+    {
+        builder.Entity<User>()
+            .Property(x => x.RowVersion)
+            .IsRowVersion();
+    }
+    ```
+3. Include ETag in HTTP Responses
+    When returning an entity in an HTTP response, include the ETag header. The ETag value can be the base64-encoded RowVersion property.
+
+    In my solution, I have a scoped service called `ChangeContext` to store the RowVersion value. 
+    I will later collect the RowVersion value from that service and assign it to the response headers using an custom `ActionFilterAttribute`. 
+
+    ```cs title="UserService.cs" {7}
+    public async Task<UserResponseViewModel> GetById(int id, CancellationToken cancellationToken)
+    {
+        var user = await GetUser(id, cancellationToken);
+
+        var userVm = _mapper.Map<UserResponseViewModel>(user);
+
+        _changeContext.RowVersion = user.RowVersion;
+
+        return userVm;
+    }
+    ```
+ 
+    ```cs  title="UseOptimisticConcurrencyAttribute.cs" {12}
+    const string ETAG_HEADER = "ETag";
+
+    public UseOptimisticConcurrencyFilter(ChangeContext changeContext)
+    {
+        this.changeContext = changeContext;
+    }
+
+    public void OnActionExecuted(ActionExecutedContext context)
+    {
+        if (changeContext.RowVersion != null && context.HttpContext.Request.Method.Equals(HttpMethod.Get.Method))
+        {
+            context.HttpContext.Response.Headers.Add(ETAG_HEADER, Convert.ToBase64String(changeContext.RowVersion));
+        }
+    }
+    ```
+
+4. Handle If-Match Header in HTTP Requests
+
+    When processing update requests, check the If-Match header to ensure the resource has not been modified. 
+    If the If-Match header is not present when called the API, return a 428 Precondition Required response.
+    If the ETag values do not match, return a 412 Precondition Failed response.
+
+    
+    ```cs title="UseOptimisticConcurrencyAttribute.cs" ins={2, 9-30, 39-43}
+    const string ETAG_HEADER = "ETag";
+    const string MATCH_HEADER = "If-Match";
+
+    public UseOptimisticConcurrencyFilter(ChangeContext changeContext)
+    {
+        this.changeContext = changeContext;
+    }
+
+    public void OnActionExecuting(ActionExecutingContext context)
+    {
+        var method = context.HttpContext.Request.Method;
+        if (method.Equals(HttpMethod.Post.Method) || method.Equals(HttpMethod.Put.Method))
+        {
+            if (context.HttpContext.Request.Headers.ContainsKey(MATCH_HEADER))
+            {
+                try
+                {
+                    changeContext.RowVersion = Convert.FromBase64String(context.HttpContext.Request.Headers[MATCH_HEADER]);
+                }
+                catch (FormatException)
+                {
+                    context.Result = new StatusCodeResult(StatusCodes.Status428PreconditionRequired);
+                }
+            }
+            else
+            {
+                context.Result = new StatusCodeResult(StatusCodes.Status428PreconditionRequired);
+            }
+        }
+    }
+    
+    public void OnActionExecuted(ActionExecutedContext context)
+    {
+        if (changeContext.RowVersion != null && context.HttpContext.Request.Method.Equals(HttpMethod.Get.Method))
+        {
+            context.HttpContext.Response.Headers.Add(ETAG_HEADER, Convert.ToBase64String(changeContext.RowVersion));
+        }
+
+        if (context.Exception is DbUpdateConcurrencyException)
+        {
+            context.Result = new StatusCodeResult(StatusCodes.Status412PreconditionFailed);
+            context.ExceptionHandled = true;
+        }
+    }
+    ```
+
+
+## Conclusion
+
+Combining RowVersioning with ETag and If-Match headers is a powerful approach for managing concurrency in web applications with EF Core.
+By using ETag to keep track of resource versions and If-Match to make sure updates only go through if the resource hasn't been changed, you can avoid losing updates and keep your data consistent. 
+Implementing these techniques in your EF Core apps will make them more reliable and improve the overall experience for your users.
+
+You can find the prototype project I've developed to  experiment with RowVersioning in my [GitHub repo](https://github.com/LasithaPrabodha/concurrency-handling/).
+
+Thank you for reading! :) 

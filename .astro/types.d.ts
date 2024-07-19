@@ -178,6 +178,13 @@ declare module 'astro:content' {
   collection: "blog";
   data: InferEntrySchema<"blog">
 } & { render(): Render[".md"] };
+"rowversioning.mdx": {
+	id: "rowversioning.mdx";
+  slug: "rowversioning";
+  body: string;
+  collection: "blog";
+  data: InferEntrySchema<"blog">
+} & { render(): Render[".mdx"] };
 "singleton-pattern.mdx": {
 	id: "singleton-pattern.mdx";
   slug: "singleton-pattern";
