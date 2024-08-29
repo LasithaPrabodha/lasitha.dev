@@ -171,6 +171,13 @@ declare module 'astro:content' {
   collection: "blog";
   data: InferEntrySchema<"blog">
 } & { render(): Render[".mdx"] };
+"new-job.mdx": {
+	id: "new-job.mdx";
+  slug: "new-job";
+  body: string;
+  collection: "blog";
+  data: InferEntrySchema<"blog">
+} & { render(): Render[".mdx"] };
 "observer-pattern.md": {
 	id: "observer-pattern.md";
   slug: "observer-pattern";
