@@ -10,7 +10,7 @@ const { default: github } = await import(`/src/assets/icons/github.svg?raw`);
 
 const icons: { [key: string]: string } = { external, book, github };
 
-const professionalProjects = (await getCollection("professional-projects")).sort((a, b) => a.data.id - b.data.id);
+const professionalProjects = (await getCollection("professional-projects")).sort((a, b) => b.data.id - a.data.id);
 ---
 
 <section class="mb-24">

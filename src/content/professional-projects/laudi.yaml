@@ -1,0 +1,13 @@
+id: 5
+title: "Laudi AS"
+position: "Full-Stack Developer"
+description: "Enhanced the user experience by developing new features for Club Arena, a comprehensive football field management system. It simplifies finding available football fields nearby and notifies users when fields become available or are fully booked."
+technologies:
+  - Angular
+  - .NET
+  - C#
+links:
+  - href: "https://laudi.no/"
+    ariaLabel: "website"
+    icon: "external"
+  
