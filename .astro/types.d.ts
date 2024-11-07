@@ -262,6 +262,11 @@ declare module 'astro:content' {
   collection: "professional-projects";
   data: any
 };
+"laudi": {
+	id: "laudi";
+  collection: "professional-projects";
+  data: any
+};
 "villvay": {
 	id: "villvay";
   collection: "professional-projects";
