@@ -1,17 +1,17 @@
 ---
 import IconLink from "./IconLink.astro";
+import Popup from "./Popup.astro";
 
 const { default: instagram } = await import(`/src/assets/icons/instagram.svg?raw`);
 const { default: facebook } = await import(`/src/assets/icons/facebook.svg?raw`);
 const { default: linkedin } = await import(`/src/assets/icons/linkedin.svg?raw`);
 const { default: github } = await import(`/src/assets/icons/github.svg?raw`);
 const { default: envelope } = await import(`/src/assets/icons/envelope.svg?raw`);
-
-const { showEmail = false } = Astro.props;
+ 
 ---
 
 <div class="center lg:invisible">
-  {showEmail && <IconLink href="mailto:lasiprabo@gmail.com" ariaLabel="email" icon={envelope} />}
+    <Popup icon={envelope} text="lasiprabo&nbsp;[at]&nbsp;gmail&nbsp;[dot]&nbsp;com" />
 
   <IconLink href="https://www.instagram.com/lu6_fer" ariaLabel="insta" icon={instagram} />
 

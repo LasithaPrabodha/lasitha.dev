@@ -1,6 +1,7 @@
 ---
 import HeaderLink from "./HeaderLink.astro";
 import IconLink from "./IconLink.astro";
+import Popup from "./Popup.astro";
 
 const { default: moon } = await import(`/src/assets/icons/moon.svg?raw`);
 const { default: cross } = await import(`/src/assets/icons/xmark.svg?raw`);
@@ -47,7 +48,7 @@ const { animate = false } = Astro.props;
   class="social-icons fixed bottom-0 left-6 gap-1 flex flex-col animate-delay-1000 animate-ease-out"
   class:list={{ "animate-fade-right": animate }}
 >
-  <IconLink href="mailto:lasiprabo@gmail.com" ariaLabel="email" icon={envelope} />
+  <Popup icon={envelope} text="lasiprabo&nbsp;[at]&nbsp;gmail&nbsp;[dot]&nbsp;com" />
 
   <IconLink href="https://www.instagram.com/lu6_fer" ariaLabel="insta" icon={instagram} />
 
