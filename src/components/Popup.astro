@@ -1,14 +1,17 @@
 ---
 import IconLink from "./IconLink.astro";
+import { nanoid } from "nanoid";
+const uid = nanoid();
+
 const { icon, text } = Astro.props;
 ---
 
 <div class="popup">
-  <span id="popIcon">
+  <span id={uid}>
     <IconLink ariaLabel={text} icon={icon} />
   </span>
 
-  <span class="popuptext" id="popupContent">
+  <span class="popuptext" id={"popupContent" + uid}>
     {text}
   </span>
 </div>
@@ -55,11 +58,11 @@ const { icon, text } = Astro.props;
     visibility: visible;
   }
 </style>
-<script>
-  const icon = document.getElementById("popIcon");
+<script define:vars={{ uid }}>
+  const icon = document.getElementById(uid);
 
-  icon!.addEventListener("click", (_) => {
-    var popup = document.getElementById("popupContent");
-    popup!.classList.toggle("show");
+  icon.addEventListener("click", (_) => {
+    var popup = document.getElementById("popupContent" + uid);
+    popup.classList.toggle("show");
   });
 </script>
