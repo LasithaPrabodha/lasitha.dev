@@ -18,7 +18,7 @@ Slow queries, increased downtime, and high operational costs can become a big pr
 But this is where <strong>sharding</strong> comes in, a healthy approach of dividing a large database into multiple smaller databases also known as <strong>shards</strong>.
 
 Sharding is not the same as simple database replication. It does not mean to maintain several copies of the same data, but to <strong>divide</strong> the data into pieces and place them in different locations. 
-Thus, queries are executed faster and the efficiency of the systems is maintained. 
+So the queries are executed faster and the efficiency of the systems is maintained.
 Social networks like Facebook, Twitter, and even e-commerce giant Amazon use sharding to handle thousands or even millions of users and maintain the performance of their sites as traffic increases.
 
 ## How Sharded Databases Work
@@ -29,10 +29,11 @@ These shards are independent but combined they make one large system.
 
 ![Courteney Cox Friends](../../assets/images/blog/2025-02-01/that-way.gif)
 
-An example of this is a online shopping website which could use customer ID as it's a shard key. 
-This means all of a customer's orders and interactions get saved on a particular shard. 
-That way when a user wants to sign in and look at their purchase history the system doesn't have to search through millions of records it just has to look at the shard related to that user which is much faster.
-Because let's be honest, no one wants to wait 30 seconds for their shopping cart to load, especially during a Black Friday sale!.
+We can take a shopping site that uses customer ID as a shard key as an example for this. 
+A specific shard is where all of a customer's orders and interactions are stored. 
+In this manner, the system only needs to look at the shard associated with that user, which is much faster, rather than searching 
+through millions of records when a person wants to sign in and view their purchase history. 
+Nobody wants to wait thirty seconds for their shopping cart to load, especially when there is a Black Friday sale, right?
 
 ## Types of Sharding
 
@@ -80,23 +81,18 @@ Therefore, companies should use sharding only if other improvements, such as cac
 
 ## When Should You Use Sharding?
 
-Sharding is most useful in applications that deal with a vast amount of data and many users. Some common use cases include: 
-
- - Social media sites (Facebook, Twitter): Billions of users create data in real time. 
- - E-commerce sites (Amazon, eBay): All orders and transactions are required to be processed as quickly as possible. 
- - Banking and financial networks: There are many secure and timely transactions that are required. 
- - Multiplayer online games: All the data related to players, their scores, and interactions needs to be saved and accessed in real time. 
- 
-If your database is facing slow queries, high storage expenses, or down time, then sharding may be worthy of a thought. 
-But if a system can do fine with caching or indexing, then sharding may bring in more complexity than needed.
+Sharding is most useful in applications that are handling very large  amounts of data and user interactions. 
+If your database is experiencing slow queries, or if you are incurring high storage costs, or even down time, then sharding might be worth considering. 
+But if a system can run without a problem because of caching or indexing then sharding may bring more complexity than it needs.
 
 ## Final Thoughts
 
 Sharding is a great way for handling large scale and high traffic applications but it is not for everyone. 
-However, it is worth noting that it enhances scalability and performance at the expense of complexity and maintenance. 
-Before implementing sharding, businesses should evaluate their needs carefully and determine if there are other solutions (e.g., indexing, caching, or replication) that could be used instead. 
+But at the same time, it is worth noting that it improves scalability and performance at the expense of complexity and maintenance.
+Therefore, businesses should carefully assess their needs beforehand and find out if there are other means of achieving the same result 
+(such as indexing, caching, or replication) instead of turning to sharding. 
 
-If done right, sharding can be the lifesaver that allows organizations to future proof their databases, to grow without sacrificing speed or reliability.
+If done  right, sharding can be the lifesaver that enables organizations to future proof their databases, grow with out  sacrificing speed or reliability.
 
 ## References
 
