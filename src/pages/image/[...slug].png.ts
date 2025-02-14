@@ -9,7 +9,7 @@ interface Props {
 
 const blogPosts = await getCollection("blog");
 const result = blogPosts.map((blog) => ({
-  params: { slug: blog.slug },
+  params: { slug: blog.data.slug },
   props: {
     title: blog.data.title,
     pubDate: blog.data.pubDate,
@@ -39,7 +39,7 @@ const posts = Object.values(postImportResult);
 
 export function getStaticPaths() {
   return posts.map((post) => ({
-    params: { slug: post.slug },
+    params: { slug: post.data.slug },
     props: post,
   }));
 }
