@@ -1,5 +1,6 @@
 ---
 title: "Observer Design Pattern"
+slug: "observer-pattern"
 description: "Think of yourself as a news enthusiast eagerly awaiting updates on your favourite topics. The Observer Pattern smoothly links you (the Observer) to the news platform (the Subject)."
 pubDate: "Feb 18 2024"
 ---

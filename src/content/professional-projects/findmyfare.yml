@@ -3,12 +3,12 @@ title: "Findmyfare.com"
 position: "Software Engineer"
 description: "Collaboratively developed and deployed web applications using Laravel and Angular for an online travel platform."
 technologies:
-  - PHP
-  - Laravel
-  - AngularJS
-  - Angular
-  - JavaScript
-  - TypeScript
+  - "PHP"
+  - "Laravel"
+  - "AngularJS"
+  - "Angular"
+  - "JavaScript"
+  - "TypeScript"
 links:
   - href: "https://findmyfare.com/"
     ariaLabel: "wesbite"

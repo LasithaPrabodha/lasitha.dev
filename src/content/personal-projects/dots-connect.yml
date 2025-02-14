@@ -2,9 +2,9 @@ id: 3
 title: "Dots Connect"
 description: "This is a small, dynamic two-player game (with AI or another player) where you compete to connect dots of the same color on a grid. It features a minimal AI that demonstrates fundamental AI capabilities."
 technologies:
-  - JavaScript
-  - HTML
-  - CSS
+  - "JavaScript"
+  - "HTML"
+  - "CSS"
 links:
   - href: "https://lasithaprabodha.github.io/dot-connect"
     ariaLabel: "live preview"
@@ -12,4 +12,3 @@ links:
   - href: "https://github.com/LasithaPrabodha/dot-connect"
     ariaLabel: "source code"
     icon: "github"
-  

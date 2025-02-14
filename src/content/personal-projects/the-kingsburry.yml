@@ -2,9 +2,9 @@ id: 8
 title: "The Kingsbury (a concept site)"
 description: "A mobile-first and user-friendly website for a luxurious apartment"
 technologies:
-  - JavaScript
-  - HTML
-  - CSS
+  - "JavaScript"
+  - "HTML"
+  - "CSS"
 links:
   - href: "https://lasithaprabodha.github.io/hotel-website/"
     ariaLabel: "live preview"

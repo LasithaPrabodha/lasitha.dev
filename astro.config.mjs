@@ -5,6 +5,7 @@ import tailwind from "@astrojs/tailwind";
 import partytown from "@astrojs/partytown";
 import expressiveCode from "astro-expressive-code";
 import { astroImageTools } from "astro-imagetools";
+import preact from "@astrojs/preact";
 
 import db from "@astrojs/db";
 
@@ -32,6 +33,9 @@ export default defineConfig({
       },
     }),
     db(),
+    preact({
+      compat: true,
+    }),
   ],
   vite: {
     ssr: {
