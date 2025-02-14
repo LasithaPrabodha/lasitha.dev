@@ -2,9 +2,9 @@ id: 2
 title: "Jeopardy Game"
 description: "A Jeopardy game built with vanilla JavaScript (without external libraries) as a simple single-page application (SPA) utilizing a Redux store for state management"
 technologies:
-  - JavaScript
-  - HTML
-  - CSS
+  - "JavaScript"
+  - "HTML"
+  - "CSS"
 links:
   - href: "https://lasithaprabodha.github.io/jeopardy-app"
     ariaLabel: "live preview"

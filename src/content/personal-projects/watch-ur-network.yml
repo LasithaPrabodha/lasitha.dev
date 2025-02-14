@@ -2,15 +2,15 @@ id: 4
 title: "Watch Your Network"
 description: "An example of a scalable Angular web application that visualizes friend network statistics on interactive grids and graphs. This project demonstrates the use of Nx, NgRx, Storybook, Jest, and Cypress"
 technologies:
-  - Angular
-  - NgRx
-  - Angular Material
-  - NgxCharts
-  - D3
-  - Nx
-  - Storybook
-  - Cypress
-  - Jest
+  - "Angular"
+  - "NgRx"
+  - "Angular Material"
+  - "NgxCharts"
+  - "D3"
+  - "Nx"
+  - "Storybook"
+  - "Cypress"
+  - "Jest"
 links:
   - href: "https://lasithaprabodha.github.io/watch-ur-network"
     ariaLabel: "live preview"

@@ -2,9 +2,9 @@ id: 2
 title: "Account Balance Viewer"
 description: "A web application designed to provide a monthly overview of account balances. It demonstrates the use of the Unit of Work pattern, RBAC, JWT authentication, and Xunit for unit testing"
 technologies:
-  - Angular
-  - .NET
-  - C#
+  - "Angular"
+  - ".NET"
+  - "C#"
 links:
   - href: "https://github.com/LasithaPrabodha/account-balance"
     ariaLabel: "source code"

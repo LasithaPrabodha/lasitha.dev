@@ -1,0 +1,7 @@
+
+import __ASTRO_IMAGE_IMPORT_Z1wga07 from "../../assets/images/blog/2024-02-18/observer-pattern.png?astroContentImageFlag=&importer=src%2Fcontent%2Fblog%2Fobserver-pattern.md";
+import __ASTRO_IMAGE_IMPORT_Z1QIpJz from "../../assets/images/blog/2024-02-18/surprised-dog.gif?astroContentImageFlag=&importer=src%2Fcontent%2Fblog%2Fobserver-pattern.md";
+import __ASTRO_IMAGE_IMPORT_LYozf from "../../assets/images/blog/2024-02-18/typing.gif?astroContentImageFlag=&importer=src%2Fcontent%2Fblog%2Fobserver-pattern.md";
+import __ASTRO_IMAGE_IMPORT_Z1bPr4p from "../../assets/images/blog/2024-02-18/happy-engineers.gif?astroContentImageFlag=&importer=src%2Fcontent%2Fblog%2Fobserver-pattern.md";
+export default new Map([["../../assets/images/blog/2024-02-18/observer-pattern.png?astroContentImageFlag=&importer=src%2Fcontent%2Fblog%2Fobserver-pattern.md", __ASTRO_IMAGE_IMPORT_Z1wga07], ["../../assets/images/blog/2024-02-18/surprised-dog.gif?astroContentImageFlag=&importer=src%2Fcontent%2Fblog%2Fobserver-pattern.md", __ASTRO_IMAGE_IMPORT_Z1QIpJz], ["../../assets/images/blog/2024-02-18/typing.gif?astroContentImageFlag=&importer=src%2Fcontent%2Fblog%2Fobserver-pattern.md", __ASTRO_IMAGE_IMPORT_LYozf], ["../../assets/images/blog/2024-02-18/happy-engineers.gif?astroContentImageFlag=&importer=src%2Fcontent%2Fblog%2Fobserver-pattern.md", __ASTRO_IMAGE_IMPORT_Z1bPr4p]]);
+		
