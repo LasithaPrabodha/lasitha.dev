@@ -5,7 +5,6 @@ import tailwind from "@astrojs/tailwind";
 import partytown from "@astrojs/partytown";
 import expressiveCode from "astro-expressive-code";
 import { astroImageTools } from "astro-imagetools";
-import preact from "@astrojs/preact";
 
 import db from "@astrojs/db";
 
@@ -32,10 +31,7 @@ export default defineConfig({
         forward: ["dataLayer.push"],
       },
     }),
-    db(),
-    preact({
-      compat: true,
-    }),
+    db()
   ],
   vite: {
     ssr: {
