@@ -1,7 +1,18 @@
+---
+
+const { showSinhala } = Astro.props;
+---
+
+{showSinhala && <span transition:name="me" class="my-name-in-sinhala max-sm:block">ලසිත ප්‍රබෝධ</span>}
 <span transition:name="me" class="my-name font-bold max-sm:block">Lasitha Prabodha</span>
 
 <style>
   .my-name {
     font-family: "Poppins", sans-serif;
+  }
+  .my-name-in-sinhala{  
+    display: block;
+    font-family: Afacad;
+    font-size: 0.9em;
   }
 </style>

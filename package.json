@@ -24,6 +24,7 @@
     "@astrojs/partytown": "^2.1.3",
     "@astrojs/sitemap": "^3.2.1",
     "@astrojs/tailwind": "^6.0.0",
+    "@fontsource-variable/afacad": "^5.2.8",
     "@fontsource-variable/quicksand": "^5.0.16",
     "@fontsource/poppins": "^5.0.8",
     "@resvg/resvg-js": "^2.6.0",
