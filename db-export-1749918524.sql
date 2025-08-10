@@ -1,0 +1,14 @@
+PRAGMA foreign_keys=OFF;
+BEGIN TRANSACTION;
+CREATE TABLE IF NOT EXISTS "ViewCount" ("slug" text PRIMARY KEY, "count" integer NOT NULL, "lastViewed" text NOT NULL);
+INSERT INTO ViewCount VALUES('intro-ngrx',938,'2025-06-14T04:29:54.819Z');
+INSERT INTO ViewCount VALUES('singleton-pattern',1233,'2025-06-14T04:29:57.067Z');
+INSERT INTO ViewCount VALUES('my-journey',940,'2025-06-14T16:04:55.717Z');
+INSERT INTO ViewCount VALUES('observer-pattern',1117,'2025-06-14T04:29:56.779Z');
+INSERT INTO ViewCount VALUES('ci-cd',877,'2025-06-14T04:29:55.628Z');
+INSERT INTO ViewCount VALUES('getting-started-angular',933,'2025-06-14T07:51:29.352Z');
+INSERT INTO ViewCount VALUES('angular-signals',1061,'2025-06-14T11:22:05.852Z');
+INSERT INTO ViewCount VALUES('rowversioning',1133,'2025-06-14T04:29:53.978Z');
+INSERT INTO ViewCount VALUES('new-job',518,'2025-06-14T16:03:59.751Z');
+INSERT INTO ViewCount VALUES('sharded-databases',386,'2025-06-14T14:43:59.373Z');
+COMMIT;
