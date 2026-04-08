@@ -60,7 +60,8 @@
   }
 
   :global([data-theme="light"]) #nebula,
-  :global([data-theme="light"]) #satellite {
+  :global([data-theme="light"]) #satellite,
+  :global([data-theme="light"]) .firefly {
     display: none;
   }
 
@@ -169,6 +170,61 @@
     twinkleContainer.appendChild(el);
   }
   document.body.appendChild(twinkleContainer);
+
+  // --- Firefly ---
+  const FIREFLY_COUNT = 2;
+  for (let f = 0; f < FIREFLY_COUNT; f++) {
+    const fly = document.createElement("div");
+    fly.className = "firefly";
+    fly.style.cssText = `
+      position: fixed;
+      width: 3px;
+      height: 3px;
+      border-radius: 50%;
+      pointer-events: none;
+      z-index: 1;
+      top: 0;
+      left: 0;
+      box-shadow: 0 0 6px 3px #b8ffb0, 0 0 2px 1px #b8ffb0;
+    `;
+    document.body.appendChild(fly);
+
+    let x = Math.random() * window.innerWidth;
+    let y = Math.random() * window.innerHeight * 0.7;
+    let vx = (Math.random() - 0.5) * 0.6;
+    let vy = (Math.random() - 0.5) * 0.6;
+    let opacity = Math.random();
+    let opacityDir = (Math.random() - 0.5) * 0.008;
+
+    function animateFly() {
+      x += vx;
+      y += vy;
+
+      // Randomly nudge direction
+      if (Math.random() < 0.02) vx += (Math.random() - 0.5) * 0.4;
+      if (Math.random() < 0.02) vy += (Math.random() - 0.5) * 0.4;
+
+      // Clamp speed
+      vx = Math.max(-0.8, Math.min(0.8, vx));
+      vy = Math.max(-0.8, Math.min(0.8, vy));
+
+      // Bounce off edges
+      if (x < 0 || x > window.innerWidth)  vx *= -1;
+      if (y < 0 || y > window.innerHeight * 0.8) vy *= -1;
+
+      // Blink
+      opacity += opacityDir;
+      if (opacity >= 1 || opacity <= 0) opacityDir *= -1;
+      opacity = Math.max(0, Math.min(1, opacity));
+
+      fly.style.transform = `translate(${x}px, ${y}px)`;
+      fly.style.opacity = String(opacity);
+
+      requestAnimationFrame(animateFly);
+    }
+
+    animateFly();
+  }
 
   // --- Scroll fade ---
   const nebula = document.getElementById("nebula");
