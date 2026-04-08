@@ -182,13 +182,22 @@
   const stars4 = document.getElementById("stars4");
 
   function updateOnScroll() {
+    const scrollY = window.scrollY;
+    let fadeStart = 0;
+    let fadeEnd = 0;
+
     const about = document.getElementById("about");
-    if (!about) return;
+    if (!about) {
+      // No hero section — keep stars at fixed reduced opacity
+      const fixed = 1 - 0.7;
+      starEls.forEach((el) => { if (el) (el as HTMLElement).style.opacity = String(fixed); });
+      if (stars4) stars4.style.opacity = String(0.35 * fixed);
+      return;
+    }
 
     const aboutTop = about.getBoundingClientRect().top + window.scrollY;
-    const fadeStart = aboutTop - window.innerHeight;
-    const fadeEnd = aboutTop;
-    const scrollY = window.scrollY;
+    fadeStart = aboutTop - window.innerHeight;
+    fadeEnd = aboutTop;
 
     let progress = 0;
     if (scrollY > fadeStart) {
