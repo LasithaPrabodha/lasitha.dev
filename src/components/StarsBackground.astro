@@ -4,11 +4,15 @@
 <div id="stars"></div>
 <div id="stars2"></div>
 <div id="stars3"></div>
+<div id="stars4"></div>
+<div id="nebula"></div>
+<div id="satellite"></div>
 
 <style>
   #stars,
   #stars2,
-  #stars3 {
+  #stars3,
+  #stars4 {
     position: fixed;
     top: 0;
     left: 0;
@@ -17,112 +21,165 @@
     background: transparent;
     pointer-events: none;
     z-index: 0;
+    border-radius: 50%;
   }
 
-  #stars2 {
-    width: 2px;
-    height: 2px;
-  }
-
-  #stars3 {
-    width: 3px;
-    height: 3px;
-  }
+  #stars2 { width: 2px; height: 2px; }
+  #stars3 { width: 2px; height: 2px; }
 
   #stars::after,
   #stars2::after,
-  #stars3::after {
+  #stars3::after,
+  #stars4::after {
     content: " ";
     position: fixed;
     top: 2000px;
     background: transparent;
   }
 
-  #stars::after {
-    width: 1px;
-    height: 1px;
+  #stars::after  { width: 1px; height: 1px; }
+  #stars2::after { width: 2px; height: 2px; }
+  #stars3::after { width: 3px; height: 3px; }
+  #stars4::after { width: 1px; height: 1px; }
+
+  #stars  { animation: animStar  50s linear infinite; }
+  #stars2 { animation: animStar 100s linear infinite; }
+  #stars3 { animation: animStar 150s linear infinite; }
+  #stars4 { animation: animStar 250s linear infinite; opacity: 0.35; }
+
+  /* Subtle CSS nebula — two overlapping radial blobs */
+  #nebula {
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 0;
+    background:
+      radial-gradient(ellipse 60% 30% at 70% 30%, rgba(80, 40, 160, 0.20) 0%, transparent 70%),
+      radial-gradient(ellipse 50% 25% at 25% 60%, rgba(20, 80, 140, 0.17) 0%, transparent 70%);
+    background-color: transparent !important;
   }
 
-  #stars2::after {
+  :global([data-theme="light"]) #nebula,
+  :global([data-theme="light"]) #satellite {
+    display: none;
+  }
+
+  #satellite {
+    position: fixed;
     width: 2px;
     height: 2px;
+    border-radius: 50%;
+    background: #fff;
+    pointer-events: none;
+    z-index: 0;
+    animation: satellite 35s linear infinite;
+    opacity: 0;
   }
 
-  #stars3::after {
-    width: 3px;
-    height: 3px;
+  @keyframes satellite {
+    0%   { transform: translate(-20px, -20px); opacity: 0; }
+    5%   { opacity: 0.7; }
+    95%  { opacity: 0.7; }
+    100% { transform: translate(calc(100vw + 20px), calc(30vh + 20px)); opacity: 0; }
   }
 
-  #stars {
-    animation: animStar 50s linear infinite;
-  }
-
-  #stars2 {
-    animation: animStar 100s linear infinite;
-  }
-
-  #stars3 {
-    animation: animStar 150s linear infinite;
+  @keyframes twinkle {
+    0%, 100% { opacity: 1; }
+    50%       { opacity: 0.15; }
   }
 
   @keyframes animStar {
-    from {
-      transform: translateY(0px);
-    }
-    to {
-      transform: translateY(-2000px);
-    }
+    from { transform: translateY(0px); }
+    to   { transform: translateY(-2000px); }
   }
-
 </style>
 
 <script>
-  function multipleBoxShadow(n: number, color: string): string {
-    let value = `${Math.floor(Math.random() * 2000)}px ${Math.floor(Math.random() * 2000)}px ${color}`;
-    for (let i = 2; i <= n; i++) {
-      value += `, ${Math.floor(Math.random() * 2000)}px ${Math.floor(Math.random() * 2000)}px ${color}`;
-    }
+  const W = Math.max(window.screen.width, window.innerWidth);
+  const H = 2000;
+
+  function multipleBoxShadow(n: number, color: string, glowSize: number, glowColor: string): string {
+    const star = () => {
+      const x = Math.floor(Math.random() * W);
+      const y = Math.floor(Math.random() * H);
+      const sharp = `${x}px ${y}px 0px ${color}`;
+      const glow = glowSize > 0 ? `, ${x}px ${y}px ${glowSize}px ${glowColor}` : "";
+      return sharp + glow;
+    };
+    let value = star();
+    for (let i = 2; i <= n; i++) value += `, ${star()}`;
     return value;
   }
 
-  const shadowsSmall = multipleBoxShadow(700, "#FFF");
-  const shadowsMedium = multipleBoxShadow(200, "#FFF");
-  const shadowsBig = multipleBoxShadow(100, "#FFF");
+  const shadowsSmall  = multipleBoxShadow(350, "#FFF", 0, "");
+  const shadowsMedium = multipleBoxShadow(100, "#FFF", 1.5, "#FFF");
+  const shadowsBig    = multipleBoxShadow(50,  "#FFF", 3, "#FFF");
+  const shadowsDim    = multipleBoxShadow(250, "#ffffff55", 0, "");
 
-  const shadowsSmallDark = multipleBoxShadow(700, "#00000066");
-  const shadowsMediumDark = multipleBoxShadow(200, "#00000066");
-  const shadowsBigDark = multipleBoxShadow(100, "#00000066");
+  const shadowsSmallDark  = multipleBoxShadow(350, "#00000055", 0, "");
+  const shadowsMediumDark = multipleBoxShadow(100, "#00000088", 3, "rgba(0,0,0,0.15)");
+  const shadowsBigDark    = multipleBoxShadow(50,  "#000000aa", 6, "rgba(0,0,0,0.1)");
+  const shadowsDimDark    = multipleBoxShadow(250, "#00000033", 0, "");
 
   const style = document.createElement("style");
+  document.head.appendChild(style);
 
   function applyTheme(theme: string) {
     const isDark = theme !== "light";
     style.textContent = `
-      #stars { box-shadow: ${isDark ? shadowsSmall : shadowsSmallDark} !important; }
-      #stars::after { box-shadow: ${isDark ? shadowsSmall : shadowsSmallDark} !important; }
-      #stars2 { box-shadow: ${isDark ? shadowsMedium : shadowsMediumDark} !important; }
+      #stars        { box-shadow: ${isDark ? shadowsSmall  : shadowsSmallDark}  !important; }
+      #stars::after { box-shadow: ${isDark ? shadowsSmall  : shadowsSmallDark}  !important; }
+      #stars2        { box-shadow: ${isDark ? shadowsMedium : shadowsMediumDark} !important; }
       #stars2::after { box-shadow: ${isDark ? shadowsMedium : shadowsMediumDark} !important; }
-      #stars3 { box-shadow: ${isDark ? shadowsBig : shadowsBigDark} !important; }
-      #stars3::after { box-shadow: ${isDark ? shadowsBig : shadowsBigDark} !important; }
+      #stars3        { box-shadow: ${isDark ? shadowsBig    : shadowsBigDark}    !important; }
+      #stars3::after { box-shadow: ${isDark ? shadowsBig    : shadowsBigDark}    !important; }
+      #stars4        { box-shadow: ${isDark ? shadowsDim    : shadowsDimDark}    !important; }
+      #stars4::after { box-shadow: ${isDark ? shadowsDim    : shadowsDimDark}    !important; }
     `;
   }
 
-  document.head.appendChild(style);
   applyTheme(document.body.getAttribute("data-theme") ?? "dark");
 
-  // Update colors when theme toggle is clicked
   document.getElementById("theme-toggle")?.addEventListener("click", () => {
-    // Wait a tick for the attribute to update
     requestAnimationFrame(() => {
       applyTheme(document.body.getAttribute("data-theme") ?? "dark");
     });
   });
 
+  // --- Twinkling stars ---
+  const twinkleStyle = document.createElement("style");
+  document.head.appendChild(twinkleStyle);
+
+  const TWINKLE_COUNT = 40;
+  let twinkleCSS = "";
+  for (let i = 0; i < TWINKLE_COUNT; i++) {
+    const x = Math.floor(Math.random() * W);
+    const y = Math.floor(Math.random() * H * 0.6);
+    const dur = (2.5 + Math.random() * 4).toFixed(2);
+    const delay = (Math.random() * 8).toFixed(2);
+    twinkleCSS += `.tw-${i}{position:fixed;left:${x}px;top:${y}px;width:2px;height:2px;border-radius:50%;background:#fff;pointer-events:none;z-index:0;animation:twinkle ${dur}s ${delay}s ease-in-out infinite;}`;
+  }
+  twinkleStyle.textContent = twinkleCSS;
+
+  const twinkleContainer = document.createElement("div");
+  twinkleContainer.style.cssText = "position:fixed;inset:0;pointer-events:none;z-index:0;background:transparent!important;";
+  for (let i = 0; i < TWINKLE_COUNT; i++) {
+    const el = document.createElement("div");
+    el.className = `tw-${i}`;
+    twinkleContainer.appendChild(el);
+  }
+  document.body.appendChild(twinkleContainer);
+
+  // --- Scroll fade ---
+  const nebula = document.getElementById("nebula");
   const starEls = [
     document.getElementById("stars"),
     document.getElementById("stars2"),
     document.getElementById("stars3"),
+    twinkleContainer,
+    nebula,
   ];
+  const stars4 = document.getElementById("stars4");
 
   function updateOnScroll() {
     const about = document.getElementById("about");
@@ -140,8 +197,10 @@
 
     const starOpacity = 1 - progress * 0.7;
     starEls.forEach((el) => {
-      if (el) el.style.opacity = String(starOpacity);
+      if (el) (el as HTMLElement).style.opacity = String(starOpacity);
     });
+
+    if (stars4) stars4.style.opacity = String(0.35 * starOpacity);
   }
 
   window.addEventListener("scroll", updateOnScroll, { passive: true });
