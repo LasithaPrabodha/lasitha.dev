@@ -6,8 +6,6 @@ import partytown from "@astrojs/partytown";
 import expressiveCode from "astro-expressive-code";
 import { astroImageTools } from "astro-imagetools";
 
-import db from "@astrojs/db";
-
 export default defineConfig({
   output: "server",
   site: "https://www.lasitha.dev",
@@ -31,7 +29,6 @@ export default defineConfig({
         forward: ["dataLayer.push"],
       },
     }),
-    db()
   ],
   vite: {
     ssr: {
