@@ -1,0 +1,149 @@
+---
+---
+
+<div id="stars"></div>
+<div id="stars2"></div>
+<div id="stars3"></div>
+
+<style>
+  #stars,
+  #stars2,
+  #stars3 {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 1px;
+    height: 1px;
+    background: transparent;
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  #stars2 {
+    width: 2px;
+    height: 2px;
+  }
+
+  #stars3 {
+    width: 3px;
+    height: 3px;
+  }
+
+  #stars::after,
+  #stars2::after,
+  #stars3::after {
+    content: " ";
+    position: fixed;
+    top: 2000px;
+    background: transparent;
+  }
+
+  #stars::after {
+    width: 1px;
+    height: 1px;
+  }
+
+  #stars2::after {
+    width: 2px;
+    height: 2px;
+  }
+
+  #stars3::after {
+    width: 3px;
+    height: 3px;
+  }
+
+  #stars {
+    animation: animStar 50s linear infinite;
+  }
+
+  #stars2 {
+    animation: animStar 100s linear infinite;
+  }
+
+  #stars3 {
+    animation: animStar 150s linear infinite;
+  }
+
+  @keyframes animStar {
+    from {
+      transform: translateY(0px);
+    }
+    to {
+      transform: translateY(-2000px);
+    }
+  }
+
+</style>
+
+<script>
+  function multipleBoxShadow(n: number, color: string): string {
+    let value = `${Math.floor(Math.random() * 2000)}px ${Math.floor(Math.random() * 2000)}px ${color}`;
+    for (let i = 2; i <= n; i++) {
+      value += `, ${Math.floor(Math.random() * 2000)}px ${Math.floor(Math.random() * 2000)}px ${color}`;
+    }
+    return value;
+  }
+
+  const shadowsSmall = multipleBoxShadow(700, "#FFF");
+  const shadowsMedium = multipleBoxShadow(200, "#FFF");
+  const shadowsBig = multipleBoxShadow(100, "#FFF");
+
+  const shadowsSmallDark = multipleBoxShadow(700, "#00000066");
+  const shadowsMediumDark = multipleBoxShadow(200, "#00000066");
+  const shadowsBigDark = multipleBoxShadow(100, "#00000066");
+
+  const style = document.createElement("style");
+
+  function applyTheme(theme: string) {
+    const isDark = theme !== "light";
+    style.textContent = `
+      #stars { box-shadow: ${isDark ? shadowsSmall : shadowsSmallDark} !important; }
+      #stars::after { box-shadow: ${isDark ? shadowsSmall : shadowsSmallDark} !important; }
+      #stars2 { box-shadow: ${isDark ? shadowsMedium : shadowsMediumDark} !important; }
+      #stars2::after { box-shadow: ${isDark ? shadowsMedium : shadowsMediumDark} !important; }
+      #stars3 { box-shadow: ${isDark ? shadowsBig : shadowsBigDark} !important; }
+      #stars3::after { box-shadow: ${isDark ? shadowsBig : shadowsBigDark} !important; }
+    `;
+  }
+
+  document.head.appendChild(style);
+  applyTheme(document.body.getAttribute("data-theme") ?? "dark");
+
+  // Update colors when theme toggle is clicked
+  document.getElementById("theme-toggle")?.addEventListener("click", () => {
+    // Wait a tick for the attribute to update
+    requestAnimationFrame(() => {
+      applyTheme(document.body.getAttribute("data-theme") ?? "dark");
+    });
+  });
+
+  const starEls = [
+    document.getElementById("stars"),
+    document.getElementById("stars2"),
+    document.getElementById("stars3"),
+  ];
+
+  function updateOnScroll() {
+    const about = document.getElementById("about");
+    if (!about) return;
+
+    const aboutTop = about.getBoundingClientRect().top + window.scrollY;
+    const fadeStart = aboutTop - window.innerHeight;
+    const fadeEnd = aboutTop;
+    const scrollY = window.scrollY;
+
+    let progress = 0;
+    if (scrollY > fadeStart) {
+      progress = Math.min((scrollY - fadeStart) / (fadeEnd - fadeStart), 1);
+    }
+
+    const starOpacity = 1 - progress * 0.7;
+    starEls.forEach((el) => {
+      if (el) el.style.opacity = String(starOpacity);
+    });
+  }
+
+  window.addEventListener("scroll", updateOnScroll, { passive: true });
+  updateOnScroll();
+</script>

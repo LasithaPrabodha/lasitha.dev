@@ -3,6 +3,7 @@ import BaseHead from "@components/BaseHead.astro";
 import Header from "@components/Header.astro";
 import Footer from "@components/Footer.astro";
 import ScrollToTop from "@components/ScrollToTop.astro";
+import StarsBackground from "@components/StarsBackground.astro";
 
 const { metaTitle, metaDescription, animate, providedTheme, ...props } = Astro.props;
 
@@ -15,6 +16,7 @@ const theme = providedTheme ?? Astro.cookies.get("theme")?.value ?? "";
     <BaseHead title={metaTitle} description={metaDescription} />
   </head>
   <body class="relative" id="top" data-theme={theme}>
+    <StarsBackground />
     <Header animate={animate} />
     <main
       {...props}
