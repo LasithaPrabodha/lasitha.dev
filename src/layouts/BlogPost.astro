@@ -5,10 +5,12 @@ import Header from "@components/Header.astro";
 import Footer from "@components/Footer.astro";
 import { getCollection } from "astro:content";
 import ScrollToTop from "@components/ScrollToTop.astro";
+import { getViewCount } from "utils/viewCount";
 
 // import "@assets/styles/blog.css";
 
 const { title, description, pubDate, updatedDate, url, ...props } = Astro.props;
+const count = await getViewCount(url);
 const { default: back } = await import(`/src/assets/icons/angle-left.svg?raw`);
 
 const posts = (await getCollection("blog"))
@@ -54,6 +56,7 @@ const ecTheme = theme === "dark" ? "one-dark-pro" : "github-light";
                   </div>
                 )
               }
+              {count !== null && <span class="text-sm text-[var(--clr-quote)]">{count} View{count === 1 ? "" : "s"}</span>}
 
             </div>
             <h1 class="text-4xl sm:text-5xl sm:leading-tight">{title}</h1>
