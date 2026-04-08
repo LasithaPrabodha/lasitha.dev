@@ -6,7 +6,7 @@ import RectPattern from "@components/RectPattern.astro";
 import myPhoto from "@assets/images/casual-photo.jpg";
 ---
 
-<section id="about" class="mb-52">
+<section id="about" class="mb-52 fade-in-section">
   <div class="center">
     <div class="name mt-12 sm:mt-0">
       <small class="uppercase">About</small>
@@ -48,6 +48,17 @@ import myPhoto from "@assets/images/casual-photo.jpg";
 </section>
 
 <style>
+  .fade-in-section {
+    opacity: 0;
+    transform: translateY(24px);
+    transition: opacity 1.6s ease, transform 1.6s ease;
+  }
+
+  .fade-in-section.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
   :global(.details-photo > svg) {
     position: absolute;
     left: 20px;
@@ -78,6 +89,23 @@ import myPhoto from "@assets/images/casual-photo.jpg";
     position: relative;
     background-image: url("/src/assets/images/blur.png");
     background-size: contain;
+  }
+
+  :global([data-theme="dark"]) .me {
+    opacity: 0.75;
+  }
+
+  :global([data-theme="dark"]) .details-photo::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: var(--clr-bg);
+    z-index: 0;
+    border-radius: 16px;
+  }
+
+  :global([data-theme="dark"]) .me {
+    z-index: 1;
   }
   h2::before {
     content: "";
@@ -119,3 +147,19 @@ import myPhoto from "@assets/images/casual-photo.jpg";
     }
   }
 </style>
+
+<script>
+  const section = document.getElementById("about");
+  if (section) {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          section.classList.add("visible");
+          observer.disconnect();
+        }
+      },
+      { threshold: 0.1 }
+    );
+    observer.observe(section);
+  }
+</script>
