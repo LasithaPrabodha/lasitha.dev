@@ -23,8 +23,8 @@
     z-index: 0;
     border-radius: 50%;
   }
-
-  #stars2 { width: 2px; height: 2px; }
+  #stars  { opacity: 0.7; }
+  #stars2 { width: 2px; height: 2px; opacity: 0.9; }
   #stars3 { width: 2px; height: 2px; }
 
   #stars::after,
@@ -236,14 +236,15 @@
 
   // --- Scroll fade ---
   const nebula = document.getElementById("nebula");
-  const starEls = [
-    document.getElementById("stars"),
-    document.getElementById("stars2"),
-    document.getElementById("stars3"),
-    twinkleContainer,
-    nebula,
+  // Base opacities per layer — must match CSS
+  const starLayers: [HTMLElement | null, number][] = [
+    [document.getElementById("stars"),  0.7],
+    [document.getElementById("stars2"), 0.9],
+    [document.getElementById("stars3"), 1],
+    [document.getElementById("stars4"), 0.35],
+    [twinkleContainer,                  1],
+    [nebula,                            1],
   ];
-  const stars4 = document.getElementById("stars4");
 
   function updateOnScroll() {
     const scrollY = window.scrollY;
@@ -252,10 +253,8 @@
 
     const about = document.getElementById("about");
     if (!about) {
-      // No hero section — keep stars at fixed reduced opacity
       const fixed = 1 - 0.7;
-      starEls.forEach((el) => { if (el) (el as HTMLElement).style.opacity = String(fixed); });
-      if (stars4) stars4.style.opacity = String(0.35 * fixed);
+      starLayers.forEach(([el, base]) => { if (el) el.style.opacity = String(base * fixed); });
       return;
     }
 
@@ -268,12 +267,8 @@
       progress = Math.min((scrollY - fadeStart) / (fadeEnd - fadeStart), 1);
     }
 
-    const starOpacity = 1 - progress * 0.7;
-    starEls.forEach((el) => {
-      if (el) (el as HTMLElement).style.opacity = String(starOpacity);
-    });
-
-    if (stars4) stars4.style.opacity = String(0.35 * starOpacity);
+    const fade = 1 - progress * 0.7;
+    starLayers.forEach(([el, base]) => { if (el) el.style.opacity = String(base * fade); });
   }
 
   window.addEventListener("scroll", updateOnScroll, { passive: true });
