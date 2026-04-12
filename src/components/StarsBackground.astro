@@ -59,6 +59,16 @@
     background-color: transparent !important;
   }
 
+  /* On wide screens lock nebula positions to what they'd be at 1500px */
+  @media (min-width: 1500px) {
+    #nebula {
+      background:
+        radial-gradient(ellipse 900px 30% at calc(50% + 300px) 25%, rgba(80, 40, 160, 0.16) 0%, transparent 70%),
+        radial-gradient(ellipse 750px 25% at calc(50% - 375px) 60%, rgba(20, 80, 140, 0.16) 0%, transparent 70%);
+      background-color: transparent !important;
+    }
+  }
+
   :global([data-theme="light"]) #nebula,
   :global([data-theme="light"]) #satellite {
     display: none;
