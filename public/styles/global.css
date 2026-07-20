@@ -15,7 +15,7 @@
   --clr-fg-alt: #333A3F;
   --clr-primary: #333A3F;
   --clr-chip-bg: #ff2d2310;
-  --clr-link: oklch(0.67 0.31 359.25); 
+  --clr-link: #F43F5E; 
   --display-sun: none;
   --display-moon: block;
 }
