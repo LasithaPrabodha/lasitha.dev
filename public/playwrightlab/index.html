@@ -1,0 +1,1185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PlaywrightLab — a Playwright practice ground</title>
+<meta name="title" content="PlaywrightLab — a Playwright practice ground">
+<meta name="description" content="A free, interactive Playwright practice ground in a single page: locators, forms, dialogs, frames, real network requests, auth sessions, file downloads, shadow DOM, and more — each demo paired with a live locator inspector that suggests the right Playwright selector as you click.">
+<meta name="author" content="Lasitha Weligampola">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://www.lasitha.dev/playwrightlab/playwrightlab.html">
+
+<!-- Open Graph / Facebook -->
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://www.lasitha.dev/playwrightlab/playwrightlab.html">
+<meta property="og:site_name" content="Lasitha Weligampola">
+<meta property="og:title" content="PlaywrightLab — a Playwright practice ground">
+<meta property="og:description" content="A free, interactive Playwright practice ground in a single page: locators, forms, dialogs, frames, real network requests, auth sessions, file downloads, shadow DOM, and more — each demo paired with a live locator inspector.">
+<meta property="og:image" content="https://www.lasitha.dev/static/banner.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:type" content="image/png">
+
+<!-- Twitter -->
+<meta property="twitter:card" content="summary_large_image">
+<meta property="twitter:url" content="https://www.lasitha.dev/playwrightlab/playwrightlab.html">
+<meta property="twitter:title" content="PlaywrightLab — a Playwright practice ground">
+<meta property="twitter:description" content="A free, interactive Playwright practice ground in a single page: locators, forms, dialogs, frames, real network requests, auth sessions, file downloads, shadow DOM, and more.">
+<meta property="twitter:image" content="https://www.lasitha.dev/static/banner.png">
+
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%2314161a'/%3E%3Ctext x='16' y='23' font-size='22' text-anchor='middle' fill='%2338bdf8'%3E%E2%97%86%3C/text%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#14161a;
+    --panel:#1b1e24;
+    --panel-alt:#20232b;
+    --border:#2a2e37;
+    --text:#e8eaed;
+    --text-muted:#8b93a1;
+    --accent:#38bdf8;
+    --accent-dim:#1b3a4a;
+    --pass:#4ade80;
+    --fail:#f87171;
+    --warn:#fbbf24;
+    --font-display:'Space Grotesk',sans-serif;
+    --font-body:'Inter',sans-serif;
+    --font-mono:'IBM Plex Mono',monospace;
+  }
+  *,*::before,*::after{box-sizing:border-box;}
+  html,body{margin:0;padding:0;}
+  body{
+    background:var(--bg);
+    color:var(--text);
+    font-family:var(--font-body);
+    font-size:15px;
+    line-height:1.55;
+    -webkit-font-smoothing:antialiased;
+  }
+  h1,h2,h3{font-family:var(--font-display);margin:0;letter-spacing:-0.01em;}
+  code,.mono{font-family:var(--font-mono);}
+  a{color:var(--accent);}
+  :focus-visible{outline:2px solid var(--accent);outline-offset:2px;border-radius:4px;}
+  :focus:not(:focus-visible){outline:none;}
+
+  /* ---------- layout shell ---------- */
+  .topbar{
+    display:flex;align-items:center;justify-content:space-between;
+    padding:14px 20px;border-bottom:1px solid var(--border);
+    background:var(--panel);position:sticky;top:0;z-index:20;
+    gap:12px;flex-wrap:wrap;
+  }
+  .brand{display:flex;align-items:baseline;gap:10px;}
+  .brand .mark{color:var(--accent);font-size:20px;}
+  .brand h1{font-size:18px;font-weight:600;}
+  .brand .tag{color:var(--text-muted);font-size:13px;}
+  .topbar-actions{display:flex;gap:10px;align-items:center;}
+
+  .layout{display:flex;min-height:calc(100vh - 57px);}
+  .sidebar{
+    width:230px;flex-shrink:0;border-right:1px solid var(--border);
+    background:var(--panel);padding:14px 10px;
+    overflow-y:auto;position:sticky;top:57px;height:calc(100vh - 57px);
+  }
+  .nav-item{
+    display:flex;gap:8px;align-items:baseline;width:100%;text-align:left;
+    background:transparent;border:none;border-left:2px solid transparent;
+    color:var(--text-muted);font-family:var(--font-body);font-size:13.5px;
+    padding:9px 10px;border-radius:6px;cursor:pointer;
+  }
+  .nav-item .num{font-family:var(--font-mono);font-size:11px;color:var(--text-muted);}
+  .nav-item:hover{background:var(--panel-alt);color:var(--text);}
+  .nav-item.is-active{background:var(--accent-dim);color:var(--text);border-left-color:var(--accent);}
+  .nav-item.is-active .num{color:var(--accent);}
+
+  .content{flex:1;padding:28px 32px 90px;max-width:840px;}
+  .panel{display:none;}
+  .panel.is-active{display:block;animation:fadein .25s ease;}
+  @keyframes fadein{from{opacity:0;transform:translateY(4px);}to{opacity:1;transform:translateY(0);}}
+  .panel-head{display:flex;align-items:baseline;gap:10px;margin-bottom:6px;}
+  .panel-num{font-family:var(--font-mono);color:var(--accent);font-size:13px;}
+  .panel h2{font-size:22px;}
+  .goal{
+    color:var(--text-muted);font-size:13.5px;margin:8px 0 22px;
+    padding:10px 12px;border-left:2px solid var(--border);background:var(--panel);
+    border-radius:0 6px 6px 0;
+  }
+  .goal strong{color:var(--text);}
+  .demo{background:var(--panel);border:1px solid var(--border);border-radius:10px;padding:20px;}
+  .demo + .demo{margin-top:14px;}
+  .demo-label{font-size:12px;text-transform:uppercase;letter-spacing:.04em;color:var(--text-muted);margin:0 0 12px;}
+
+  /* ---------- buttons & form controls ---------- */
+  .btn{
+    font-family:var(--font-body);font-size:13.5px;font-weight:500;
+    padding:9px 16px;border-radius:8px;border:1px solid var(--border);
+    background:var(--panel-alt);color:var(--text);cursor:pointer;
+  }
+  .btn:hover{border-color:var(--accent);}
+  .btn:disabled{opacity:.5;cursor:not-allowed;}
+  .btn--primary{background:var(--accent);border-color:var(--accent);color:#04202b;font-weight:600;}
+  .btn--primary:hover{filter:brightness(1.08);}
+  .btn--danger{border-color:#5a2f2f;color:var(--fail);}
+  .btn--danger:hover{border-color:var(--fail);}
+  .btn-row{display:flex;gap:10px;flex-wrap:wrap;align-items:center;}
+
+  label{display:block;font-size:13px;color:var(--text-muted);margin-bottom:5px;}
+  input[type=text],input[type=email],input[type=search],textarea,select{
+    width:100%;background:var(--panel-alt);border:1px solid var(--border);
+    color:var(--text);border-radius:7px;padding:9px 11px;font-family:var(--font-body);font-size:14px;
+  }
+  input[type=range]{accent-color:var(--accent);width:100%;}
+  input[type=checkbox],input[type=radio]{accent-color:var(--accent);width:15px;height:15px;margin-right:7px;}
+  .field{margin-bottom:16px;}
+  .field-row{display:flex;gap:16px;flex-wrap:wrap;}
+  .field-row .field{flex:1;min-width:180px;}
+  .check-row,.radio-row{display:flex;align-items:center;margin-bottom:8px;font-size:14px;}
+
+  .badge{display:inline-block;font-size:11px;font-family:var(--font-mono);padding:3px 8px;border-radius:20px;border:1px solid;}
+  .badge--pass{color:var(--pass);border-color:#1f4a34;background:#132a1f;}
+  .badge--fail{color:var(--fail);border-color:#4a2323;background:#2a1414;}
+  .badge--flaky{color:var(--warn);border-color:#4a3d1a;background:#2a2110;}
+
+  .note-box{margin-top:12px;font-size:13px;color:var(--text-muted);font-family:var(--font-mono);}
+  .note-box.is-set{color:var(--text);}
+
+  /* ---------- section-specific bits ---------- */
+  .card-row{display:flex;gap:12px;flex-wrap:wrap;}
+  .mini-card{background:var(--panel-alt);border:1px solid var(--border);border-radius:8px;padding:12px 14px;flex:1;min-width:160px;}
+  .mini-card h4{font-size:14px;margin:0 0 4px;}
+  .mini-card p{font-size:12.5px;color:var(--text-muted);margin:0 0 10px;}
+
+  .tabs{display:flex;gap:4px;border-bottom:1px solid var(--border);margin-bottom:14px;}
+  .tab{background:none;border:none;color:var(--text-muted);padding:8px 14px;font-size:13.5px;cursor:pointer;border-bottom:2px solid transparent;}
+  .tab[aria-selected="true"]{color:var(--accent);border-bottom-color:var(--accent);}
+  .tab-panel{display:none;font-size:14px;color:var(--text-muted);}
+  .tab-panel.is-active{display:block;}
+
+  progress{width:100%;height:10px;accent-color:var(--accent);}
+
+  dialog, .modal-overlay{border:none;}
+  .modal-overlay{
+    position:fixed;inset:0;background:rgba(0,0,0,.55);display:none;
+    align-items:center;justify-content:center;z-index:50;
+  }
+  .modal-overlay.is-open{display:flex;}
+  .modal-box{background:var(--panel);border:1px solid var(--border);border-radius:10px;padding:22px;width:320px;}
+  .modal-box h3{font-size:16px;margin-bottom:8px;}
+  .modal-box p{font-size:13.5px;color:var(--text-muted);margin-bottom:16px;}
+
+  iframe.demo-frame{width:100%;height:130px;border:1px solid var(--border);border-radius:8px;}
+
+  .dnd-board{display:flex;gap:14px;}
+  .dnd-col{flex:1;background:var(--panel-alt);border:1px dashed var(--border);border-radius:8px;padding:10px;min-height:140px;}
+  .dnd-col h4{font-size:12.5px;color:var(--text-muted);text-transform:uppercase;letter-spacing:.04em;margin:2px 6px 10px;}
+  .dnd-card{background:var(--panel);border:1px solid var(--border);border-radius:6px;padding:9px 11px;margin-bottom:8px;font-size:13.5px;cursor:grab;}
+  .dnd-card.dragging{opacity:.4;}
+
+  table{width:100%;border-collapse:collapse;font-size:13.5px;}
+  th,td{text-align:left;padding:9px 10px;border-bottom:1px solid var(--border);}
+  th{cursor:pointer;color:var(--text-muted);font-weight:500;user-select:none;}
+  th:hover{color:var(--text);}
+  th .arrow{color:var(--accent);margin-left:3px;}
+
+  .tooltip{position:relative;display:inline-flex;align-items:center;justify-content:center;
+    width:20px;height:20px;border-radius:50%;background:var(--panel-alt);border:1px solid var(--border);
+    font-size:12px;color:var(--text-muted);cursor:default;}
+  .tooltip .bubble{
+    position:absolute;bottom:130%;left:50%;transform:translateX(-50%);
+    background:var(--panel-alt);border:1px solid var(--border);border-radius:6px;
+    padding:6px 10px;font-size:12px;white-space:nowrap;color:var(--text);
+    opacity:0;pointer-events:none;transition:opacity .12s ease;
+  }
+  .tooltip:hover .bubble{opacity:1;}
+  .hover-menu{position:relative;display:inline-block;}
+  .hover-menu .menu-list{
+    position:absolute;top:110%;left:0;background:var(--panel-alt);border:1px solid var(--border);
+    border-radius:8px;padding:6px;min-width:150px;display:none;z-index:5;
+  }
+  .hover-menu:hover .menu-list{display:block;}
+  .hover-menu .menu-list button{
+    display:block;width:100%;text-align:left;background:none;border:none;color:var(--text);
+    padding:7px 9px;border-radius:5px;font-size:13px;cursor:pointer;
+  }
+  .hover-menu .menu-list button:hover{background:var(--accent-dim);}
+
+  .listbox{border:1px solid var(--border);border-radius:8px;margin-top:6px;overflow:hidden;background:var(--panel-alt);}
+  .listbox[hidden]{display:none;}
+  .listbox [role="option"]{padding:8px 11px;font-size:13.5px;cursor:pointer;}
+  .listbox [role="option"]:hover{background:var(--accent-dim);}
+
+  .cookie-banner{
+    position:sticky;top:57px;z-index:15;background:var(--panel-alt);border-bottom:1px solid var(--border);
+    padding:10px 20px;display:flex;gap:16px;align-items:center;justify-content:space-between;flex-wrap:wrap;
+  }
+  .cookie-banner[hidden]{display:none;}
+
+  /* ---------- inspector HUD (signature element) ---------- */
+  .inspector{
+    position:fixed;left:0;right:0;bottom:0;z-index:30;
+    background:var(--panel);border-top:1px solid var(--border);
+    font-family:var(--font-mono);font-size:12.5px;
+    padding:10px 16px;display:flex;gap:18px;align-items:center;flex-wrap:wrap;
+  }
+  .inspector .insp-label{color:var(--accent);flex-shrink:0;font-weight:600;}
+  .inspector .insp-empty{color:var(--text-muted);}
+  .insp-field{color:var(--text-muted);}
+  .insp-field b{color:var(--text);font-weight:500;}
+  .insp-suggestion{color:var(--pass);}
+  .insp-note{color:var(--warn);}
+
+  @media (max-width: 820px){
+    .layout{flex-direction:column;}
+    .sidebar{width:100%;position:sticky;top:57px;height:auto;
+      display:flex;flex-direction:row;overflow-x:auto;padding:8px 10px;gap:4px;}
+    .nav-item{flex-shrink:0;border-left:none;border-bottom:2px solid transparent;white-space:nowrap;}
+    .nav-item.is-active{border-left-color:transparent;border-bottom-color:var(--accent);}
+    .content{padding:20px 16px 120px;}
+    .dnd-board{flex-direction:column;}
+    .inspector{font-size:11px;padding:8px 12px;}
+  }
+  @media (prefers-reduced-motion: reduce){
+    *,*::before,*::after{animation-duration:.001ms !important;transition-duration:.001ms !important;}
+  }
+</style>
+</head>
+<body>
+
+<header class="topbar">
+  <div class="brand">
+    <span class="mark">◆</span>
+    <h1>PlaywrightLab</h1>
+    <span class="tag">a Playwright practice ground</span>
+  </div>
+  <div class="topbar-actions">
+    <a class="btn" href="beyond-the-page.html">Beyond the page &rarr;</a>
+    <a class="btn" href="https://playwright.dev" target="_blank" rel="noopener">Playwright docs ↗</a>
+    <button class="btn btn--danger" id="reset-data-btn">Reset practice data</button>
+  </div>
+</header>
+
+<div id="cookie-banner" class="cookie-banner" hidden>
+  <span>This lab uses <code class="mono">localStorage</code> to remember a note and this choice. No real cookies.</span>
+  <div class="btn-row">
+    <button class="btn" id="cookie-decline" data-testid="cookie-decline">Decline</button>
+    <button class="btn btn--primary" id="cookie-accept" data-testid="cookie-accept">Accept</button>
+  </div>
+</div>
+
+<div class="layout">
+  <nav class="sidebar" id="sidebar" aria-label="Practice sections">
+    <button class="nav-item" data-target="locators"><span class="num">01</span>Locators</button>
+    <button class="nav-item" data-target="forms"><span class="num">02</span>Forms</button>
+    <button class="nav-item" data-target="dynamic"><span class="num">03</span>Dynamic content</button>
+    <button class="nav-item" data-target="waits"><span class="num">04</span>Waits &amp; flakiness</button>
+    <button class="nav-item" data-target="dialogs"><span class="num">05</span>Dialogs</button>
+    <button class="nav-item" data-target="frames"><span class="num">06</span>Frames</button>
+    <button class="nav-item" data-target="dnd"><span class="num">07</span>Drag &amp; drop</button>
+    <button class="nav-item" data-target="tables"><span class="num">08</span>Tables</button>
+    <button class="nav-item" data-target="hover"><span class="num">09</span>Hover &amp; tooltips</button>
+    <button class="nav-item" data-target="network"><span class="num">10</span>Network</button>
+    <button class="nav-item" data-target="storage"><span class="num">11</span>Storage</button>
+    <button class="nav-item" data-target="shadow"><span class="num">12</span>Shadow DOM</button>
+    <button class="nav-item" data-target="autocomplete"><span class="num">13</span>Autocomplete</button>
+    <button class="nav-item" data-target="nav"><span class="num">14</span>New tab &amp; nav</button>
+    <button class="nav-item" data-target="auth"><span class="num">15</span>Auth &amp; session</button>
+    <button class="nav-item" data-target="downloads"><span class="num">16</span>Downloads</button>
+  </nav>
+
+  <main class="content">
+
+    <!-- 01 LOCATORS -->
+    <section class="panel" data-panel="locators">
+      <div class="panel-head"><span class="panel-num">01</span><h2>Locators</h2></div>
+      <p class="goal">Goal: practice <b>getByRole</b>, <b>getByTestId</b>, and <b>getByText</b> — then use <code class="mono">.filter()</code> or scope inside a parent to tell apart elements that look identical.</p>
+
+      <div class="demo">
+        <p class="demo-label">Three ways to target the same kind of button</p>
+        <div class="btn-row">
+          <button class="btn btn--primary" data-testid="primary-action" id="btn-primary">Primary action</button>
+          <button class="btn" id="btn-secondary">Secondary (id only)</button>
+          <button class="btn">Ghost (no id, no class hook, just text)</button>
+        </div>
+      </div>
+
+      <div class="demo">
+        <p class="demo-label">Duplicate text trap — three "Edit" buttons, same label</p>
+        <div class="card-row">
+          <div class="mini-card" data-testid="card-invoices"><h4>Invoices</h4><p>12 records</p><button class="btn" data-testid="edit-invoices">Edit</button></div>
+          <div class="mini-card" data-testid="card-contacts"><h4>Contacts</h4><p>340 records</p><button class="btn" data-testid="edit-contacts">Edit</button></div>
+          <div class="mini-card" data-testid="card-billing"><h4>Billing</h4><p>4 records</p><button class="btn" data-testid="edit-billing">Edit</button></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 02 FORMS -->
+    <section class="panel" data-panel="forms">
+      <div class="panel-head"><span class="panel-num">02</span><h2>Forms</h2></div>
+      <p class="goal">Goal: fill inputs, selects, checkboxes and radios; assert the submit button stays <b>disabled</b> until required fields are valid, then assert the confirmation.</p>
+
+      <form class="demo" id="practice-form">
+        <div class="field-row">
+          <div class="field">
+            <label for="f-name">Full name</label>
+            <input type="text" id="f-name" data-testid="input-name" required>
+          </div>
+          <div class="field">
+            <label for="f-email">Email</label>
+            <input type="email" id="f-email" data-testid="input-email" required>
+          </div>
+        </div>
+        <div class="field">
+          <label for="f-bio">Bio</label>
+          <textarea id="f-bio" rows="2" data-testid="input-bio" placeholder="Optional"></textarea>
+        </div>
+        <div class="field-row">
+          <div class="field">
+            <label for="f-country">Country</label>
+            <select id="f-country" data-testid="select-country">
+              <option value="">Choose…</option>
+              <option>Canada</option>
+              <option>United Kingdom</option>
+              <option>Sri Lanka</option>
+              <option>Germany</option>
+            </select>
+          </div>
+          <div class="field">
+            <label for="f-level">Experience level: <span id="f-level-out">3</span>/5</label>
+            <input type="range" id="f-level" min="1" max="5" value="3" data-testid="range-level">
+          </div>
+        </div>
+        <div class="field">
+          <label>Interests</label>
+          <div class="check-row"><input type="checkbox" id="f-int-ui" data-testid="check-ui"><label for="f-int-ui" style="display:inline;margin:0;">UI testing</label></div>
+          <div class="check-row"><input type="checkbox" id="f-int-api" data-testid="check-api"><label for="f-int-api" style="display:inline;margin:0;">API testing</label></div>
+          <div class="check-row"><input type="checkbox" id="f-newsletter" data-testid="check-newsletter" checked><label for="f-newsletter" style="display:inline;margin:0;">Subscribe to updates</label></div>
+        </div>
+        <div class="field">
+          <label>Plan</label>
+          <div class="radio-row"><input type="radio" name="plan" id="f-plan-free" value="Free" data-testid="radio-free" checked><label for="f-plan-free" style="display:inline;margin:0;">Free</label></div>
+          <div class="radio-row"><input type="radio" name="plan" id="f-plan-pro" value="Pro" data-testid="radio-pro"><label for="f-plan-pro" style="display:inline;margin:0;">Pro</label></div>
+          <div class="radio-row"><input type="radio" name="plan" id="f-plan-team" value="Team" data-testid="radio-team"><label for="f-plan-team" style="display:inline;margin:0;">Team</label></div>
+        </div>
+        <div class="field">
+          <label for="f-file">Attachment</label>
+          <input type="file" id="f-file" data-testid="input-file">
+        </div>
+        <div class="btn-row">
+          <button type="submit" class="btn btn--primary" id="f-submit" data-testid="submit-form" disabled>Submit</button>
+          <span class="note-box" id="f-result" data-testid="form-result"></span>
+        </div>
+      </form>
+    </section>
+
+    <!-- 03 DYNAMIC CONTENT -->
+    <section class="panel" data-panel="dynamic">
+      <div class="panel-head"><span class="panel-num">03</span><h2>Dynamic content</h2></div>
+      <p class="goal">Goal: use auto-waiting instead of fixed sleeps — <code class="mono">await expect(locator).toBeVisible()</code> rather than <code class="mono">waitForTimeout()</code>.</p>
+
+      <div class="demo">
+        <p class="demo-label">Content that loads after a delay, with a fresh id every time</p>
+        <button class="btn btn--primary" id="load-content-btn" data-testid="load-content-btn">Load content</button>
+        <div id="dynamic-content-holder" style="margin-top:12px;"></div>
+      </div>
+
+      <div class="demo">
+        <p class="demo-label">Simple counter</p>
+        <div class="btn-row">
+          <button class="btn" id="counter-dec" data-testid="counter-dec">−</button>
+          <span class="mono" id="counter-value" data-testid="counter-value" style="min-width:24px;text-align:center;display:inline-block;">0</span>
+          <button class="btn" id="counter-inc" data-testid="counter-inc">+</button>
+        </div>
+      </div>
+
+      <div class="demo">
+        <p class="demo-label">Tabs — practice asserting <code class="mono">aria-selected</code></p>
+        <div class="tabs" role="tablist">
+          <button class="tab" role="tab" aria-selected="true" data-tab="overview" data-testid="tab-overview">Overview</button>
+          <button class="tab" role="tab" aria-selected="false" data-tab="pricing" data-testid="tab-pricing">Pricing</button>
+          <button class="tab" role="tab" aria-selected="false" data-tab="faq" data-testid="tab-faq">FAQ</button>
+        </div>
+        <div class="tab-panel is-active" data-tab-panel="overview">A short overview lives here.</div>
+        <div class="tab-panel" data-tab-panel="pricing">Pricing details would render here.</div>
+        <div class="tab-panel" data-tab-panel="faq">Frequently asked questions go here.</div>
+      </div>
+    </section>
+
+    <!-- 04 WAITS & FLAKINESS -->
+    <section class="panel" data-panel="waits">
+      <div class="panel-head"><span class="panel-num">04</span><h2>Waits &amp; flakiness</h2></div>
+      <p class="goal">Goal: practice <code class="mono">expect.poll()</code>, waiting for an element to become enabled, and retrying against a genuinely flaky action.</p>
+
+      <div class="demo">
+        <p class="demo-label">Progress bar (button re-enables at 100%)</p>
+        <button class="btn btn--primary" id="progress-start" data-testid="progress-start">Start process</button>
+        <div style="margin-top:10px;">
+          <progress id="progress-bar" data-testid="progress-bar" value="0" max="100"></progress>
+          <span class="mono" id="progress-status" data-testid="progress-status" style="margin-left:8px;color:var(--text-muted);">Idle</span>
+        </div>
+      </div>
+
+      <div class="demo">
+        <p class="demo-label">Button enables itself after a countdown</p>
+        <button class="btn btn--primary" id="delay-enable-btn" data-testid="delay-enable-btn" disabled>Enabling in 3…</button>
+      </div>
+
+      <div class="demo">
+        <p class="demo-label">Flaky action — succeeds about 60% of the time</p>
+        <button class="btn" id="flaky-btn" data-testid="flaky-btn">Run flaky check</button>
+        <span class="note-box" id="flaky-result" data-testid="flaky-result"></span>
+      </div>
+    </section>
+
+    <!-- 05 DIALOGS -->
+    <section class="panel" data-panel="dialogs">
+      <div class="panel-head"><span class="panel-num">05</span><h2>Dialogs</h2></div>
+      <p class="goal">Goal: handle native dialogs with <code class="mono">page.on('dialog', ...)</code>, and a custom modal with ordinary locators. This modal actually traps focus — press Tab repeatedly and it cycles between Cancel and Close instead of escaping to the page behind it.</p>
+
+      <div class="demo">
+        <p class="demo-label">Native browser dialogs</p>
+        <div class="btn-row">
+          <button class="btn" id="alert-btn" data-testid="alert-btn">Trigger alert()</button>
+          <button class="btn" id="confirm-btn" data-testid="confirm-btn">Trigger confirm()</button>
+          <button class="btn" id="prompt-btn" data-testid="prompt-btn">Trigger prompt()</button>
+        </div>
+        <div class="note-box" id="native-dialog-result" data-testid="native-dialog-result"></div>
+      </div>
+
+      <div class="demo">
+        <p class="demo-label">Custom modal (not a native dialog)</p>
+        <button class="btn btn--primary" id="open-modal-btn" data-testid="open-modal-btn">Open modal</button>
+      </div>
+    </section>
+
+    <!-- 06 FRAMES -->
+    <section class="panel" data-panel="frames">
+      <div class="panel-head"><span class="panel-num">06</span><h2>Frames</h2></div>
+      <p class="goal">Goal: reach inside with <code class="mono">page.frameLocator('#practice-frame')</code> before using normal locators.</p>
+      <div class="demo">
+        <p class="demo-label">An iframe with its own button and counter</p>
+        <iframe class="demo-frame" id="practice-frame" data-testid="practice-frame" title="Practice frame"></iframe>
+      </div>
+    </section>
+
+    <!-- 07 DRAG & DROP -->
+    <section class="panel" data-panel="dnd">
+      <div class="panel-head"><span class="panel-num">07</span><h2>Drag &amp; drop</h2></div>
+      <p class="goal">Goal: practice <code class="mono">locator.dragTo()</code>, or manual <code class="mono">mouse.down()/move()/up()</code> for finer control.</p>
+      <div class="demo">
+        <div class="dnd-board">
+          <div class="dnd-col" id="dnd-col-todo" data-testid="dnd-col-todo">
+            <h4>To do</h4>
+            <div class="dnd-card" draggable="true" id="dnd-card-1" data-testid="dnd-card-write-tests">Write tests</div>
+            <div class="dnd-card" draggable="true" id="dnd-card-2" data-testid="dnd-card-review-pr">Review PR</div>
+            <div class="dnd-card" draggable="true" id="dnd-card-3" data-testid="dnd-card-deploy">Deploy</div>
+          </div>
+          <div class="dnd-col" id="dnd-col-done" data-testid="dnd-col-done">
+            <h4>Done</h4>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 08 TABLES -->
+    <section class="panel" data-panel="tables">
+      <div class="panel-head"><span class="panel-num">08</span><h2>Tables</h2></div>
+      <p class="goal">Goal: scope locators inside a row (<code class="mono">page.getByRole('row', {name:...})</code>), and re-query after the table re-renders on sort/filter.</p>
+      <div class="demo">
+        <div class="field" style="max-width:260px;">
+          <label for="table-filter">Filter by test name</label>
+          <input type="text" id="table-filter" data-testid="table-filter" placeholder="e.g. login">
+        </div>
+        <table id="results-table" data-testid="results-table">
+          <thead>
+            <tr>
+              <th data-sort="name">Test<span class="arrow"></span></th>
+              <th data-sort="status">Status<span class="arrow"></span></th>
+              <th data-sort="duration">Duration<span class="arrow"></span></th>
+              <th data-sort="browser">Browser<span class="arrow"></span></th>
+            </tr>
+          </thead>
+          <tbody id="results-tbody"></tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- 09 HOVER -->
+    <section class="panel" data-panel="hover">
+      <div class="panel-head"><span class="panel-num">09</span><h2>Hover &amp; tooltips</h2></div>
+      <p class="goal">Goal: practice <code class="mono">locator.hover()</code>. For the native tooltip, read the <code class="mono">title</code> attribute directly instead of relying on visual hover.</p>
+
+      <div class="demo">
+        <p class="demo-label">Native title attribute</p>
+        <span title="This comes from the title attribute" class="mono" data-testid="native-tooltip-target" style="border-bottom:1px dotted var(--text-muted);cursor:default;">Hover me (native tooltip)</span>
+      </div>
+
+      <div class="demo">
+        <p class="demo-label">Custom CSS tooltip</p>
+        <span class="tooltip" data-testid="custom-tooltip">?
+          <span class="bubble" data-testid="custom-tooltip-bubble">Revealed via :hover, no JS needed</span>
+        </span>
+      </div>
+
+      <div class="demo">
+        <p class="demo-label">Hover-revealed menu</p>
+        <div class="hover-menu" data-testid="hover-menu">
+          <button class="btn">Options ▾</button>
+          <div class="menu-list">
+            <button data-testid="menu-view">View</button>
+            <button data-testid="menu-duplicate">Duplicate</button>
+            <button data-testid="menu-archive">Archive</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 10 NETWORK -->
+    <section class="panel" data-panel="network">
+      <div class="panel-head"><span class="panel-num">10</span><h2>Network</h2></div>
+      <p class="goal">Goal: these buttons make real <code class="mono">fetch()</code> calls to a public test API, so <code class="mono">page.route()</code>, <code class="mono">waitForResponse()</code> and <code class="mono">waitForRequest()</code> have a genuine request to intercept. Try <code class="mono">context.setOffline(true)</code> before clicking — the request will really fail.</p>
+      <div class="demo">
+        <p class="demo-label">GET requests to jsonplaceholder.typicode.com</p>
+        <div class="btn-row">
+          <button class="btn btn--primary" id="fetch-btn" data-testid="fetch-btn">Fetch users</button>
+          <button class="btn" id="fetch-404-btn" data-testid="fetch-404-btn">Fetch missing user (404)</button>
+        </div>
+        <div id="network-output" style="margin-top:12px;"></div>
+      </div>
+    </section>
+
+    <!-- 11 STORAGE -->
+    <section class="panel" data-panel="storage">
+      <div class="panel-head"><span class="panel-num">11</span><h2>Storage</h2></div>
+      <p class="goal">Goal: assert <code class="mono">localStorage</code> via <code class="mono">page.evaluate()</code>. The cookie banner at the top only reappears after a reset — a realistic first-visit pattern to handle in test setup.</p>
+
+      <div class="demo">
+        <p class="demo-label">Local storage note</p>
+        <div class="field" style="max-width:320px;">
+          <label for="note-input">Note</label>
+          <input type="text" id="note-input" data-testid="note-input" placeholder="Type something…">
+        </div>
+        <div class="btn-row">
+          <button class="btn btn--primary" id="note-save" data-testid="note-save">Save</button>
+          <button class="btn" id="note-load" data-testid="note-load">Load</button>
+          <button class="btn btn--danger" id="note-clear" data-testid="note-clear">Clear</button>
+        </div>
+        <div class="note-box" id="note-output" data-testid="note-output"></div>
+      </div>
+
+      <div class="demo">
+        <p class="demo-label">Cookie banner</p>
+        <button class="btn" id="cookie-reset-btn" data-testid="cookie-reset-btn">Reset cookie choice &amp; show banner</button>
+      </div>
+    </section>
+
+    <!-- 12 SHADOW DOM -->
+    <section class="panel" data-panel="shadow">
+      <div class="panel-head"><span class="panel-num">12</span><h2>Shadow DOM</h2></div>
+      <p class="goal">Goal: Playwright pierces open shadow roots automatically — normal locators just work here, no special syntax needed.</p>
+      <div class="demo">
+        <p class="demo-label">Open shadow root — normal locators reach inside</p>
+        <my-widget></my-widget>
+      </div>
+      <div class="demo">
+        <p class="demo-label">Closed shadow root — a genuine hard limit</p>
+        <my-widget-closed></my-widget-closed>
+        <p style="font-size:12.5px;color:var(--text-muted);margin-top:10px;">Built with <code class="mono">attachShadow({mode:"closed"})</code>. No Playwright selector, and no other outside script, can reach inside a closed shadow root — the browser doesn't expose it. If you control the source, switch it to open mode; otherwise treat it as untestable from the DOM.</p>
+      </div>
+    </section>
+
+    <!-- 13 AUTOCOMPLETE -->
+    <section class="panel" data-panel="autocomplete">
+      <div class="panel-head"><span class="panel-num">13</span><h2>Autocomplete</h2></div>
+      <p class="goal">Goal: type into the field, wait for the filtered <code class="mono">role="listbox"</code> results, and click one — plus check the empty-results state.</p>
+      <div class="demo">
+        <div class="field" style="max-width:320px;">
+          <label for="tool-search">Search testing tools</label>
+          <input type="text" id="tool-search" data-testid="tool-search" placeholder="Try “play” or “cy”" autocomplete="off">
+        </div>
+        <div class="listbox" id="tool-listbox" data-testid="tool-listbox" role="listbox" hidden></div>
+      </div>
+    </section>
+
+    <!-- 14 NEW TAB / NAV -->
+    <section class="panel" data-panel="nav">
+      <div class="panel-head"><span class="panel-num">14</span><h2>New tab &amp; navigation</h2></div>
+      <p class="goal">Goal: catch the new tab with <code class="mono">context.waitForEvent('page')</code>. This lab keeps its own section switch out of the URL bar, so it won't collide with route-based tests you build elsewhere.</p>
+      <div class="demo">
+        <p class="demo-label">Opens a real new tab</p>
+        <a class="btn" href="https://playwright.dev/docs/pages" target="_blank" rel="noopener" data-testid="external-link">Open Playwright docs (new tab)</a>
+      </div>
+    </section>
+
+    <!-- 15 AUTH & SESSION -->
+    <section class="panel" data-panel="auth">
+      <div class="panel-head"><span class="panel-num">15</span><h2>Auth &amp; session</h2></div>
+      <p class="goal">Goal: log in once through the UI, then save <code class="mono">context.storageState()</code> to a file so later tests can reuse the session and skip the login form entirely. Any username works here — the password is <code class="mono">playwright</code>.</p>
+
+      <form class="demo" id="auth-logged-out">
+        <p class="demo-label">Log in</p>
+        <div class="field-row">
+          <div class="field">
+            <label for="auth-username">Username</label>
+            <input type="text" id="auth-username" data-testid="auth-username" autocomplete="username">
+          </div>
+          <div class="field">
+            <label for="auth-password">Password</label>
+            <input type="password" id="auth-password" data-testid="auth-password" autocomplete="current-password">
+          </div>
+        </div>
+        <button type="submit" class="btn btn--primary" id="auth-login-btn" data-testid="auth-login-btn">Log in</button>
+        <div class="note-box" id="auth-error" data-testid="auth-error"></div>
+      </form>
+
+      <div class="demo" id="auth-logged-in" hidden>
+        <p class="demo-label">Session (persisted in localStorage — reload the page and it holds)</p>
+        <p style="margin:0 0 14px;">Logged in as <b class="mono" id="auth-whoami" data-testid="auth-whoami"></b></p>
+        <button class="btn btn--danger" id="auth-logout-btn" data-testid="auth-logout-btn">Log out</button>
+      </div>
+    </section>
+
+    <!-- 16 DOWNLOADS -->
+    <section class="panel" data-panel="downloads">
+      <div class="panel-head"><span class="panel-num">16</span><h2>Downloads</h2></div>
+      <p class="goal">Goal: wrap the click with <code class="mono">page.waitForEvent('download')</code>, then inspect <code class="mono">download.suggestedFilename()</code> and save it with <code class="mono">download.saveAs()</code>. These are real Blob-backed downloads, not links to server files.</p>
+
+      <div class="demo">
+        <p class="demo-label">Export the practice results table (section 08)</p>
+        <div class="btn-row">
+          <button class="btn btn--primary" id="download-csv-btn" data-testid="download-csv-btn">Download CSV report</button>
+          <button class="btn" id="download-json-btn" data-testid="download-json-btn">Download JSON export</button>
+        </div>
+      </div>
+    </section>
+
+  </main>
+</div>
+
+<div class="modal-overlay" id="modal-overlay" data-testid="modal-overlay">
+  <div class="modal-box" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+    <h3 id="modal-title">Custom modal</h3>
+    <p>This is a plain div, not a native dialog — target it with ordinary locators. Focus is trapped inside while open.</p>
+    <div class="btn-row">
+      <button class="btn" id="modal-cancel-btn" data-testid="modal-cancel-btn">Cancel</button>
+      <button class="btn btn--primary" id="modal-close-btn" data-testid="modal-close-btn">Close</button>
+    </div>
+  </div>
+</div>
+
+<footer class="inspector" id="inspector">
+  <span class="insp-label">Inspector</span>
+  <span class="insp-empty" id="insp-empty">Click any element on the page to see a suggested Playwright locator.</span>
+</footer>
+
+<script>
+(function(){
+  "use strict";
+
+  /* ---------------- section navigation ---------------- */
+  var navItems = document.querySelectorAll(".nav-item");
+  var panels = document.querySelectorAll(".panel");
+  function showSection(name){
+    navItems.forEach(function(b){ b.classList.toggle("is-active", b.dataset.target === name); });
+    panels.forEach(function(p){ p.classList.toggle("is-active", p.dataset.panel === name); });
+  }
+  navItems.forEach(function(btn){
+    btn.addEventListener("click", function(){ showSection(btn.dataset.target); });
+  });
+  showSection("locators");
+
+  /* ---------------- inspector HUD ---------------- */
+  var inspector = document.getElementById("inspector");
+  var insEmpty = document.getElementById("insp-empty");
+
+  function describeElement(el){
+    if (!el || el.nodeType !== 1) return null;
+    if (el === document.body || el === document.documentElement) return null;
+    if (el.closest && el.closest("#inspector")) return null;
+
+    var tag = el.tagName.toLowerCase();
+    var id = el.id || "";
+    var testId = el.getAttribute("data-testid");
+    var cls = (typeof el.className === "string" ? el.className : "").trim();
+    var role = el.getAttribute("role");
+    var placeholder = el.getAttribute("placeholder");
+    var ariaLabel = el.getAttribute("aria-label");
+    var type = el.getAttribute("type");
+    var text = (el.innerText || el.textContent || "").trim().replace(/\s+/g," ").slice(0, 34);
+
+    var implicitRoles = {
+      button:"button", a:"link", textarea:"textbox", select:"combobox",
+      input: (type === "checkbox" ? "checkbox" : type === "radio" ? "radio" : type === "file" ? undefined : type === "range" ? "slider" : "textbox")
+    };
+    var effectiveRole = role || implicitRoles[tag];
+
+    var suggestion, note;
+    if (testId){
+      suggestion = "page.getByTestId('" + testId + "')";
+      note = "Best choice — explicit hook, immune to text/style changes.";
+    } else if (effectiveRole && (ariaLabel || placeholder || (text && text.length > 0 && text.length <= 34))){
+      var name = ariaLabel || placeholder || text;
+      suggestion = "page.getByRole('" + effectiveRole + "', { name: '" + name + "' })";
+      note = "Good — mirrors how users and assistive tech find it.";
+    } else if (placeholder){
+      suggestion = "page.getByPlaceholder('" + placeholder + "')";
+      note = "Fine for inputs without a visible label.";
+    } else if (id && !/\d{3,}|[a-f0-9]{6,}/i.test(id)){
+      suggestion = "page.locator('#" + id + "')";
+      note = "OK if this id is stable across builds.";
+    } else {
+      var firstClass = cls.split(/\s+/).filter(Boolean)[0];
+      suggestion = firstClass ? "page.locator('." + firstClass + "')" : "page.locator('" + tag + "')";
+      note = "⚠ Fragile — prefer a role or data-testid instead.";
+    }
+    return { tag: tag, id: id, testId: testId, text: text, suggestion: suggestion, note: note };
+  }
+
+  function renderInspector(info){
+    if (!info){
+      inspector.innerHTML = '<span class="insp-label">Inspector</span><span class="insp-empty">Click any element on the page to see a suggested Playwright locator.</span>';
+      return;
+    }
+    var idPart = info.id ? '<span class="insp-field">id:<b>' + info.id + '</b></span>' : '';
+    var tidPart = info.testId ? '<span class="insp-field">testid:<b>' + info.testId + '</b></span>' : '';
+    var textPart = info.text ? '<span class="insp-field">text:<b>"' + info.text + '"</b></span>' : '';
+    inspector.innerHTML =
+      '<span class="insp-label">Inspector</span>' +
+      '<span class="insp-field">tag:<b>&lt;' + info.tag + '&gt;</b></span>' +
+      idPart + tidPart + textPart +
+      '<span class="insp-suggestion">' + info.suggestion + '</span>' +
+      '<span class="insp-note">' + info.note + '</span>';
+  }
+
+  document.addEventListener("click", function(e){
+    var path = (typeof e.composedPath === "function") ? e.composedPath() : [e.target];
+    var real = path[0];
+    var target = (real.closest && real.closest("button, a, input, textarea, select, [role], [data-testid], li, td, th")) || real;
+    var info = describeElement(target);
+    if (info) renderInspector(info);
+  }, true);
+
+  /* ---------------- 01 locators: nothing extra needed ---------------- */
+
+  /* ---------------- 02 forms ---------------- */
+  var fName = document.getElementById("f-name");
+  var fEmail = document.getElementById("f-email");
+  var fSubmit = document.getElementById("f-submit");
+  var fResult = document.getElementById("f-result");
+  function validateForm(){
+    fSubmit.disabled = !(fName.value.trim() && /\S+@\S+\.\S+/.test(fEmail.value));
+  }
+  fName.addEventListener("input", validateForm);
+  fEmail.addEventListener("input", validateForm);
+  document.getElementById("f-level").addEventListener("input", function(e){
+    document.getElementById("f-level-out").textContent = e.target.value;
+  });
+  document.getElementById("practice-form").addEventListener("submit", function(e){
+    e.preventDefault();
+    var plan = document.querySelector('input[name="plan"]:checked').value;
+    fResult.textContent = "Submitted ✓ — " + fName.value.trim() + " (" + plan + " plan)";
+    fResult.classList.add("is-set");
+  });
+
+  /* ---------------- 03 dynamic content ---------------- */
+  document.getElementById("load-content-btn").addEventListener("click", function(){
+    var btn = this;
+    btn.disabled = true;
+    btn.textContent = "Loading…";
+    setTimeout(function(){
+      var id = "note-" + Math.random().toString(36).slice(2, 7);
+      document.getElementById("dynamic-content-holder").innerHTML =
+        '<p class="note-box is-set" id="' + id + '" data-testid="loaded-note">Loaded at ' +
+        new Date().toLocaleTimeString() + '. Its id is <code class="mono">' + id +
+        '</code> — it changes every reload, so target it by data-testid instead.</p>';
+      btn.disabled = false;
+      btn.textContent = "Load content again";
+    }, 1300);
+  });
+
+  var counterVal = 0;
+  var counterEl = document.getElementById("counter-value");
+  document.getElementById("counter-inc").addEventListener("click", function(){ counterVal++; counterEl.textContent = counterVal; });
+  document.getElementById("counter-dec").addEventListener("click", function(){ counterVal--; counterEl.textContent = counterVal; });
+
+  document.querySelectorAll(".tab").forEach(function(tab){
+    tab.addEventListener("click", function(){
+      document.querySelectorAll(".tab").forEach(function(t){ t.setAttribute("aria-selected", "false"); });
+      document.querySelectorAll(".tab-panel").forEach(function(p){ p.classList.remove("is-active"); });
+      tab.setAttribute("aria-selected", "true");
+      document.querySelector('.tab-panel[data-tab-panel="' + tab.dataset.tab + '"]').classList.add("is-active");
+    });
+  });
+
+  /* ---------------- 04 waits & flakiness ---------------- */
+  document.getElementById("progress-start").addEventListener("click", function(){
+    var btn = this, bar = document.getElementById("progress-bar"), status = document.getElementById("progress-status");
+    btn.disabled = true;
+    var val = 0;
+    status.textContent = "Running…";
+    var timer = setInterval(function(){
+      val += 4;
+      bar.value = Math.min(val, 100);
+      if (val >= 100){
+        clearInterval(timer);
+        status.textContent = "Complete ✓";
+        btn.disabled = false;
+      }
+    }, 100);
+  });
+
+  (function countdownEnable(){
+    var btn = document.getElementById("delay-enable-btn");
+    var n = 3;
+    var timer = setInterval(function(){
+      n--;
+      if (n > 0){ btn.textContent = "Enabling in " + n + "…"; }
+      else { clearInterval(timer); btn.disabled = false; btn.textContent = "Ready ✓"; }
+    }, 1000);
+  })();
+
+  document.getElementById("flaky-btn").addEventListener("click", function(){
+    var out = document.getElementById("flaky-result");
+    var ok = Math.random() < 0.6;
+    out.textContent = ok ? "Passed ✓" : "Failed — try again";
+    out.classList.add("is-set");
+    if (!ok){
+      setTimeout(function(){ out.textContent = ""; out.classList.remove("is-set"); }, 1400);
+    }
+  });
+
+  /* ---------------- 05 dialogs ---------------- */
+  var dlgOut = document.getElementById("native-dialog-result");
+  document.getElementById("alert-btn").addEventListener("click", function(){
+    alert("This is a native alert. Handle it with page.on('dialog', d => d.accept()).");
+    dlgOut.textContent = "alert() was shown and dismissed.";
+    dlgOut.classList.add("is-set");
+  });
+  document.getElementById("confirm-btn").addEventListener("click", function(){
+    var ok = confirm("Proceed with this action?");
+    dlgOut.textContent = "confirm() result: " + (ok ? "accepted" : "dismissed");
+    dlgOut.classList.add("is-set");
+  });
+  document.getElementById("prompt-btn").addEventListener("click", function(){
+    var val = prompt("Enter your name:");
+    dlgOut.textContent = "prompt() result: " + (val === null ? "cancelled" : JSON.stringify(val));
+    dlgOut.classList.add("is-set");
+  });
+
+  var overlay = document.getElementById("modal-overlay");
+  var modalFocusableSelector = 'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])';
+  var modalLastFocused = null;
+  function openModal(){
+    modalLastFocused = document.activeElement;
+    overlay.classList.add("is-open");
+    var focusables = overlay.querySelectorAll(modalFocusableSelector);
+    if (focusables.length) focusables[0].focus();
+  }
+  function closeModal(){
+    overlay.classList.remove("is-open");
+    if (modalLastFocused && typeof modalLastFocused.focus === "function") modalLastFocused.focus();
+  }
+  document.getElementById("open-modal-btn").addEventListener("click", openModal);
+  document.getElementById("modal-close-btn").addEventListener("click", closeModal);
+  document.getElementById("modal-cancel-btn").addEventListener("click", closeModal);
+  overlay.addEventListener("click", function(e){ if (e.target === overlay) closeModal(); });
+  document.addEventListener("keydown", function(e){
+    if (!overlay.classList.contains("is-open")) return;
+    if (e.key === "Escape"){ closeModal(); return; }
+    if (e.key === "Tab"){
+      var focusables = Array.prototype.slice.call(overlay.querySelectorAll(modalFocusableSelector));
+      if (!focusables.length) return;
+      var first = focusables[0], last = focusables[focusables.length - 1];
+      if (e.shiftKey && document.activeElement === first){ e.preventDefault(); last.focus(); }
+      else if (!e.shiftKey && document.activeElement === last){ e.preventDefault(); first.focus(); }
+    }
+  });
+
+  /* ---------------- 06 frames ---------------- */
+  document.getElementById("practice-frame").srcdoc =
+    '<!doctype html><html><head><style>' +
+    'body{margin:0;padding:14px;font-family:Inter,sans-serif;background:#1b1e24;color:#e8eaed;}' +
+    'button{padding:7px 12px;border-radius:7px;border:1px solid #2a2e37;background:#20232b;color:#e8eaed;cursor:pointer;}' +
+    'button:hover{border-color:#38bdf8;}' +
+    '<\/style><\/head><body>' +
+    '<p style="margin:0 0 10px;font-size:13px;color:#8b93a1;">Inside the iframe</p>' +
+    '<button id="frame-btn" data-testid="frame-btn">Click me</button>' +
+    '<p style="margin-top:10px;font-size:13px;">Count: <span id="frame-count" data-testid="frame-count">0</span></p>' +
+    '<script>document.getElementById("frame-btn").addEventListener("click", function(){' +
+    'var s = document.getElementById("frame-count"); s.textContent = parseInt(s.textContent, 10) + 1;' +
+    '});<\/script>' +
+    '<\/body><\/html>';
+
+  /* ---------------- 07 drag & drop ---------------- */
+  var dragged = null;
+  document.querySelectorAll(".dnd-card").forEach(function(card){
+    card.addEventListener("dragstart", function(){ dragged = card; card.classList.add("dragging"); });
+    card.addEventListener("dragend", function(){ card.classList.remove("dragging"); });
+  });
+  document.querySelectorAll(".dnd-col").forEach(function(col){
+    col.addEventListener("dragover", function(e){ e.preventDefault(); });
+    col.addEventListener("drop", function(e){
+      e.preventDefault();
+      if (dragged) col.appendChild(dragged);
+    });
+  });
+
+  /* ---------------- 08 tables ---------------- */
+  var tableData = [
+    { name:"checkout_flow_completes", status:"Passed", duration:2.1, browser:"Chromium" },
+    { name:"login_invalid_password_shows_error", status:"Passed", duration:0.8, browser:"Firefox" },
+    { name:"cart_updates_quantity", status:"Failed", duration:3.4, browser:"WebKit" },
+    { name:"search_autocomplete_filters_results", status:"Passed", duration:1.1, browser:"Chromium" },
+    { name:"payment_form_validates_card", status:"Flaky", duration:2.9, browser:"Firefox" },
+    { name:"logout_clears_session", status:"Passed", duration:0.6, browser:"Chromium" },
+    { name:"profile_avatar_upload", status:"Failed", duration:4.0, browser:"WebKit" },
+    { name:"dark_mode_toggle_persists", status:"Passed", duration:0.9, browser:"Chromium" }
+  ];
+  var sortKey = null, sortDir = 1;
+  var filterText = "";
+
+  function badgeFor(status){
+    var cls = status === "Passed" ? "badge--pass" : status === "Failed" ? "badge--fail" : "badge--flaky";
+    return '<span class="badge ' + cls + '">' + status + '</span>';
+  }
+  function renderTable(){
+    var rows = tableData.filter(function(r){ return r.name.toLowerCase().indexOf(filterText.toLowerCase()) !== -1; });
+    if (sortKey){
+      rows = rows.slice().sort(function(a, b){
+        if (a[sortKey] < b[sortKey]) return -1 * sortDir;
+        if (a[sortKey] > b[sortKey]) return 1 * sortDir;
+        return 0;
+      });
+    }
+    var tbody = document.getElementById("results-tbody");
+    tbody.innerHTML = rows.map(function(r){
+      return '<tr data-testid="row-' + r.name + '"><td class="mono">' + r.name + '</td><td>' + badgeFor(r.status) +
+        '</td><td class="mono">' + r.duration.toFixed(1) + 's</td><td>' + r.browser + '</td></tr>';
+    }).join("") || '<tr><td colspan="4" style="color:var(--text-muted);">No matching tests</td></tr>';
+
+    document.querySelectorAll("#results-table th .arrow").forEach(function(a){ a.textContent = ""; });
+    if (sortKey){
+      var th = document.querySelector('#results-table th[data-sort="' + sortKey + '"] .arrow');
+      if (th) th.textContent = sortDir === 1 ? "↑" : "↓";
+    }
+  }
+  document.querySelectorAll("#results-table th").forEach(function(th){
+    th.addEventListener("click", function(){
+      var key = th.dataset.sort;
+      sortDir = (sortKey === key) ? -sortDir : 1;
+      sortKey = key;
+      renderTable();
+    });
+  });
+  document.getElementById("table-filter").addEventListener("input", function(e){
+    filterText = e.target.value;
+    renderTable();
+  });
+  renderTable();
+
+  /* ---------------- 10 network ---------------- */
+  var NETWORK_API_BASE = "https://jsonplaceholder.typicode.com";
+  function runNetworkFetch(url, btn, out){
+    btn.disabled = true;
+    out.innerHTML = '<span class="note-box is-set" data-testid="network-loading">Loading…</span>';
+    return fetch(url)
+      .then(function(res){
+        if (!res.ok){
+          out.innerHTML = '<span class="note-box is-set" data-testid="network-error" style="color:var(--fail);">Request failed — server responded ' + res.status + '.</span>';
+          return;
+        }
+        return res.json().then(function(data){
+          var names = Array.isArray(data) ? data.slice(0, 5).map(function(u){ return u.name; }) : [data.name || "(no name)"];
+          out.innerHTML = '<ul data-testid="user-list" style="margin:0;padding-left:18px;font-size:13.5px;">' +
+            names.map(function(n){ return '<li>' + n + '</li>'; }).join("") + '</ul>';
+        });
+      })
+      .catch(function(){
+        out.innerHTML = '<span class="note-box is-set" data-testid="network-error" style="color:var(--fail);">Request failed — check the network and retry.</span>';
+      })
+      .then(function(){ btn.disabled = false; });
+  }
+  document.getElementById("fetch-btn").addEventListener("click", function(){
+    runNetworkFetch(NETWORK_API_BASE + "/users", this, document.getElementById("network-output"));
+  });
+  document.getElementById("fetch-404-btn").addEventListener("click", function(){
+    runNetworkFetch(NETWORK_API_BASE + "/users/9999", this, document.getElementById("network-output"));
+  });
+
+  /* ---------------- 11 storage ---------------- */
+  var NOTE_KEY = "locatorlab_note";
+  var COOKIE_KEY = "locatorlab_cookie_choice";
+  document.getElementById("note-save").addEventListener("click", function(){
+    localStorage.setItem(NOTE_KEY, document.getElementById("note-input").value);
+    var out = document.getElementById("note-output");
+    out.textContent = "Saved to localStorage.";
+    out.classList.add("is-set");
+  });
+  document.getElementById("note-load").addEventListener("click", function(){
+    var val = localStorage.getItem(NOTE_KEY);
+    var out = document.getElementById("note-output");
+    out.textContent = val ? ('Loaded: "' + val + '"') : "Nothing saved yet.";
+    out.classList.add("is-set");
+  });
+  document.getElementById("note-clear").addEventListener("click", function(){
+    localStorage.removeItem(NOTE_KEY);
+    document.getElementById("note-input").value = "";
+    var out = document.getElementById("note-output");
+    out.textContent = "Cleared.";
+    out.classList.add("is-set");
+  });
+
+  var cookieBanner = document.getElementById("cookie-banner");
+  function maybeShowCookieBanner(){
+    cookieBanner.hidden = !!localStorage.getItem(COOKIE_KEY);
+  }
+  document.getElementById("cookie-accept").addEventListener("click", function(){
+    localStorage.setItem(COOKIE_KEY, "accepted"); cookieBanner.hidden = true;
+  });
+  document.getElementById("cookie-decline").addEventListener("click", function(){
+    localStorage.setItem(COOKIE_KEY, "declined"); cookieBanner.hidden = true;
+  });
+  document.getElementById("cookie-reset-btn").addEventListener("click", function(){
+    localStorage.removeItem(COOKIE_KEY);
+    maybeShowCookieBanner();
+  });
+  maybeShowCookieBanner();
+
+  /* ---------------- 12 shadow DOM ---------------- */
+  var MyWidget = function(){ return Reflect.construct(HTMLElement, [], MyWidget); };
+  Object.setPrototypeOf(MyWidget.prototype, HTMLElement.prototype);
+  Object.setPrototypeOf(MyWidget, HTMLElement);
+  MyWidget.prototype.connectedCallback = function(){
+    var shadow = this.attachShadow({ mode: "open" });
+    shadow.innerHTML =
+      '<style>' +
+      'button{font-family:Inter,sans-serif;padding:9px 16px;border-radius:8px;border:1px solid #2a2e37;background:#20232b;color:#e8eaed;cursor:pointer;font-size:13.5px;}' +
+      'button:hover{border-color:#38bdf8;}' +
+      'span{margin-left:10px;color:#8b93a1;font-family:"IBM Plex Mono",monospace;}' +
+      '</style>' +
+      '<button data-testid="shadow-btn">Click inside shadow DOM</button>' +
+      '<span data-testid="shadow-count">0</span>';
+    var n = 0;
+    var span = shadow.querySelector("span");
+    shadow.querySelector("button").addEventListener("click", function(){ n++; span.textContent = n; });
+  };
+  customElements.define("my-widget", MyWidget);
+
+  var MyWidgetClosed = function(){ return Reflect.construct(HTMLElement, [], MyWidgetClosed); };
+  Object.setPrototypeOf(MyWidgetClosed.prototype, HTMLElement.prototype);
+  Object.setPrototypeOf(MyWidgetClosed, HTMLElement);
+  MyWidgetClosed.prototype.connectedCallback = function(){
+    var shadow = this.attachShadow({ mode: "closed" });
+    shadow.innerHTML =
+      '<style>' +
+      'button{font-family:Inter,sans-serif;padding:9px 16px;border-radius:8px;border:1px solid #2a2e37;background:#20232b;color:#e8eaed;cursor:pointer;font-size:13.5px;}' +
+      'button:hover{border-color:#38bdf8;}' +
+      'span{margin-left:10px;color:#8b93a1;font-family:"IBM Plex Mono",monospace;}' +
+      '</style>' +
+      '<button data-testid="shadow-closed-btn">Click inside closed shadow DOM</button>' +
+      '<span data-testid="shadow-closed-count">0</span>';
+    var n = 0;
+    var span = shadow.querySelector("span");
+    shadow.querySelector("button").addEventListener("click", function(){ n++; span.textContent = n; });
+  };
+  customElements.define("my-widget-closed", MyWidgetClosed);
+
+  /* ---------------- 13 autocomplete ---------------- */
+  var tools = ["Playwright", "Puppeteer", "Selenium", "Cypress", "WebdriverIO", "TestCafe", "Jest", "Vitest", "Mocha", "Cucumber"];
+  var searchInput = document.getElementById("tool-search");
+  var listbox = document.getElementById("tool-listbox");
+  searchInput.addEventListener("input", function(){
+    var q = searchInput.value.trim().toLowerCase();
+    if (!q){ listbox.hidden = true; listbox.innerHTML = ""; return; }
+    var matches = tools.filter(function(t){ return t.toLowerCase().indexOf(q) !== -1; });
+    listbox.hidden = false;
+    if (matches.length === 0){
+      listbox.innerHTML = '<div data-testid="no-results" style="padding:8px 11px;color:var(--text-muted);font-size:13px;">No matches for "' + searchInput.value + '"</div>';
+      return;
+    }
+    listbox.innerHTML = matches.map(function(t){
+      return '<div role="option" data-testid="option-' + t.toLowerCase() + '">' + t + '</div>';
+    }).join("");
+    listbox.querySelectorAll('[role="option"]').forEach(function(opt){
+      opt.addEventListener("click", function(){
+        searchInput.value = opt.textContent;
+        listbox.hidden = true;
+        listbox.innerHTML = "";
+      });
+    });
+  });
+
+  /* ---------------- 15 auth & session ---------------- */
+  var AUTH_KEY = "locatorlab_auth_user";
+  var authLoggedOut = document.getElementById("auth-logged-out");
+  var authLoggedIn = document.getElementById("auth-logged-in");
+  var authError = document.getElementById("auth-error");
+  function renderAuthState(){
+    var user = localStorage.getItem(AUTH_KEY);
+    if (user){
+      authLoggedOut.hidden = true;
+      authLoggedIn.hidden = false;
+      document.getElementById("auth-whoami").textContent = user;
+    } else {
+      authLoggedOut.hidden = false;
+      authLoggedIn.hidden = true;
+    }
+  }
+  document.getElementById("auth-logged-out").addEventListener("submit", function(e){
+    e.preventDefault();
+    var user = document.getElementById("auth-username").value.trim();
+    var pass = document.getElementById("auth-password").value;
+    if (!user || pass !== "playwright"){
+      authError.textContent = "Invalid credentials — any username, password is \"playwright\".";
+      authError.classList.add("is-set");
+      return;
+    }
+    authError.textContent = "";
+    authError.classList.remove("is-set");
+    localStorage.setItem(AUTH_KEY, user);
+    renderAuthState();
+  });
+  document.getElementById("auth-logout-btn").addEventListener("click", function(){
+    localStorage.removeItem(AUTH_KEY);
+    document.getElementById("auth-username").value = "";
+    document.getElementById("auth-password").value = "";
+    renderAuthState();
+  });
+  renderAuthState();
+
+  /* ---------------- 16 downloads ---------------- */
+  function triggerDownload(filename, content, mime){
+    var blob = new Blob([content], { type: mime });
+    var url = URL.createObjectURL(blob);
+    var a = document.createElement("a");
+    a.href = url;
+    a.download = filename;
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    setTimeout(function(){ URL.revokeObjectURL(url); }, 1000);
+  }
+  document.getElementById("download-csv-btn").addEventListener("click", function(){
+    var rows = ["name,status,duration,browser"].concat(tableData.map(function(r){
+      return r.name + "," + r.status + "," + r.duration + "," + r.browser;
+    }));
+    triggerDownload("practice-results.csv", rows.join("\n"), "text/csv");
+  });
+  document.getElementById("download-json-btn").addEventListener("click", function(){
+    triggerDownload("practice-results.json", JSON.stringify(tableData, null, 2), "application/json");
+  });
+
+  /* ---------------- reset practice data ---------------- */
+  document.getElementById("reset-data-btn").addEventListener("click", function(){
+    localStorage.removeItem(NOTE_KEY);
+    localStorage.removeItem(COOKIE_KEY);
+    localStorage.removeItem(AUTH_KEY);
+    location.reload();
+  });
+
+})();
+</script>
+</body>
+</html>

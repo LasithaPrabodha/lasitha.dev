@@ -1,0 +1,524 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Beyond the Page — what PlaywrightLab can't teach you</title>
+<meta name="title" content="Beyond the Page — what PlaywrightLab can't teach you">
+<meta name="description" content="A companion guide to PlaywrightLab covering everything a single practice page can't: getting started with Playwright, test architecture (Page Object Model, fixtures), playwright.config.js, debugging tooling, CI setup, and API testing.">
+<meta name="author" content="Lasitha Weligampola">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://www.lasitha.dev/playwrightlab/beyond-the-page.html">
+
+<!-- Open Graph / Facebook -->
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://www.lasitha.dev/playwrightlab/beyond-the-page.html">
+<meta property="og:site_name" content="Lasitha Weligampola">
+<meta property="og:title" content="Beyond the Page — what PlaywrightLab can't teach you">
+<meta property="og:description" content="A companion guide to PlaywrightLab: getting started with Playwright, test architecture (Page Object Model, fixtures), playwright.config.js, debugging tooling, CI setup, and API testing.">
+<meta property="og:image" content="https://www.lasitha.dev/static/banner.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:type" content="image/png">
+
+<!-- Twitter -->
+<meta property="twitter:card" content="summary_large_image">
+<meta property="twitter:url" content="https://www.lasitha.dev/playwrightlab/beyond-the-page.html">
+<meta property="twitter:title" content="Beyond the Page — what PlaywrightLab can't teach you">
+<meta property="twitter:description" content="A companion guide to PlaywrightLab: getting started with Playwright, test architecture, config, debugging tooling, CI setup, and API testing.">
+<meta property="twitter:image" content="https://www.lasitha.dev/static/banner.png">
+
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%2314161a'/%3E%3Ctext x='16' y='23' font-size='22' text-anchor='middle' fill='%2338bdf8'%3E%E2%97%86%3C/text%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#14161a;
+    --panel:#1b1e24;
+    --panel-alt:#20232b;
+    --border:#2a2e37;
+    --text:#e8eaed;
+    --text-muted:#8b93a1;
+    --accent:#38bdf8;
+    --accent-dim:#1b3a4a;
+    --pass:#4ade80;
+    --fail:#f87171;
+    --warn:#fbbf24;
+    --font-display:'Space Grotesk',sans-serif;
+    --font-body:'Inter',sans-serif;
+    --font-mono:'IBM Plex Mono',monospace;
+  }
+  *,*::before,*::after{box-sizing:border-box;}
+  html,body{margin:0;padding:0;}
+  body{
+    background:var(--bg);color:var(--text);font-family:var(--font-body);
+    font-size:15px;line-height:1.55;-webkit-font-smoothing:antialiased;
+  }
+  h1,h2,h3{font-family:var(--font-display);margin:0;letter-spacing:-0.01em;}
+  code,.mono{font-family:var(--font-mono);}
+  a{color:var(--accent);}
+  :focus-visible{outline:2px solid var(--accent);outline-offset:2px;border-radius:4px;}
+
+  .topbar{
+    display:flex;align-items:center;justify-content:space-between;
+    padding:14px 20px;border-bottom:1px solid var(--border);
+    background:var(--panel);position:sticky;top:0;z-index:20;gap:12px;flex-wrap:wrap;
+  }
+  .brand{display:flex;align-items:baseline;gap:10px;}
+  .brand .mark{color:var(--accent);font-size:20px;}
+  .brand h1{font-size:18px;font-weight:600;}
+  .brand .tag{color:var(--text-muted);font-size:13px;}
+  .topbar-actions{display:flex;gap:10px;align-items:center;}
+  .btn{
+    font-family:var(--font-body);font-size:13.5px;font-weight:500;
+    padding:9px 16px;border-radius:8px;border:1px solid var(--border);
+    background:var(--panel-alt);color:var(--text);cursor:pointer;text-decoration:none;display:inline-block;
+  }
+  .btn:hover{border-color:var(--accent);}
+
+  .layout{display:flex;min-height:calc(100vh - 57px);}
+  .sidebar{
+    width:250px;flex-shrink:0;border-right:1px solid var(--border);
+    background:var(--panel);padding:14px 10px;overflow-y:auto;
+    position:sticky;top:57px;height:calc(100vh - 57px);
+  }
+  .nav-item{
+    display:flex;gap:8px;align-items:baseline;width:100%;text-align:left;
+    background:transparent;border:none;border-left:2px solid transparent;
+    color:var(--text-muted);font-family:var(--font-body);font-size:13.5px;
+    padding:9px 10px;border-radius:6px;cursor:pointer;
+  }
+  .nav-item .num{font-family:var(--font-mono);font-size:11px;color:var(--text-muted);}
+  .nav-item:hover{background:var(--panel-alt);color:var(--text);}
+  .nav-item.is-active{background:var(--accent-dim);color:var(--text);border-left-color:var(--accent);}
+  .nav-item.is-active .num{color:var(--accent);}
+
+  .content{flex:1;padding:28px 32px 90px;max-width:860px;}
+  .panel{display:none;}
+  .panel.is-active{display:block;animation:fadein .25s ease;}
+  @keyframes fadein{from{opacity:0;transform:translateY(4px);}to{opacity:1;transform:translateY(0);}}
+  .panel-head{display:flex;align-items:baseline;gap:10px;margin-bottom:6px;}
+  .panel-num{font-family:var(--font-mono);color:var(--accent);font-size:13px;}
+  .panel h2{font-size:22px;}
+  .goal{
+    color:var(--text-muted);font-size:13.5px;margin:8px 0 22px;
+    padding:10px 12px;border-left:2px solid var(--border);background:var(--panel);
+    border-radius:0 6px 6px 0;
+  }
+  .goal strong{color:var(--text);}
+  .card{background:var(--panel);border:1px solid var(--border);border-radius:10px;padding:20px;}
+  .card + .card{margin-top:14px;}
+  .card h3{font-size:15px;margin-bottom:8px;color:var(--text);}
+  .card p{font-size:13.5px;color:var(--text-muted);margin:0 0 10px;}
+  .card p:last-child{margin-bottom:0;}
+  .card ul{margin:0 0 10px;padding-left:20px;font-size:13.5px;color:var(--text-muted);}
+  .card li{margin-bottom:4px;}
+  .card li b{color:var(--text);}
+
+  pre{
+    background:#0f1116;border:1px solid var(--border);border-radius:8px;
+    padding:14px 16px;overflow-x:auto;font-size:12.5px;line-height:1.6;
+    font-family:var(--font-mono);color:#c7ccd6;margin:0 0 12px;
+  }
+  pre .cm{color:#5c6470;}
+  pre .kw{color:#c792ea;}
+  pre .st{color:#a6e3a1;}
+  pre .fn{color:#38bdf8;}
+  code.inline{background:var(--panel-alt);border:1px solid var(--border);border-radius:4px;padding:1px 6px;font-size:12.5px;}
+  .link-btn{
+    background:none;border:none;padding:0;margin:0;font:inherit;
+    color:var(--accent);text-decoration:underline;text-underline-offset:2px;
+    cursor:pointer;
+  }
+
+  .badge-row{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:14px;}
+  .pill{font-size:11px;font-family:var(--font-mono);padding:3px 9px;border-radius:20px;border:1px solid var(--border);color:var(--text-muted);}
+
+  footer.pagefoot{
+    padding:20px 32px 40px;color:var(--text-muted);font-size:12.5px;border-top:1px solid var(--border);margin-top:8px;
+  }
+
+  @media (max-width: 820px){
+    .layout{flex-direction:column;}
+    .sidebar{width:100%;position:sticky;top:57px;height:auto;
+      display:flex;flex-direction:row;overflow-x:auto;padding:8px 10px;gap:4px;}
+    .nav-item{flex-shrink:0;border-left:none;border-bottom:2px solid transparent;white-space:nowrap;}
+    .nav-item.is-active{border-left-color:transparent;border-bottom-color:var(--accent);}
+    .content{padding:20px 16px 60px;}
+  }
+  @media (prefers-reduced-motion: reduce){
+    *,*::before,*::after{animation-duration:.001ms !important;transition-duration:.001ms !important;}
+  }
+</style>
+</head>
+<body>
+
+<header class="topbar">
+  <div class="brand">
+    <span class="mark">◆</span>
+    <h1>Beyond the Page</h1>
+    <span class="tag">what a single practice page can't teach you</span>
+  </div>
+  <div class="topbar-actions">
+    <a class="btn" href="index.html">&larr; Back to PlaywrightLab</a>
+    <a class="btn" href="https://playwright.dev/docs/intro" target="_blank" rel="noopener">Playwright docs &#8599;</a>
+  </div>
+</header>
+
+<div class="layout">
+  <nav class="sidebar" id="sidebar" aria-label="Topics">
+    <button class="nav-item" data-target="start"><span class="num">00</span>Getting started</button>
+    <button class="nav-item" data-target="architecture"><span class="num">01</span>Test architecture</button>
+    <button class="nav-item" data-target="config"><span class="num">02</span>playwright.config.js</button>
+    <button class="nav-item" data-target="debugging"><span class="num">03</span>Debugging tooling</button>
+    <button class="nav-item" data-target="ci"><span class="num">04</span>CI</button>
+    <button class="nav-item" data-target="api"><span class="num">05</span>API testing</button>
+  </nav>
+
+  <main class="content">
+
+    <!-- 00 GETTING STARTED -->
+    <section class="panel" data-panel="start">
+      <div class="panel-head"><span class="panel-num">00</span><h2>Getting started</h2></div>
+      <p class="goal">Everything else on this page assumes you can already write and run one Playwright test. If you can't yet, start here — then PlaywrightLab's hands-on locator practice, and the rest of this page, will actually make sense instead of being a wall of unfamiliar syntax.</p>
+
+      <div class="card">
+        <h3>Install &amp; scaffold a project</h3>
+        <pre>npm init playwright@latest</pre>
+        <p>This one command asks a few questions — TypeScript or JavaScript, where your test files should live (default: <code class="inline">tests/</code>), whether to add a GitHub Actions workflow, and whether to install browser binaries now — then generates a working project: a <code class="inline">playwright.config.ts</code>, an example test, and a <code class="inline">tests-examples/</code> folder worth skimming once and deleting.</p>
+        <pre>npx playwright install</pre>
+        <p>Browser installation is a separate step on purpose: Playwright doesn't drive your system's Chrome or Firefox, it downloads its own known-good builds of Chromium, Firefox, and WebKit and drives those directly. That's also why a test can behave differently from what you see in your everyday browser — it's not always the same binary or the same version.</p>
+      </div>
+
+      <div class="card">
+        <h3>Anatomy of a test file</h3>
+        <p>Almost every Playwright test follows the same three-part shape: go somewhere, do something, check something happened.</p>
+        <pre><span class="cm">// tests/example.spec.ts</span>
+<span class="kw">import</span> { test, expect } <span class="kw">from</span> <span class="st">'@playwright/test'</span>;
+
+test(<span class="st">'homepage has the right title'</span>, <span class="kw">async</span> ({ page }) => {
+  <span class="kw">await</span> page.goto(<span class="st">'https://playwright.dev'</span>);
+  <span class="kw">await</span> expect(page).toHaveTitle(<span class="cm">/Playwright/</span>);
+});</pre>
+        <ul>
+          <li><b>test(name, fn)</b> — one test case. The function receives an object you destructure fixtures out of — <code class="inline">{ page }</code> here is Playwright handing you a fresh, isolated browser tab for this test only.</li>
+          <li><b>await</b> — nearly every Playwright call is <code class="inline">async</code>, because each one is really a message sent to a real browser and a reply waited for. Forget an <code class="inline">await</code> and the test moves on before the action finished — usually surfacing as a confusing failure two lines later, not on the line actually missing it.</li>
+          <li><b>expect(...)</b> — the assertion. Covered in full below, but notice it's also <code class="inline">await</code>ed — that's not a typo, it's the single most important thing to understand about how these assertions differ from a plain <code class="inline">assert()</code>.</li>
+        </ul>
+      </div>
+
+      <div class="card">
+        <h3>Running tests</h3>
+        <pre><span class="cm"># run everything, headless, and print a pass/fail summary</span>
+npx playwright test
+
+<span class="cm"># watch it happen in a real browser window instead of headless</span>
+npx playwright test --headed
+
+<span class="cm"># pause on failure and step through with the Playwright Inspector</span>
+npx playwright test --debug
+
+<span class="cm"># just one file, or just tests whose name matches</span>
+npx playwright test tests/example.spec.ts
+npx playwright test --grep "homepage"</pre>
+        <p>A run ends with a summary line (<code class="inline">3 passed, 1 failed</code>) and, on any failure, a command to open the full HTML report — that report is the same one <button type="button" class="link-btn" onclick="showSection('debugging')">the debugging tools</button> below build on. <code class="inline">--debug</code> is worth reaching for before anything fancier: it opens the Playwright Inspector and pauses before every action, which is often enough to see exactly where an assumption about the page was wrong.</p>
+      </div>
+
+      <div class="card">
+        <h3>The assertion library, and why it's different</h3>
+        <p>A plain assertion checks a value once, immediately, and is wrong by nature for a browser: the element you want almost certainly doesn't exist the instant your test starts, because the page is still loading, an animation hasn't settled, or data hasn't arrived from an API yet. Playwright's <code class="inline">expect(locator)</code> assertions are <b>web-first</b> — they retry automatically for a few seconds until the condition is true or a timeout is hit, which is the entire reason PlaywrightLab's dynamic-content and waits panels don't need any manual <code class="inline">sleep()</code> calls to pass reliably.</p>
+        <pre><span class="kw">await</span> expect(locator).toBeVisible();
+<span class="kw">await</span> expect(locator).toHaveText(<span class="st">'Submitted'</span>);
+<span class="kw">await</span> expect(locator).toHaveValue(<span class="st">'tester'</span>);
+<span class="kw">await</span> expect(locator).toBeEnabled();
+<span class="kw">await</span> expect(locator).toBeChecked();
+<span class="kw">await</span> expect(locator).toHaveCount(<span class="fn">3</span>);
+<span class="kw">await</span> expect(page).toHaveURL(<span class="cm">/checkout/</span>);
+<span class="kw">await</span> expect(page).toHaveTitle(<span class="st">'PlaywrightLab'</span>);</pre>
+        <ul>
+          <li><b>toBeVisible / toBeHidden</b> — the two you'll write most often, since "did the right thing show up" is most of what a UI test checks.</li>
+          <li><b>toHaveText / toContainText</b> — exact match vs. substring; reach for <code class="inline">toContainText</code> when only part of a string is stable (a dynamic timestamp appended to a fixed label, for example).</li>
+          <li><b>toHaveValue / toBeChecked</b> — form state: an input's current value, or a checkbox/radio's checked state.</li>
+          <li><b>toHaveCount</b> — asserts on how many elements a locator matches, useful for "the list has 3 rows" rather than inspecting each row.</li>
+          <li><b>toHaveURL / toHaveTitle</b> — assert on the page itself rather than an element on it, typically after a navigation or form submission.</li>
+        </ul>
+        <p>The missing <code class="inline">await</code> is the single most common beginner mistake here — without it, the assertion fires immediately, fails on a page that hasn't finished loading, and the error looks like a real bug in the app rather than a missing keyword in the test.</p>
+      </div>
+    </section>
+
+    <!-- 01 ARCHITECTURE -->
+    <section class="panel" data-panel="architecture">
+      <div class="panel-head"><span class="panel-num">01</span><h2>Test architecture</h2></div>
+      <p class="goal">PlaywrightLab teaches you to find and act on one element at a time. It has no opinion on how a hundred tests should be organized so the suite stays readable a year from now. That's this page's job.</p>
+
+      <div class="card">
+        <h3>Page Object Model (POM)</h3>
+        <p>Without it, a locator like <code class="inline">page.getByTestId('auth-username')</code> gets copy-pasted into every test file that touches login. The day someone renames that field, you're doing a find-and-replace across the suite instead of editing one file — and the tests that only run nightly won't tell you they're broken until they do.</p>
+        <p>Wrap a page's locators and actions in a class instead. Tests read like user stories ("log in, then assert the session") instead of a wall of selectors, and when a locator changes you fix it in one place. The class stays dumb on purpose — it exposes locators and low-level actions, not assertions — so a failing <code class="inline">expect()</code> still points at the test that broke, not at some helper three files away.</p>
+        <pre><span class="cm">// pages/login-page.ts</span>
+<span class="kw">export class</span> LoginPage {
+  <span class="kw">readonly</span> page: Page;
+  <span class="kw">readonly</span> username: Locator;
+  <span class="kw">readonly</span> password: Locator;
+  <span class="kw">readonly</span> submit: Locator;
+
+  <span class="kw">constructor</span>(page: Page) {
+    <span class="kw">this</span>.page = page;
+    <span class="kw">this</span>.username = page.getByTestId(<span class="st">'auth-username'</span>);
+    <span class="kw">this</span>.password = page.getByTestId(<span class="st">'auth-password'</span>);
+    <span class="kw">this</span>.submit = page.getByRole(<span class="st">'button'</span>, { name: <span class="st">'Log in'</span> });
+  }
+
+  <span class="kw">async</span> loginAs(user: <span class="kw">string</span>, pass: <span class="kw">string</span>) {
+    <span class="kw">await this</span>.username.fill(user);
+    <span class="kw">await this</span>.password.fill(pass);
+    <span class="kw">await this</span>.submit.click();
+  }
+}</pre>
+        <pre><span class="cm">// tests/login.spec.ts</span>
+test(<span class="st">'rejects a wrong password'</span>, <span class="kw">async</span> ({ page }) => {
+  <span class="kw">const</span> login = <span class="kw">new</span> LoginPage(page);
+  <span class="kw">await</span> page.goto(<span class="st">'/playwrightlab.html'</span>);
+  <span class="kw">await</span> login.loginAs(<span class="st">'tester'</span>, <span class="st">'wrong'</span>);
+  <span class="kw">await</span> expect(page.getByTestId(<span class="st">'auth-error'</span>)).toBeVisible();
+});</pre>
+        <p>One page, one class is the common convention, but it's not a law — for a small suite, a handful of shared locator constants can be enough. Reach for full POM classes once the same flow (login, checkout, search) is driven from three or more spec files.</p>
+      </div>
+
+      <div class="card">
+        <h3>Custom fixtures</h3>
+        <p>Every test that needs a logged-in user could just call <code class="inline">await new LoginPage(page).loginAs(...)</code> in its first line — but now that call is duplicated everywhere, and it runs freshly, serially, inside every single test even though the outcome never differs. A fixture does the same setup once per test in a shared, declarative way, and — critically — only actually runs for tests that ask for it, so tests that don't need auth don't pay for it.</p>
+        <p>Playwright's <code class="inline">test.extend()</code> lets you inject setup — like an already-logged-in page — instead of repeating it in every test's first three lines. Fixtures can depend on each other (a fixture can request another fixture the way a test does), so you can build up a chain — <code class="inline">loggedInPage</code> depends on <code class="inline">page</code>, an <code class="inline">adminPage</code> fixture could depend on <code class="inline">loggedInPage</code> — and Playwright resolves the order for you.</p>
+        <pre><span class="cm">// fixtures.ts</span>
+<span class="kw">import</span> { test <span class="kw">as</span> base } <span class="kw">from</span> <span class="st">'@playwright/test'</span>;
+<span class="kw">import</span> { LoginPage } <span class="kw">from</span> <span class="st">'./pages/login-page'</span>;
+
+<span class="kw">export const</span> test = base.extend&lt;{ loggedInPage: Page }&gt;({
+  loggedInPage: <span class="kw">async</span> ({ page }, use) => {
+    <span class="kw">await</span> page.goto(<span class="st">'/playwrightlab.html'</span>);
+    <span class="kw">await new</span> LoginPage(page).loginAs(<span class="st">'tester'</span>, <span class="st">'playwright'</span>);
+    <span class="kw">await</span> use(page); <span class="cm">// hand the ready-to-go page to the test</span>
+  },
+});</pre>
+        <pre>test(<span class="st">'logged-in users see their session'</span>, <span class="kw">async</span> ({ loggedInPage }) => {
+  <span class="kw">await</span> expect(loggedInPage.getByTestId(<span class="st">'auth-whoami'</span>)).toHaveText(<span class="st">'tester'</span>);
+});</pre>
+      </div>
+
+      <div class="card">
+        <h3>Organizing with test.describe</h3>
+        <p>A flat folder of 200 <code class="inline">test()</code> calls works fine on day one. It stops working the day CI takes 40 minutes and someone asks "can we just run the checkout tests" — and the honest answer is "not without grep-ing filenames." These four habits are what keep a suite navigable as it grows, roughly in the order you'll feel the pain:</p>
+        <ul>
+          <li>Group by <b>feature</b>, not by page — <code class="inline">describe('checkout')</code> beats <code class="inline">describe('CartPage')</code> once a single flow spans multiple pages, which most real flows do.</li>
+          <li><code class="inline">test.beforeEach</code> inside a describe block for setup shared by that group only — it won't silently run for tests in a sibling describe block that don't need it.</li>
+          <li><code class="inline">test.step('fill shipping form', async () => {...})</code> to make trace-viewer timelines and failure output readable at a glance — without steps, a failure just says "line 47," and you're left reading the whole test to figure out which logical phase it was in.</li>
+          <li>Tag with <code class="inline">test('...', { tag: '@smoke' }, ...)</code> and filter with <code class="inline">--grep @smoke</code> in CI — this is what lets a PR pipeline run a 2-minute smoke subset instead of the full 40-minute suite, saving the full run for a nightly job.</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- 02 CONFIG -->
+    <section class="panel" data-panel="config">
+      <div class="panel-head"><span class="panel-num">02</span><h2>playwright.config.js</h2></div>
+      <p class="goal">One file controls which browsers you run against, how flaky failures are retried, and what evidence gets kept when something breaks. PlaywrightLab only ever runs in whatever browser you happened to open it in.</p>
+
+      <div class="card">
+        <h3>Cross-browser and device projects</h3>
+        <pre><span class="cm">// playwright.config.ts</span>
+<span class="kw">import</span> { defineConfig, devices } <span class="kw">from</span> <span class="st">'@playwright/test'</span>;
+
+<span class="kw">export default</span> defineConfig({
+  testDir: <span class="st">'./tests'</span>,
+  fullyParallel: <span class="kw">true</span>,
+  retries: process.env.CI ? <span class="fn">2</span> : <span class="fn">0</span>,
+  workers: process.env.CI ? <span class="fn">2</span> : <span class="kw">undefined</span>,
+  reporter: <span class="st">'html'</span>,
+  use: {
+    baseURL: <span class="st">'http://localhost:3000'</span>,
+    trace: <span class="st">'on-first-retry'</span>,
+    screenshot: <span class="st">'only-on-failure'</span>,
+    video: <span class="st">'retain-on-failure'</span>,
+  },
+  projects: [
+    { name: <span class="st">'chromium'</span>, use: { ...devices[<span class="st">'Desktop Chrome'</span>] } },
+    { name: <span class="st">'firefox'</span>,  use: { ...devices[<span class="st">'Desktop Firefox'</span>] } },
+    { name: <span class="st">'webkit'</span>,   use: { ...devices[<span class="st">'Desktop Safari'</span>] } },
+    { name: <span class="st">'mobile-chrome'</span>, use: { ...devices[<span class="st">'Pixel 7'</span>] } },
+  ],
+});</pre>
+      </div>
+
+      <div class="card">
+        <h3>What each setting is actually for</h3>
+        <p>None of these are defaults to copy blindly — each one is answering a specific failure mode you'll hit eventually:</p>
+        <ul>
+          <li><b>retries</b> — reruns a failing test to separate real bugs from flakiness (a test that fails once and passes on retry is flaky, not broken). Keep it at <code class="inline">0</code> locally so a real bug fails loudly on the first try instead of quietly passing on attempt two while you're not looking.</li>
+          <li><b>workers</b> — how many tests run in parallel, one browser instance each. CI runners usually have fewer cores than your laptop, so a value tuned locally can starve or overload a shared CI machine — cap it explicitly there rather than trusting Playwright's auto-detection.</li>
+          <li><b>trace: 'on-first-retry'</b> — only pay the recording cost (CPU, disk, artifact size) when a test is already suspicious, not on every green run. <code class="inline">trace: 'on'</code> records everything and is useful for a short debugging session, but bloats CI artifacts fast if left on permanently.</li>
+          <li><b>projects</b> — the same test file runs once per project, with that project's browser and device settings. A locator that only breaks in WebKit, or a layout that only breaks on a 390px viewport, is exactly the kind of bug a single-browser run would never catch, and the kind that reaches production first.</li>
+          <li><b>baseURL</b> — lets tests call <code class="inline">page.goto('/checkout')</code> instead of hardcoding a host per environment. Combine with an environment variable so the same test file runs unmodified against local, staging, and CI.</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- 03 DEBUGGING -->
+    <section class="panel" data-panel="debugging">
+      <div class="panel-head"><span class="panel-num">03</span><h2>Debugging tooling</h2></div>
+      <p class="goal">A failing assertion tells you what was wrong. These tools tell you why — by letting you step through, or rewind to, the exact moment it happened. In practice you'll reach for them in roughly this order: codegen while writing a new test, UI mode while a test is actively failing on your machine, and trace viewer once it's failing on someone else's.</p>
+
+      <div class="card">
+        <h3>Trace viewer</h3>
+        <p>A trace is a scrubbable recording of the whole test run: a DOM snapshot before and after every action, the network log, the console, and a screenshot per step — enough to reconstruct exactly what the browser saw, after the fact, without having to reproduce the failure live.</p>
+        <pre><span class="cm"># record on first retry (set in config, see 02), then open it</span>
+npx playwright show-trace trace.zip</pre>
+        <p>This is what earns its keep on a CI-only failure: something failed on a Linux runner you don't have access to, in a state you can't reproduce locally. In CI, upload <code class="inline">test-results/</code> as a build artifact so that trace is one download away instead of "works on my machine" being the end of the investigation.</p>
+      </div>
+
+      <div class="card">
+        <h3>UI mode</h3>
+        <pre>npx playwright test --ui</pre>
+        <p>Runs your suite in a local app with a timeline, a live DOM snapshot per step, locator picking, and a watch mode that reruns automatically on save. This is where most day-to-day debugging should happen — it's the fast, local loop for "why did this test just fail on my machine," before you'd ever reach for trace viewer, which is aimed at failures you can't watch happen live.</p>
+      </div>
+
+      <div class="card">
+        <h3>Codegen</h3>
+        <pre>npx playwright codegen playwrightlab.html</pre>
+        <p>Opens a browser instrumented to record your clicks and typing as Playwright code as you go — useful for a first draft or for figuring out a locator for one stubborn element, less useful as a way to author an entire suite (recorded scripts tend to be brittle and skip the assertions that make a test worth having). Usefully, it also shows the same locator-quality reasoning PlaywrightLab's own inspector does: it prefers roles and test ids over brittle CSS paths, and will visibly hesitate on an element that doesn't have a good one.</p>
+      </div>
+
+      <div class="card">
+        <h3>Screenshots and video on failure</h3>
+        <p>Already wired up in the <button type="button" class="link-btn" onclick="showSection('config')">config example above</button> via <code class="inline">screenshot: 'only-on-failure'</code> and <code class="inline">video: 'retain-on-failure'</code>. Cheap to leave on permanently — unlike full tracing, Playwright discards the artifact automatically when a test passes, so the storage cost only shows up on the runs you'd want to inspect anyway. A screenshot answers "what did the page look like," a trace answers "what led up to it" — keep both on and reach for whichever the failure actually calls for.</p>
+      </div>
+    </section>
+
+    <!-- 04 CI -->
+    <section class="panel" data-panel="ci">
+      <div class="panel-head"><span class="panel-num">04</span><h2>CI</h2></div>
+      <p class="goal">A suite that only runs on your machine isn't a safety net for the team — it's a safety net for you, on the days you remember to run it. The goal here is a green check on every pull request, in a time budget people will actually wait for instead of merging past.</p>
+
+      <div class="card">
+        <h3>Headless run in GitHub Actions</h3>
+        <p>"Headless" just means no visible browser window — the same Chromium/Firefox/WebKit binaries run identically, just without rendering to a screen, which is the only mode that makes sense on a CI runner. The workflow below is close to the minimum viable setup: install dependencies, install the browsers Playwright needs (a separate step, since they're not npm packages), run the suite, and — critically — upload the report even when the run fails, since <code class="inline">if: always()</code> is what saves that artifact from being thrown away with a failed job.</p>
+        <pre><span class="cm"># .github/workflows/playwright.yml</span>
+name: Playwright Tests
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with: { node-version: <span class="st">20</span> }
+      - run: npm ci
+      - run: npx playwright install --with-deps
+      - run: npx playwright test
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: playwright-report
+          path: playwright-report/
+          retention-days: <span class="fn">14</span></pre>
+      </div>
+
+      <div class="card">
+        <h3>Sharding across machines</h3>
+        <p>Split one suite across several parallel jobs — 4 shards at 25 tests each finishes roughly 4x faster than 1 runner working through all 100.</p>
+        <pre>strategy:
+  matrix:
+    shard: [<span class="fn">1</span>, <span class="fn">2</span>, <span class="fn">3</span>, <span class="fn">4</span>]
+steps:
+  - run: npx playwright test --shard=${{ matrix.shard }}/4</pre>
+        <p>Combine with the <code class="inline">workers</code> setting from <button type="button" class="link-btn" onclick="showSection('config')">playwright.config.js</button>: shards split test <em>files</em> across machines, workers split them across cores <em>within</em> one machine — you generally want both.</p>
+      </div>
+
+      <div class="card">
+        <h3>Merging sharded reports</h3>
+        <p>Splitting the suite across 4 shards also splits the report into 4 separate, partial HTML reports — none of which shows the full picture on its own. Each shard job uploads its raw ("blob") results as an artifact; a final job that depends on all of them downloads the artifacts and merges the blobs into the one HTML report you'd actually want to open and click through.</p>
+        <pre><span class="cm"># each shard uploads its blob report, a final job merges them</span>
+npx playwright merge-reports --reporter=html ./all-blob-reports</pre>
+      </div>
+    </section>
+
+    <!-- 05 API -->
+    <section class="panel" data-panel="api">
+      <div class="panel-head"><span class="panel-num">05</span><h2>API testing</h2></div>
+      <p class="goal">PlaywrightLab's Network panel proves a request happened, but you can't test a JSON API through a browser page. This needs a real HTTP endpoint — the <code class="inline">request</code> fixture talks to one directly, no browser involved.</p>
+
+      <div class="card">
+        <h3>Testing a REST endpoint directly</h3>
+        <pre><span class="kw">import</span> { test, expect } <span class="kw">from</span> <span class="st">'@playwright/test'</span>;
+
+test(<span class="st">'GET /users returns a list'</span>, <span class="kw">async</span> ({ request }) => {
+  <span class="kw">const</span> res = <span class="kw">await</span> request.get(<span class="st">'https://jsonplaceholder.typicode.com/users'</span>);
+  expect(res.ok()).toBeTruthy();
+  <span class="kw">const</span> users = <span class="kw">await</span> res.json();
+  expect(users.length).toBeGreaterThan(<span class="fn">0</span>);
+});
+
+test(<span class="st">'GET a missing user returns 404'</span>, <span class="kw">async</span> ({ request }) => {
+  <span class="kw">const</span> res = <span class="kw">await</span> request.get(<span class="st">'https://jsonplaceholder.typicode.com/users/9999'</span>);
+  expect(res.status()).toBe(<span class="fn">404</span>);
+});</pre>
+        <p>This is the same pair of endpoints PlaywrightLab's Network panel calls from the browser — hitting them through <code class="inline">request</code> instead skips launching a browser, rendering a page, and waiting for the DOM entirely. A UI test that clicks through to check an API response might take 2-3 seconds; the equivalent <code class="inline">request</code> call takes milliseconds, which is the difference between a 200-test suite finishing in minutes versus seconds.</p>
+      </div>
+
+      <div class="card">
+        <h3>Seeding state via API, verifying via UI</h3>
+        <p>The pattern that actually earns API testing its keep, and the one most real suites underuse: create data through the API (fast, no flake, no dependency on some other UI flow having worked first), then check the UI reflects it — because the UI is the part users actually see, and no amount of passing API tests proves it renders correctly.</p>
+        <p>The alternative — driving the UI to create the test data too, e.g. filling out a "new post" form before every test that needs a post to exist — multiplies both runtime and flake risk for setup that isn't what the test is actually about. Reserve full UI-driven setup for the handful of tests whose whole point <em>is</em> that creation flow.</p>
+        <pre>test(<span class="st">'a post created via API shows up in the UI'</span>, <span class="kw">async</span> ({ request, page }) => {
+  <span class="kw">const</span> created = <span class="kw">await</span> request.post(<span class="st">'https://jsonplaceholder.typicode.com/posts'</span>, {
+    data: { title: <span class="st">'Hello'</span>, body: <span class="st">'World'</span>, userId: <span class="fn">1</span> },
+  });
+  <span class="kw">const</span> { id } = <span class="kw">await</span> created.json();
+
+  <span class="kw">await</span> page.goto(<span class="cm">`/posts/${id}`</span>);
+  <span class="kw">await</span> expect(page.getByRole(<span class="st">'heading'</span>)).toHaveText(<span class="st">'Hello'</span>);
+});</pre>
+      </div>
+
+      <div class="card">
+        <h3>Reusing a login for both</h3>
+        <p>Every test that needs to be logged in could log in through the UI first — fill username, fill password, click submit, wait for the redirect. Multiply that by a few hundred tests and logging in becomes a meaningful fraction of total suite runtime, for a step that's identical every single time and isn't what any of those tests are actually checking.</p>
+        <p>Log in once via <code class="inline">request</code> — no browser needed, since it's just an HTTP call — save the resulting session to disk, and every later test — API or UI — starts already authenticated by loading that saved state instead of repeating the login flow. This is the other half of the <button type="button" class="link-btn" onclick="showSection('architecture')">storageState pattern</button> PlaywrightLab's Auth &amp; session panel sets up: that panel shows what to reuse (a session that survives reload), this is how to create it without a browser in the loop at all.</p>
+        <pre><span class="cm">// global-setup.ts</span>
+<span class="kw">async function</span> globalSetup() {
+  <span class="kw">const</span> requestContext = <span class="kw">await</span> request.newContext();
+  <span class="kw">await</span> requestContext.post(<span class="st">'/api/login'</span>, { data: { user: <span class="st">'tester'</span>, pass: <span class="st">'playwright'</span> } });
+  <span class="kw">await</span> requestContext.storageState({ path: <span class="st">'storageState.json'</span> });
+}</pre>
+      </div>
+    </section>
+
+  </main>
+</div>
+
+<footer class="pagefoot">
+  Companion to <a href="playwrightlab.html">PlaywrightLab</a> — that page teaches locators and interaction patterns on real DOM; this one covers the project-level layer around a suite that no single practice page can demonstrate on its own.
+</footer>
+
+<script>
+(function(){
+  "use strict";
+  var navItems = document.querySelectorAll(".nav-item");
+  var panels = document.querySelectorAll(".panel");
+  function showSection(name){
+    navItems.forEach(function(b){ b.classList.toggle("is-active", b.dataset.target === name); });
+    panels.forEach(function(p){ p.classList.toggle("is-active", p.dataset.panel === name); });
+    window.scrollTo({ top: 0, behavior: "instant" });
+  }
+  window.showSection = showSection;
+  navItems.forEach(function(btn){
+    btn.addEventListener("click", function(){ showSection(btn.dataset.target); });
+  });
+  showSection("start");
+})();
+</script>
+</body>
+</html>
