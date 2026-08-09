@@ -423,7 +423,7 @@
 
       <div class="demo">
         <p class="demo-label">Button enables itself after a countdown</p>
-        <button class="btn btn--primary" id="delay-enable-btn" data-testid="delay-enable-btn" disabled>Enabling in 3…</button>
+        <button class="btn btn--primary" id="delay-enable-btn" data-testid="delay-enable-btn" disabled>Enabling in 5…</button>
       </div>
 
       <div class="demo">
@@ -681,14 +681,24 @@
   /* ---------------- section navigation ---------------- */
   var navItems = document.querySelectorAll(".nav-item");
   var panels = document.querySelectorAll(".panel");
+  var sectionNames = Array.prototype.map.call(navItems, function(b){ return b.dataset.target; });
   function showSection(name){
     navItems.forEach(function(b){ b.classList.toggle("is-active", b.dataset.target === name); });
     panels.forEach(function(p){ p.classList.toggle("is-active", p.dataset.panel === name); });
+    if (name === "waits") startDelayEnableCountdown();
   }
   navItems.forEach(function(btn){
-    btn.addEventListener("click", function(){ showSection(btn.dataset.target); });
+    btn.addEventListener("click", function(){
+      var target = btn.dataset.target;
+      if (location.hash.slice(1) === target){ showSection(target); }
+      else { location.hash = target; }
+    });
   });
-  showSection("locators");
+  window.addEventListener("hashchange", function(){
+    var name = location.hash.slice(1);
+    showSection(sectionNames.indexOf(name) !== -1 ? name : "locators");
+  });
+  showSection(sectionNames.indexOf(location.hash.slice(1)) !== -1 ? location.hash.slice(1) : "locators");
 
   /* ---------------- inspector HUD ---------------- */
   var inspector = document.getElementById("inspector");
@@ -830,15 +840,25 @@
     }, 100);
   });
 
-  (function countdownEnable(){
+  var delayEnableTimer = null;
+  function startDelayEnableCountdown(){
     var btn = document.getElementById("delay-enable-btn");
-    var n = 3;
-    var timer = setInterval(function(){
+    if (delayEnableTimer) clearInterval(delayEnableTimer);
+    var n = 5;
+    btn.disabled = true;
+    btn.textContent = "Enabling in " + n + "…";
+    delayEnableTimer = setInterval(function(){
       n--;
       if (n > 0){ btn.textContent = "Enabling in " + n + "…"; }
-      else { clearInterval(timer); btn.disabled = false; btn.textContent = "Ready ✓"; }
+      else {
+        clearInterval(delayEnableTimer);
+        delayEnableTimer = null;
+        btn.disabled = false;
+        btn.textContent = "Ready ✓";
+      }
     }, 1000);
-  })();
+  }
+  startDelayEnableCountdown();
 
   document.getElementById("flaky-btn").addEventListener("click", function(){
     var out = document.getElementById("flaky-result");
