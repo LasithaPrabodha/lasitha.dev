@@ -469,6 +469,26 @@ test(<span class="st">'GET a missing user returns 404'</span>, <span class="kw">
       </div>
 
       <div class="card">
+        <h3>Mocking the network instead of calling it</h3>
+        <p>The <code class="inline">request</code> fixture above still hits a real backend — fine for testing the API itself, but a UI test that needs to check "what does the page show when this call is slow, empty, or a 500" shouldn't depend on making the real server actually misbehave on demand. <code class="inline">page.route()</code> intercepts a request before it leaves the browser and lets you answer with whatever response the test needs, so the UI is exercised against a case that might be rare or impossible to trigger for real.</p>
+        <pre><span class="kw">await</span> page.route(<span class="cm">'**/api/users'</span>, <span class="kw">async</span> route => {
+  <span class="kw">await</span> route.fulfill({
+    status: <span class="fn">200</span>,
+    contentType: <span class="st">'application/json'</span>,
+    body: JSON.stringify([{ id: <span class="fn">1</span>, name: <span class="st">'Ada'</span> }]),
+  });
+});
+
+<span class="kw">await</span> page.route(<span class="cm">'**/api/users'</span>, route =>
+  route.fulfill({ status: <span class="fn">500</span>, body: <span class="st">'Internal Server Error'</span> })
+);
+
+<span class="kw">await</span> page.goto(<span class="st">'/users'</span>);
+<span class="kw">await</span> expect(page.getByTestId(<span class="st">'error-banner'</span>)).toBeVisible();</pre>
+        <p>This is also what turns a UI test suite deterministic instead of dependent on a real backend being up, seeded correctly, and fast — three things that are true on a good day and false on the day CI actually needs them. The tradeoff is real: a mocked response can drift from what the API actually returns and the test would never notice, so mock the failure paths and edge cases that are hard to produce for real, and keep at least a few end-to-end tests hitting the genuine API so a real contract break still gets caught.</p>
+      </div>
+
+      <div class="card">
         <h3>Seeding state via API, verifying via UI</h3>
         <p>The pattern that actually earns API testing its keep, and the one most real suites underuse: create data through the API (fast, no flake, no dependency on some other UI flow having worked first), then check the UI reflects it — because the UI is the part users actually see, and no amount of passing API tests proves it renders correctly.</p>
         <p>The alternative — driving the UI to create the test data too, e.g. filling out a "new post" form before every test that needs a post to exist — multiplies both runtime and flake risk for setup that isn't what the test is actually about. Reserve full UI-driven setup for the handful of tests whose whole point <em>is</em> that creation flow.</p>
