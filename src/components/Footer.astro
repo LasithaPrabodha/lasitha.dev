@@ -44,7 +44,7 @@ const socials = [
 
     <div class="footer-bottom">
       <p class="footer-copyright">© Lasitha Prabodha Weligampola {new Date().getFullYear()}</p>
-      <div class="footer-socials">
+      <div class="footer-contact-links">
         {
           socials.map((social) => (
             <a href={social.href} target="_blank" rel="noreferrer" aria-label={social.label} title={social.label}>
@@ -161,24 +161,24 @@ const socials = [
     color: var(--clr-quote);
   }
 
-  .footer-socials {
+  .footer-contact-links {
     display: flex;
     align-items: center;
     gap: 1.25rem;
   }
 
-  .footer-socials a {
+  .footer-contact-links a {
     display: inline-flex;
   }
 
-  .footer-socials :global(svg) {
+  .footer-contact-links :global(svg) {
     width: 20px;
     height: 20px;
     fill: var(--clr-quote);
     transition: fill 0.2s ease;
   }
 
-  .footer-socials a:hover :global(svg) {
+  .footer-contact-links a:hover :global(svg) {
     fill: var(--clr-link);
   }
 </style>
