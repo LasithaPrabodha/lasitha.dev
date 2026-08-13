@@ -19,11 +19,18 @@ const { animate = false, hideSocialIcons = false } = Astro.props;
 
 <header class="fixed top-0 left-0 right-0 bg-transparent">
   <nav class="nav flex justify-between py-6 px-6 sm:px-10">
-    <a href="/" class="z-50 animate-delay-1000 animate-ease-out" class:list={{ "animate-fade-right": animate }}>
+    <a
+      href="/"
+      class="logo-link z-50 animate-delay-1000 animate-ease-out"
+      class:list={{ "animate-fade-right": animate }}
+    >
       <h4 class="font-bold">LP</h4>
     </a>
 
-    <div class="flex relative animate-delay-1000 animate-ease-out" class:list={{ "animate-fade-left": animate }}>
+    <div
+      class="nav-links-wrap flex relative animate-delay-1000 animate-ease-out"
+      class:list={{ "animate-fade-left": animate }}
+    >
       <ul class="nav-list center">
         <HeaderLink href="/">home</HeaderLink>
         <HeaderLink href="/blog">Blog</HeaderLink>
@@ -294,14 +301,18 @@ const { animate = false, hideSocialIcons = false } = Astro.props;
   let socialIconsHidden = false;
   let footerNameObserver: IntersectionObserver | null = null;
 
-  const playSocialIconsAnimation = (hide: boolean) => {
-    const socialIcons = document.querySelector(".social-icons");
-    if (!socialIcons) return;
+  // Drops any existing animation classes (including the page-load entrance one)
+  // and forces a reflow so re-adding them always restarts the animation.
+  // `hide: true` replays the entrance in reverse, i.e. the element retreats
+  // back the way it came in.
+  const playDirectionalAnimation = (
+    el: Element | null,
+    fadeClass: "animate-fade-right" | "animate-fade-left",
+    hide: boolean,
+  ) => {
+    if (!el) return;
 
-    socialIcons.classList.toggle("at-bottom", hide);
-    // Drop any existing animation classes (including the page-load entrance one)
-    // and force a reflow so re-adding them always restarts the animation.
-    socialIcons.classList.remove(
+    el.classList.remove(
       "animate-fade-right",
       "animate-fade-left",
       "animate-ease-in",
@@ -309,9 +320,17 @@ const { animate = false, hideSocialIcons = false } = Astro.props;
       "animate-reverse",
       "animate-delay-1000",
     );
-    void (socialIcons as HTMLElement).offsetWidth;
-    socialIcons.classList.add("animate-fade-right", hide ? "animate-ease-in" : "animate-ease-out");
-    if (hide) socialIcons.classList.add("animate-reverse");
+    void (el as HTMLElement).offsetWidth;
+    el.classList.add(fadeClass, hide ? "animate-ease-in" : "animate-ease-out");
+    if (hide) el.classList.add("animate-reverse");
+  };
+
+  const playSocialIconsAnimation = (hide: boolean) => {
+    const socialIcons = document.querySelector(".social-icons");
+    if (!socialIcons) return;
+
+    socialIcons.classList.toggle("at-bottom", hide);
+    playDirectionalAnimation(socialIcons, "animate-fade-right", hide);
   };
 
   // Hide the sidebar as soon as the footer's name comes near the viewport,
@@ -336,4 +355,14 @@ const { animate = false, hideSocialIcons = false } = Astro.props;
 
   setupFooterNameObserver();
   document.addEventListener("astro:page-load", setupFooterNameObserver);
+
+  // When the hero (src/components/home/HeroReveal.tsx) goes idle, replay the
+  // logo/nav/social-icons entrance animations in reverse, so they retreat
+  // back the way they came in alongside the hero fading out.
+  window.addEventListener("hero-idle-change", (event) => {
+    const hide = (event as CustomEvent<{ idle: boolean }>).detail.idle;
+    playDirectionalAnimation(document.querySelector(".logo-link"), "animate-fade-right", hide);
+    playDirectionalAnimation(document.querySelector(".nav-links-wrap"), "animate-fade-left", hide);
+    playSocialIconsAnimation(hide);
+  });
 </script>

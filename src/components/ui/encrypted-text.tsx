@@ -22,6 +22,8 @@ type EncryptedTextProps = {
   encryptedClassName?: string;
   /** CSS class for styling the revealed characters */
   revealedClassName?: string;
+  /** Gate on top of the in-view check — the reveal won't start until this is true. Defaults to true. */
+  startWhen?: boolean;
 };
 
 const DEFAULT_CHARSET =
@@ -65,9 +67,11 @@ export const EncryptedText: React.FC<EncryptedTextProps> = ({
   flipDelayMs = 50,
   encryptedClassName,
   revealedClassName,
+  startWhen = true,
 }) => {
   const ref = useRef<HTMLSpanElement>(null);
   const isInView = useInView(ref, { once: true });
+  const shouldStart = isInView && startWhen;
 
   const [revealCount, setRevealCount] = useState<number>(0);
   const animationFrameRef = useRef<number | null>(null);
@@ -78,7 +82,7 @@ export const EncryptedText: React.FC<EncryptedTextProps> = ({
   );
 
   useEffect(() => {
-    if (!isInView) return;
+    if (!shouldStart) return;
 
     // Reset state for a fresh animation whenever dependencies change
     const initial = text
@@ -134,7 +138,7 @@ export const EncryptedText: React.FC<EncryptedTextProps> = ({
         cancelAnimationFrame(animationFrameRef.current);
       }
     };
-  }, [isInView, text, revealDelayMs, charset, flipDelayMs]);
+  }, [shouldStart, text, revealDelayMs, charset, flipDelayMs]);
 
   if (!text) return null;
 

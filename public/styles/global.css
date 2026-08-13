@@ -135,6 +135,16 @@ small {
   text-align: center;
 }
 
+.glow-text {
+  color: var(--clr-fg-alt);
+  text-shadow: 0 0 6px rgba(170, 110, 255, 0.35);
+}
+
+[data-theme="light"] .glow-text {
+  color: var(--clr-fg-alt);
+  text-shadow: none;
+}
+
 code {
   background: var(--clr-bg-code);
   padding: 2px;

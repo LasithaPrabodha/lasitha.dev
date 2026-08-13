@@ -44,5 +44,9 @@ export default defineConfig({
       exclude: ["@resvg/resvg-js"],
     },
   },
-  adapter: netlify(),
+  adapter: netlify({
+    devFeatures: {
+      edgeFunctions: false,
+    },
+  }),
 });

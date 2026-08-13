@@ -12,6 +12,8 @@ interface CanvasTextProps {
   lineGap?: number;
   curveIntensity?: number;
   overlay?: boolean;
+  /** Fired once, the first time the canvas has measured its text and painted a frame. */
+  onReady?: () => void;
 }
 
 function resolveColor(color: string): string {
@@ -35,12 +37,14 @@ export function CanvasText({
   lineGap = 10,
   curveIntensity = 60,
   overlay = false,
+  onReady,
 }: CanvasTextProps) {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const textRef = useRef<HTMLSpanElement>(null);
   const bgRef = useRef<HTMLSpanElement>(null);
   const animationRef = useRef<number>(0);
   const startTimeRef = useRef<number>(0);
+  const hasFiredReadyRef = useRef(false);
   const [bgColor, setBgColor] = useState("#0a0a0a");
   const [resolvedColors, setResolvedColors] = useState<string[]>([]);
   const [dimensions, setDimensions] = useState({ width: 0, height: 0 });
@@ -118,6 +122,11 @@ export function CanvasText({
 
     const numLines = Math.floor(height / lineGap) + 10;
     startTimeRef.current = performance.now();
+
+    if (!hasFiredReadyRef.current) {
+      hasFiredReadyRef.current = true;
+      onReady?.();
+    }
 
     const animate = (currentTime: number) => {
       const elapsed = (currentTime - startTimeRef.current) / 1000;
