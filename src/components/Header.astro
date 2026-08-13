@@ -301,10 +301,7 @@ const { animate = false, hideSocialIcons = false } = Astro.props;
   let socialIconsHidden = false;
   let footerNameObserver: IntersectionObserver | null = null;
 
-  // Drops any existing animation classes (including the page-load entrance one)
-  // and forces a reflow so re-adding them always restarts the animation.
-  // `hide: true` replays the entrance in reverse, i.e. the element retreats
-  // back the way it came in.
+  // Resets animation classes and forces a reflow so re-adding them always restarts; `hide: true` replays the entrance in reverse.
   const playDirectionalAnimation = (
     el: Element | null,
     fadeClass: "animate-fade-right" | "animate-fade-left",
@@ -333,8 +330,7 @@ const { animate = false, hideSocialIcons = false } = Astro.props;
     playDirectionalAnimation(socialIcons, "animate-fade-right", hide);
   };
 
-  // Hide the sidebar as soon as the footer's name comes near the viewport,
-  // well before it's actually visible (200px lead via rootMargin).
+  // Hide the sidebar as soon as the footer's name comes near the viewport (200px lead via rootMargin).
   const setupFooterNameObserver = () => {
     footerNameObserver?.disconnect();
     socialIconsHidden = false;
@@ -356,9 +352,7 @@ const { animate = false, hideSocialIcons = false } = Astro.props;
   setupFooterNameObserver();
   document.addEventListener("astro:page-load", setupFooterNameObserver);
 
-  // When the hero (src/components/home/HeroReveal.tsx) goes idle, replay the
-  // logo/nav/social-icons entrance animations in reverse, so they retreat
-  // back the way they came in alongside the hero fading out.
+  // When the hero (HeroReveal.tsx) goes idle, replay logo/nav/social-icons entrances in reverse, alongside the hero fading out.
   window.addEventListener("hero-idle-change", (event) => {
     const hide = (event as CustomEvent<{ idle: boolean }>).detail.idle;
     playDirectionalAnimation(document.querySelector(".logo-link"), "animate-fade-right", hide);

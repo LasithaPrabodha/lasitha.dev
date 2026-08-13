@@ -14,11 +14,7 @@ export interface OgData {
   date: Date;
 }
 
-/**
- * generate opengraph image with satori and return a buffer
- *
- * @param text
- */
+// Generates an opengraph image with satori and returns a buffer.
 const generateOgImage = async (title: string = SITE_TITLE, date: Date = new Date()): Promise<Buffer> => {
   const markup = html`<div tw="bg-zinc-900 flex flex-col w-full h-full" style="font-family: 'Quicksand'">
     <div tw="flex flex-col w-full h-4/5 p-10 justify-center">

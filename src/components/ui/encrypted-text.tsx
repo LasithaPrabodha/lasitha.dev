@@ -6,17 +6,11 @@ import { cn } from "@/lib/utils";
 type EncryptedTextProps = {
   text: string;
   className?: string;
-  /**
-   * Time in milliseconds between revealing each subsequent real character.
-   * Lower is faster. Defaults to 50ms per character.
-   */
+  /** Time in ms between revealing each real character (lower = faster). Defaults to 50ms. */
   revealDelayMs?: number;
   /** Optional custom character set to use for the gibberish effect. */
   charset?: string;
-  /**
-   * Time in milliseconds between gibberish flips for unrevealed characters.
-   * Lower is more jittery. Defaults to 50ms.
-   */
+  /** Time in ms between gibberish flips for unrevealed characters (lower = more jittery). Defaults to 50ms. */
   flipDelayMs?: number;
   /** CSS class for styling the encrypted/scrambled characters */
   encryptedClassName?: string;
@@ -47,9 +41,7 @@ function generateGibberishPreservingSpaces(
   return result;
 }
 
-// Deterministic (non-random) placeholder used for the server render and the
-// client's first paint, so hydration never mismatches on Math.random() output.
-// True randomized scrambling only kicks in client-side once mounted.
+// Deterministic placeholder for server render + first paint so hydration never mismatches on Math.random() output; real scrambling kicks in once mounted.
 function generatePlaceholderPreservingSpaces(original: string): string {
   if (!original) return "";
   let result = "";

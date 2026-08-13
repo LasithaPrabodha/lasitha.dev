@@ -19,7 +19,7 @@ export const CardSpotlight = ({
   children: React.ReactNode;
   /** Skip the hover glow entirely while the site's `data-theme` is "light". */
   hideOnLightTheme?: boolean;
-} & React.HTMLAttributes<HTMLDivElement>) => {
+} & React.ComponentProps<typeof motion.div>) => {
   const mouseX = useMotionValue(0);
   const mouseY = useMotionValue(0);
   function handleMouseMove({
@@ -60,7 +60,7 @@ export const CardSpotlight = ({
   `;
 
   return (
-    <div
+    <motion.div
       className={cn(
         "group/spotlight p-10 rounded-md relative border border-oklch(0.922 0 0) border-neutral-800 bg-black dark:border-neutral-800 dark:border-oklch(1 0 0 / 10%)",
         className
@@ -92,6 +92,6 @@ export const CardSpotlight = ({
         </motion.div>
       )}
       <div className="relative z-10">{children}</div>
-    </div>
+    </motion.div>
   );
 };
