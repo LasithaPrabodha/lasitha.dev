@@ -15,7 +15,10 @@
   --clr-fg-alt: #333A3F;
   --clr-primary: #333A3F;
   --clr-chip-bg: #ff2d2310;
-  --clr-link: #F43F5E; 
+  --clr-link: #F43F5E;
+  --clr-glass-bg: rgba(255, 255, 255, 0.3);
+  --clr-glass-border: rgba(255, 255, 255, 0.5);
+  --clr-glass-shadow: rgba(100, 100, 111, 0.12);
   --display-sun: none;
   --display-moon: block;
 }
@@ -29,7 +32,10 @@
   --clr-fg-alt: #cdcdff;
   --clr-primary: #90a0d9;
   --clr-chip-bg: #90a0d920;
-  --clr-link: #90a0d9;  
+  --clr-link: #90a0d9;
+  --clr-glass-bg: rgba(255, 255, 255, 0.035);
+  --clr-glass-border: rgba(255, 255, 255, 0.1);
+  --clr-glass-shadow: rgba(0, 0, 0, 0.25);
   --display-sun: block;
   --display-moon: none;
 }

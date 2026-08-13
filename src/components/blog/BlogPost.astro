@@ -1,10 +1,18 @@
 ---
 import FormattedDate from "../blog/FormattedDate.astro";
+import { CardSpotlight } from "@/components/ui/card-spotlight";
 
 const { post } = Astro.props;
 ---
 
-<a class="blog-post" href={`/blog/${post.slug}/`}>
+<CardSpotlight
+  client:visible
+  radius={400}
+  color="#6344F5"
+  hideOnLightTheme
+  className="blog-post relative rounded-lg border border-[var(--clr-glass-border)] bg-[var(--clr-glass-bg)] p-4 shadow-[0_4px_24px_var(--clr-glass-shadow)] backdrop-blur-md transition-colors hover:border-[var(--clr-bg-code)] sm:p-6 [&_*]:!bg-transparent"
+>
+  <a class="absolute inset-0 z-20" href={`/blog/${post.slug}/`} aria-label={post.title}></a>
   <div class="mb-2">
     <FormattedDate date={post.pubDate} />
     <h4 class="mt-2 text-xl">{post.title}</h4>
@@ -12,26 +20,4 @@ const { post } = Astro.props;
   <p>{post.description}</p>
 
   <p class="btn-read-story text-[color:var(--clr-link)] mb-2">Read Full Story</p>
-</a>
-<style>
-  .blog-post {
-    padding: 1em;
-    border-radius: 8px;
-    transition:
-      border ease-in 0.2s,
-      opacity ease-in 0.2s;
-    border: 1px solid var(--clr-bg);
-  }
-  .blog-post:hover {
-    border: 1px solid var(--clr-bg-code);
-    opacity: 1 !important;
-  }
-
-  @media (max-width: 640px) {
-    .blog-post {
-      padding-left: 0;
-      padding-right: 0;
-      border: 0.5px solid var(--clr-bg) !important;
-    }
-  }
-</style>
+</CardSpotlight>

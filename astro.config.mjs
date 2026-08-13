@@ -3,8 +3,8 @@ import mdx from "@astrojs/mdx";
 import netlify from "@astrojs/netlify";
 import tailwind from "@astrojs/tailwind";
 import partytown from "@astrojs/partytown";
+import react from "@astrojs/react";
 import expressiveCode from "astro-expressive-code";
-import { astroImageTools } from "astro-imagetools";
 
 export default defineConfig({
   output: "server",
@@ -13,7 +13,6 @@ export default defineConfig({
     service: sharpImageService(),
   },
   integrations: [
-    astroImageTools,
     expressiveCode({
       themes: ["one-dark-pro", "github-light"],
       styleOverrides: {
@@ -21,7 +20,9 @@ export default defineConfig({
           frameBoxShadowCssValue: "var(--shadow)",
         },
       },
+      emitExternalStylesheet: false,
     }),
+    react(),
     mdx(),
     tailwind(),
     partytown({

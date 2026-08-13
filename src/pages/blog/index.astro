@@ -15,7 +15,7 @@ const posts = (await getCollection("blog")).sort((a, b) => b.data.pubDate.valueO
     Let's Learn Together!
   </h2>
 
-  <div class="my-6 grid gap-2 sm:grid-cols-2 sm:gap-y-8 animate-fade-up animate-ease-out" id="blog">
+  <div class="mt-6 mb-20 sm:mb-32 grid gap-2 sm:grid-cols-2 sm:gap-x-6 sm:gap-y-8 animate-fade-up animate-ease-out" id="blog">
     {posts.map((post, i) => <BlogPost post={post.data} indx={i} />)}
   </div>
 </Page>

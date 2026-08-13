@@ -14,8 +14,7 @@ const blog = defineCollection({
 });
 
 const personalProjects = defineCollection({
-  type: "data",
-  // loader: glob({ pattern: "*.md", base: "src/content/personal-projects" }),
+  loader: glob({ pattern: "*.yml", base: "src/content/personal-projects" }),
   // Type-check frontmatter using a schema
   schema: z.object({
     id: z.number(),
@@ -27,8 +26,7 @@ const personalProjects = defineCollection({
 });
 
 const proProjects = defineCollection({
-  type: "data",
-  // loader: glob({ pattern: "*.md", base: "src/content/professional-projects" }),
+  loader: glob({ pattern: "*.yml", base: "src/content/professional-projects" }),
   // Type-check frontmatter using a schema
   schema: z.object({
     id: z.number(),

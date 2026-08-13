@@ -14,7 +14,7 @@ const { default: linkedin } = await import(`/src/assets/icons/linkedin.svg?raw`)
 const { default: github } = await import(`/src/assets/icons/github.svg?raw`);
 const { default: envelope } = await import(`/src/assets/icons/envelope.svg?raw`);
 
-const { animate = false } = Astro.props;
+const { animate = false, hideSocialIcons = false } = Astro.props;
 ---
 
 <header class="fixed top-0 left-0 right-0 bg-transparent">
@@ -46,7 +46,7 @@ const { animate = false } = Astro.props;
 
 <div
   class="social-icons fixed bottom-0 left-6 gap-1 flex flex-col animate-delay-1000 animate-ease-out"
-  class:list={{ "animate-fade-right": animate }}
+  class:list={{ "animate-fade-right": animate, hidden: hideSocialIcons }}
 >
   <Popup icon={envelope} text="hello&nbsp;[at]&nbsp;lasitha&nbsp;[dot]&nbsp;dev" />
 
@@ -122,6 +122,10 @@ const { animate = false } = Astro.props;
   .social-icons,
   .social-icons * {
     background-color: transparent;
+  }
+
+  .social-icons.at-bottom {
+    pointer-events: none;
   }
 
   .social-icons::after {
@@ -286,4 +290,50 @@ const { animate = false } = Astro.props;
   };
 
   window.addEventListener("scroll", toggleBottomNav);
+
+  let socialIconsHidden = false;
+  let footerNameObserver: IntersectionObserver | null = null;
+
+  const playSocialIconsAnimation = (hide: boolean) => {
+    const socialIcons = document.querySelector(".social-icons");
+    if (!socialIcons) return;
+
+    socialIcons.classList.toggle("at-bottom", hide);
+    // Drop any existing animation classes (including the page-load entrance one)
+    // and force a reflow so re-adding them always restarts the animation.
+    socialIcons.classList.remove(
+      "animate-fade-right",
+      "animate-fade-left",
+      "animate-ease-in",
+      "animate-ease-out",
+      "animate-reverse",
+      "animate-delay-1000",
+    );
+    void (socialIcons as HTMLElement).offsetWidth;
+    socialIcons.classList.add("animate-fade-right", hide ? "animate-ease-in" : "animate-ease-out");
+    if (hide) socialIcons.classList.add("animate-reverse");
+  };
+
+  // Hide the sidebar as soon as the footer's name comes near the viewport,
+  // well before it's actually visible (200px lead via rootMargin).
+  const setupFooterNameObserver = () => {
+    footerNameObserver?.disconnect();
+    socialIconsHidden = false;
+
+    const footerName = document.querySelector(".footer-logo-name");
+    if (!footerName) return;
+
+    footerNameObserver = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting === socialIconsHidden) return;
+        socialIconsHidden = entry.isIntersecting;
+        playSocialIconsAnimation(socialIconsHidden);
+      },
+      { rootMargin: "0px 0px 200px 0px" },
+    );
+    footerNameObserver.observe(footerName);
+  };
+
+  setupFooterNameObserver();
+  document.addEventListener("astro:page-load", setupFooterNameObserver);
 </script>

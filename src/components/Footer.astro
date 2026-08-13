@@ -1,3 +1,184 @@
-<div class="mt-[-1rem] w-full">
-    <p class="text-xs mb-0 text-center">© Lasitha Prabodha Weligampola</p>
-</div>
+---
+const { default: instagram } = await import(`/src/assets/icons/instagram.svg?raw`);
+const { default: facebook } = await import(`/src/assets/icons/facebook.svg?raw`);
+const { default: linkedin } = await import(`/src/assets/icons/linkedin.svg?raw`);
+const { default: github } = await import(`/src/assets/icons/github.svg?raw`);
+const { default: envelope } = await import(`/src/assets/icons/envelope.svg?raw`);
+
+const pages = [
+  { label: "Home", href: "/" },
+  { label: "About", href: "/#about" },
+  { label: "Blog", href: "/blog" },
+  { label: "Contact", href: "/contact" },
+];
+
+const socials = [
+  { label: "Instagram", href: "https://www.instagram.com/lu6_fer", icon: instagram },
+  { label: "Facebook", href: "https://www.facebook.com/lmlxlml", icon: facebook },
+  { label: "LinkedIn", href: "https://linkedin.com/in/lasithapw", icon: linkedin },
+  { label: "GitHub", href: "https://github.com/LasithaPrabodha", icon: github },
+  { label: "Email", href: "mailto:hello@lasitha.dev", icon: envelope },
+];
+---
+
+<footer class="footer">
+  <div class="footer-inner">
+    <div class="footer-brand">
+      <a href="/" class="footer-logo">
+        <span class="footer-logo-mark">LP</span>
+        <span class="footer-logo-name">Lasitha Prabodha</span>
+      </a>
+
+      <ul class="footer-nav">
+        {
+          pages.map((page) => (
+            <li>
+              <a href={page.href}>{page.label}</a>
+            </li>
+          ))
+        }
+      </ul>
+
+      <div class="footer-divider" aria-hidden="true"></div>
+    </div>
+
+    <div class="footer-bottom">
+      <p class="footer-copyright">© Lasitha Prabodha Weligampola {new Date().getFullYear()}</p>
+      <div class="footer-socials">
+        {
+          socials.map((social) => (
+            <a href={social.href} target="_blank" rel="noreferrer" aria-label={social.label} title={social.label}>
+              <Fragment set:html={social.icon} />
+            </a>
+          ))
+        }
+      </div>
+    </div>
+  </div>
+</footer>
+
+<style>
+  .footer {
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+    padding: 5rem 2rem;
+    background: transparent;
+  }
+
+  .footer-inner {
+    margin: 0 auto;
+    max-width: 80rem;
+  }
+
+  .footer-brand {
+    position: relative;
+    display: flex;
+    width: 100%;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .footer-logo {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-bottom: 1rem;
+  }
+
+  .footer-logo-mark {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 1.75rem;
+    height: 1.75rem;
+    border-radius: 999px;
+    background: var(--clr-primary);
+    color: var(--clr-bg);
+    font-size: 0.75rem;
+    font-weight: 700;
+  }
+
+  .footer-logo-name {
+    font-weight: 500;
+    color: var(--clr-fg-alt);
+  }
+
+  .footer-nav {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+    list-style: none;
+    font-size: 0.875rem;
+    color: var(--clr-quote);
+  }
+
+  @media (min-width: 640px) {
+    .footer-nav {
+      flex-direction: row;
+    }
+  }
+
+  .footer-nav a {
+    color: var(--clr-quote);
+    transition: color 0.2s ease;
+  }
+
+  .footer-nav a:hover {
+    color: var(--clr-link);
+  }
+
+  .footer-divider {
+    margin: 2rem auto 0;
+    height: 1px;
+    width: calc(100% + 3rem);
+    max-width: 80rem;
+    background-image: repeating-linear-gradient(to right, var(--clr-bg-code), var(--clr-bg-code) 5px, transparent 5px, transparent 10px);
+    -webkit-mask-image: linear-gradient(to right, transparent, black 15%, black 85%, transparent);
+    mask-image: linear-gradient(to right, transparent, black 15%, black 85%, transparent);
+  }
+
+  .footer-bottom {
+    margin-top: 2rem;
+    display: flex;
+    width: 100%;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1.5rem;
+  }
+
+  @media (min-width: 640px) {
+    .footer-bottom {
+      flex-direction: row;
+    }
+  }
+
+  .footer-copyright {
+    font-size: 0.875rem;
+    color: var(--clr-quote);
+  }
+
+  .footer-socials {
+    display: flex;
+    align-items: center;
+    gap: 1.25rem;
+  }
+
+  .footer-socials a {
+    display: inline-flex;
+  }
+
+  .footer-socials :global(svg) {
+    width: 20px;
+    height: 20px;
+    fill: var(--clr-quote);
+    transition: fill 0.2s ease;
+  }
+
+  .footer-socials a:hover :global(svg) {
+    fill: var(--clr-link);
+  }
+</style>

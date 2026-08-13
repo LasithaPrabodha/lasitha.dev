@@ -54,7 +54,7 @@ const generateOgImage = async (title: string = SITE_TITLE, date: Date = new Date
     </div>
   </div>`;
 
-  const svg = await satori(markup, {
+  const svg = await satori(markup as Parameters<typeof satori>[0], {
     fonts: [
       {
         name: "Quicksand",
