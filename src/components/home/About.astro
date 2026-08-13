@@ -43,9 +43,15 @@ import myPhoto from "@assets/images/casual-photo.jpg";
     I'm always excited to push the boundaries of technology and make a meaningful impact. Let's connect - whether it's to talk tech, music, or potential collaborations. 🤝
   </p>
   <div class="flex justify-center mt-12">
-    <a href="https://whats-lasitha-now-playing.vercel.app/now-playing?open" target="_blank" rel="noopener noreferrer">
-      <img src="https://whats-lasitha-now-playing.vercel.app/now-playing" alt="Now Playing" />
-    </a>
+    <iframe
+      id="now-playing-frame"
+      data-src="https://whats-lasitha-now-playing.vercel.app/player"
+      width="430"
+      height="88"
+      style="border: none; max-width: 100%;"
+      title="Now Playing"
+      loading="lazy"
+    ></iframe>
   </div>
 </section>
 
@@ -163,5 +169,19 @@ import myPhoto from "@assets/images/casual-photo.jpg";
       { threshold: 0.1 }
     );
     observer.observe(section);
+  }
+
+  const nowPlayingFrame = document.getElementById("now-playing-frame") as HTMLIFrameElement | null;
+  if (nowPlayingFrame) {
+    const PLAYER_ORIGIN = "https://whats-lasitha-now-playing.vercel.app";
+    const baseSrc = nowPlayingFrame.dataset.src!;
+
+    const currentTheme = () => (document.body.getAttribute("data-theme") === "dark" ? "dark" : "light");
+
+    nowPlayingFrame.src = `${baseSrc}?theme=${currentTheme()}`;
+
+    new MutationObserver(() => {
+      nowPlayingFrame.contentWindow?.postMessage({ theme: currentTheme() }, PLAYER_ORIGIN);
+    }).observe(document.body, { attributes: true, attributeFilter: ["data-theme"] });
   }
 </script>
