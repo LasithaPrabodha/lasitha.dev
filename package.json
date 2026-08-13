@@ -3,7 +3,7 @@
   "type": "module",
   "version": "0.0.1",
   "scripts": {
-    "dev": "astro dev",
+    "dev": "NETLIFY_DEV=true astro dev",
     "start": "astro dev",
     "build": "astro check && astro build --remote",
     "build:node": "npx astro build --remote ./ --node",
