@@ -1,9 +1,7 @@
 ---
 import MyName from "@components/MyName.astro";
-import { Picture } from "astro:assets";
 
 import RectPattern from "@components/RectPattern.astro";
-import myPhoto from "@assets/images/casual-photo.jpg";
 ---
 
 <section id="about" class="mb-52 fade-in-section">
@@ -28,7 +26,8 @@ import myPhoto from "@assets/images/casual-photo.jpg";
       </p>
     </div>
     <div class="details-photo h-min relative max-w-full sm:max-w-64">
-      <Picture class="me" formats={["avif", "webp"]} src={myPhoto} alt="Lasitha Prabodha Weligampola" />
+      <img class="me" id="me-photo" src="/static/casual-photo-192x192.png" width="192" height="192" alt="Lasitha Prabodha Weligampola" />
+      <canvas class="me me-pixel" id="me-pixel" width="192" height="192" aria-hidden="true"></canvas>
       <RectPattern width={256} height={256} />
     </div>
   </div>
@@ -75,6 +74,8 @@ import myPhoto from "@assets/images/casual-photo.jpg";
     transition: var(--transition);
   }
   .details-photo {
+    width: 16rem;
+    flex-shrink: 0;
     transition: var(--transition);
     margin-bottom: 1em;
   }
@@ -92,11 +93,25 @@ import myPhoto from "@assets/images/casual-photo.jpg";
   }
 
   .me {
+    width: 100%;
+    height: auto;
+    aspect-ratio: 1;
+    image-rendering: pixelated;
     border-radius: 16px;
     box-shadow: var(--shadow);
     position: relative;
     background-image: url("/src/assets/images/blur.png");
     background-size: contain;
+  }
+
+  .me-pixel {
+    display: none;
+  }
+  .pixel-ready #me-photo {
+    display: none;
+  }
+  .pixel-ready .me-pixel {
+    display: block;
   }
 
   :global([data-theme="dark"]) .me {
@@ -169,6 +184,55 @@ import myPhoto from "@assets/images/casual-photo.jpg";
       { threshold: 0.1 }
     );
     observer.observe(section);
+  }
+
+  // Pixelate effect: resolves from coarse blocks to a fine, permanent pixel-art
+  // look (indie-game style) when scrolled into view.
+  const photo = document.getElementById("me-photo") as HTMLImageElement | null;
+  const canvas = document.getElementById("me-pixel") as HTMLCanvasElement | null;
+  const ctx = canvas?.getContext("2d");
+  if (photo && canvas && ctx) {
+    const SIZE = canvas.width;
+    const STEPS = [16, 12, 8, 6, 4, 3, 2, 1.5];
+    const MAX = STEPS.length - 1;
+    const small = document.createElement("canvas");
+    const sctx = small.getContext("2d")!;
+    const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    let level = 0;
+    let target = 0;
+    let timer: number | undefined;
+
+    const draw = (block: number) => {
+      const n = Math.max(1, Math.ceil(SIZE / block));
+      small.width = small.height = n;
+      sctx.imageSmoothingEnabled = true;
+      sctx.drawImage(photo, 0, 0, n, n);
+      ctx.imageSmoothingEnabled = false;
+      ctx.clearRect(0, 0, SIZE, SIZE);
+      ctx.drawImage(small, 0, 0, n, n, 0, 0, n * block, n * block);
+    };
+
+    const step = () => {
+      if (level === target) { timer = undefined; return; }
+      level += level < target ? 1 : -1;
+      draw(STEPS[level]);
+      timer = window.setTimeout(step, 70);
+    };
+    const goTo = (t: number) => {
+      target = t;
+      if (reduced) { level = t; draw(STEPS[level]); return; }
+      if (timer === undefined) step();
+    };
+
+    const init = () => {
+      draw(STEPS[0]);
+      const wrap = photo.parentElement!;
+      wrap.classList.add("pixel-ready");
+      new IntersectionObserver(([e], o) => {
+        if (e.isIntersecting) { goTo(MAX); o.disconnect(); }
+      }, { threshold: 0.3 }).observe(wrap);
+    };
+    if (photo.complete) init(); else photo.addEventListener("load", init, { once: true });
   }
 
   const nowPlayingFrame = document.getElementById("now-playing-frame") as HTMLIFrameElement | null;
